@@ -34,6 +34,14 @@ def get_random_chance_entry(dictionary_list, chance_key):
     messagebox.showinfo(title="Oops!", message=f"ERROR - failed to find random entry with key{chance_key} in \n{dictionary_list}")
 
 
+def get_random_key_value(key, list_dictionaries):
+    """given a list of dictionaries returns the key from a random dictionary"""
+    random_dictionary = choice(list_dictionaries)
+    if key in random_dictionary:
+        return random_dictionary[key]
+    messagebox.showinfo(title="Oops!",
+                        message=f"ERROR - failed to find key{key} in \n{list_dictionaries}")
+
 def get_json_int(value, default):
     """For dealing with missing numerical values in json files as they will be empty strings if there is no value
     send the value from the json and a default value, it will return teh default if value is a string, otherwise returns teh value"""
@@ -78,6 +86,27 @@ def convert_list_to_string(data):
         if i != len(data) - 1:
             string += ", "
     return string
+
+
+def split_into_lines(string, line_length):
+    split_lines = string
+    if len(string) > line_length:
+        words = string.split(' ')
+        lines = [""]
+        current_line = 0
+        for word in words:
+            if len(lines[current_line]) >= line_length:
+                current_line += 1
+                lines.append(word)
+            else:
+                lines[current_line] = lines[current_line] + word + " "
+        split_lines = ""
+        for line in lines:
+            split_lines += line + "\n"
+
+    return split_lines
+
+
 
 
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22

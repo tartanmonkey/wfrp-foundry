@@ -2,10 +2,12 @@ from tkinter import *
 from tkinter import messagebox
 import json
 import character_creator
+import trade_creator
 from character_creator import GameCharacter, init_skills_data, create_character_details
 from random import randint
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
+from utilities import split_into_lines
 
 # ------------------------ VARIABLES ----------------------------
 
@@ -24,6 +26,7 @@ def click_clear():
 
 
 def click_create_vessel():
+    global character_detail_text
     vessel = Vessel()
     vessel_data = vessel.get_vessel_data()
     passengers = get_passenger_numbers(vessel_data)
@@ -31,7 +34,13 @@ def click_create_vessel():
         passengers[i] = f"{passengers[i]} {get_random_career_key()}"
     vessel.set_passengers(passengers)
     vessel_details = vessel.get_output()
-    label_output["text"] = vessel_details
+    captain_origin = trade_creator.get_origin()
+    captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
+    # TODO create captain as character & replace following
+    character_detail_text = create_character_details(captain_origin, captain_says)
+
+    # ---Display output
+    label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character_detail_text
     pyperclip.copy(vessel_details)
 
 
@@ -169,6 +178,7 @@ label_output.grid(column=0, row=2, columnspan=7)
 init_data()
 init_skills_data()
 init_trade_data()
+#print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()
 
 

@@ -147,11 +147,13 @@ def get_vessel_name():
 
 
 def get_origin():
-    origin = get_random_chance_entry(origin_data, "chance")
+    origin = get_random_chance_entry(origin_data, "chance")["origin"]
     if origin == "[Destination]":
-        origin = get_random_chance_entry(destination_data, "chance")
+        origin = get_random_chance_entry(destination_data, "chance")["destination"]
     return origin
 
+def get_captain_data(key):
+    return get_random_key_value(key, captain_data)
 
 def get_cargo(vessel):
     cargo = []

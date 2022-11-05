@@ -65,7 +65,7 @@ def get_list_output(list_name, data):
     return output
 
 
-def create_character_details():
+def create_character_details(origin="", says=""):
     details = ""
     try:
         with open("Data/Details_Data_GMS.json", "r") as data_file:
@@ -76,10 +76,15 @@ def create_character_details():
         rand_cap = len(data) - 1
         details += f"{data[randint(0, rand_cap)]['Description']}, "
         details += f"{data[randint(0, rand_cap)]['Detail']}.\n"
+        if len(origin) > 0:
+            details += f"Origin: {origin}.\n"
         details += f"Trait: {data[randint(0, rand_cap)]['Trait']}\n"
         details += f"Motivation: {data[randint(0, rand_cap)]['Motivation']}\n"
         details += f"Ambition: {data[randint(0, rand_cap)]['Ambition']}\n"
         details += f"Quirk: {data[randint(0, rand_cap)]['Quirk']}\n"
+        if len(says) > 0:
+            details += f"Says: {says}\n"
+        details += "\n"
 
     return details
 
@@ -115,6 +120,7 @@ class GameCharacter:
         # TODO trappings list
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
+        self.details = ""
 
     def set_skills(self, skill_string):
         skill_list = skill_string.split(',')
@@ -131,14 +137,18 @@ class GameCharacter:
     def set_trappings(self, trappings_string):
         self.trappings = trappings_string.split(',')
 
+    def set_details(self, details):
+        self.details = details
+
     def get_output(self, output_type="ui"):
+        output = self.details
         if output_type == "ui":
-            output = f"{self.career} ({self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"{self.career} ({self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']}   {self.attributes['BS']}   {self.attributes['S']}  {self.attributes['T']}"
             output += f"  {self.attributes['I']}  {self.attributes['Agi']}    {self.attributes['Dex']}   {self.attributes['Int']}"
             output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"
         else:
-            output = f"{self.career} ({self.path}) {self.status}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
+            output += f"{self.career} ({self.path}) {self.status}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
             output += f"\n{self.attributes['WS']}  {self.attributes['BS']}  {self.attributes['S']}  {self.attributes['T']}"
             output += f"  {self.attributes['I']}  {self.attributes['Agi']}   {self.attributes['Dex']}  {self.attributes['Int']}"
             output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"

@@ -12,6 +12,7 @@ from trade_creator import init_trade_data, Vessel, get_passenger_numbers
 # career_name : {chance: tuple, level_data: list}
 career_data = {}
 character_detail_text = ""
+character = None
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -52,8 +53,9 @@ def click_create():
 
 
 def click_random():
+    global character_detail_text
+    character_detail_text = create_character_details()
     create_character(get_random_career_key(), 1)
-
 
 
 def click_save():
@@ -105,17 +107,17 @@ def get_random_career_key():
 
 
 def create_character(career, level):
-    global career_data
-    new_char = GameCharacter(career, level, career_data[career]['level_data'])
-    display_character_stats(new_char)
+    global career_data, character
+    character = GameCharacter(career, level, career_data[career]['level_data'])
+    if len(character_detail_text) > 0:
+        character.set_details(character_detail_text)
+    display_character_stats(character)
 
 
 def display_character_stats(character):
-    text = ""
-    if len(character_detail_text) > 0:
-        text = character_detail_text + "\n\n"
-    label_output["text"] = text + character.get_output()
-    pyperclip.copy(text + character.get_output("save"))
+    # TODO replace logic with call to simply use character output
+    label_output["text"] = character.get_output()
+    pyperclip.copy(character.get_output("save"))
 
 
 def test_character_data():

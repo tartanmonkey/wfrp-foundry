@@ -1,0 +1,426 @@
+[
+  {
+    "Chance": 2,
+    "Goods": "Grain - Barley",
+    "Spring": 1,
+    "Summer": 0.5,
+    "Autumn": 0.25,
+    "Winter": 0.5
+  },
+  {
+    "Chance": 2,
+    "Goods": "Grain - Buckwheat",
+    "Spring": 1,
+    "Summer": 0.5,
+    "Autumn": 0.25,
+    "Winter": 0.5
+  },
+  {
+    "Chance": 2,
+    "Goods": "Grain - Oats",
+    "Spring": 1,
+    "Summer": 0.5,
+    "Autumn": 0.25,
+    "Winter": 0.5
+  },
+  {
+    "Chance": 2,
+    "Goods": "Grain - Millet",
+    "Spring": 1,
+    "Summer": 0.5,
+    "Autumn": 0.25,
+    "Winter": 0.5
+  },
+  {
+    "Chance": 2,
+    "Goods": "Grain - Chick Peas",
+    "Spring": 1,
+    "Summer": 0.5,
+    "Autumn": 0.25,
+    "Winter": 0.5
+  },
+  {
+    "Chance": 3,
+    "Goods": "Armaments",
+    "Spring": 12,
+    "Summer": 10,
+    "Autumn": 8,
+    "Winter": 10
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Silk",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Chocolate",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Venison",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Ivory",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Mink Fur",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Porcelain",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Religious Icons",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Saffron",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Incense",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 1,
+    "Goods": "Luxury - Musk",
+    "Spring": 50,
+    "Summer": 50,
+    "Autumn": 50,
+    "Winter": 50
+  },
+  {
+    "Chance": 2,
+    "Goods": "Metal - Tools",
+    "Spring": 8,
+    "Summer": 8,
+    "Autumn": 8,
+    "Winter": 8
+  },
+  {
+    "Chance": 2,
+    "Goods": "Metal - Pots & Pans",
+    "Spring": 8,
+    "Summer": 8,
+    "Autumn": 8,
+    "Winter": 8
+  },
+  {
+    "Chance": 2,
+    "Goods": "Metal - Ingots Iron",
+    "Spring": 8,
+    "Summer": 8,
+    "Autumn": 8,
+    "Winter": 8
+  },
+  {
+    "Chance": 1,
+    "Goods": "Metal - Ingots Copper",
+    "Spring": 8,
+    "Summer": 8,
+    "Autumn": 8,
+    "Winter": 8
+  },
+  {
+    "Chance": 1,
+    "Goods": "Metal - Ingots Silver",
+    "Spring": 8,
+    "Summer": 8,
+    "Autumn": 8,
+    "Winter": 8
+  },
+  {
+    "Chance": 2,
+    "Goods": "Metal - Ingots Tin",
+    "Spring": 8,
+    "Summer": 8,
+    "Autumn": 8,
+    "Winter": 8
+  },
+  {
+    "Chance": 12,
+    "Goods": "Timber",
+    "Spring": 3,
+    "Summer": 1.5,
+    "Autumn": 2,
+    "Winter": 3.5
+  },
+  {
+    "Chance": 10,
+    "Goods": "Wine",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 5,
+    "Goods": "Brandy",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 12,
+    "Goods": "Wool",
+    "Spring": 1,
+    "Summer": 1.5,
+    "Autumn": 2,
+    "Winter": 3
+  },
+  {
+    "Chance": 1,
+    "Goods": "Bloodpine",
+    "Spring": 5,
+    "Summer": 2.5,
+    "Autumn": 4,
+    "Winter": 5.5
+  },
+  {
+    "Chance": 1,
+    "Goods": "Fish",
+    "Spring": 1,
+    "Summer": 1,
+    "Autumn": 1.5,
+    "Winter": 2
+  },
+  {
+    "Chance": 1,
+    "Goods": "Deer Hides",
+    "Spring": 3,
+    "Summer": 3,
+    "Autumn": 4,
+    "Winter": 5
+  },
+  {
+    "Chance": 1,
+    "Goods": "Pipeweed",
+    "Spring": 6,
+    "Summer": 6,
+    "Autumn": 6,
+    "Winter": 6
+  },
+  {
+    "Chance": 1,
+    "Goods": "St Olga Ale",
+    "Spring": 2,
+    "Summer": 2,
+    "Autumn": 2,
+    "Winter": 2
+  },
+  {
+    "Chance": 1,
+    "Goods": "Dyes",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Oil",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Flour",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Tea",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Salt",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 2,
+    "Goods": "Pottery",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Sheep",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Chickens",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Pigs",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Rugs",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Clothing",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Furniture",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Charcoal",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Saddles",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Manure",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Stone",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Furs",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Sugar",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Vodka",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Wax",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  },
+  {
+    "Chance": 1,
+    "Goods": "Pottery",
+    "Spring": 1.5,
+    "Summer": 2,
+    "Autumn": 2,
+    "Winter": 1.5
+  },
+  {
+    "Chance": 1,
+    "Goods": "Bugman's Ale",
+    "Spring": "",
+    "Summer": "",
+    "Autumn": "",
+    "Winter": ""
+  }
+]

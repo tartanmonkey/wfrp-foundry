@@ -1,0 +1,102 @@
+from random import choice, randint
+from tkinter import messagebox
+
+
+def get_key_from_string(text, sep_start='[', sep_end=']'):
+    """returns the text in a string found between the separators"""
+    start = text.index(sep_start) + 1
+    end = text.index(sep_end)
+    key = ""
+    for n in range(start, end):
+        key += text[n]
+    return key
+
+
+def get_random_from_keyed_lists(key, dictionary):
+    """Sent a dictionary of lists will return a random item from the list assigned to the key """
+    if key in dictionary:
+        return choice(dictionary[key])
+    else:
+        messagebox.showinfo(title="Oops!", message=f"ERROR - failed to find {key} in \n{dictionary}")
+        return "ERROR"
+
+
+def get_random_chance_entry(dictionary_list, chance_key):
+    """returns a dictionary from a list by making a random 1 - 100 roll and consulting the chance_key in the dictionary
+     which has form (higher than this value, lower than or equal to this value)"""
+    roll = randint(1, 100)
+    #print(f"random: {roll}")
+    for item in dictionary_list:
+        chance = item[chance_key]
+        #print(f"{chance}")
+        if roll > chance[0] and roll <= chance[1]:
+            return item
+    messagebox.showinfo(title="Oops!", message=f"ERROR - failed to find random entry with key{chance_key} in \n{dictionary_list}")
+
+
+def get_json_int(value, default):
+    """For dealing with missing numerical values in json files as they will be empty strings if there is no value
+    send the value from the json and a default value, it will return teh default if value is a string, otherwise returns teh value"""
+    if type(value) == str:
+        return default
+    else:
+        return value
+
+
+def replace_chance_with_tuple(data, chance_key):
+    """given a list of dictionaries with a chance_key, it creates a tuple in form (higher than this value, lower than or
+     equal to this value)"""
+    chance_low = 0
+    for entry in data:
+        chance_high = chance_low + entry[chance_key]
+        chance = (chance_low, chance_high)
+        chance_low = chance_high
+        entry[chance_key] = chance
+    return data
+
+
+def convert_to_bool(string):
+    """Converts a the strings TRUE & FALSE in any format to bool"""
+    if string.upper() == "FALSE":
+        return False
+    return True
+
+
+def roll_under(value, die=100):
+    """Does a die roll (defaulting to %), returns True if less than or equal to value"""
+    roll = randint(1, die)
+    if roll <= value:
+        return True
+    return False
+
+
+def convert_list_to_string(data):
+    """turns a list of strings into a comma separated list"""
+    string = ""
+    for i in range(len(data)):
+        string += data[i]
+        if i != len(data) - 1:
+            string += ", "
+    return string
+
+
+#  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
+def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
+    """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and
+    another set of values (keys) keyed to (data_keys) which are provided as lists"""
+    if len(data_keys) != len(keys):
+        messagebox.showinfo(title="Oops!", message=f"ERROR: create_chance_dictionary: data_keys {len(data_keys)} not equal to "
+                                                   f"keys {len(keys)}, data_chance_key = {data_chance_key}, chance_key= {chance_key}")
+        return
+    else:
+        chance_list = []
+        chance_low = 0
+        for entry in data:
+            chance_high = chance_low + entry[data_chance_key]
+            chance = (chance_low, chance_high)
+            chance_low = chance_high
+            chance_entry = {chance_key: chance}
+            for i in range(len(data_keys)):
+                chance_entry[keys[i]] = data_keys[i]
+            chance_list.append(chance_entry)
+        return chance_list

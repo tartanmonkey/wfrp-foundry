@@ -1,0 +1,158 @@
+[
+  {
+    "Chance_D": 1,
+    "Destination": "Carrich",
+    "Chance_O": 70,
+    "Origin": "[Destination]"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Fielbach",
+    "Chance_O": 8,
+    "Origin": "Bretonian"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Castle Reikguard",
+    "Chance_O": 6,
+    "Origin": "Tilean"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Rhya's Rest",
+    "Chance_O": 6,
+    "Origin": "Estalian"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Lengern",
+    "Chance_O": 5,
+    "Origin": "Kislevite"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Badenborn",
+    "Chance_O": 3,
+    "Origin": "Strigany"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Buxhead",
+    "Chance_O": 1,
+    "Origin": "Dwarf"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Ranzig",
+    "Chance_O": 1,
+    "Origin": "Elf"
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Ostwald",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Jungbach",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Achern",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Erinsbeck",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "The Abbey of St Olga",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 3,
+    "Destination": "Grissenwald",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 5,
+    "Destination": "Diesdorf",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 15,
+    "Destination": "Kemperbad",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 4,
+    "Destination": "Brandenburg",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 20,
+    "Destination": "Nuln",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 2,
+    "Destination": "Grunberg",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Auerswald",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Stimmigen",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 2,
+    "Destination": "Carroburg",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 2,
+    "Destination": "Talabheim",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 2,
+    "Destination": "Marienburg",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 1,
+    "Destination": "Praag",
+    "Chance_O": "",
+    "Origin": ""
+  },
+  {
+    "Chance_D": 29,
+    "Destination": "Altdorf",
+    "Chance_O": "",
+    "Origin": ""
+  }
+]

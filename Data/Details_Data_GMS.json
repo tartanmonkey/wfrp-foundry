@@ -1,0 +1,202 @@
+[
+  {
+    "Trait": "Arrogant",
+    "Motivation": "Authority",
+    "Ambition": "To avoid an obligation",
+    "Quirk": "A late bloomer of magical talent",
+    "Description": "Fat",
+    "Detail": "braided hair"
+  },
+  {
+    "Trait": "Bawdy",
+    "Motivation": "Change",
+    "Ambition": "To be immortalised",
+    "Quirk": "Addicted to illicit substances or acts",
+    "Description": "Thin",
+    "Detail": "pony tail"
+  },
+  {
+    "Trait": "Brash",
+    "Motivation": "Charity",
+    "Ambition": "To become someone else",
+    "Quirk": "Chronically unlucky",
+    "Description": "Stocky",
+    "Detail": "pock-marked"
+  },
+  {
+    "Trait": "Calculating",
+    "Motivation": "Control",
+    "Ambition": "To convince someone to take the fall",
+    "Quirk": "Deeply in debt to the wrong people",
+    "Description": "Lanky",
+    "Detail": "scarred"
+  },
+  {
+    "Trait": "Cavalier",
+    "Motivation": "Envy",
+    "Ambition": "To cure themselves or a loved one",
+    "Quirk": "Erring on the side of heresy",
+    "Description": "Young",
+    "Detail": "tattooed"
+  },
+  {
+    "Trait": "Charming",
+    "Motivation": "Fame",
+    "Ambition": "To do the work of the Gods",
+    "Quirk": "Extremely religious",
+    "Description": "Old",
+    "Detail": "glasses"
+  },
+  {
+    "Trait": "Cold",
+    "Motivation": "Freedom",
+    "Ambition": "To earn affection",
+    "Quirk": "Gifted with recent good luck",
+    "Description": "Weathered",
+    "Detail": "bruised"
+  },
+  {
+    "Trait": "Confident",
+    "Motivation": "Glory",
+    "Ambition": "To earn recognition",
+    "Quirk": "Gossipy and overly informed",
+    "Description": "Hulking",
+    "Detail": "curly hair"
+  },
+  {
+    "Trait": "Crude",
+    "Motivation": "Gluttony",
+    "Ambition": "To explore a mystery",
+    "Quirk": "Has a hidden talent",
+    "Description": "Short",
+    "Detail": "nose ring"
+  },
+  {
+    "Trait": "Dishonest",
+    "Motivation": "Happiness",
+    "Ambition": "To gain a promotion",
+    "Quirk": "Has a terrible short-term memory",
+    "Description": "Wide",
+    "Detail": "bald"
+  },
+  {
+    "Trait": "Fierce",
+    "Motivation": "Infamy",
+    "Ambition": "To help a family member or friend",
+    "Quirk": "Hides a minor mutation",
+    "Description": "Grizzled",
+    "Detail": "shaved head"
+  },
+  {
+    "Trait": "Gloomy",
+    "Motivation": "Justice",
+    "Ambition": "To hide from a shameful past",
+    "Quirk": "Holds to revolutionary ideals",
+    "Description": "Flamboyant",
+    "Detail": "beard/bun"
+  },
+  {
+    "Trait": "Gracious",
+    "Motivation": "Knowledge",
+    "Ambition": "To improve themselves",
+    "Quirk": "Looking for investors for a new scheme",
+    "Description": "Filthy",
+    "Detail": "one eyed"
+  },
+  {
+    "Trait": "Gregarious",
+    "Motivation": "Love",
+    "Ambition": "To kill a hated enemy",
+    "Quirk": "Needlessly superstitious",
+    "Description": "Well dressed",
+    "Detail": "bad cough"
+  },
+  {
+    "Trait": "Honest",
+    "Motivation": "Obligation",
+    "Ambition": "To locate something lost",
+    "Quirk": "Not who they say they are",
+    "Description": "Bandy legged",
+    "Detail": "smelly"
+  },
+  {
+    "Trait": "Indignant",
+    "Motivation": "Pleasure",
+    "Ambition": "To make enough money for...",
+    "Quirk": "On the run from a darker past",
+    "Description": "Pale skinned",
+    "Detail": "has a limp"
+  },
+  {
+    "Trait": "Naive",
+    "Motivation": "Power",
+    "Ambition": "To make it through just one more day",
+    "Quirk": "Outcast from their friends and family",
+    "Description": "Gaunt",
+    "Detail": "missing teeth"
+  },
+  {
+    "Trait": "Obsessive",
+    "Motivation": "Recognition",
+    "Ambition": "To prove a point",
+    "Quirk": "Recently retired from adventuring",
+    "Description": "Fat",
+    "Detail": "rash/spotty"
+  },
+  {
+    "Trait": "Quiet",
+    "Motivation": "Respect",
+    "Ambition": "To prove their worth",
+    "Quirk": "Repeats themselves again and again",
+    "Description": "Willowy",
+    "Detail": "stutter"
+  },
+  {
+    "Trait": "Reserved",
+    "Motivation": "Revenge",
+    "Ambition": "To reclaim what was taken",
+    "Quirk": "Scandalous reputation",
+    "Description": "Athletic",
+    "Detail": "soft spoken"
+  },
+  {
+    "Trait": "Rude",
+    "Motivation": "Ruin",
+    "Ambition": "To regain honour",
+    "Quirk": "Speaks prayers to Darker powers",
+    "Description": "Crooked",
+    "Detail": "warts/boils"
+  },
+  {
+    "Trait": "Shrewd",
+    "Motivation": "Servitude",
+    "Ambition": "To restore the family name",
+    "Quirk": "Spotless reputation",
+    "Description": "Wiry",
+    "Detail": "fidgety"
+  },
+  {
+    "Trait": "Vain",
+    "Motivation": "Survival",
+    "Ambition": "To spread suffering",
+    "Quirk": "Surprisingly literate / illiterate",
+    "Description": "Scrawny",
+    "Detail": "monobrow"
+  },
+  {
+    "Trait": "Worrisome",
+    "Motivation": "Unity",
+    "Ambition": "To steal something of value",
+    "Quirk": "Utterly and desperately broke",
+    "Description": "Good looking",
+    "Detail": "big nose"
+  },
+  {
+    "Trait": "Zealous",
+    "Motivation": "Wealth",
+    "Ambition": "To uncover a conspiracy",
+    "Quirk": "Well known in their community",
+    "Description": "Well built",
+    "Detail": "moustache/bob"
+  }
+]

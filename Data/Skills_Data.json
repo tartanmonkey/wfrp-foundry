@@ -1,0 +1,182 @@
+[
+  {
+    "Skill": "Animal Care",
+    "Attribute": "S"
+  },
+  {
+    "Skill": "Animal Training",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Art",
+    "Attribute": "Dex"
+  },
+  {
+    "Skill": "Athletics",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Bribery",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Channelling",
+    "Attribute": "WP"
+  },
+  {
+    "Skill": "Charm",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Charm Animal",
+    "Attribute": "WP"
+  },
+  {
+    "Skill": "Climb",
+    "Attribute": "S"
+  },
+  {
+    "Skill": "Consume Alcohol",
+    "Attribute": "T"
+  },
+  {
+    "Skill": "Cool",
+    "Attribute": "WP"
+  },
+  {
+    "Skill": "Dodge",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Drive",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Endurance",
+    "Attribute": "T"
+  },
+  {
+    "Skill": "Entertain",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Evaluate",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Gamble",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Gossip",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Haggle",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Heal",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Intimidate",
+    "Attribute": "S"
+  },
+  {
+    "Skill": "Intuition",
+    "Attribute": "I"
+  },
+  {
+    "Skill": "Language",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Leadership",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Lore",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Melee",
+    "Attribute": "WS"
+  },
+  {
+    "Skill": "Navigation",
+    "Attribute": "I"
+  },
+  {
+    "Skill": "Outdoor Survival",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Perception",
+    "Attribute": "I"
+  },
+  {
+    "Skill": "Perform",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Pick Lock",
+    "Attribute": "Dex"
+  },
+  {
+    "Skill": "Play",
+    "Attribute": "Dex"
+  },
+  {
+    "Skill": "Pray",
+    "Attribute": "Fel"
+  },
+  {
+    "Skill": "Ranged",
+    "Attribute": "BS"
+  },
+  {
+    "Skill": "Research",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Ride",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Row",
+    "Attribute": "S"
+  },
+  {
+    "Skill": "Sail",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Secret Signs",
+    "Attribute": "Int"
+  },
+  {
+    "Skill": "Set Trap",
+    "Attribute": "Dex"
+  },
+  {
+    "Skill": "Sleight of Hand",
+    "Attribute": "Dex"
+  },
+  {
+    "Skill": "Stealth",
+    "Attribute": "Agi"
+  },
+  {
+    "Skill": "Swim",
+    "Attribute": "S"
+  },
+  {
+    "Skill": "Track",
+    "Attribute": "I"
+  },
+  {
+    "Skill": "Trade",
+    "Attribute": "Dex"
+  }
+]

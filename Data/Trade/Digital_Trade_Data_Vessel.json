@@ -1,0 +1,98 @@
+[
+  {
+    "Vessel": "Raft",
+    "Chance": 2,
+    "Has Name": "FALSE",
+    "Num Crew": 2,
+    "Num Passengers": 5,
+    "Cargo Chance": 40,
+    "Passenger Chance": 25,
+    "Capacity": 60,
+    "Captain": "Riverwoman, Merchant",
+    "Captain Level": 1
+  },
+  {
+    "Vessel": "Row Boat",
+    "Chance": 5,
+    "Has Name": "FALSE",
+    "Num Crew": 1,
+    "Num Passengers": 4,
+    "Cargo Chance": 10,
+    "Passenger Chance": 30,
+    "Capacity": 60,
+    "Captain": "Riverwoman, Boatman, Huffer, Smuggler, Wrecker",
+    "Captain Level": 1
+  },
+  {
+    "Vessel": "Fishing Skiff",
+    "Chance": 10,
+    "Has Name": "FALSE",
+    "Num Crew": 2,
+    "Num Passengers": 0,
+    "Cargo Chance": 0,
+    "Passenger Chance": 1,
+    "Capacity": 120,
+    "Captain": "Riverwoman, Boatman, Huffer",
+    "Captain Level": 2
+  },
+  {
+    "Vessel": "Barge",
+    "Chance": 45,
+    "Has Name": "TRUE",
+    "Num Crew": 3,
+    "Num Passengers": 5,
+    "Cargo Chance": 60,
+    "Passenger Chance": 30,
+    "Capacity": 300,
+    "Captain": "Boatman, Smuggler",
+    "Captain Level": 3
+  },
+  {
+    "Vessel": "Large Barge",
+    "Chance": 65,
+    "Has Name": "TRUE",
+    "Num Crew": 6,
+    "Num Passengers": 10,
+    "Cargo Chance": 70,
+    "Passenger Chance": 30,
+    "Capacity": 500,
+    "Captain": "Boatman, Smuggler, Merchant",
+    "Captain Level": 3
+  },
+  {
+    "Vessel": "River Boat",
+    "Chance": 85,
+    "Has Name": "TRUE",
+    "Num Crew": 6,
+    "Num Passengers": 20,
+    "Cargo Chance": 10,
+    "Passenger Chance": 70,
+    "Capacity": 150,
+    "Captain": "Boatman, Smuggler, Merchant, Wrecker",
+    "Captain Level": 3
+  },
+  {
+    "Vessel": "Ship",
+    "Chance": 95,
+    "Has Name": "TRUE",
+    "Num Crew": 30,
+    "Num Passengers": 60,
+    "Cargo Chance": 60,
+    "Passenger Chance": 70,
+    "Capacity": 400,
+    "Captain": "Boatman, Merchant, Seaman",
+    "Captain Level": 4
+  },
+  {
+    "Vessel": "Patrol Boat",
+    "Chance": 100,
+    "Has Name": "TRUE",
+    "Num Crew": 10,
+    "Num Passengers": 5,
+    "Cargo Chance": 1,
+    "Passenger Chance": 3,
+    "Capacity": 80,
+    "Captain": "Riverwarden",
+    "Captain Level": 3
+  }
+]

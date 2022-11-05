@@ -1,0 +1,97 @@
+
+
+Soldier (Recruit) Silver 1
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+35  30  30  35  30  30   30  30  35  30  12
+-----SKILLS----------------
+Melee(Basic): 40, Athletics: 35, Dodge: 35, 
+Cool: 40, Endurance: 40, Language(Battle): 35, 
+Play (Drum or Fife): 35, Climb: 35, 
+
+-----TALENTS----------------
+Diceman,  Marksman,  Strong Back, 
+ Warrior Born, 
+
+-----TRAPPINGS----------------
+Dagger,  Leather Breastplate,  Uniform, 
+
+Thief (Prowler) Brass 1
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+30  30  30  30  35  35   30  30  35  30  12
+-----SKILLS----------------
+Dodge: 40, Athletics: 40, Endurance: 35, 
+Cool: 40, Intuition: 40, Perception: 40, 
+Stealth(Urban): 40, Climb: 35, 
+
+-----TALENTS----------------
+Alley Cat,  Criminal,  Flee!, 
+ Strike to Stun, 
+
+-----TRAPPINGS----------------
+Crowbar,  Leather Jerkin,  Sack, 
+
+Fat dude
+Big Nose
+Old
+
+Soldier (Recruit) Silver 1
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+35  30  30  35  30  30   30  30  35  30  12
+-----SKILLS----------------
+Melee(Basic): 40, Athletics: 35, Dodge: 35, 
+Cool: 40, Endurance: 40, Language(Battle): 35, 
+Play (Drum or Fife): 35, Climb: 35, 
+
+-----TALENTS----------------
+Diceman,  Marksman,  Strong Back, 
+ Warrior Born, 
+
+-----TRAPPINGS----------------
+Dagger,  Leather Breastplate,  Uniform, 
+
+Flamboyant, soft spoken.
+Trait: Charming
+Motivation: Gluttony
+Ambition: To avoid an obligation
+Quirk: Scandalous reputation
+
+
+Charlatan (Swindler) Brass 3
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+30  30  30  30  35  30   35  30  30  35  12
+-----SKILLS----------------
+Charm: 40, Haggle: 40, Sleight of Hand: 40, 
+Bribery: 40, Gamble: 35, Gossip: 40, 
+Consume Alcohol: 35, Entertain(Storytelling): 40, 
+
+-----TALENTS----------------
+Cardsharp,  Diceman,  Etiquette (Any), 
+ Luck, 
+
+-----TRAPPINGS----------------
+Backpack,  2 Sets of Clothing,  Deck of Cards, 
+ Dice, 
+
+Flamboyant, soft spoken.
+Trait: Charming
+Motivation: Gluttony
+Ambition: To avoid an obligation
+Quirk: Scandalous reputation
+
+
+Charlatan (Swindler) Brass 3
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+30  30  30  30  35  30   35  30  30  35  12
+-----SKILLS----------------
+Charm: 40, Haggle: 40, Sleight of Hand: 40, 
+Bribery: 40, Gamble: 35, Gossip: 40, 
+Consume Alcohol: 35, Entertain(Storytelling): 40, 
+
+-----TALENTS----------------
+Cardsharp,  Diceman,  Etiquette (Any), 
+ Luck, 
+
+-----TRAPPINGS----------------
+Backpack,  2 Sets of Clothing,  Deck of Cards, 
+ Dice, 
+

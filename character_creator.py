@@ -1,0 +1,161 @@
+import json
+from tkinter import messagebox
+from random import randint
+
+skills = {}
+
+
+def init_skills_data():
+    global skills
+    try:
+        with open("Data/Skills_Data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Skills data!")
+    else:
+        for entry in data:
+            skills[entry["Skill"]] = entry["Attribute"]
+
+
+def test_data(characters, data_type="skills"):
+    missing_data = ""
+    for character in characters:
+        for skill in character.skills:
+            skill_key = get_skill_key(skill)
+            if skill_key not in skills:
+                missing_data += f"{character.career}: {skill}\n"
+    with open("Output/missing_data.txt", "w") as data:
+        data.write(missing_data)
+
+
+def get_skill_value(skill_name, attributes):
+    # print(f"skill name: {skill_name} * attributes: {attributes}")
+    skill_key = get_skill_key(skill_name)
+    # print(skill_key)
+    # TODO set only some skills defined by Level
+    if skill_key in skills:
+        if skills[skill_key] in attributes:
+            attribute = skills[skill_key]
+            return attributes[attribute] + 5  # this probably needs to take level or distinguish between set & add
+        else:
+            messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
+    else:
+        messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
+    return 30
+
+
+def get_skill_key(skill_name):
+    words = skill_name.split("(")
+    return words[0].strip()
+
+
+def get_attribute_value(value):
+    if type(value) == str:
+        return 30
+    else:
+        return value
+
+
+def get_list_output(list_name, data):
+    output = f"\n\n-----{list_name.upper()}----------------\n"
+    for n in range(len(data)):
+        if n != 0 and n % 3 == 0:
+            output += "\n"
+        output += f"{data[n]}, "
+    return output
+
+
+def create_character_details():
+    details = ""
+    try:
+        with open("Data/Details_Data_GMS.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Details_Data_GMS.json!")
+    else:
+        rand_cap = len(data) - 1
+        details += f"{data[randint(0, rand_cap)]['Description']}, "
+        details += f"{data[randint(0, rand_cap)]['Detail']}.\n"
+        details += f"Trait: {data[randint(0, rand_cap)]['Trait']}\n"
+        details += f"Motivation: {data[randint(0, rand_cap)]['Motivation']}\n"
+        details += f"Ambition: {data[randint(0, rand_cap)]['Ambition']}\n"
+        details += f"Quirk: {data[randint(0, rand_cap)]['Quirk']}\n"
+
+    return details
+
+# ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
+
+
+class GameCharacter:
+    def __init__(self, career_name, level, levels_data):
+        self.level = level
+        self.career = career_name
+        index = level -1
+        self.path = levels_data[index]["Title"]
+        self.status = levels_data[index]["Status"]
+        path_data = levels_data[index]
+        self.attributes = {
+            "WS": get_attribute_value(path_data["WS"]),
+            "BS": get_attribute_value(path_data["BS"]),
+            "S": get_attribute_value(path_data["S"]),
+            "T": get_attribute_value(path_data["T"]),
+            "I": get_attribute_value(path_data["I"]),
+            "Agi": get_attribute_value(path_data["Agi"]),
+            "Dex": get_attribute_value(path_data["Dex"]),
+            "Int": get_attribute_value(path_data["Int"]),
+            "WP": get_attribute_value(path_data["WP"]),
+            "Fel": get_attribute_value(path_data["Fel"]),
+            "W": get_attribute_value(path_data["W"])
+        }
+        self.skills = {}
+        self.set_skills(levels_data[index]["Skills"])
+        # TODO talents list
+        self.talents = []
+        self.set_talents(levels_data[index]["Talents"])
+        # TODO trappings list
+        self.trappings = []
+        self.set_trappings(levels_data[index]["Trappings"])
+
+    def set_skills(self, skill_string):
+        skill_list = skill_string.split(',')
+        skills_stripped = [skill.strip() for skill in skill_list]
+        # print(skill_list)
+        # print(skills_stripped)
+        # TODO set initial values
+        for s in skills_stripped:
+            self.skills[s] = get_skill_value(s, self.attributes)
+
+    def set_talents(self, talent_string):
+        self.talents = talent_string.split(',')
+
+    def set_trappings(self, trappings_string):
+        self.trappings = trappings_string.split(',')
+
+    def get_output(self, output_type="ui"):
+        if output_type == "ui":
+            output = f"{self.career} ({self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"\n{self.attributes['WS']}   {self.attributes['BS']}   {self.attributes['S']}  {self.attributes['T']}"
+            output += f"  {self.attributes['I']}  {self.attributes['Agi']}    {self.attributes['Dex']}   {self.attributes['Int']}"
+            output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"
+        else:
+            output = f"{self.career} ({self.path}) {self.status}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
+            output += f"\n{self.attributes['WS']}  {self.attributes['BS']}  {self.attributes['S']}  {self.attributes['T']}"
+            output += f"  {self.attributes['I']}  {self.attributes['Agi']}   {self.attributes['Dex']}  {self.attributes['Int']}"
+            output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"
+
+        output += self.get_skills_output()
+        output += get_list_output("talents", self.talents)
+        output += get_list_output("trappings", self.trappings)
+
+        return output
+
+    def get_skills_output(self):
+        output = "\n-----SKILLS----------------\n"
+        index = 0
+        for skill, value in self.skills.items():
+            if index != 0 and index % 3 == 0:
+                output += "\n"
+            output += f"{skill}: {value}, "
+            index += 1
+        return output
+

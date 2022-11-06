@@ -32,6 +32,8 @@ def init_vessel_data():
             chance_high = chance_low + entry['Chance']
             chance = (chance_low, chance_high)
             chance_low = chance_high
+            careers = entry["Captain"].split(',')
+            careers = [c.strip() for c in careers]
             vessel_entry = {
                 "vessel_type": entry["Vessel"],
                 "has_name": convert_to_bool(entry["Has Name"]),
@@ -41,7 +43,7 @@ def init_vessel_data():
                 "cargo_chance": entry["Cargo Chance"],
                 "passenger_chance": entry["Passenger Chance"],
                 "cargo_capacity": entry["Capacity"],
-                "captain_career": entry["Captain"].split(','),
+                "captain_career": careers,
                 "captain_level": entry["Captain Level"]
             }
             vessel_data.append(vessel_entry)

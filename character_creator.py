@@ -1,6 +1,6 @@
 import json
 from tkinter import messagebox
-from random import randint
+from random import randint, choice
 from utilities import get_random_chance_entry
 
 skills = {}
@@ -9,6 +9,27 @@ levels = {
     3: [{"chance": (0, 60), "level": 1}, {"chance": (60, 85), "level": 2}, {"chance": (85, 100), "level": 3}],
     4: [{"chance": (0, 40), "level": 1}, {"chance": (40, 75), "level": 2}, {"chance": (75, 95), "level": 3}, {"chance": (95, 100), "level": 4}]
 }
+
+names = {
+    "empire": {"male": [], "female": [], "surname": []}
+}
+
+
+def init_name_data():
+    global names
+    try:
+        with open("Data/Names/Names_Data_Empire.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Names_Data_Empire.json!")
+    else:
+        for entry in data:
+            names["empire"]["male"].append(entry["Male"])
+            names["empire"]["female"].append(entry["Female"])
+
+    with open("Data/Names/Data_Names_Empire_Surnames.txt", "r") as surnames:
+        names["empire"]["surname"] = surnames.readlines()
+    # print(get_random_name("female"))
 
 
 def init_skills_data():
@@ -21,6 +42,13 @@ def init_skills_data():
     else:
         for entry in data:
             skills[entry["Skill"]] = entry["Attribute"]
+
+
+def get_random_name(gender, region="empire"):
+    if gender in names[region]:
+        return f"{choice(names[region][gender])} {choice(names[region]['surname'])}"
+    else:
+        messagebox.showinfo(title="Oops!", message=f"Missing {gender} from {region}")
 
 
 def test_data(characters, data_type="skills"):
@@ -78,8 +106,8 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_character_details(origin="", says=""):
-    details = ""
+def create_character_details(gender, origin="", says=""):
+    details = get_random_name(gender)
     try:
         with open("Data/Details_Data_GMS.json", "r") as data_file:
             data = json.load(data_file)
@@ -105,7 +133,7 @@ def create_character_details(origin="", says=""):
 
 
 class GameCharacter:
-    def __init__(self, career_name, level, levels_data):
+    def __init__(self, career_name, level, levels_data, details=""):
         self.level = level
         self.career = career_name
         index = level -1
@@ -133,7 +161,7 @@ class GameCharacter:
         # TODO trappings list
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
-        self.details = ""
+        self.details = details
 
     def set_skills(self, skill_string):
         skill_list = skill_string.split(',')

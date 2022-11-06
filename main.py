@@ -3,7 +3,7 @@ from tkinter import messagebox
 import json
 import character_creator
 import trade_creator
-from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level
+from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, init_name_data
 from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -37,26 +37,26 @@ def click_create_vessel():
     captain_origin = trade_creator.get_origin()
     captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
     # TODO create captain as character & replace following
-    character_detail_text = create_character_details(captain_origin, captain_says)
+    character_detail_text = create_character_details(get_gender(), captain_origin, captain_says)
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])
-    # character = create_character(captain_career, captain_level)
+    create_character(captain_career, captain_level)
     print(f"Captain: {captain_career} Level: {captain_level}")
 
     # ---Display output
-    label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character_detail_text
+    label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
     pyperclip.copy(vessel_details)
 
 
 def click_details():
     global character_detail_text
-    character_detail_text = create_character_details()
+    character_detail_text = create_character_details(get_gender())
     label_output["text"] = character_detail_text
     pyperclip.copy(character_detail_text)
 
 
 def click_create():
-    global career_data
+    global career_data, character
     career_name = input_career.get()
     level = int(input_level.get())
     if career_name in career_data and level < len(career_data[career_name]['level_data'])+1:
@@ -67,7 +67,7 @@ def click_create():
 
 def click_random():
     global character_detail_text
-    character_detail_text = create_character_details()
+    character_detail_text = create_character_details(get_gender())
     create_character(get_random_career_key(), get_random_level())
 
 
@@ -108,6 +108,10 @@ def init_data():
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
+def get_gender():
+    return choice(["male", "female"])
+
+
 def get_random_career_key():
     roll = randint(1, 100)
     # print(f"random: {roll}")
@@ -121,9 +125,7 @@ def get_random_career_key():
 
 def create_character(career, level):
     global career_data, character
-    character = GameCharacter(career, level, career_data[career]['level_data'])
-    if len(character_detail_text) > 0:
-        character.set_details(character_detail_text)
+    character = GameCharacter(career, level, career_data[career]['level_data'], character_detail_text)
     display_character_stats(character)
 
 
@@ -159,7 +161,7 @@ button_create = Button(text="Create", command=click_create)
 button_random = Button(text="Random", command=click_random)
 button_save = Button(text="Save", command=click_save)
 
-label_output = Label(text="Character output goes here", width=50, height=25, justify="left")
+label_output = Label(text="Character output goes here", width=50, height=40, justify="left", anchor="n", pady=20)
 
 button_details.grid(column=0, row=0, columnspan=3)
 button_clear.grid(column=3, row=0, columnspan=2)
@@ -182,6 +184,7 @@ label_output.grid(column=0, row=2, columnspan=7)
 init_data()
 init_skills_data()
 init_trade_data()
+init_name_data()
 #print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()
 

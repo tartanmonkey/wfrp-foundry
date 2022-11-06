@@ -3,16 +3,16 @@ from tkinter import messagebox
 import json
 import character_creator
 import trade_creator
-from character_creator import GameCharacter, init_skills_data, create_character_details
-from random import randint
+from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level
+from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
 from utilities import split_into_lines
 
 # ------------------------ VARIABLES ----------------------------
 
-# career_name : {chance: tuple, level_data: list}
-career_data = {}
+
+career_data = {} # career_name : {chance: tuple, level_data: list}
 character_detail_text = ""
 character = None
 # ------------------------ BUTTON FUNCTIONS ----------------------------
@@ -26,7 +26,7 @@ def click_clear():
 
 
 def click_create_vessel():
-    global character_detail_text
+    global character_detail_text, character
     vessel = Vessel()
     vessel_data = vessel.get_vessel_data()
     passengers = get_passenger_numbers(vessel_data)
@@ -38,6 +38,10 @@ def click_create_vessel():
     captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
     # TODO create captain as character & replace following
     character_detail_text = create_character_details(captain_origin, captain_says)
+    captain_level = get_random_level(vessel_data["captain_level"])
+    captain_career = choice(vessel_data["captain_career"])
+    # character = create_character(captain_career, captain_level)
+    print(f"Captain: {captain_career} Level: {captain_level}")
 
     # ---Display output
     label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character_detail_text
@@ -64,7 +68,7 @@ def click_create():
 def click_random():
     global character_detail_text
     character_detail_text = create_character_details()
-    create_character(get_random_career_key(), 1)
+    create_character(get_random_career_key(), get_random_level())
 
 
 def click_save():

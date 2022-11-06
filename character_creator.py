@@ -1,8 +1,14 @@
 import json
 from tkinter import messagebox
 from random import randint
+from utilities import get_random_chance_entry
 
 skills = {}
+levels = {
+    2: [{"chance": (0, 70), "level": 1}, {"chance": (70, 100), "level": 2}],
+    3: [{"chance": (0, 60), "level": 1}, {"chance": (60, 85), "level": 2}, {"chance": (85, 100), "level": 3}],
+    4: [{"chance": (0, 40), "level": 1}, {"chance": (40, 75), "level": 2}, {"chance": (75, 95), "level": 3}, {"chance": (95, 100), "level": 4}]
+}
 
 
 def init_skills_data():
@@ -63,6 +69,13 @@ def get_list_output(list_name, data):
             output += "\n"
         output += f"{data[n]}, "
     return output
+
+
+def get_random_level(max_level=4):
+    if max_level == 1:
+        return 1
+    level_data = get_random_chance_entry(levels[max_level], "chance")
+    return level_data["level"]
 
 
 def create_character_details(origin="", says=""):
@@ -143,7 +156,7 @@ class GameCharacter:
     def get_output(self, output_type="ui"):
         output = self.details
         if output_type == "ui":
-            output += f"{self.career} ({self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"{self.career} ({self.level} {self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']}   {self.attributes['BS']}   {self.attributes['S']}  {self.attributes['T']}"
             output += f"  {self.attributes['I']}  {self.attributes['Agi']}    {self.attributes['Dex']}   {self.attributes['Int']}"
             output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"

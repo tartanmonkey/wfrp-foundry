@@ -78,8 +78,8 @@ def click_save():
         save_data.write(text)
 
 
-def male_button_used():
-    print(male_state.get())
+def gender_set():
+    print(radio_gender.get())
 
 # ---------------------------- DATA SETUP ----------------------------- #
 
@@ -112,7 +112,13 @@ def init_data():
 
 
 def get_gender():
-    return choice(["male", "female"])
+    gender = radio_gender.get()
+    if gender == 3:
+        return choice(["male", "female"])
+    elif gender == 1:
+        return "male"
+    else:
+        return "female"
 
 
 def get_random_career_key():
@@ -159,9 +165,11 @@ button_save = Button(text="Save", width=15, command=click_save)
 
 button_details = Button(text="Details", width=15, command=click_details)
 label_gender = Label(text="Gender: ")
-male_state = IntVar()
-checkbutton_male = Checkbutton(text="Male?", variable=male_state, command=male_button_used)
-male_state.get()
+radio_gender = IntVar()
+radio_gender.set(3)
+radio_male = Radiobutton(text="Male", value=1, variable=radio_gender, command=gender_set)
+radio_female = Radiobutton(text="Female", value=2, variable=radio_gender, command=gender_set)
+radio_random = Radiobutton(text="Random", value=3, variable=radio_gender, command=gender_set)
 
 label_career = Label(text="Career: ")
 input_career = Entry(width=20)
@@ -180,7 +188,9 @@ button_save.grid(column=3, row=0, columnspan=3)
 
 button_details.grid(column=0, row=1, columnspan=1)
 label_gender.grid(column=1, row=1)
-checkbutton_male.grid(column=2, row=1)
+radio_male.grid(column=2, row=1)
+radio_female.grid(column=3, row=1)
+radio_random.grid(column=4, row=1)
 
 label_career.grid(column=0, row=2)
 input_career.grid(column=1, row=2)

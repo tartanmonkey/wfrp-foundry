@@ -81,6 +81,12 @@ def click_save():
 def gender_set():
     print(radio_gender.get())
 
+
+def attribute_test():
+    attribs = {"WS": {"val": 1}, "BS": 2}
+    for k, v in attribs.items():
+        print(k)
+
 # ---------------------------- DATA SETUP ----------------------------- #
 
 def init_data():
@@ -211,6 +217,7 @@ init_data()
 init_skills_data()
 init_trade_data()
 init_name_data()
+#attribute_test()
 #print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()
 

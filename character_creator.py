@@ -65,12 +65,12 @@ def test_data(characters, data_type="skills"):
 def get_skill_value(skill_name, attributes):
     # print(f"skill name: {skill_name} * attributes: {attributes}")
     skill_key = get_skill_key(skill_name)
-    # print(skill_key)
+    print(skill_key)
     # TODO set only some skills defined by Level
     if skill_key in skills:
         if skills[skill_key] in attributes:
             attribute = skills[skill_key]
-            return attributes[attribute] + 5  # this probably needs to take level or distinguish between set & add
+            return attributes[attribute]["total"] + 5  # this probably needs to take level or distinguish between set & add
         else:
             messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
     else:
@@ -85,7 +85,7 @@ def get_skill_key(skill_name):
 
 def get_attribute_value(value):
     if type(value) == str:
-        return 30
+        return 0
     else:
         return value
 
@@ -129,6 +129,12 @@ def create_character_details(gender, origin="", says=""):
 
     return details
 
+
+def create_attribute(race="human"):
+    roll_1 = randint(1, 10)
+    roll_2 = randint(1, 10)
+    return {"base": roll_1 + roll_2 + 20, "advances": 0, "total": roll_1 + roll_2 + 20}
+
 # ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
 
 
@@ -141,18 +147,20 @@ class GameCharacter:
         self.status = levels_data[index]["Status"]
         path_data = levels_data[index]
         self.attributes = {
-            "WS": get_attribute_value(path_data["WS"]),
-            "BS": get_attribute_value(path_data["BS"]),
-            "S": get_attribute_value(path_data["S"]),
-            "T": get_attribute_value(path_data["T"]),
-            "I": get_attribute_value(path_data["I"]),
-            "Agi": get_attribute_value(path_data["Agi"]),
-            "Dex": get_attribute_value(path_data["Dex"]),
-            "Int": get_attribute_value(path_data["Int"]),
-            "WP": get_attribute_value(path_data["WP"]),
-            "Fel": get_attribute_value(path_data["Fel"]),
-            "W": get_attribute_value(path_data["W"])
+            "WS": create_attribute(),
+            "BS": create_attribute(),
+            "S": create_attribute(),
+            "T": create_attribute(),
+            "I": create_attribute(),
+            "Agi": create_attribute(),
+            "Dex": create_attribute(),
+            "Int": create_attribute(),
+            "WP": create_attribute(),
+            "Fel": create_attribute(),
         }
+        self.set_attributes(path_data)
+        # TODO set wounds
+        self.wounds = 0
         self.skills = {}
         self.set_skills(levels_data[index]["Skills"])
         # TODO talents list
@@ -181,18 +189,25 @@ class GameCharacter:
     def set_details(self, details):
         self.details = details
 
+    def set_attributes(self, level_data):
+        for attribute, value in self.attributes.items():
+            level_multiplier = get_attribute_value(level_data[attribute])
+            self.attributes[attribute]["advances"] = level_multiplier * 5 + randint(0, 5)
+            self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
+
+
     def get_output(self, output_type="ui"):
         output = self.details
         if output_type == "ui":
             output += f"{self.career} ({self.level} {self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
-            output += f"\n{self.attributes['WS']}   {self.attributes['BS']}   {self.attributes['S']}  {self.attributes['T']}"
-            output += f"  {self.attributes['I']}  {self.attributes['Agi']}    {self.attributes['Dex']}   {self.attributes['Int']}"
-            output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"
+            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
+            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
         else:
             output += f"{self.career} ({self.path}) {self.status}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
-            output += f"\n{self.attributes['WS']}  {self.attributes['BS']}  {self.attributes['S']}  {self.attributes['T']}"
-            output += f"  {self.attributes['I']}  {self.attributes['Agi']}   {self.attributes['Dex']}  {self.attributes['Int']}"
-            output += f"  {self.attributes['WP']}  {self.attributes['Fel']}  {self.attributes['W']}"
+            output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
+            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
 
         output += self.get_skills_output()
         output += get_list_output("talents", self.talents)
@@ -206,7 +221,13 @@ class GameCharacter:
         for skill, value in self.skills.items():
             if index != 0 and index % 3 == 0:
                 output += "\n"
-            output += f"{skill}: {value}, "
+            output += f"{skill}: {value}, " #call to get skill total here
             index += 1
         return output
 
+    def get_skill_total(self, skill):
+        # TODO get skill key
+        # TODO get skill attribute
+        # TODO get self.attributes[attribute]["total]
+        # TODO return self.skills[skill_key] + ^
+        pass

@@ -78,6 +78,9 @@ def click_save():
         save_data.write(text)
 
 
+def male_button_used():
+    print(male_state.get())
+
 # ---------------------------- DATA SETUP ----------------------------- #
 
 def init_data():
@@ -146,38 +149,51 @@ def test_character_data():
 # ---------------------------- UI SETUP ------------------------------- #
 
 
+
 window = Tk()
 window.title("Character Creator")
 window.config(padx=20, pady=20)
-button_details = Button(text="Details", width=15, command=click_details)
+
 button_clear = Button(text="Clear", width=15, command=click_clear)
-button_create_vessel = Button(text="Create Vessel", width=15, command=click_create_vessel)
+button_save = Button(text="Save", width=15, command=click_save)
+
+button_details = Button(text="Details", width=15, command=click_details)
+label_gender = Label(text="Gender: ")
+male_state = IntVar()
+checkbutton_male = Checkbutton(text="Male?", variable=male_state, command=male_button_used)
+male_state.get()
 
 label_career = Label(text="Career: ")
 input_career = Entry(width=20)
 label_level = Label(text="Level: ")
-input_level = Entry(width=5)
+input_level = Entry(width=3)
 button_create = Button(text="Create", command=click_create)
 button_random = Button(text="Random", command=click_random)
-button_save = Button(text="Save", command=click_save)
+
+button_create_vessel = Button(text="Create Vessel", width=15, command=click_create_vessel)
 
 label_output = Label(text="Character output goes here", width=50, height=40, justify="left", anchor="n", pady=20)
 
-button_details.grid(column=0, row=0, columnspan=3)
-button_clear.grid(column=3, row=0, columnspan=2)
-button_create_vessel.grid(column=5, row=0, columnspan=2)
 
+button_clear.grid(column=0, row=0, columnspan=3)
+button_save.grid(column=3, row=0, columnspan=3)
 
-label_career.grid(column=0, row=1)
-input_career.grid(column=1, row=1)
+button_details.grid(column=0, row=1, columnspan=1)
+label_gender.grid(column=1, row=1)
+checkbutton_male.grid(column=2, row=1)
+
+label_career.grid(column=0, row=2)
+input_career.grid(column=1, row=2)
 input_career.insert(0, "Soldier")
-label_level.grid(column=2, row=1)
-input_level.grid(column=3, row=1)
+label_level.grid(column=2, row=2)
+input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
-button_create.grid(column=4, row=1)
-button_random.grid(column=5, row=1)
-button_save.grid(column=6, row=1)
-label_output.grid(column=0, row=2, columnspan=7)
+button_create.grid(column=4, row=2)
+button_random.grid(column=5, row=2)
+
+button_create_vessel.grid(column=0, row=3, columnspan=2)
+
+label_output.grid(column=0, row=4, columnspan=6)
 
 # ---------------------------- MAIN ------------------------------- #
 

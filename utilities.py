@@ -89,6 +89,7 @@ def convert_list_to_string(data):
 
 
 def split_into_lines(string, line_length):
+    """Given a string and a line length in characters returns a list of lines with less than line_length"""
     split_lines = string
     if len(string) > line_length:
         words = string.split(' ')
@@ -107,6 +108,9 @@ def split_into_lines(string, line_length):
     return split_lines
 
 
+def get_stripped_list(string):
+    string_list = string.split(',')
+    return [entry.strip() for entry in string_list]
 
 
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22

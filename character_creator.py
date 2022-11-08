@@ -1,7 +1,7 @@
 import json
 from tkinter import messagebox
 from random import randint, choice
-from utilities import get_random_chance_entry
+from utilities import get_random_chance_entry, get_stripped_list
 
 skills = {}
 levels = {
@@ -77,6 +77,12 @@ def get_skill_value(skill_name, attributes):
         messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
     return 30
 
+
+def get_random_skill_value(num_rolls):
+    value = 0
+    for n in range(num_rolls):
+        value += randint(0, 5)
+    return value
 
 def get_skill_key(skill_name):
     words = skill_name.split("(")
@@ -162,7 +168,8 @@ class GameCharacter:
         # TODO set wounds
         self.wounds = 0
         self.skills = {}
-        self.set_skills(levels_data[index]["Skills"])
+        self.set_skills(levels_data)
+        # self.set_skills(levels_data[index]["Skills"])
         # TODO talents list
         self.talents = []
         self.set_talents(levels_data[index]["Talents"])
@@ -170,15 +177,6 @@ class GameCharacter:
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
         self.details = details
-
-    def set_skills(self, skill_string):
-        skill_list = skill_string.split(',')
-        skills_stripped = [skill.strip() for skill in skill_list]
-        # print(skill_list)
-        # print(skills_stripped)
-        # TODO set initial values
-        for s in skills_stripped:
-            self.skills[s] = 5#get_skill_value(s, self.attributes)
 
     def set_talents(self, talent_string):
         self.talents = talent_string.split(',')
@@ -236,3 +234,21 @@ class GameCharacter:
         else:
             messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
         return 0
+
+    def set_skills(self, level_data):
+        if self.level == 1:
+            skill_list = get_stripped_list(level_data[0]["Skills"])
+            for skill in skill_list:
+                self.skills[skill] = get_random_skill_value(1)
+        else:
+            for i in range(self.level):
+                skill_list = get_stripped_list(level_data[i]["Skills"])
+                for skill in skill_list:
+                    if i == 0:
+                        value = (self.level - 1) * 5
+                    else:
+                        num_rolls = self.level - i
+                        value = get_random_skill_value(num_rolls)
+                    self.skills[skill] = value
+
+

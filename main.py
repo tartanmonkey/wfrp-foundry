@@ -3,6 +3,7 @@ from tkinter import messagebox
 import json
 import character_creator
 import trade_creator
+import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, init_name_data
 from random import randint, choice
 import pyperclip # for using the clipboard

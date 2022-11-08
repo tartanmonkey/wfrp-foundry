@@ -61,7 +61,7 @@ def test_data(characters, data_type="skills"):
     with open("Output/missing_data.txt", "w") as data:
         data.write(missing_data)
 
-
+# TODO Remove once new skill logic complete
 def get_skill_value(skill_name, attributes):
     # print(f"skill name: {skill_name} * attributes: {attributes}")
     skill_key = get_skill_key(skill_name)
@@ -178,7 +178,7 @@ class GameCharacter:
         # print(skills_stripped)
         # TODO set initial values
         for s in skills_stripped:
-            self.skills[s] = get_skill_value(s, self.attributes)
+            self.skills[s] = 5#get_skill_value(s, self.attributes)
 
     def set_talents(self, talent_string):
         self.talents = talent_string.split(',')
@@ -221,13 +221,18 @@ class GameCharacter:
         for skill, value in self.skills.items():
             if index != 0 and index % 3 == 0:
                 output += "\n"
-            output += f"{skill}: {value}, " #call to get skill total here
+            output += f"{skill}: {self.get_skill_total(skill)}, " #call to get skill total here
             index += 1
         return output
 
-    def get_skill_total(self, skill):
-        # TODO get skill key
-        # TODO get skill attribute
-        # TODO get self.attributes[attribute]["total]
-        # TODO return self.skills[skill_key] + ^
-        pass
+    def get_skill_total(self, skill_name):
+        skill_key = get_skill_key(skill_name)
+        if skill_key in skills:
+            if skills[skill_key] in self.attributes:
+                attribute = skills[skill_key]
+                return self.attributes[attribute]["total"] + self.skills[skill_name]
+            else:
+                messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
+        else:
+            messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
+        return 0

@@ -156,7 +156,7 @@
     "WP": 3,
     "Fel": "",
     "Skills": "Language (Any), Lore (Any)",
-    "Talents": "Magnum Opus, Rapid Reload, Savant (Engineering), Unshakeable",
+    "Talents": "Magnum Opus, Rapid Reload, Savant (Engineering), Unshakable",
     "Trappings": "Guild License, Library (Engineer), Quality"
   },
   {
@@ -276,7 +276,7 @@
     "WP": 1,
     "Fel": 2,
     "Skills": "Melee(Any), Charm, Research, Trade(Brewer), Trade(Herbalist), Trade(Vintner)",
-    "Talents": "Talents: Etiquette (Cultists), Field Dressing, Holy Visions, Invoke (Any)",
+    "Talents": "Etiquette (Cultists), Field Dressing, Holy Visions, Invoke (Any)",
     "Trappings": "Trappings: Book (Religion), Religious Relic, Trade Tools (Any)"
   },
   {
@@ -296,7 +296,7 @@
     "WP": 2,
     "Fel": 3,
     "Skills": "Perception, Leadership, Lore(Local), Lore(Politics)",
-    "Talents": "Resistance (Any), Robust, Savant (Theology), Stouthearted",
+    "Talents": "Resistance (Any), Robust, Savant (Theology), Stout-hearted",
     "Trappings": "Abbey, Library (Theology)"
   },
   {
@@ -1676,7 +1676,7 @@
     "WP": 3,
     "Fel": 3,
     "Skills": "Lore (Any), Track",
-    "Talents": "Commanding Presence, Iron Will, Warleader, Wealthy",
+    "Talents": "Commanding Presence, Iron Will, War Leader, Wealthy",
     "Trappings": "4 sets of Best Quality Courtly Garb, Quality Foil or Hand Mirror, 40 gc , Jewellery worth 40 gc , Province"
   },
   {
@@ -1716,7 +1716,7 @@
     "WP": "",
     "Fel": "",
     "Skills": "Evaluate, Gamble, Gossip, Haggle, Animal Care, Consume Alcohol",
-    "Talents": "Etiquette (Servants), Shadow, Tenacious, Wellprepared",
+    "Talents": "Etiquette (Servants), Shadow, Tenacious, Well-prepared",
     "Trappings": "Livery"
   },
   {
@@ -1956,7 +1956,7 @@
     "WP": 2,
     "Fel": 1,
     "Skills": "Bribery, Charm, Evaluate, Intuition, Leadership, Lore(Local)",
-    "Talents": "Break and Enter, Criminal, Public Speaking, Strike to Stun",
+    "Talents": "Break and Enter, Criminal, Public Speaker, Strike to Stun",
     "Trappings": "Leather Jack, 3 Tax Collectors"
   },
   {
@@ -2656,7 +2656,7 @@
     "WP": 1,
     "Fel": "",
     "Skills": "Ranged(Entangling), Endurance, Perception, Animal Care, Charm Animal, Climb, Drive, Ride (Horse)",
-    "Talents": "Animal Affinity, Seasoned Traveller, Trick-Riding, Tenacious",
+    "Talents": "Animal Affinity, Seasoned Traveller, Trick Riding, Tenacious",
     "Trappings": "Warm Coat and Gloves, Whip"
   },
   {
@@ -2676,7 +2676,7 @@
     "WP": 2,
     "Fel": "",
     "Skills": "Ranged(Blackpowder), Intuition, Consume Alcohol, Gossip, Lore(Local), Navigation",
-    "Talents": "Coolheaded, Crack the Whip, Gunner, Strongminded",
+    "Talents": "Coolheaded, Crack the Whip, Gunner, Strong-minded",
     "Trappings": "Blunderbuss with 10 Shots, Coach Horn, Leather Jack, Hat"
   },
   {
@@ -2736,7 +2736,7 @@
     "WP": "",
     "Fel": 1,
     "Skills": "Athletics, Charm, Sleight of Hand, Entertain(Any) , Gossip, Haggle, Perform(Any), Play(any)",
-    "Talents": "Attractive, Mimic, Public-Speaking, Suave",
+    "Talents": "Attractive, Mimic, Public Speaker, Suave",
     "Trappings": "Bowl, Instrument"
   },
   {
@@ -2936,7 +2936,7 @@
     "WP": 2,
     "Fel": "",
     "Skills": "Charm Animal, Bribery, Consume Alcohol, Outdoor Survival",
-    "Talents": "Nose for Trouble, Relentless, Tenacious, Trick Rider",
+    "Talents": "Nose for Trouble, Relentless, Tenacious, Trick Riding",
     "Trappings": "Backpack, Saddlebags, Shield"
   },
   {
@@ -3336,7 +3336,7 @@
     "WP": 2,
     "Fel": "",
     "Skills": "Intimidate, Haggle, Lore (Local), Lore(Wrecks)",
-    "Talents": "Acute Sense (Sight), Pilot, Sea Legs, VeryStrong",
+    "Talents": "Acute Sense (Sight), Pilot, Sea Legs, Very Strong",
     "Trappings": "Pole, Storm Lantern and Oil"
   },
   {
@@ -3596,7 +3596,7 @@
     "WP": "",
     "Fel": 4,
     "Skills": "Charm, Navigation",
-    "Talents": "Orientation, Pilot, Public Speaking, Savvy",
+    "Talents": "Orientation, Pilot, Public Speaker, Savvy",
     "Trappings": "Shipping Charts, Sailing Ship and Crew, Sextant, Spyglass"
   },
   {
@@ -3736,7 +3736,7 @@
     "WP": 2,
     "Fel": "",
     "Skills": "Cool, Evaluate, Intuition, Leadership",
-    "Talents": "Dealmaker, Embezzle, Etiquette(Criminals), Public Speaking",
+    "Talents": "Dealmaker, Embezzle, Etiquette(Criminals), Public Speaker",
     "Trappings": "Gang of Stevedores, Whistle"
   },
   {
@@ -3876,7 +3876,7 @@
     "WP": "",
     "Fel": 2,
     "Skills": "Melee(Basic),Dodge, Endurance, Intuition, Perception, Lore(Local)",
-    "Talents": "Ambidextrous, Carouser, Criminal, Resistant (Disease)",
+    "Talents": "Ambidextrous, Carouser, Criminal, Resistance (Disease)",
     "Trappings": "Dose of Weirdroot, Quality Clothing"
   },
   {
@@ -4156,7 +4156,7 @@
     "WP": 4,
     "Fel": "",
     "Skills": "Navigation, Trade (Engineer)",
-    "Talents": "Fearless (Undead), Sixth Sense, Strongminded, Trapper",
+    "Talents": "Fearless (Undead), Sixth Sense, Strong-minded, Trapper",
     "Trappings": "Bedroll, Maps, Tent, Trade Tools(Engineer), Writing Kit"
   },
   {
@@ -4536,7 +4536,7 @@
     "WP": "",
     "Fel": "",
     "Skills": "Intimidate, Intuition, Leadership, Lore (Warfare)",
-    "Talents": "Combat Reflexes, Fast Shot, Hatred (Any), Warleader",
+    "Talents": "Combat Reflexes, Fast Shot, Hatred (Any), War Leader",
     "Trappings": "Sash"
   },
   {
@@ -4616,7 +4616,7 @@
     "WP": "",
     "Fel": "",
     "Skills": "Melee (Two-handed), Heal, Language(Battle), Lore(Etiquette)",
-    "Talents": "Fearless (Intruders), Jump Up, Stout-hearted, Unshakeable",
+    "Talents": "Fearless (Intruders), Jump Up, Stout-hearted, Unshakable",
     "Trappings": "Great Weapon or Halberd, Helmet, Uniform"
   },
   {
@@ -4696,7 +4696,7 @@
     "WP": 2,
     "Fel": "",
     "Skills": "Charm, Consume Alcohol, Leadership, Lore(Warfare)",
-    "Talents": "Fearless (Any), Stout-hearted, Unshakeable, Warleader",
+    "Talents": "Fearless (Any), Stout-hearted, Unshakable, War Leader",
     "Trappings": "Barding, Small Unit of Knights"
   },
   {
@@ -5016,7 +5016,7 @@
     "WP": 3,
     "Fel": "",
     "Skills": "Heal, Intuition, Leadership, Perception",
-    "Talents": "Combat Aware, Enclosed Fighter, Unshakeable, Warleader",
+    "Talents": "Combat Aware, Enclosed Fighter, Unshakable, War Leader",
     "Trappings": "Symbol of Rank, Unit of Troops"
   },
   {
@@ -5036,7 +5036,7 @@
     "WP": 4,
     "Fel": 3,
     "Skills": "Lore (Warfare), Navigation",
-    "Talents": "Inspiring, Public Speaking, Seasoned Traveller, Stout-hearted",
+    "Talents": "Inspiring, Public Speaker, Seasoned Traveller, Stout-hearted",
     "Trappings": "Letter of Commission, Light Warhorse with Saddle and Tack, Map, Orders, Unit of Soldiers, Quality Uniform, Symbol of Rank"
   },
   {
@@ -5096,7 +5096,7 @@
     "WP": 3,
     "Fel": "",
     "Skills": "Intuition, Perception, Ride(Horse), Animal Care",
-    "Talents": "Combat Aware, Holy Visions, Pure Soul, Stouthearted",
+    "Talents": "Combat Aware, Holy Visions, Pure Soul, Stout-hearted",
     "Trappings": "Light Warhorse with Saddle and Tack"
   },
   {
@@ -5116,7 +5116,7 @@
     "WP": 4,
     "Fel": 3,
     "Skills": "Consume Alcohol, Lore (Warfare)",
-    "Talents": "Fearless (Any), Furious Assault, Holy Hatred, Warleader",
+    "Talents": "Fearless (Any), Furious Assault, Holy Hatred, War Leader",
     "Trappings": "Religious Relic"
   }
 ]

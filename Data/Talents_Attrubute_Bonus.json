@@ -1,0 +1,38 @@
+[
+  {
+    "Talent": "Coolheaded",
+    "Attribute": "WP"
+  },
+  {
+    "Talent": "Lightning Reflexes",
+    "Attribute": "Agi"
+  },
+  {
+    "Talent": "Marksman",
+    "Attribute": "BS"
+  },
+  {
+    "Talent": "Nimble Fingered",
+    "Attribute": "Dex"
+  },
+  {
+    "Talent": "Savvy",
+    "Attribute": "Int"
+  },
+  {
+    "Talent": "Sharp",
+    "Attribute": "I"
+  },
+  {
+    "Talent": "Suave",
+    "Attribute": "Fel"
+  },
+  {
+    "Talent": "Very Strong",
+    "Attribute": "Str"
+  },
+  {
+    "Talent": "Warrior Born",
+    "Attribute": "WS"
+  }
+]

@@ -4,7 +4,8 @@ import json
 import character_creator
 import trade_creator
 import utilities
-from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, init_name_data
+from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
+    init_name_data, init_talents_data
 from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -218,6 +219,8 @@ init_data()
 init_skills_data()
 init_trade_data()
 init_name_data()
+init_talents_data()
+character_creator.test_data(career_data, "talents")
 #attribute_test()
 #print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()

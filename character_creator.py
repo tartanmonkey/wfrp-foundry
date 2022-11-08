@@ -14,6 +14,8 @@ names = {
     "empire": {"male": [], "female": [], "surname": []}
 }
 
+talents_random = []
+
 
 def init_name_data():
     global names
@@ -44,6 +46,15 @@ def init_skills_data():
             skills[entry["Skill"]] = entry["Attribute"]
 
 
+def init_talents_data():
+    global talents_random
+    try:
+        with open("Data/Talents_Random.txt", "r") as data_file:
+            talents_random = data_file.readlines()
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Talents_Random data!")
+
+
 def get_random_name(gender, region="empire"):
     if gender in names[region]:
         return f"{choice(names[region][gender])} {choice(names[region]['surname'])}"
@@ -53,18 +64,39 @@ def get_random_name(gender, region="empire"):
 
 def test_data(characters, data_type="skills"):
     missing_data = ""
-    for character in characters:
-        for skill in character.skills:
-            skill_key = get_skill_key(skill)
-            if skill_key not in skills:
-                missing_data += f"{character.career}: {skill}\n"
-    with open("Output/missing_data.txt", "w") as data:
-        data.write(missing_data)
+    if data_type == "skills":  # Note this is expecting actual character instances
+        for character in characters:
+            for skill in character.skills:
+                skill_key = extract_key(skill)
+                if skill_key not in skills:
+                    missing_data += f"{character.career}: {skill}\n"
+        with open("Output/missing_data.txt", "w") as data:
+            data.write(missing_data)
+    elif data_type == "talents":
+        try:
+            with open("Data/Talents_All_Keys.txt", "r") as data_file:
+                talents_all_keys = data_file.readlines()
+        except FileNotFoundError:
+            messagebox.showinfo(title="Oops!", message="Talents_Random data!")
+        else:
+            talents_all_keys = [talent.strip() for talent in talents_all_keys]
+            # print(talents_all_keys)
+            for career, level_set in characters.items():
+                for entry in level_set["level_data"]:
+                    talent_list = entry["Talents"].split(",")
+                    talent_list = [t.strip() for t in talent_list]
+                    #print(talent_list)
+                    for career_talent in talent_list:
+                        talent_key = extract_key(career_talent)
+                        if talent_key not in talents_all_keys:
+                            missing_data += f"{career} {entry['Title']} missing: {talent_key}\n"
+            with open("Output/missing_data.txt", "w") as data:
+                data.write(missing_data)
 
 # TODO Remove once new skill logic complete
 def get_skill_value(skill_name, attributes):
     # print(f"skill name: {skill_name} * attributes: {attributes}")
-    skill_key = get_skill_key(skill_name)
+    skill_key = extract_key(skill_name)
     print(skill_key)
     # TODO set only some skills defined by Level
     if skill_key in skills:
@@ -84,8 +116,8 @@ def get_random_skill_value(num_rolls):
         value += randint(0, 5)
     return value
 
-def get_skill_key(skill_name):
-    words = skill_name.split("(")
+def extract_key(string):
+    words = string.split("(")
     return words[0].strip()
 
 
@@ -224,7 +256,7 @@ class GameCharacter:
         return output
 
     def get_skill_total(self, skill_name):
-        skill_key = get_skill_key(skill_name)
+        skill_key = extract_key(skill_name)
         if skill_key in skills:
             if skills[skill_key] in self.attributes:
                 attribute = skills[skill_key]

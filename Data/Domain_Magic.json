@@ -1,0 +1,112 @@
+[
+  {
+    "Domain": "Beasts",
+    "Spells": "Amber Taons, Beast Form, Beast Master, Beast Tongue, Flock of Doom, Hunter's Hide",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Death",
+    "Spells": "Caress of Laniph, Dying Words, Purple Pall of Shyish, Sanctify, Scythe of Shyish, Soul Vortex, Steal Life, Swift Passing",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Fire",
+    "Spells": "Aqshys Aegis, Cauterise, Crown of Flame, Flaming Hearts, Firewall, Great Fires of UZhul, Flaming Sword of Rhuin, Purge",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Heavens",
+    "Spells": "Cerulean Shield, Comet of Casandora, Fate’s Fickle Fingers, Starcrossed, TEsslas Arc, The First Portent of Amul, The Second Portent of Amul, The Third Portent of Amul",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Metal",
+    "Spells": "Crucible of Chamon, Enchant Weapon, Feather of Lead, Fool’s Gold, Forge of Chamon, Glittering Robe, Mutable Metal, Transmutation of Chamon",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Life",
+    "Spells": "Barkskin, Earthblood, Earthpool, Fat of the Land, Forest of Thorns, Lie of the Land, Lifebloom, Regenerate",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Light",
+    "Spells": "Banishment, Blinding Light, Clarity of Thought, Daemonbane, Healing Light, Net of Amyntok, Phas Protection, Speed of Thought",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Shadow",
+    "Spells": "Choking Shadows, Doppelganger, Illusion, Mindslip, Mystifying Miasma, Shadowsteed, Shadowstep, Shroud of Invisibility",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Manann",
+    "Spells": "Becalm, Drowned Mans Face, Fair Winds, Mananns Bounty, Sea Legs, Waterwalk",
+    "Blessings": "Battle, Breath, Courage, Hardiness, Savagery, Tenacity"
+  },
+  {
+    "Domain": "Morr",
+    "Spells": "Death Mask, Destroy Undead, Dooming, Last Rites, Portals Threshold, Stay Morrs Hand",
+    "Blessings": "Breath, Courage, Fortune, Righteousness, Tenacity, Wisdom"
+  },
+  {
+    "Domain": "Myrmidia",
+    "Spells": "Blazing Sun, Eagles Eye, Furys Call, Inspiring, Shield of Myrmidia, Spear of Myrmidia",
+    "Blessings": "Battle, Conscience, Courage, Fortune, Protection, Righteousness"
+  },
+  {
+    "Domain": "Ranald",
+    "Spells": "An Invitation, Cats Eyes, Ranalds Grace, Rich Man, Stay Lucky, You Aint Seen Me Right?",
+    "Blessings": "Charisma, Conscience, Finesse, Fortune, Protection, Wit"
+  },
+  {
+    "Domain": "Rhya",
+    "Spells": "Rhyas Children, Rhyas Harvest, Rhyas Shelter, Rhyas Succour, Rhyas Touch, Rhyas Union",
+    "Blessings": "Breath, Conscience, Grace, Healing, Protection, Recuperation"
+  },
+  {
+    "Domain": "Shallya",
+    "Spells": "Anchorites Endurance, Balm to a Wounded Mind, Bitter Catharsis, Martyr, Shallyas Tears, Unblemished Innocence",
+    "Blessings": "Breath, Conscience, Healing, Protection, Recuperation, Tenacity"
+  },
+  {
+    "Domain": "Sigmar",
+    "Spells": "Beacon of Righteous Virtue, Heed Not the Witch, Sigmars Fiery Hammer, Soulfire, Twin-tailed Comet, Vanquish the Unrighteous",
+    "Blessings": "Battle, Courage, Hardiness, Might, Protection, Righteousness"
+  },
+  {
+    "Domain": "Taal",
+    "Spells": "Animal Instincts, King of the Wild, Leaping Stag, Lord of the Hunt, Tooth and Claw, Tanglefoot",
+    "Blessings": "Battle, Breath, Conscience, Hardiness, The Hunt, Savagery"
+  },
+  {
+    "Domain": "Ulric",
+    "Spells": "Hoarfrosts Chill, Howl of the Wolf, Ulrics Fury, Pelt of the Winter Wolf, The Snow Kings Judgement, Winters Bite",
+    "Blessings": "Battle, Courage, Hardiness, Might, Savagery, Tenacity"
+  },
+  {
+    "Domain": "Verena",
+    "Spells": "As Verena Is My Witness, Blind Justice, Shackles of Truth, Sword of Justice, Truth Will Out, Wisdom of the Owl",
+    "Blessings": "Conscience, Courage, Fortune, Righteousness, Wisdom Wit"
+  },
+  {
+    "Domain": "Hedgecraft",
+    "Spells": "Goodwill, Mirkride, Nepenthe, Nostrum, Part the Branches, Protective Charm,",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Witchcraft",
+    "Spells": "Blight, Creeping Menace, Curse of Crippling Pain, Curse of Ill-Fortune, Haunting Horror, The Evil Eye",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Daemonology",
+    "Spells": "Destroy Lesser Daemon, Detect Daemon, Manifest Lesser Daemon, Octagram",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Necromancy",
+    "Spells": "Raise Dead, Reanimate, Screaming Skull, Vanhels Call",
+    "Blessings": ""
+  }
+]

@@ -43,7 +43,7 @@ def click_create_vessel():
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])
     create_character(captain_career, captain_level)
-    print(f"Captain: {captain_career} Level: {captain_level}")
+    #print(f"Captain: {captain_career} Level: {captain_level}")
 
     # ---Display output
     label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
@@ -160,6 +160,16 @@ def test_character_data():
 
     character_creator.test_data(all_characters)
 
+def output_trappings_data(data):
+    text = ""
+    for item, value in data.items():
+        text += f"----------- {item} ----------------\n"
+        for career in value['level_data']:
+            text += career['Trappings'] + "\n"
+    with open("Output/trappings_data.txt", "w") as trappings_data:
+        trappings_data.write(text)
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 
@@ -220,7 +230,11 @@ init_skills_data()
 init_trade_data()
 init_name_data()
 init_talents_data()
-character_creator.test_data(career_data, "talents")
+my_list = ["one", "two", "three"]
+new_list = utilities.get_random_list_items(my_list, 2)
+
+#output_trappings_data(career_data)
+#character_creator.test_data(career_data, "talents")
 #attribute_test()
 #print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()

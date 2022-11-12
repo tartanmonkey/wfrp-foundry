@@ -1,7 +1,8 @@
 import json
+import math
 from tkinter import messagebox
 from random import randint, choice
-from utilities import get_random_chance_entry, get_stripped_list
+from utilities import get_random_chance_entry, get_stripped_list, get_random_list_items, get_key_from_string
 
 skills = {}
 levels = {
@@ -15,7 +16,18 @@ names = {
 }
 
 talents_random = []
+talent_bonus = {}  # talent name: attribute
 
+hand_weapons = ["Sword", "Axe", "Mace", "Studded Club"]
+
+wealth_data = {
+    "Brass": {"coin": "d", "rolls": 2},
+    "Silver": {"coin": "s", "rolls": 1},
+    "Gold": {"coin": "GC", "rolls": 0},
+}
+
+magic_colours = ["Beasts", "Death", "Fire", "Heavens", "Metal", "Life", "Light", "Shadow"]
+gods = ["Manann", "Morr", "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena"]
 
 def init_name_data():
     global names
@@ -47,12 +59,21 @@ def init_skills_data():
 
 
 def init_talents_data():
-    global talents_random
+    global talents_random, talent_bonus
     try:
         with open("Data/Talents_Random.txt", "r") as data_file:
             talents_random = data_file.readlines()
+            talents_random = [talent.strip() for talent in talents_random]
     except FileNotFoundError:
         messagebox.showinfo(title="Oops!", message="Talents_Random data!")
+    try:
+        with open("Data/Talents_Attrubute_Bonus.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Skills data!")
+    else:
+        for entry in data:
+            talent_bonus[entry["Talent"]] = entry["Attribute"]
 
 
 def get_random_name(gender, region="empire"):
@@ -116,6 +137,7 @@ def get_random_skill_value(num_rolls):
         value += randint(0, 5)
     return value
 
+
 def extract_key(string):
     words = string.split("(")
     return words[0].strip()
@@ -154,7 +176,7 @@ def create_character_details(gender, origin="", says=""):
     else:
         rand_cap = len(data) - 1
         details += f"{data[randint(0, rand_cap)]['Description']}, "
-        details += f"{data[randint(0, rand_cap)]['Detail']}.\n"
+        details += f"{get_extra_detail(gender, data[randint(0, rand_cap)]['Detail'])}.\n"
         if len(origin) > 0:
             details += f"Origin: {origin}.\n"
         details += f"Trait: {data[randint(0, rand_cap)]['Trait']}\n"
@@ -173,6 +195,19 @@ def create_attribute(race="human"):
     roll_2 = randint(1, 10)
     return {"base": roll_1 + roll_2 + 20, "advances": 0, "total": roll_1 + roll_2 + 20}
 
+
+def get_attribute_bonus(attribute):
+    return math.floor(attribute / 10)
+
+
+def get_extra_detail(gender, detail):
+    if "/" in detail:
+        options = detail.split("/")
+        if gender == "male":
+            return options[0]
+        else:
+            return options[1]
+    return detail
 # ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
 
 
@@ -197,14 +232,14 @@ class GameCharacter:
             "Fel": create_attribute(),
         }
         self.set_attributes(path_data)
-        # TODO set wounds
-        self.wounds = 0
         self.skills = {}
         self.set_skills(levels_data)
         # self.set_skills(levels_data[index]["Skills"])
         # TODO talents list
-        self.talents = []
-        self.set_talents(levels_data[index]["Talents"])
+        self.talents = self.set_talents(levels_data)
+        # self.set_talents(levels_data[index]["Talents"])
+        # TODO set wounds
+        self.wounds = self.set_wounds()
         # TODO trappings list
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
@@ -215,6 +250,31 @@ class GameCharacter:
 
     def set_trappings(self, trappings_string):
         self.trappings = trappings_string.split(',')
+        self.trappings = [item.strip() for item in self.trappings]
+        for i in range(len(self.trappings)):
+            if self.trappings[i] == "Hand Weapon":
+                # replace hand weapon if it exists
+                self.trappings[i] = choice(hand_weapons)
+            elif "[" in self.trappings[i]:
+                # replace options with one
+                item = get_key_from_string(self.trappings[i], '[', ']')
+                item = item.split('/')
+                self.trappings[i] = choice(item)
+        # now add money
+        self.trappings.append(self.get_money())
+
+    def get_money(self):
+        wealth = self.status.split(" ")
+        multiplier = int(wealth[1])
+        money = 0
+        rolls = wealth_data[wealth[0]]["rolls"] * multiplier
+        for c in range(rolls):
+            money += randint(1, 10)
+        if money == 0:
+            return f"{multiplier}GC"
+        else:
+            return f"{money}{wealth_data[wealth[0]]['coin']}"
+
 
     def set_details(self, details):
         self.details = details
@@ -240,7 +300,7 @@ class GameCharacter:
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
 
         output += self.get_skills_output()
-        output += get_list_output("talents", self.talents)
+        output += self.get_talents_output()
         output += get_list_output("trappings", self.trappings)
 
         return output
@@ -253,6 +313,14 @@ class GameCharacter:
                 output += "\n"
             output += f"{skill}: {self.get_skill_total(skill)}, " #call to get skill total here
             index += 1
+        return output
+
+    def get_talents_output(self):
+        output = "\n-----TALENTS---------------\n"
+        for i in range(len(self.talents)):
+            if i != 0 and i % 4 == 0:
+                output += "\n"
+            output += f"{self.talents[i]}, "
         return output
 
     def get_skill_total(self, skill_name):
@@ -283,4 +351,48 @@ class GameCharacter:
                         value = get_random_skill_value(num_rolls)
                     self.skills[skill] = value
 
+    def set_talents(self, levels_data):
+        # get 3 unique random talents
+        talents = get_random_list_items(talents_random, 3)
+        # get one Career Talent/level - data needs prep
+        for i in range(self.level):
+            talents.append(self.get_career_talent(levels_data[i]["Talents"], talents))
+        # apply and Talent Attribute bonuses
+        for talent in talents:
+            self.apply_talent_attribute_bonus(talent)
+        return talents
 
+    def get_career_talent(self, path_talents, my_talents):
+        talent_list = path_talents.split(",")
+        talent_list = [talent.strip() for talent in talent_list]
+        # remove any talents i already have
+        for t in talent_list:
+            if t in my_talents:
+                # print(f"already have Talent: {t} removing from random list")
+                talent_list.remove(t)
+        if len(talent_list) == 0:
+            print("WARNING: already have all talents in list, returning none")
+            return ""
+        # TODO check for essential career talents, i.e. Pray, Petty Magic etc
+        return choice(talent_list)
+
+    def apply_talent_attribute_bonus(self, talent):
+        talent_key = extract_key(talent)
+        if talent_key in talent_bonus:
+            self.increase_attribute(talent_bonus[talent_key], 5)
+            #print(f"Applied talent bonus: {talent}; {talent_bonus[talent_key]}")
+
+    def increase_attribute(self, attribute, amount):
+        self.attributes[attribute]["base"] += amount
+        self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
+        #print(f"Increased {attribute} to total {self.attributes[attribute]['total']}")
+
+    def set_wounds(self):
+        tb = get_attribute_bonus(self.attributes["T"]["total"])
+        sb = get_attribute_bonus(self.attributes["S"]["total"])
+        wpb = get_attribute_bonus(self.attributes["WP"]["total"])
+        wounds = (2 * tb) + sb + wpb
+        if "Hardy" in self.talents:
+            #print("Increasing wounds as have Hardy Talent")
+            wounds += tb
+        return wounds

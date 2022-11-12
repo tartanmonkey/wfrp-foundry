@@ -1,0 +1,320 @@
+----------- Apothecary ----------------
+Book (Blank), Healing Draught, Leather Jerkin, Pestle and Mortar
+Guild Licence, Trade Tools
+Book (Apothecary), Apprentice, Workshop
+Commission Papers, Large Workshop
+----------- Engineer ----------------
+Book (Engineer), Hammer and Spikes
+Guild Licence, Trade Tools
+Workshop
+Guild License, Library (Engineer), Quality
+----------- Lawyer ----------------
+Book (Law), Magnifying Glass
+Court Robes, Guild Licence, Writing Kit
+Office, Assistant (Student or Servant)
+Gavel, Ostentatious Wig
+----------- Nun ----------------
+Religious Symbol, Robes
+Trappings: Book (Religion), Religious Relic, Trade Tools (Any)
+Abbey, Library (Theology)
+Religious Order
+----------- Physician ----------------
+Bandages, Healing Draught
+Book (Medicine), Guild Licence, Trade Tools (Medicine)
+Apprentice, Workshop (Medicine)
+Courtly Attire, Letter of Appointment
+----------- Priest ----------------
+Religious Symbol, Robes
+Book (Religion), Ceremonial Robes
+Quality Robes, Religious Relic, Subordinate Priests, Temple
+Library (Theology), Subordinate High Priests
+----------- Scholar ----------------
+Alcohol, Book, Opinions, Writing Kit
+Access to a Library, Degree
+Mortarboard, Robes
+Study
+----------- Wizard ----------------
+Grimoire, Quarterstaff
+Magical License
+Apprentice, Light Warhorse, Magical Item
+Apprentice, Library (Magic), Workshop (Magic)
+----------- Agitator ----------------
+Writing Kit, Hammer and Nails, Pile of Leaflets
+Leather Jack
+Hand Weapon, Pamphleteer
+3 Pamphleteers, Patron, Printing Press, Impressive Hat
+----------- Artisan ----------------
+Chalk, Leather Jerkin, d10 rags
+Guild Licence, Trade Tools
+Apprentice, Workshop
+Guild, Quality Clothing
+----------- Beggar ----------------
+Poor Quality Blanket, Cup
+Crutch, Bowl
+Disguise Kit, Hiding Place, Pauper Follower
+Lair, Large Group of Beggar Followers
+----------- Investigator ----------------
+Lantern, Lamp Oil, Journal, Quill and Ink
+Leather Jack, Hand Weapon, Magnifying Glass, Lockpick
+Assistant, Office
+Network of Informants, Spyglass
+----------- Merchant ----------------
+Abacus, Mule and Cart, Canvas Tarpaulin, 3d10 Silver Shillings
+Riverboat or 2 Wagons, Guild License, 20 GC
+Town House with Servants, Warehouse, 100 GC
+Trappings: 2 Riverboats or 4 Wagons, Large Town Estate, 2 Warehouses, 1000 GC, Quality Clothing
+----------- Rat Catcher ----------------
+Sling with Ammunition, Sack, Small but Vicious
+Animal Traps, Pole for Dead Rats
+Davrich Lantern, Hand Weapon, Leather Jack
+Assistant, Large and Vicious Dog, Sack of Poisoned Bait (10 doses of Heartkill)
+----------- Townsman ----------------
+Lodgings, Sturdy Boots
+Modest Townhouse, Servant, Quill and Ink
+Coach and Driver, Townhouse
+Chains of Office, Coach and Footman, Quality Clothing, Large Townhouse with Gardens and Servants
+----------- Watchman ----------------
+Hand Weapon, Leather Jack, Uniform
+Lantern and Pole, Lamp Oil, Copper Badge
+Breastplate, Helm, Symbol of Rank
+Riding Horse with Saddle and Tack, Quality Hat, Quality Hand weapon, Quality Symbol of Rank
+----------- Advisor ----------------
+Writing Kit
+Livery
+Quality Clothing, Aide
+Riding Horse with Saddle and Harness, Quality Courtly Garb, Staff of Advisors and Aides
+----------- Artist ----------------
+Brush or Chisel or Quill Pen
+Sling Bag containing Trade Tools (Artist)
+Apprentice, Patron, Workshop (Artist)
+Large Workshop (Artist), Library (Art), 3 Apprentices
+----------- Duellist ----------------
+Hand Weapon or Rapier, Sling Bag containing Clothing and 1d10 Bandages
+Main Gauche or Sword-breaker, Pistol with Gunpowder and Ammunition
+Quality Rapier, Hand Weapon, Trusty Second, 2 Wooden Training Swords
+2 Quality Weapons
+----------- Envoy ----------------
+Leather Jack, Livery, Scroll Case
+Quill and Ink, 10 sheets of parchment
+Aide, Quality Clothes, Map
+Aide, Best Quality Courtly Clothes, Staff of Diplomats, Herald
+----------- Noble ----------------
+Courtly Garb, Foil or Hand Mirror, Jewellery worth 3d10 gc , Personal Servant
+4 Household Servants, Quality Courtly Garb, Courtly Garb, Riding Horse with Saddle and Harness or Coach, Main Gauche or Quality Cloak, Jewellery worth 4 gc
+2 sets of Quality Courtly Garb, 200 gc , Fiefdom, Jewellery worth 200 gc , Signet Ring
+4 sets of Best Quality Courtly Garb, Quality Foil or Hand Mirror, 40 gc , Jewellery worth 40 gc , Province
+----------- Servant ----------------
+Floor Brush
+Livery
+Quality Livery, Storm Lantern, Tinderbox, Lamp Oil
+Hand Weapon, Fine Clothes, Servant
+----------- Spy ----------------
+Charcoal stick, Sling Bag containing 2 different sets of clothing and Hooded Cloak
+Informer, Hand Weapon, Disguise Kit, Ring of Informers, Telescope
+Book (Cryptography), Ring of Spies and Informers, Loft of Homing Pigeons, Quill and Ink
+Office and Staff, Large Spy Ring of Agents, Spies and Informers
+----------- Warden ----------------
+Keys, Lantern, Lamp Oil, Livery
+Hand Weapon or Bow with 10 arrows, Riding Horse with Saddle and Harness, Leather Jack
+Breastplate, Ceremonial Staff of Office, Staff of Wardens and Custodians
+Aide, Governor’s Residence, Servant
+----------- Bailiff ----------------
+Hand weapon, small lock box
+Leather Jack, 3 Tax Collectors
+Horse with Saddle and Tack, Breastplate, Bailiff
+Library (Law), Quality Robes, Seal of Office
+----------- Hedge Witch ----------------
+1d10 Lucky Charms, Quarterstaff, Backpack
+Antitoxin Kit, Healing Poultice, Trade Tools(Herbalist)
+Isolated Hut, Apprentice
+Assortment of Animal Skulls, Ceremonial Cloak and Garland
+----------- Herbalist ----------------
+Boots, Cloak, Sling Bag containing Assortment of Herbs
+Hand Weapon (Sickle), Healing Poultice, Trade Tools (Herbalist)
+Herb Gatherer, 3 Healing Poultices, Healing Draught, Workshop (Herbalist)
+Pony and Cart
+----------- Hunter ----------------
+Selection of Animal Traps, Hand Weapon, Sling with 10 Stone Bullets, Sturdy Boots and Cloak
+Bow with 10 arrows
+Backpack, Bedroll, Tent
+Riding Horse with Saddle and Tack, Kennel of Hunting Dogs
+----------- Miner ----------------
+Charcoal Stick, Crude Map, Pan, Spade
+Davrich Lamp, Hand Weapon (Pick), Lamp Oil, Leather Jack
+Great Weapon (Two-handed Pick), Helmet, Trade Tools (Engineer)
+Crew of Miners, Writing Kit
+----------- Mystic ----------------
+Deck of Cards or Dice, Cheap Jewellery
+Selection of Amulets
+Trade Tools (Writing)
+Trade Tools (Astrology)
+----------- Scout ----------------
+Hand Weapon, Leather Jack, Sturdy Boots and Cloak, Rope
+Bow and 10 Arrows, Mail Shirt
+Map, Riding Horse with Saddle and Tack, Saddlebags with 2 weeks’ Rations, Tent
+Selection of Maps, Trade Tools (Cartographer)
+----------- Villager ----------------
+None
+Leather Jerkin, Hand Weapon(Axe), Trade Tools (as Trade)
+Mule and Cart, Village Home and Workshop
+The Respect of the Village
+----------- Bounty Hunter ----------------
+Hand Weapon, Leather Jerkin, Rope
+Crossbow and 10 bolts, Leather Skullcap, Manacles, Net, Warrant Papers
+Mail Shirt, Riding Horse and Saddle
+Draught Horse and Cart, Mail Shirt, 4 Pairs of Manacles
+----------- Coachman ----------------
+Warm Coat and Gloves, Whip
+Blunderbuss with 10 Shots, Coach Horn, Leather Jack, Hat
+Mail Shirt, Pistol, Quality Cloak
+Fleet of Coaches and Horses, Maps
+----------- Entertainer ----------------
+Bowl, Instrument
+Costume, Instrument, Selection of Scripts (that you can’t yet read), Throwing Weapons
+Trained Animal, Writing Kit
+Draught Horses and Wagon (Stage), Wardrobe of Costumes and Props, Troupe of Entertainers
+----------- Flagellant ----------------
+Flail, Tattered Robes
+Placard, Religious Symbol, Sling
+Religious Relic
+Book (Religion), Followers (including Penitents, Flagellants, and Zealots)
+----------- Messenger ----------------
+Scroll Case
+Hand Weapon, Leather Jack, Riding Horse with Saddle and Tack
+Backpack, Saddlebags, Shield
+Couriers, Mail Shirt, Writing Kit
+----------- Pedlar ----------------
+Backpack, Bedroll, Goods worth 2d10 Brass, Tent
+Mule and Saddlebags, Goods worth 2d10 Silver, Selection of Pots and Pans, Trade Tools (Tinker)
+Cart, Goods worth at least 2d10 Gold
+Draught Horse and Wagon, Goods worth at least 5d10 Gold, 4 Silver in Coin
+----------- Road Warden ----------------
+Crossbow with 10 Bolts, Leather Jack
+Hand Weapon, Mail Shirt, Riding Horse with Saddle and Harness, Rope
+Squad of Road Wardens, Pistol with 10 Shots, Shield, Symbol of Rank
+Light Warhorse, Pistol with 10 Shots, Quality Hat and Cloak, Unit of Road Wardens
+----------- Witch Hunter ----------------
+Hand Weapon, Instruments of Torture
+Crossbow Pistol or Pistol, Hat (Henin), Leather Jack, Riding Horse with Saddle and Tack, Rope, Silvered Sword
+Quality Clothing, Subordinate Interrogators
+Best Quality Courtly Garb, Subordinate Witch Hunters
+----------- Boatman ----------------
+Hand Weapon (Boat Hook), Leather Jack, Pole
+Rope, Rowboat
+Backpack, Trade Tools(Carpenter)
+Hat, Riverboat and Crew
+----------- Huffer ----------------
+Hand Weapon (Boat Hook), Storm Lantern and Oil
+Leather Jerkin, Rope, Row Boat
+Pole, Storm Lantern and Oil
+Boathand, Small Riverboat
+----------- Riverwarden ----------------
+Hand Weapon (Sword), Leather Jack, Uniform
+Lantern and Oil, Pistol with 10 shot, Shield
+Grappling Hook, Helmet, Mail Shirt
+Patrol Boats and Crew, Symbol of Rank
+----------- Riverwoman ----------------
+Bucket, Fishing Rod and Bait, Leather Leggings
+Eel Trap, Leather Jerkin, Net, Spear
+Row Boat, Storm Lantern and Oil
+Hut or Riverboat
+----------- Seaman ----------------
+Bucket, Brush, Mop
+Hand Weapon (Boat Hook), Leather Jerkin
+Trade Tools (Carpenter)
+Shipping Charts, Sailing Ship and Crew, Sextant, Spyglass
+----------- Smuggler ----------------
+Large Sack, Mask or Scarves, Tinderbox, Storm Lantern and Oil
+2 Barrels, Hand Weapon, Leather Jack, Row Boat
+River Runner, Speedy Riverboat
+Disguise Kit, Small Fleet of Riverboats
+----------- Stevedore ----------------
+Hand Weapon (Boat Hook), Leather Gloves
+Guild Licence, Leather Jerkin, Pipe and Tobacco, Porter Cap
+Gang of Stevedores, Whistle
+Office and Staff, Writing Kit
+----------- Wrecker ----------------
+Crowbar, Large Sack, Leather Gloves
+Hand Weapon (Boat Hook), Leather Jack, Storm Lantern and Oil
+Crossbow with 10 Bolts, Grappling Hook and Rope, Riverboat
+Fleet of Riverboats and Wrecker Crew, Keg of Ale, Manacles
+----------- Bawd ----------------
+Flask of Spirits
+Dose of Weirdroot, Quality Clothing
+A Ring of Hustlers
+Townhouse with Discreet Back Entrance, a Ring of Bawds
+----------- Charlatan ----------------
+Backpack, 2 Sets of Clothing, Deck of Cards, Dice
+1 Forged Document, 2 Sets of Quality Clothing, Selection of Coloured Powders and Water, Selection of Trinkets and Charms
+Disguise Kit, Lock Picks, Multiple Forged Documents
+Forged Seal, Writing Kit
+----------- Fence ----------------
+Hand Weapon, Stolen Goods worth 3d10 Shillings
+Eye-glass, Trade Tools (Engraver), Writing Kit
+Pawnbroker’s Shop
+Hired Muscle, Network of Informants, Warehouse
+----------- Grave Robber ----------------
+Crowbar, Handcart, Hooded Cloak, Tarpaulin
+Backpack, Hand Weapon, Spade, Storm Lantern and Oil
+Hand Weapon (Pick), Horse and Cart, Leather Jack, Rope, Trade Tools (Thief)
+Bedroll, Maps, Tent, Trade Tools(Engineer), Writing Kit
+----------- Outlaw ----------------
+Bedroll, Hand Weapon, Leather Jerkin, Tinderbox
+Bow with 10 Arrows, Shield, Tent
+Helmet, Riding Horse with Saddle and Tack, Sleeved Mail Shirt, Band of Outlaws
+‘Fiefdom’ of Outlaw Chiefs, Lair
+----------- Racketeer ----------------
+Knuckledusters, Leather Jack
+Hand Weapon, Hat, Mail Shirt
+Crossbow Pistol with 10 Bolts, Gang of Thugs and Racketeers, Lair
+Network of Informers, Quality Clothing and Hat, Subordinate Gang Bosses
+----------- Thief ----------------
+Crowbar, Leather Jerkin, Sack
+Trade Tools (Thief), Rope
+Crossbow Pistol with 10 Bolts
+Dark Clothing, Grappling Hook, Mask or Scarves
+----------- Witch ----------------
+Candles, Chalk, Doll, Pins
+Quarterstaff, Sack, Selection of Herbs, Trade Tools (Herbalist)
+Backpack, Cloak with Several Pockets, Lucky Charm
+Robes, Skull
+----------- Cavalryman ----------------
+Leather Jack, Riding Horse with Saddle and Tack
+Breastplate, Helmet, Light Warhorse with Saddle and Tack, Pistol with 10 Shots, Shield
+Sash
+Deck of Cards, Quality Clothing
+----------- Guard ----------------
+Buckler, Leather Jerkin, Storm Lantern with Oil
+Bow with 10 Arrows, Sleeved Mail Shirt, Shield, Spear
+Great Weapon or Halberd, Helmet, Uniform
+Breastplate
+----------- Knight ----------------
+Leather Jack, Mail Shirt, Riding Horse with Saddle and Tack, Shield, Trade Tools (Farrier)
+Destrier with Saddle and Tack, Melee Weapon(Any), Lance, Plate Armour and Helm
+Barding, Small Unit of Knights
+Plumed Great Helm, Squire, Large Unit of Knights or Several Small Units of Knights
+----------- Pit Fighter ----------------
+Bandages, Knuckledusters, Leather Jack
+Flail or Great Weapon, Hand Weapon, Net or Whip, Shield or Buckler
+Breast Plate, Helmet
+Quality Helmet
+----------- Protagonist ----------------
+Hood or Mask, Knuckledusters, Leather Jack
+Hand Weapon, Mail Shirt, Riding Horse with Saddle and Tack, Shield
+Cloak, Garotte, Poison, Throwing
+Crossbow with 10 shots, Disguise Kit
+----------- Slayer ----------------
+Axe, Flask of Spirits, Shame, Tattoos
+Great Axe, Jewellery, Troll’s Head
+Giant’s Head, Throwing Axes
+Dragon’s Head
+----------- Soldier ----------------
+Dagger, Leather Breastplate, Uniform
+Breastplate, Helmet, Weapon (Any)
+Symbol of Rank, Unit of Troops
+Letter of Commission, Light Warhorse with Saddle and Tack, Map, Orders, Unit of Soldiers, Quality Uniform, Symbol of Rank
+----------- Warrior Priest ----------------
+Book (Religion), Leather Jerkin, Religious Symbol, Robes, Weapon (Any Melee)
+Breastplate, Weapon (Any)
+Light Warhorse with Saddle and Tack
+Religious Relic

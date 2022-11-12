@@ -154,8 +154,17 @@ def get_origin():
         origin = get_random_chance_entry(destination_data, "chance")["destination"]
     return origin
 
+
 def get_captain_data(key):
-    return get_random_key_value(key, captain_data)
+    data = get_random_key_value(key, captain_data)
+    print(data)
+    if "[" in data and "/" in data:
+        choices = get_key_from_string(data, "[", "]")
+        print(f"should get random detail from: {choices}")
+        data = data.split("[")
+        data = f"{data[0]} {get_random_item(choices, '/')}"
+        return data
+    return data
 
 def get_cargo(vessel):
     cargo = []

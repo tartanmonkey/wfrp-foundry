@@ -113,6 +113,26 @@ def get_stripped_list(string):
     return [entry.strip() for entry in string_list]
 
 
+def get_random_list_items(list_data, num_items):
+    if num_items > len(list_data) - 1:
+        messagebox.showinfo(title="Oops!", message=f"ERROR: list does not contain enough items!")
+        return list_data
+    else:
+        temp_list = list_data.copy()
+        random_items = []
+        for n in range(num_items):
+            item = choice(temp_list)
+            random_items.append(item)
+            temp_list.remove(item)
+        return random_items
+
+
+def get_random_item(string, divisor):
+    """Splits a string into a list of items separated by the divisor and returns a random one"""
+    items = string.split(divisor)
+    return choice(items)
+
+
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
     """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and

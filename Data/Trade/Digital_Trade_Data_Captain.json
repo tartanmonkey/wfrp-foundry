@@ -18,10 +18,10 @@
     "Captain Says": "Wants info about locations ahead"
   },
   {
-    "Captain Says": "Warning about river hazard (flood debris, rocks, signs of beastmen)"
+    "Captain Says": "Warning about river hazard [flood debris/rocks/signs of beastmen]"
   },
   {
-    "Captain Says": "Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)"
+    "Captain Says": "Warning about some location visited [thieves/con-men/corrupt river wardens/corrupt officials/disease]"
   },
   {
     "Captain Says": "Warning about passenger"
@@ -30,7 +30,7 @@
     "Captain Says": "Story about Pirates"
   },
   {
-    "Captain Says": "Wants a message taken somewhere (relating to cargo, passenger or problem encountered)"
+    "Captain Says": "Wants a message taken somewhere relating to [cargo/passenger/problem encountered]"
   },
   {
     "Captain Says": "Vessel in need of repair"
@@ -54,7 +54,7 @@
     "Captain Says": "One of their passengers has disapeared"
   },
   {
-    "Captain Says": "Has ejected passenger (criminal, annoying, sick, fight)"
+    "Captain Says": "Has ejected passenger [criminal/annoying/sick/fight/superstition]"
   },
   {
     "Captain Says": "Has sick crew or passengers"

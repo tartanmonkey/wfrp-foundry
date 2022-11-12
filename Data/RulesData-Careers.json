@@ -37,7 +37,7 @@
     "Fel": 1,
     "Skills": "Perception, Charm, Haggle, Gossip, Lore(Science), Language(Guilder)",
     "Talents": "Criminal, Dealmaker, Etiquette (Guilder), Pharmacist",
-    "Trappings": "Guild Licence, Trade Tools"
+    "Trappings": "Guild Licence, Trade Tools, Book (Blank), Healing Draught, Leather Jerkin, Pestle and Mortar"
   },
   {
     "Career": "Apothecary",
@@ -57,7 +57,7 @@
     "Fel": 2,
     "Skills": "Intuition, Leadership, Research, Secret Signs(Guilder)",
     "Talents": "Bookish, Master Tradesman (Apothecary), Resistance (Poison), Savvy",
-    "Trappings": "Book (Apothecary), Apprentice, Workshop"
+    "Trappings": "Book (Apothecary), Guild Licence, Trade Tools, Healing Draught, Leather Jerkin, Apprentice, Workshop"
   },
   {
     "Career": "Apothecary",
@@ -77,7 +77,7 @@
     "Fel": 3,
     "Skills": "Intimidate, Ride (Horse)",
     "Talents": "Acute Sense (Taste), Coolheaded, Master Tradesman (Poisoner), Savant (Apothecary)",
-    "Trappings": "Commission Papers, Large Workshop"
+    "Trappings": "Commission Papers, Leather Jerkin, Apprentices, Large Workshop"
   },
   {
     "Career": "Engineer",
@@ -117,7 +117,7 @@
     "Fel": "",
     "Skills": "Ranged(Engineering), Dodge, Drive, Navigation, Research, Language(Guilder)",
     "Talents": "Craftsman (Engineer), Etiquette (Guilder), Marksman, Orientation",
-    "Trappings": "Guild Licence, Trade Tools"
+    "Trappings": "Guild Licence, Trade Tools, Book (Engineer), Hammer and Spikes"
   },
   {
     "Career": "Engineer",
@@ -137,7 +137,7 @@
     "Fel": "",
     "Skills": "Leadership, Ride(Horse), Language(Khazalid), Secret Signs(Guilder)",
     "Talents": "Etiquette (Scholar), Master Tradesman (Engineering), Sniper, Super Numerate",
-    "Trappings": "Workshop"
+    "Trappings": "Guild Licence, Workshop, Guild Licence"
   },
   {
     "Career": "Engineer",
@@ -157,7 +157,7 @@
     "Fel": "",
     "Skills": "Language (Any), Lore (Any)",
     "Talents": "Magnum Opus, Rapid Reload, Savant (Engineering), Unshakable",
-    "Trappings": "Guild License, Library (Engineer), Quality"
+    "Trappings": "Guild License, Library (Engineer), Quality Trade Tools, Large Workshop"
   },
   {
     "Career": "Lawyer",
@@ -197,7 +197,7 @@
     "Fel": 1,
     "Skills": "Bribery, Charm, Gossip, Intuition, Language(Guilder), Secret Signs(Guilder)",
     "Talents": "Argumentative, Criminal, Etiquette (Guilder), Suave",
-    "Trappings": "Court Robes, Guild Licence, Writing Kit"
+    "Trappings": "Court Robes, Guild Licence, Writing Kit, Book (Law), Magnifying Glass"
   },
   {
     "Career": "Lawyer",
@@ -217,7 +217,7 @@
     "Fel": 2,
     "Skills": "Intimidate, Art(Writing), Entertain(Speeches), Lore(Any)",
     "Talents": "Bookish, Cat-tongued, Impassioned Zeal, Savvy",
-    "Trappings": "Office, Assistant (Student or Servant)"
+    "Trappings": "Court Robes, Guild Licence, Office, Assistant [Student/Servant]"
   },
   {
     "Career": "Lawyer",
@@ -237,7 +237,7 @@
     "Fel": 3,
     "Skills": "Cool, Lore (Any)",
     "Talents": "Commanding Presence, Kingpin, Savant (Law), Wealthy",
-    "Trappings": "Gavel, Ostentatious Wig"
+    "Trappings": "Court Robes, Guild Licence, Office, Assistants Student and Servant, Gavel, Ostentatious Wig"
   },
   {
     "Career": "Nun",
@@ -277,7 +277,7 @@
     "Fel": 2,
     "Skills": "Melee(Any), Charm, Research, Trade(Brewer), Trade(Herbalist), Trade(Vintner)",
     "Talents": "Etiquette (Cultists), Field Dressing, Holy Visions, Invoke (Any)",
-    "Trappings": "Trappings: Book (Religion), Religious Relic, Trade Tools (Any)"
+    "Trappings": "Religious Symbol, Robes, Book (Religion), Religious Relic, Trade Tools (Any)"
   },
   {
     "Career": "Nun",
@@ -297,7 +297,7 @@
     "Fel": 3,
     "Skills": "Perception, Leadership, Lore(Local), Lore(Politics)",
     "Talents": "Resistance (Any), Robust, Savant (Theology), Stout-hearted",
-    "Trappings": "Abbey, Library (Theology)"
+    "Trappings": "Religious Symbol, Robes, Abbey, Library (Theology), Religious Relic"
   },
   {
     "Career": "Nun",
@@ -317,7 +317,7 @@
     "Fel": 4,
     "Skills": "Language (Any), Lore (Any)",
     "Talents": "Commanding Presence, Iron Will, Pure Soul, Strong-minded",
-    "Trappings": "Religious Order"
+    "Trappings": "Religious Symbol, Robes, Religious Order"
   },
   {
     "Career": "Physician",
@@ -357,7 +357,7 @@
     "Fel": 1,
     "Skills": "Charm, Haggle, Lore(Anatomy), Lore(Medicine), Trade(Barber), Language(Guilder)",
     "Talents": "Coolheaded, Criminal, Etiquette(Guilder), Surgery",
-    "Trappings": "Book (Medicine), Guild Licence, Trade Tools (Medicine)"
+    "Trappings": "Bandages, Healing Draught, Book (Medicine), Guild Licence, Trade Tools (Medicine)"
   },
   {
     "Career": "Physician",
@@ -377,7 +377,7 @@
     "Fel": 2,
     "Skills": "Intimidate, Leadership, Consume Alcohol, Research",
     "Talents": "Etiquette (Scholars), Resistance (Disease), Savvy, Strike to Injure",
-    "Trappings": "Apprentice, Workshop (Medicine)"
+    "Trappings": "Guild Licence, Apprentice, Workshop (Medicine)"
   },
   {
     "Career": "Physician",
@@ -397,7 +397,7 @@
     "Fel": 3,
     "Skills": "Lore (Noble), Perform (Dancing)",
     "Talents": "Etiquette (Nobles), Nimble Fingered, Savant (Medicine), Strong-minded",
-    "Trappings": "Courtly Attire, Letter of Appointment"
+    "Trappings": "Courtly Attire, Letter of Appointment, Apprentices, Workshop (Medicine)"
   },
   {
     "Career": "Priest",
@@ -437,7 +437,7 @@
     "Fel": 1,
     "Skills": "Melee(Basic), Heal, Charm, Intimidate, Gossip, Entertain(Storytelling)",
     "Talents": "Blather, Bookish, Etiquette (Cultists), Invoke (Any)",
-    "Trappings": "Book (Religion), Ceremonial Robes"
+    "Trappings": "Religious Symbol, Book (Religion), Ceremonial Robes"
   },
   {
     "Career": "Priest",
@@ -477,7 +477,7 @@
     "Fel": 3,
     "Skills": "Language (Any), Lore (Politics)",
     "Talents": "Master Orator, Pure Soul, Resistance (Any), Savant(Theology)",
-    "Trappings": "Library (Theology), Subordinate High Priests"
+    "Trappings": "Quality Robes, Religious Relic, Temple, Library (Theology), Subordinate High Priests"
   },
   {
     "Career": "Scholar",
@@ -537,7 +537,7 @@
     "Fel": 2,
     "Skills": "Intimidate, Entertain(Lecture), Language(Any), Lore(Any)",
     "Talents": "Linguistics, Public Speaker, Savant (Any), Tower of Memories",
-    "Trappings": "Mortarboard, Robes"
+    "Trappings": "Mortarboard, Robes, Access to a Library, Degree"
   },
   {
     "Career": "Scholar",
@@ -557,7 +557,7 @@
     "Fel": 3,
     "Skills": "Entertain (Rhetoric), Lore (Any)",
     "Talents": "Magnum Opus, Master Orator, Savant(Any), Sharp",
-    "Trappings": "Study"
+    "Trappings": "Mortarboard, Robes, Access to a Library, Degree, Study"
   },
   {
     "Career": "Wizard",
@@ -597,7 +597,7 @@
     "Fel": "",
     "Skills": "Charm, Cool, Gossip, Intimidate, Language(Battle), Language(Any)",
     "Talents": "Arcane Magic (Arcane Lore), Detect Artefact, Fast Hands, Sixth Sense",
-    "Trappings": "Magical License"
+    "Trappings": "Magical License, Grimoire, Quarterstaff"
   },
   {
     "Career": "Wizard",
@@ -617,7 +617,7 @@
     "Fel": "",
     "Skills": "Animal Care, Evaluate, Lore (Warfare), Ride (Horse)",
     "Talents": "Dual Wielder, Instinctive Diction, Magical Sense, Menacing",
-    "Trappings": "Apprentice, Light Warhorse, Magical Item"
+    "Trappings": "Magical License, Grimoire, Apprentice, Light Warhorse, Magical Item"
   },
   {
     "Career": "Wizard",
@@ -637,7 +637,7 @@
     "Fel": "",
     "Skills": "Language (Any), Lore (Any)",
     "Talents": "Combat Aware, Frightening, Iron Will, War Wizard",
-    "Trappings": "Apprentice, Library (Magic), Workshop (Magic)"
+    "Trappings": "Magical License, Grimoire, Apprentice, Light Warhorse, Magical Item, Library (Magic), Workshop (Magic)"
   },
   {
     "Career": "Agitator",
@@ -677,7 +677,7 @@
     "Fel": 2,
     "Skills": "Cool, Dodge, Gamble, Intuition, Leadership, Entertain(Storytelling)",
     "Talents": "Alley Cat, Argumentative, Impassioned Zeal, Public Speaker",
-    "Trappings": "Leather Jack"
+    "Trappings": "Leather Jack, Writing Kit, Hammer and Nails, Pile of Leaflets"
   },
   {
     "Career": "Agitator",
@@ -697,7 +697,7 @@
     "Fel": 3,
     "Skills": "Melee (Brawling), Athletics, Intimidate, Perception",
     "Talents": "Cat-tongued, Dirty Fighting, Flee!, Step Aside",
-    "Trappings": "Hand Weapon, Pamphleteer"
+    "Trappings": "Hand Weapon, Pamphleteer, Leather Jack, Writing Kit, Hammer and Nails, Pile of Leaflets"
   },
   {
     "Career": "Agitator",
@@ -717,7 +717,7 @@
     "Fel": 4,
     "Skills": "Ride(Horse), Lore(Heraldry)",
     "Talents": "Etiquette (Any), Master Orator, Schemer, Suave",
-    "Trappings": "3 Pamphleteers, Patron, Printing Press, Impressive Hat"
+    "Trappings": "Hand Weapon, Leather Jack, 3 Pamphleteers, Patron, Printing Press, Impressive Hat"
   },
   {
     "Career": "Artisan",
@@ -757,7 +757,7 @@
     "Fel": 1,
     "Skills": "Charm, Haggle, Gossip, Perception, Language(Guilder), Lore(Local)",
     "Talents": "Dealmaker, Etiquette (Guilder), Nimble Fingered,Sturdy",
-    "Trappings": "Guild Licence, Trade Tools"
+    "Trappings": "Guild Licence, Trade Tools, Chalk, Leather Jerkin, d10 rags"
   },
   {
     "Career": "Artisan",
@@ -777,7 +777,7 @@
     "Fel": 2,
     "Skills": "Intuition, Leadership, Research, Secret Signs(Guilder)",
     "Talents": "Acute Sense (Taste or Touch), Master Tradesman(Any), Read/Write, Tinker",
-    "Trappings": "Apprentice, Workshop"
+    "Trappings": "Guild Licence, Leather Jerkin, Apprentice, Workshop"
   },
   {
     "Career": "Artisan",
@@ -837,7 +837,7 @@
     "Fel": 2,
     "Skills": "Perception, Gossip, Haggle, Sleight of Hand, Entertain(Acting), Entertain(Any)",
     "Talents": "Alley Cat, Beneath Notice, Criminal, Etiquette(Criminals)",
-    "Trappings": "Crutch, Bowl"
+    "Trappings": "Crutch, Bowl, Poor Quality Blanket"
   },
   {
     "Career": "Beggar",
@@ -857,7 +857,7 @@
     "Fel": 3,
     "Skills": "Charm Animal, Leadership, Lore(Local), Secret Signs(Vagabond)",
     "Talents": "Blather, Dirty Fighting, Hardy, Step Aside",
-    "Trappings": "Disguise Kit, Hiding Place, Pauper Follower"
+    "Trappings": "Disguise Kit, Hiding Place, Pauper Follower, Crutch, Bowl, Poor Quality Blanket"
   },
   {
     "Career": "Beggar",
@@ -917,7 +917,7 @@
     "Fel": 1,
     "Skills": "Track, Cool, Intuition, Perception, Charm, Stealth(Urban), Gossip, Climb",
     "Talents": "Etiquette (Any), Savvy, Shadow, Tenacious",
-    "Trappings": "Leather Jack, Hand Weapon, Magnifying Glass, Lockpick"
+    "Trappings": "Leather Jack, Hand Weapon, Magnifying Glass, Lockpick, Lantern, Lamp Oil, Journal, Quill and Ink"
   },
   {
     "Career": "Investigator",
@@ -937,7 +937,7 @@
     "Fel": 2,
     "Skills": "Bribery, Evaluate, Leadership, Lore (Any)",
     "Talents": "Bookish, Break and Enter, Sixth Sense, Suave",
-    "Trappings": "Assistant, Office"
+    "Trappings": "Assistant, Office, Leather Jack, Hand Weapon"
   },
   {
     "Career": "Investigator",
@@ -957,7 +957,7 @@
     "Fel": 3,
     "Skills": "Intimidate, Lore (any)",
     "Talents": "Acute Sense (Any), Savant (Any), Speedreader, Tower of Memories",
-    "Trappings": "Network of Informants, Spyglass"
+    "Trappings": "Network of Informants, Spyglass, Assistant, Office, Leather Jack, Hand Weapon"
   },
   {
     "Career": "Merchant",
@@ -977,7 +977,7 @@
     "Fel": 1,
     "Skills": "Charm, Gamble, Gossip, Haggle, Bribery, Animal Care, Consume Alcohol, Drive",
     "Talents": "Blather, Dealmaker, Read/Write, Suave",
-    "Trappings": "Abacus, Mule and Cart, Canvas Tarpaulin, 3d10 Silver Shillings"
+    "Trappings": "Abacus, Mule and Cart, Canvas Tarpaulin, 15s"
   },
   {
     "Career": "Merchant",
@@ -997,7 +997,7 @@
     "Fel": 2,
     "Skills": "Evaluate, Intuition, Perception, Language(Any), Language(Guilder), Lore(Local)",
     "Talents": "Briber, Embezzle, Etiquette (Guilder), Savvy",
-    "Trappings": "Riverboat or 2 Wagons, Guild License, 20 GC"
+    "Trappings": "[Riverboat/2 Wagons], Guild License, 20GC"
   },
   {
     "Career": "Merchant",
@@ -1017,7 +1017,7 @@
     "Fel": 3,
     "Skills": "Cool, Navigation, Language(Classical), Secret Signs(Guilder)",
     "Talents": "Cat-tongued, Etiquette (Any), Numismatics, Sharp",
-    "Trappings": "Town House with Servants, Warehouse, 100 GC"
+    "Trappings": "Town House with Servants, Warehouse, [Riverboat/Wagons], Guild License,100GC"
   },
   {
     "Career": "Merchant",
@@ -1037,7 +1037,7 @@
     "Fel": 4,
     "Skills": "Lore (Any), Intimidate",
     "Talents": "Iron Will, Luck, Schemer, Wealthy",
-    "Trappings": "Trappings: 2 Riverboats or 4 Wagons, Large Town Estate, 2 Warehouses, 1000 GC, Quality Clothing"
+    "Trappings": "[2 Riverboats/4 Wagons], Large Town Estate with Servants, 2 Warehouses, 1000 GC, Quality Clothing"
   },
   {
     "Career": "Rat Catcher",
@@ -1057,7 +1057,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Ranged(Sling), Athletics, Endurance, Stealth (Underground or Urban), Consume Alcohol, Animal Training (Dog), Charm Animal",
     "Talents": "Night Vision, Resistance (Disease), Strike Mighty Blow, Strike to Stun",
-    "Trappings": "Sling with Ammunition, Sack, Small but Vicious"
+    "Trappings": "Sling, Sack, Small but Vicious Dog"
   },
   {
     "Career": "Rat Catcher",
@@ -1077,7 +1077,7 @@
     "Fel": "",
     "Skills": "Perception, Gossip, Haggle, Set Trap, Lore (Poison), Animal Care",
     "Talents": "Enclosed Fighter, Etiquette (Guilder), Fearless(Rats), Very Resilient",
-    "Trappings": "Animal Traps, Pole for Dead Rats"
+    "Trappings": "Animal Traps, Pole for Dead Rats, Sling, Sack, Small but Vicious Dog"
   },
   {
     "Career": "Rat Catcher",
@@ -1097,7 +1097,7 @@
     "Fel": "",
     "Skills": "Ranged(Crossbow Pistol), Cool, Dodge, Climb",
     "Talents": "Hardy, Stout-hearted, Strong Legs, Tunnel Rat",
-    "Trappings": "Davrich Lantern, Hand Weapon, Leather Jack"
+    "Trappings": "Davrich Lantern, Hand Weapon, Leather Jack, Animal Traps, Pole for Dead Rats, Sling, Sack, Small but Vicious Dog"
   },
   {
     "Career": "Rat Catcher",
@@ -1117,7 +1117,7 @@
     "Fel": "",
     "Skills": "Leadership, Track",
     "Talents": "Fearless (Skaven), Menacing, Robust,Strong-minded",
-    "Trappings": "Assistant, Large and Vicious Dog, Sack of Poisoned Bait (10 doses of Heartkill)"
+    "Trappings": "Assistant, Davrich Lantern, Hand Weapon, Leather Jack, Animal Traps, Large and Vicious Dog, Sack of Poisoned Bait (10 doses of Heartkill)"
   },
   {
     "Career": "Townsman",
@@ -1177,7 +1177,7 @@
     "Fel": 3,
     "Skills": "Cool, Perception, Research, Lore (Law)",
     "Talents": "Briber, Public Speaker, Read/Write, Supportive",
-    "Trappings": "Coach and Driver, Townhouse"
+    "Trappings": "Coach and Driver, Townhouse, Servant, Quill and Ink"
   },
   {
     "Career": "Townsman",
@@ -1237,7 +1237,7 @@
     "Fel": 2,
     "Skills": "Cool, Intuition, Intimidate, Charm, Gossip, Lore(Local)",
     "Talents": "Break and Enter, Criminal, Night Vision, Sprinter",
-    "Trappings": "Lantern and Pole, Lamp Oil, Copper Badge"
+    "Trappings": "Hand Weapon, Leather Jack, Lantern and Pole, Lamp Oil, Copper Badge"
   },
   {
     "Career": "Watchman",
@@ -1257,7 +1257,7 @@
     "Fel": 3,
     "Skills": "Leadership, Haggle, Lore(Law), Entertain(Storytelling)",
     "Talents": "Disarm, Etiquette (Soldiers),Fearless (Criminals), Nose for Trouble",
-    "Trappings": "Breastplate, Helm, Symbol of Rank"
+    "Trappings": "Leather Jack, Breastplate, Helm, Symbol of Rank, Hand Weapon"
   },
   {
     "Career": "Watchman",
@@ -1277,7 +1277,7 @@
     "Fel": 4,
     "Skills": "Lore (Politics), Ride (Horse)",
     "Talents": "Public Speaker, Robust, Kingpin, Schemer",
-    "Trappings": "Riding Horse with Saddle and Tack, Quality Hat, Quality Hand weapon, Quality Symbol of Rank"
+    "Trappings": "Leather Jack, Breastplate, Helm,Riding Horse with Saddle and Tack, Quality Hat, Quality Hand weapon, Quality Symbol of Rank"
   },
   {
     "Career": "Advisor",
@@ -1317,7 +1317,7 @@
     "Fel": 1,
     "Skills": "Charm, Cool, Intuition, Evaluate, Gamble, Lore(Local)",
     "Talents": "Blather, Criminal, Schemer, Supportive",
-    "Trappings": "Livery"
+    "Trappings": "Livery, Writing Kit"
   },
   {
     "Career": "Advisor",
@@ -1337,7 +1337,7 @@
     "Fel": 2,
     "Skills": "Leadership, Entertain(Storytelling), Language(Any), Lore(Any)",
     "Talents": "Argumentative, Briber, Carouser, Cat-tongued",
-    "Trappings": "Quality Clothing, Aide"
+    "Trappings": "Quality Clothing, Aide, Writing Kit"
   },
   {
     "Career": "Advisor",
@@ -1357,7 +1357,7 @@
     "Fel": 3,
     "Skills": "Lore (Heraldry), Ride (Horse)",
     "Talents": "Commanding Presence, Embezzle, Kingpin, Suave",
-    "Trappings": "Riding Horse with Saddle and Harness, Quality Courtly Garb, Staff of Advisors and Aides"
+    "Trappings": "Riding Horse, Quality Courtly Garb, Staff of Advisors and Aides"
   },
   {
     "Career": "Artist",
@@ -1377,7 +1377,7 @@
     "Fel": "",
     "Skills": "Cool, Endurance, Stealth (Urban), Perception, Gossip, Evaluate, Consume Alcohol, Art(Any)",
     "Talents": "Artistic, Sharp, Strong Back, Tenacious",
-    "Trappings": "Brush or Chisel or Quill Pen"
+    "Trappings": "[Brush/Chisel/Quill]"
   },
   {
     "Career": "Artist",
@@ -1457,7 +1457,7 @@
     "Fel": "",
     "Skills": "Melee (Any), Dodge, Athletics, Endurance, Intuition, Perception, Heal, Language(Classical)",
     "Talents": "Beat Blade, Distract, Feint, Step Aside",
-    "Trappings": "Hand Weapon or Rapier, Sling Bag containing Clothing and 1d10 Bandages"
+    "Trappings": "[Hand Weapon/Rapier], Sling Bag containing Clothing and 1d10 Bandages"
   },
   {
     "Career": "Duellist",
@@ -1477,7 +1477,7 @@
     "Fel": "",
     "Skills": "Ranged(Blackpowder),  Melee (Parry), Cool, Charm, Gamble, Trade (Gunsmith)",
     "Talents": "Combat Reflexes, Etiquette (Any), Fast Shot, Reversal",
-    "Trappings": "Main Gauche or Sword-breaker, Pistol with Gunpowder and Ammunition"
+    "Trappings": "[Main Gauche/Sword-breaker], Pistol"
   },
   {
     "Career": "Duellist",
@@ -1517,7 +1517,7 @@
     "Fel": "",
     "Skills": "Melee(Any), Lore (Law)",
     "Talents": "Combat Master, Menacing, Reaction Strike, Strike to Injure",
-    "Trappings": "2 Quality Weapons"
+    "Trappings": "[Main Gauche/Sword-breaker], Quality Hand Weapon, Quality Rapier, Pistol, Trusty Second"
   },
   {
     "Career": "Envoy",
@@ -1557,7 +1557,7 @@
     "Fel": 2,
     "Skills": "Cool, Gossip, Haggle, Bribery, Lore(Politics), Art (Writing)",
     "Talents": "Attractive, Cat-tongued, Etiquette (any), Seasoned Traveller",
-    "Trappings": "Quill and Ink, 10 sheets of parchment"
+    "Trappings": "Leather Jack, Livery, Scroll Case, Quill and Ink, 10 sheets of parchment"
   },
   {
     "Career": "Envoy",
@@ -1577,7 +1577,7 @@
     "Fel": 3,
     "Skills": "Intimidate, Leadership, Navigation, Language(Any)",
     "Talents": "Carouser, Dealmaker, Gregarious, Schemer",
-    "Trappings": "Aide, Quality Clothes, Map"
+    "Trappings": "Aide, Quality Clothes, Map, Scroll Case, Quill and Ink"
   },
   {
     "Career": "Envoy",
@@ -1617,7 +1617,7 @@
     "Fel": "",
     "Skills": "Melee(Fencing), Intimidate, Leadership, Bribery, Consume Alcohol, Gamble, Lore(Heraldry), Play(Any)",
     "Talents": "Etiquette (Nobles), Luck, Noble Blood, Read/Write",
-    "Trappings": "Courtly Garb, Foil or Hand Mirror, Jewellery worth 3d10 gc , Personal Servant"
+    "Trappings": "Courtly Garb, [Foil/Hand Mirror], Jewellery worth 15 GC , Personal Servant"
   },
   {
     "Career": "Noble",
@@ -1637,7 +1637,7 @@
     "Fel": 1,
     "Skills": "Melee(Parry), Charm, Gossip, Language(Classical), Lore(Local), Ride(Horse)",
     "Talents": "Attractive, Briber, Carouser, Suave",
-    "Trappings": "4 Household Servants, Quality Courtly Garb, Courtly Garb, Riding Horse with Saddle and Harness or Coach, Main Gauche or Quality Cloak, Jewellery worth 4 gc"
+    "Trappings": "4 Household Servants, Quality Courtly Garb, Jewellery worth 15 GC, [Riding Horse/Coach], [Main Gauche/Quality Cloak], Jewellery worth 40 GC"
   },
   {
     "Career": "Noble",
@@ -1677,7 +1677,7 @@
     "Fel": 3,
     "Skills": "Lore (Any), Track",
     "Talents": "Commanding Presence, Iron Will, War Leader, Wealthy",
-    "Trappings": "4 sets of Best Quality Courtly Garb, Quality Foil or Hand Mirror, 40 gc , Jewellery worth 40 gc , Province"
+    "Trappings": "4 sets of Best Quality Courtly Garb, [Quality Foil/Hand Mirror], 400 GC , Jewellery worth 400 GC , Province"
   },
   {
     "Career": "Servant",
@@ -1817,7 +1817,7 @@
     "Fel": 3,
     "Skills": "Leadership, Animal Care, Animal Training (Pigeon), Language(Any)",
     "Talents": "Attractive, Cat-tongued, Master of Disguise, Mimic",
-    "Trappings": "Book (Cryptography), Ring of Spies and Informers, Loft of Homing Pigeons, Quill and Ink"
+    "Trappings": "Hand Weapon, Book (Cryptography), Ring of Spies and Informers, Loft of Homing Pigeons, Quill and Ink"
   },
   {
     "Career": "Spy",
@@ -1837,7 +1837,7 @@
     "Fel": 4,
     "Skills": "Lore (Any), Research",
     "Talents": "Briber, Schemer, Suave, Tower of Memories",
-    "Trappings": "Office and Staff, Large Spy Ring of Agents, Spies and Informers"
+    "Trappings": "Hand Weapon, Office and Staff, Large Spy Ring of Agents, Spies and Informers"
   },
   {
     "Career": "Warden",
@@ -1877,7 +1877,7 @@
     "Fel": "",
     "Skills": "Melee (Basic), Ranged (Bow), Outdoor Survival, Ride (Horse), Animal Care, Swim",
     "Talents": "Animal Affinity, Etiquette (Servants),Strider (any), Rover",
-    "Trappings": "Hand Weapon or Bow with 10 arrows, Riding Horse with Saddle and Harness, Leather Jack"
+    "Trappings": "[Hand Weapon/Bow], Riding Horse, Leather Jack"
   },
   {
     "Career": "Warden",
@@ -1897,7 +1897,7 @@
     "Fel": 2,
     "Skills": "Bribery, Charm, Gossip, Leadership",
     "Talents": "Embezzle, Numismatics, Read/Write, Supportive",
-    "Trappings": "Breastplate, Ceremonial Staff of Office, Staff of Wardens and Custodians"
+    "Trappings": "Leather Jack, Breastplate, Hand Weapon, Ceremonial Staff of Office, Staff of Wardens and Custodians"
   },
   {
     "Career": "Warden",
@@ -1917,7 +1917,7 @@
     "Fel": 3,
     "Skills": "Evaluate, Language (Any)",
     "Talents": "Commanding Presence, Etiquette (any), Savant(local), Suave",
-    "Trappings": "Aide, Governor’s Residence, Servant"
+    "Trappings": "Aide, Governor’s Residence, Servant, Hand Weapon"
   },
   {
     "Career": "Bailiff",
@@ -1957,7 +1957,7 @@
     "Fel": 1,
     "Skills": "Bribery, Charm, Evaluate, Intuition, Leadership, Lore(Local)",
     "Talents": "Break and Enter, Criminal, Public Speaker, Strike to Stun",
-    "Trappings": "Leather Jack, 3 Tax Collectors"
+    "Trappings": "Leather Jack, Hand weapon, small lock box, 3 Tax Collectors"
   },
   {
     "Career": "Bailiff",
@@ -1977,7 +1977,7 @@
     "Fel": 2,
     "Skills": "Animal Care, Lore (Heraldry), Navigation, Ride(Horse)",
     "Talents": "Kingpin, Menacing, Nose for Trouble, Read/Write",
-    "Trappings": "Horse with Saddle and Tack, Breastplate, Bailiff"
+    "Trappings": "Horse, Breastplate, Leather Jack, Hand weapon, Bailiff"
   },
   {
     "Career": "Bailiff",
@@ -2037,7 +2037,7 @@
     "Fel": "",
     "Skills": "Cool, Gossip, Heal, Lore (Local), Trade (Charms), Trade (Herbalist)",
     "Talents": "Aethyric Attunement, Animal Affinity, Arcane Magic (Hedgecraft), Sixth Sense",
-    "Trappings": "Antitoxin Kit, Healing Poultice, Trade Tools(Herbalist)"
+    "Trappings": "1d10 Lucky Charms, Quarterstaff, Backpack, Antitoxin Kit, Healing Poultice, Trade Tools(Herbalist)"
   },
   {
     "Career": "Hedge Witch",
@@ -2057,7 +2057,7 @@
     "Fel": 2,
     "Skills": "Haggle, Lore (Genealogy), Lore (Magic), Lore(Spirits)",
     "Talents": "Craftsman (Herbalist), Magical Sense, Pure Soul, Resistance (Disease)",
-    "Trappings": "Isolated Hut, Apprentice"
+    "Trappings": "1d10 Lucky Charms, Quarterstaff, Backpack, Antitoxin Kit, Healing Poultice, Trade Tools(Herbalist), Isolated Hut, Apprentice"
   },
   {
     "Career": "Hedge Witch",
@@ -2077,7 +2077,7 @@
     "Fel": 3,
     "Skills": "Intimidate, Pray",
     "Talents": "Acute Sense (Any), Master Craftsman (Herbalist), Night Vision, Strong-minded",
-    "Trappings": "Assortment of Animal Skulls, Ceremonial Cloak and Garland"
+    "Trappings": "Trade Tools(Herbalist), Isolated Hut, Apprentice, Assortment of Animal Skulls, Ceremonial Cloak and Garland"
   },
   {
     "Career": "Herbalist",
@@ -2117,7 +2117,7 @@
     "Fel": "",
     "Skills": "Cool, Heal, Gossip, Haggle, Consume Alcohol, Lore(Local)",
     "Talents": "Dealmaker, Nimble Fingered, Sharp, Sturdy",
-    "Trappings": "Hand Weapon (Sickle), Healing Poultice, Trade Tools (Herbalist)"
+    "Trappings": "Sickle, Healing Poultice, Trade Tools (Herbalist), Sling Bag containing Assortment of Herbs"
   },
   {
     "Career": "Herbalist",
@@ -2137,7 +2137,7 @@
     "Fel": 2,
     "Skills": "Intuition, Leadership, Lore (Medicine), Trade(Poisons)",
     "Talents": "Craftsman (Herbalist), Field Dressing, Hardy,Savvy",
-    "Trappings": "Herb Gatherer, 3 Healing Poultices, Healing Draught, Workshop (Herbalist)"
+    "Trappings": "Sickle, Herb Gatherer, 3 Healing Poultices, Healing Draught, Workshop (Herbalist)"
   },
   {
     "Career": "Herbalist",
@@ -2157,7 +2157,7 @@
     "Fel": 3,
     "Skills": "Drive, Navigation",
     "Talents": "Concoct, Master Tradesman (Herbalist), Resistance (Poison), Savant (Herbs)",
-    "Trappings": "Pony and Cart"
+    "Trappings": "Pony and Cart, Herb Gatherer, Workshop (Herbalist)"
   },
   {
     "Career": "Hunter",
@@ -2197,7 +2197,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Ranged(Bow), Cool, Intuition, Stealth(Rural), Secret Signs(Hunter)",
     "Talents": "Accurate Shot, Fast Shot, Hunter’s Eye, Marksman",
-    "Trappings": "Bow with 10 arrows"
+    "Trappings": "Selection of Animal Traps, Hand Weapon, Bow"
   },
   {
     "Career": "Hunter",
@@ -2217,7 +2217,7 @@
     "Fel": "",
     "Skills": "Navigation, Ride (Horse), Swim, Track",
     "Talents": "Acute Sense (any), Deadeye Shot, Fearless (Animals), Sharpshooter",
-    "Trappings": "Backpack, Bedroll, Tent"
+    "Trappings": "Selection of Animal Traps, Hand Weapon, Bow, Backpack, Bedroll, Tent"
   },
   {
     "Career": "Hunter",
@@ -2237,7 +2237,7 @@
     "Fel": "",
     "Skills": "Animal Care, Animal Training (Any)",
     "Talents": "Fearless (Monsters), Robust, Sniper, Sure Shot",
-    "Trappings": "Riding Horse with Saddle and Tack, Kennel of Hunting Dogs"
+    "Trappings": "Hand Weapon, Bow, Riding Horse, Kennel of Hunting Dogs"
   },
   {
     "Career": "Miner",
@@ -2297,7 +2297,7 @@
     "Fel": "",
     "Skills": "Gossip, Lore (Geology), Stealth (Underground), Trade (Engineer)",
     "Talents": "Careful Strike, Craftsman (Explosives), Tinker, Tunnel Rat",
-    "Trappings": "Great Weapon (Two-handed Pick), Helmet, Trade Tools (Engineer)"
+    "Trappings": "Two-handed Pick, Helmet, Trade Tools (Engineer)"
   },
   {
     "Career": "Miner",
@@ -2337,7 +2337,7 @@
     "Fel": 1,
     "Skills": "Dodge, Charm, Gossip, Intuition, Perception, Sleight of Hand, Haggle, Entertain (Fortune Telling)",
     "Talents": "Attractive, Luck, Second Sight, Suave",
-    "Trappings": "Deck of Cards or Dice, Cheap Jewellery"
+    "Trappings": "[Deck of Cards/Dice], Cheap Jewellery,"
   },
   {
     "Career": "Mystic",
@@ -2357,7 +2357,7 @@
     "Fel": 2,
     "Skills": "Cool, Intimidate, Evaluate, Bribery, Entertain(Prophecy), Lore(Astrology)",
     "Talents": "Detect Artefact, Holy Visions, Sixth Sense, Well-prepared",
-    "Trappings": "Selection of Amulets"
+    "Trappings": "[Deck of Cards/Dice], Cheap Jewellery, Selection of Amulets"
   },
   {
     "Career": "Mystic",
@@ -2377,7 +2377,7 @@
     "Fel": 3,
     "Skills": "Art (Writing), Charm Animal, Entertain(Storytelling), Language (Any)",
     "Talents": "Witch!, Nose for Trouble, Petty Magic, Read/Write",
-    "Trappings": "Trade Tools (Writing)"
+    "Trappings": "[Deck of Cards/Dice], Cheap Jewellery, Selection of Amulets, Trade Tools (Writing)"
   },
   {
     "Career": "Mystic",
@@ -2396,8 +2396,8 @@
     "WP": 3,
     "Fel": 4,
     "Skills": "Channelling (Azyr ), Lore (Prophecy)",
-    "Talents": "Arcane Magic (Celestial), Magical Sense, Menacing, Strong-minded",
-    "Trappings": "Trade Tools (Astrology)"
+    "Talents": "Arcane Magic (Heavens), Magical Sense, Menacing, Strong-minded",
+    "Trappings": "[Deck of Cards/Dice], Cheap Jewellery, Selection of Amulets, Trade Tools (Writing), Trade Tools (Astrology)"
   },
   {
     "Career": "Scout",
@@ -2437,7 +2437,7 @@
     "Fel": "",
     "Skills": "Ranged(Bow), Athletics, Track, Navigation, Stealth(Rural), Ride(Horse)",
     "Talents": "Combat Aware, Night Vision, Nose for Trouble, Seasoned Traveller",
-    "Trappings": "Bow and 10 Arrows, Mail Shirt"
+    "Trappings": "Hand Weapon, Leather Jack, Sturdy Boots and Cloak, Rope, Bow, Mail Shirt"
   },
   {
     "Career": "Scout",
@@ -2457,7 +2457,7 @@
     "Fel": "",
     "Skills": "Animal Care, Haggle, Secret Signs (Hunter), Swim",
     "Talents": "Acute Sense (Sight), Sixth Sense, Strong Legs, Very Resilient",
-    "Trappings": "Map, Riding Horse with Saddle and Tack, Saddlebags with 2 weeks’ Rations, Tent"
+    "Trappings": "Hand Weapon, Leather Jack, Sturdy Boots and Cloak, Rope, Bow, Mail Shirt, Map, Riding Horse, Saddlebags with 2 weeks’ Rations, Tent"
   },
   {
     "Career": "Scout",
@@ -2477,7 +2477,7 @@
     "Fel": "",
     "Skills": "Language (any), Trade (Cartographer)",
     "Talents": "Hardy, Linguistics, Savant (Local), Tenacious",
-    "Trappings": "Selection of Maps, Trade Tools (Cartographer)"
+    "Trappings": "Hand Weapon, Leather Jack, Sturdy Boots and Cloak, Rope, Bow, Mail Shirt, Map, Riding Horse, Selection of Maps, Trade Tools (Cartographer)"
   },
   {
     "Career": "Villager",
@@ -2517,7 +2517,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Dodge, Haggle, Drive, Entertain(Storytelling), Trade(Any)",
     "Talents": "Animal Affinity, Hardy, Tenacious, Very Strong",
-    "Trappings": "Leather Jerkin, Hand Weapon(Axe), Trade Tools (as Trade)"
+    "Trappings": "Leather Jerkin, Axe, Trade Tools (as Trade)"
   },
   {
     "Career": "Villager",
@@ -2537,7 +2537,7 @@
     "Fel": 2,
     "Skills": "Bribery, Charm, Intimidate, Leadership",
     "Talents": "Craftsman (Any), Dealmaker, Stout-hearted, Very Resilient",
-    "Trappings": "Mule and Cart, Village Home and Workshop"
+    "Trappings": "Leather Jerkin, Axe, Trade Tools (as Trade), Mule and Cart, Village Home and Workshop"
   },
   {
     "Career": "Villager",
@@ -2557,7 +2557,7 @@
     "Fel": 3,
     "Skills": "Intuition, Lore (History)",
     "Talents": "Master Tradesman (Any), Nimble Fingered, Public Speaker, Savant (Local)",
-    "Trappings": "The Respect of the Village"
+    "Trappings": "Trade Tools (as Trade), Mule and Cart, Village Home and Workshop, The Respect of the Village"
   },
   {
     "Career": "Bounty Hunter",
@@ -2597,7 +2597,7 @@
     "Fel": "",
     "Skills": "Ranged(Crossbow), Ranged (Entangling), Athletics, Endurance, Intimidate, Track",
     "Talents": "Marksman, Relentless, Seasoned Traveller, Strong Back",
-    "Trappings": "Crossbow and 10 bolts, Leather Skullcap, Manacles, Net, Warrant Papers"
+    "Trappings": "Hand Weapon, Leather Jerkin, Rope, Crossbow, Leather Skullcap, Manacles, Net, Warrant Papers"
   },
   {
     "Career": "Bounty Hunter",
@@ -2617,7 +2617,7 @@
     "Fel": "",
     "Skills": "Animal Care, Climb, Ride (Horse), Swim",
     "Talents": "Accurate Shot, Careful Strike, Dual Wielder, Sprinter",
-    "Trappings": "Mail Shirt, Riding Horse and Saddle"
+    "Trappings": "Hand Weapon, Leather Jerkin, Rope, Crossbow, Leather Skullcap, Manacles, Net, Warrant Papers, Mail Shirt, Riding Horse"
   },
   {
     "Career": "Bounty Hunter",
@@ -2637,7 +2637,7 @@
     "Fel": "",
     "Skills": "Drive, Lore (Law)",
     "Talents": "Deadeye Shot, Fearless (Bounties), Hardy, Sure Shot",
-    "Trappings": "Draught Horse and Cart, Mail Shirt, 4 Pairs of Manacles"
+    "Trappings": "Hand Weapon, Draught Horse and Cart, Mail Shirt, 4 Pairs of Manacles"
   },
   {
     "Career": "Coachman",
@@ -2677,7 +2677,7 @@
     "Fel": "",
     "Skills": "Ranged(Blackpowder), Intuition, Consume Alcohol, Gossip, Lore(Local), Navigation",
     "Talents": "Coolheaded, Crack the Whip, Gunner, Strong-minded",
-    "Trappings": "Blunderbuss with 10 Shots, Coach Horn, Leather Jack, Hat"
+    "Trappings": "Warm Coat and Gloves, Whip, Blunderbuss with 10 Shots, Coach Horn, Leather Jack, Hat"
   },
   {
     "Career": "Coachman",
@@ -2697,7 +2697,7 @@
     "Fel": "",
     "Skills": "Animal Training (Horse), Intimidate, Language(any), Lore (Routes)",
     "Talents": "Accurate Shot, Dealmaker, Fearless (Outlaws), Nose for Trouble",
-    "Trappings": "Mail Shirt, Pistol, Quality Cloak"
+    "Trappings": "Warm Coat and Gloves, Mail Shirt, Pistol, Quality Cloak"
   },
   {
     "Career": "Coachman",
@@ -2837,7 +2837,7 @@
     "Fel": "",
     "Skills": "Ranged(Sling), Athletics, Cool, Language(Classical), Lore(The Empire), Art(Icons)",
     "Talents": "Hardy, Hatred (Heretics), Flagellant, Implacable",
-    "Trappings": "Placard, Religious Symbol, Sling"
+    "Trappings": "Flail, Tattered Robes, Placard, Religious Symbol, Sling"
   },
   {
     "Career": "Flagellant",
@@ -2857,7 +2857,7 @@
     "Fel": "",
     "Skills": "Charm, Language (any), Lore (Theology), Perception",
     "Talents": "Field Dressing, Furious Assault, Menacing, Seasoned Traveller",
-    "Trappings": "Religious Relic"
+    "Trappings": "Flail, Tattered Robes, Placard, Religious Symbol, Sling, Religious Relic"
   },
   {
     "Career": "Flagellant",
@@ -2917,7 +2917,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Cool, Charm, Animal Care, Lore(Local), Ride(Horse)",
     "Talents": "Crack the Whip, Criminal, Orientation, Seasoned Traveller",
-    "Trappings": "Hand Weapon, Leather Jack, Riding Horse with Saddle and Tack"
+    "Trappings": "Hand Weapon, Leather Jack, Riding Horse"
   },
   {
     "Career": "Messenger",
@@ -2937,7 +2937,7 @@
     "Fel": "",
     "Skills": "Charm Animal, Bribery, Consume Alcohol, Outdoor Survival",
     "Talents": "Nose for Trouble, Relentless, Tenacious, Trick Riding",
-    "Trappings": "Backpack, Saddlebags, Shield"
+    "Trappings": "Hand Weapon, Leather Jack, Riding Horse, Backpack, Saddlebags, Shield"
   },
   {
     "Career": "Messenger",
@@ -2957,7 +2957,7 @@
     "Fel": 3,
     "Skills": "Intimidate, Leadership",
     "Talents": "Dealmaker, Hatred (Outlaws), Kingpin, Very Resilient",
-    "Trappings": "Couriers, Mail Shirt, Writing Kit"
+    "Trappings": "Hand Weapon, Mail Shirt, Riding Horse, Backpack, Saddlebags, Couriers"
   },
   {
     "Career": "Pedlar",
@@ -2977,7 +2977,7 @@
     "Fel": "",
     "Skills": "Endurance, Charm, Intuition, Gossip, Haggle, Stealth (Rural or Urban), Outdoor Survival, Entertain(Storytelling)",
     "Talents": "Fisherman, Flee!, Rover, Tinker",
-    "Trappings": "Backpack, Bedroll, Goods worth 2d10 Brass, Tent"
+    "Trappings": "Backpack, Bedroll, Goods worth 10d, Tent"
   },
   {
     "Career": "Pedlar",
@@ -2997,7 +2997,7 @@
     "Fel": 1,
     "Skills": "Animal Care, Charm Animal, Consume Alcohol, Evaluate, Ride (Horse), Trade (Tinker)",
     "Talents": "Dealmaker, Orientation, Seasoned Traveller, Strong Back",
-    "Trappings": "Mule and Saddlebags, Goods worth 2d10 Silver, Selection of Pots and Pans, Trade Tools (Tinker)"
+    "Trappings": "Mule and Saddlebags, Goods worth 10s Silver, Selection of Pots and Pans, Trade Tools (Tinker)"
   },
   {
     "Career": "Pedlar",
@@ -3017,7 +3017,7 @@
     "Fel": 2,
     "Skills": "Perception, Drive, Intimidate, Language (any)",
     "Talents": "Numismatics, Sturdy, Well-prepared, Very Resilient",
-    "Trappings": "Cart, Goods worth at least 2d10 Gold"
+    "Trappings": "Cart, Goods worth at least 10GC, Trade Tools (Tinker)"
   },
   {
     "Career": "Pedlar",
@@ -3037,7 +3037,7 @@
     "Fel": 3,
     "Skills": "Lore (Local), Lore (Geography)",
     "Talents": "Cat-tongued, Strong-minded, Suave, Tenacious",
-    "Trappings": "Draught Horse and Wagon, Goods worth at least 5d10 Gold, 4 Silver in Coin"
+    "Trappings": "Draught Horse and Wagon, Goods worth at least 25GC, 4s"
   },
   {
     "Career": "Road Warden",
@@ -3057,7 +3057,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Ranged(Crossbow), Perception, Gossip, Haggle, Bribery, Consume Alcohol, Gamble",
     "Talents": "Coolheaded, Embezzle, Marksman, Numismatics",
-    "Trappings": "Crossbow with 10 Bolts, Leather Jack"
+    "Trappings": "Crossbow, Leather Jack"
   },
   {
     "Career": "Road Warden",
@@ -3077,7 +3077,7 @@
     "Fel": "",
     "Skills": "Endurance, Intimidate, Intuition, Outdoor Survival, Ride(Horse), Animal Care",
     "Talents": "Crack the Whip, Criminal, Roughrider, Seasoned Traveller",
-    "Trappings": "Hand Weapon, Mail Shirt, Riding Horse with Saddle and Harness, Rope"
+    "Trappings": "Crossbow, Hand Weapon, Mail Shirt, Riding Horse, Rope"
   },
   {
     "Career": "Road Warden",
@@ -3097,7 +3097,7 @@
     "Fel": 2,
     "Skills": "Ranged(Blackpowder), Athletics, Charm, Leadership",
     "Talents": "Etiquette (Soldiers), Fearless (Outlaws), Hatred(any), Nose for Trouble",
-    "Trappings": "Squad of Road Wardens, Pistol with 10 Shots, Shield, Symbol of Rank"
+    "Trappings": "Squad of Road Wardens, Pistol, Shield, Symbol of Rank, Hand Weapon, Mail Shirt, Riding, Rope"
   },
   {
     "Career": "Road Warden",
@@ -3117,7 +3117,7 @@
     "Fel": 3,
     "Skills": "Lore (Empire), Navigation",
     "Talents": "Combat Aware, Commanding Presence, Kingpin, Public Speaker",
-    "Trappings": "Light Warhorse, Pistol with 10 Shots, Quality Hat and Cloak, Unit of Road Wardens"
+    "Trappings": "Light Warhorse, Pistol, Quality Hat and Cloak, Mail Shirt, Hand Weapon, Unit of Road Wardens"
   },
   {
     "Career": "Witch Hunter",
@@ -3157,7 +3157,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Ranged(Any), Cool, Ride(Horse), Gossip, Lore(Witches)",
     "Talents": "Dual Wielder, Marksman, Seasoned Traveller, Shadow",
-    "Trappings": "Crossbow Pistol or Pistol, Hat (Henin), Leather Jack, Riding Horse with Saddle and Tack, Rope, Silvered Sword"
+    "Trappings": "Hand Weapon, Instruments of Torture, [Crossbow/Pistol], Hat (Henin), Leather Jack, Riding Horse, Rope, Silvered Sword"
   },
   {
     "Career": "Witch Hunter",
@@ -3177,7 +3177,7 @@
     "Fel": 2,
     "Skills": "Endurance, Leadership, Lore (Law), Lore (Local)",
     "Talents": "Fearless (Witches), Nose for Trouble, Relentless, Strong-minded",
-    "Trappings": "Quality Clothing, Subordinate Interrogators"
+    "Trappings": "Quality Clothing, Subordinate Interrogators, Hand Weapon, Instruments of Torture, Pistol, Hat (Henin), Leather Jack, Riding Horse, Rope, Silvered Sword"
   },
   {
     "Career": "Witch Hunter",
@@ -3197,7 +3197,7 @@
     "Fel": 3,
     "Skills": "Lore (Chaos), Lore (Politics)",
     "Talents": "Frightening, Iron Will, Magical Sense, Pure Soul",
-    "Trappings": "Best Quality Courtly Garb, Subordinate Witch Hunters"
+    "Trappings": "Best Quality Courtly Garb, Hand Weapon, Pistol, Riding Horse, Subordinate Witch Hunters"
   },
   {
     "Career": "Boatman",
@@ -3217,7 +3217,7 @@
     "Fel": "",
     "Skills": "Melee(Brawling), Dodge, Endurance, Gossip, Row, Sail , Swim, Consume Alcohol",
     "Talents": "Dirty Fighting, Fisherman, Strong Back, Strong Swimmer",
-    "Trappings": "Hand Weapon (Boat Hook), Leather Jack, Pole"
+    "Trappings": "Boat Hook, Leather Jack, Pole"
   },
   {
     "Career": "Boatman",
@@ -3237,7 +3237,7 @@
     "Fel": "",
     "Skills": "Athletics, Perception, Intuition, Haggle, Entertain(Storytelling), Lore(Riverways)",
     "Talents": "Etiquette (Guilder), Seasoned Traveller, Very Strong, Waterman",
-    "Trappings": "Rope, Rowboat"
+    "Trappings": "Boat Hook, Leather Jack, Pole, Rope, Rowboat"
   },
   {
     "Career": "Boatman",
@@ -3257,7 +3257,7 @@
     "Fel": "",
     "Skills": "Climb, Heal, Trade (Boatbuilding), Entertain (Singing)",
     "Talents": "Dealmaker, Embezzle, Nose for Trouble, Strike Mighty Blow",
-    "Trappings": "Backpack, Trade Tools(Carpenter)"
+    "Trappings": "Boat Hook, Leather Jack, Pole, Rope, Rowboat, Backpack, Trade Tools(Carpenter)"
   },
   {
     "Career": "Boatman",
@@ -3277,7 +3277,7 @@
     "Fel": "",
     "Skills": "Leadership, Navigation",
     "Talents": "Menacing, Orientation, Pilot, Public Speaker",
-    "Trappings": "Hat, Riverboat and Crew"
+    "Trappings": "Boat Hook, Leather Jack, Pole, Rope, Hat, Riverboat and Crew"
   },
   {
     "Career": "Huffer",
@@ -3297,7 +3297,7 @@
     "Fel": "",
     "Skills": "Perception, Intuition, Gossip, Consume Alcohol, Lore(Local), Lore(Riverways), Row, Swim",
     "Talents": "Fisherman, Night Vision, Orientation, Waterman",
-    "Trappings": "Hand Weapon (Boat Hook), Storm Lantern and Oil"
+    "Trappings": "Boat Hook, Storm Lantern and Oil"
   },
   {
     "Career": "Huffer",
@@ -3317,7 +3317,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Cool, Charm, Entertain(Storytelling), Language(Any), Navigation",
     "Talents": "Dealmaker, Etiquette (Guilder), Nose for Trouble, River Guide",
-    "Trappings": "Leather Jerkin, Rope, Row Boat"
+    "Trappings": "Boat Hook, Storm Lantern and Oil, Leather Jerkin, Rope, Row Boat"
   },
   {
     "Career": "Huffer",
@@ -3337,7 +3337,7 @@
     "Fel": "",
     "Skills": "Intimidate, Haggle, Lore (Local), Lore(Wrecks)",
     "Talents": "Acute Sense (Sight), Pilot, Sea Legs, Very Strong",
-    "Trappings": "Pole, Storm Lantern and Oil"
+    "Trappings": "Pole, Boat Hook, Storm Lantern and Oil, Leather Jerkin, Rope, Row Boat"
   },
   {
     "Career": "Huffer",
@@ -3357,7 +3357,7 @@
     "Fel": 3,
     "Skills": "Leadership, Sail",
     "Talents": "Sixth Sense, Sharp, Strong Swimmer, Tenacious",
-    "Trappings": "Boathand, Small Riverboat"
+    "Trappings": "Pole, Boat Hook, Storm Lantern and Oil, Leather Jerkin, Rope,Boathand, Small Riverboat"
   },
   {
     "Career": "Riverwarden",
@@ -3377,7 +3377,7 @@
     "Fel": 1,
     "Skills": "Melee(Basic), Dodge, Athletics, Endurance, Perception, Row, Sail, Swim",
     "Talents": "Strong Swimmer, Strong Back, Very Strong, Waterman",
-    "Trappings": "Hand Weapon (Sword), Leather Jack, Uniform"
+    "Trappings": "Sword, Leather Jack, Uniform"
   },
   {
     "Career": "Riverwarden",
@@ -3397,7 +3397,7 @@
     "Fel": 2,
     "Skills": "Ranged(Blackpowder), Intimidate, Charm, Gossip, Bribery, Lore(Riverways)",
     "Talents": "Criminal, Gunner, Fisherman, Seasoned Traveller",
-    "Trappings": "Lantern and Oil, Pistol with 10 shot, Shield"
+    "Trappings": "Sword, Leather Jack, Uniform, Lantern and Oil, Pistol, Shield"
   },
   {
     "Career": "Riverwarden",
@@ -3417,7 +3417,7 @@
     "Fel": 3,
     "Skills": "Climb, Cool, Intuition, Leadership",
     "Talents": "Fearless (Wreckers), Hatred (Any), Pilot, Sea Legs",
-    "Trappings": "Grappling Hook, Helmet, Mail Shirt"
+    "Trappings": "Sword, Helmet, Mail Shirt, Uniform, Lantern and Oil, Pistol, Grappling Hook"
   },
   {
     "Career": "Riverwarden",
@@ -3437,7 +3437,7 @@
     "Fel": 4,
     "Skills": "Lore (Law), Navigation",
     "Talents": "Commanding Presence, Kingpin, Menacing, Orientation",
-    "Trappings": "Patrol Boats and Crew, Symbol of Rank"
+    "Trappings": "Sword, Helmet, Mail Shirt, Uniform, Pistol, Patrol Boats and Crew, Symbol of Rank"
   },
   {
     "Career": "Riverwoman",
@@ -3477,7 +3477,7 @@
     "Fel": "",
     "Skills": "Ranged(Throwing), Ranged(Entangling), Set Trap, Gamble, Lore(Local), Lore (Riverways)",
     "Talents": "Craftsman (Boatbuilder), Rover, Strong Back, Waterman",
-    "Trappings": "Eel Trap, Leather Jerkin, Net, Spear"
+    "Trappings": "Bucket, Fishing Rod and Bait, Leather Leggings, Eel Trap, Leather Jerkin, Net, Spear"
   },
   {
     "Career": "Riverwoman",
@@ -3497,7 +3497,7 @@
     "Fel": "",
     "Skills": "Melee(Polearm), Intuition, Perception, Charm",
     "Talents": "Savant (Riverways), Stout-hearted, Tenacious, Very Strong",
-    "Trappings": "Row Boat, Storm Lantern and Oil"
+    "Trappings": "Row Boat, Storm Lantern and Oil, Bucket, Fishing Rod and Bait, Leather Jerkin, Eel Trap, Leather Jerkin, Net, Spear"
   },
   {
     "Career": "Riverwoman",
@@ -3517,7 +3517,7 @@
     "Fel": 3,
     "Skills": "Entertain (Storytelling), Lore(Folklore)",
     "Talents": "Master Craftsman (Boatbuilder), Public Speaker, Sharp, Strong-minded",
-    "Trappings": "Hut or Riverboat"
+    "Trappings": "[Hut/Riverboat]"
   },
   {
     "Career": "Seaman",
@@ -3557,7 +3557,7 @@
     "Fel": 2,
     "Skills": "Melee(Basic), Dodge, Athletics, Endurance, Entertain(Singing), Language (any)",
     "Talents": "Catfall, Sea Legs, Seasoned Traveller, Strong Legs",
-    "Trappings": "Hand Weapon (Boat Hook), Leather Jerkin"
+    "Trappings": "Boat Hook, Leather Jerkin"
   },
   {
     "Career": "Seaman",
@@ -3577,7 +3577,7 @@
     "Fel": 3,
     "Skills": "Cool, Leadership, Perception, Trade (Carpenter)",
     "Talents": "Old Salt, Strike Mighty Blow, Tenacious, Very Strong",
-    "Trappings": "Trade Tools (Carpenter)"
+    "Trappings": "Trade Tools (Carpenter), Boat Hook, Leather Jerkin"
   },
   {
     "Career": "Seaman",
@@ -3617,7 +3617,7 @@
     "Fel": "",
     "Skills": "Athletics, Cool, Bribery, Stealth (Rural or Urban), Consume Alcohol, Row, Sail, Swim",
     "Talents": "Criminal, Fisherman, Strider (Marshes), Strong Back",
-    "Trappings": "Large Sack, Mask or Scarves, Tinderbox, Storm Lantern and Oil"
+    "Trappings": "Large Sack, [Mask/Scarves], Tinderbox, Storm Lantern and Oil"
   },
   {
     "Career": "Smuggler",
@@ -3637,7 +3637,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Perception, Haggle, Gossip, Lore (Local), Secret Signs (Smuggler)",
     "Talents": "Dealmaker, Etiquette (Criminals), Waterman, Very Strong",
-    "Trappings": "2 Barrels, Hand Weapon, Leather Jack, Row Boat"
+    "Trappings": "2 Barrels, Hand Weapon, Leather Jack, Row Boat, [Mask/Scarves], Tinderbox, Storm Lantern and Oil"
   },
   {
     "Career": "Smuggler",
@@ -3657,7 +3657,7 @@
     "Fel": "",
     "Skills": "Evaluate, Intimidate, Intuition, Lore(Riverways)",
     "Talents": "Briber, Fearless (Riverwardens), Pilot, Strong Swimmer",
-    "Trappings": "River Runner, Speedy Riverboat"
+    "Trappings": "River Runner, Speedy Riverboat, Hand Weapon, Leather Jack, [Mask/Scarves]"
   },
   {
     "Career": "Smuggler",
@@ -3677,7 +3677,7 @@
     "Fel": 3,
     "Skills": "Language (Any), Leadership",
     "Talents": "Kingpin, Savvy, Strider (Coastal), Sea Legs",
-    "Trappings": "Disguise Kit, Small Fleet of Riverboats"
+    "Trappings": "Disguise Kit, Small Fleet of Riverboats, Hand Weapon, Leather Jack"
   },
   {
     "Career": "Stevedore",
@@ -3697,7 +3697,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Dodge, Athletics, Endurance, Gossip, Climb, Consume Alcohol, Swim",
     "Talents": "Dirty Fighting, Strong Back, Sturdy, Very Strong",
-    "Trappings": "Hand Weapon (Boat Hook), Leather Gloves"
+    "Trappings": "Boat Hook, Leather Gloves"
   },
   {
     "Career": "Stevedore",
@@ -3717,7 +3717,7 @@
     "Fel": "",
     "Skills": "Intimidate, Perception, Stealth (Urban), Bribery, Gamble, Entertain(Storytelling)",
     "Talents": "Criminal, Etiquette (Guilders), Strong Legs, Tenacious",
-    "Trappings": "Guild Licence, Leather Jerkin, Pipe and Tobacco, Porter Cap"
+    "Trappings": "Guild Licence, Leather Jerkin, Pipe and Tobacco, Porter Cap, Boat Hook, Leather Gloves"
   },
   {
     "Career": "Stevedore",
@@ -3737,7 +3737,7 @@
     "Fel": "",
     "Skills": "Cool, Evaluate, Intuition, Leadership",
     "Talents": "Dealmaker, Embezzle, Etiquette(Criminals), Public Speaker",
-    "Trappings": "Gang of Stevedores, Whistle"
+    "Trappings": "Gang of Stevedores, Whistle, Guild Licence, Leather Jerkin, Pipe and Tobacco, Porter Cap, Boat Hook, Leather Gloves"
   },
   {
     "Career": "Stevedore",
@@ -3777,7 +3777,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Dodge, Endurance, Row, Outdoor Survival, Swim, Climb, Consume Alcohol",
     "Talents": "Break and Enter, Criminal, Fisherman, Strong Back",
-    "Trappings": "Crowbar, Large Sack, Leather Gloves"
+    "Trappings": "Crowbar, Large Sack, Leather Gloves,"
   },
   {
     "Career": "Wrecker",
@@ -3797,7 +3797,7 @@
     "Fel": "",
     "Skills": "Cool, Intuition, Perception, Set Trap, Navigation, Bribery",
     "Talents": "Flee!, Rover, Strong Swimmer, Trapper",
-    "Trappings": "Hand Weapon (Boat Hook), Leather Jack, Storm Lantern and Oil"
+    "Trappings": "Boat Hook, Leather Jack, Storm Lantern and Oil, Crowbar, Large Sack, Leather Gloves"
   },
   {
     "Career": "Wrecker",
@@ -3817,7 +3817,7 @@
     "Fel": "",
     "Skills": "Ranged(Crossbow), Intimidate, Gossip, Stealth(Rural)",
     "Talents": "Dirty Fighting, Etiquette (Criminals), Menacing, Waterman",
-    "Trappings": "Crossbow with 10 Bolts, Grappling Hook and Rope, Riverboat"
+    "Trappings": "Boat Hook, Leather Jack, Crossbow, Grappling Hook and Rope, Riverboat"
   },
   {
     "Career": "Wrecker",
@@ -3837,7 +3837,7 @@
     "Fel": 3,
     "Skills": "Leadership, Lore (Riverways)",
     "Talents": "Furious Assault, In-fighter, Pilot, Warrior Born",
-    "Trappings": "Fleet of Riverboats and Wrecker Crew, Keg of Ale, Manacles"
+    "Trappings": "Fleet of Riverboats and Wrecker Crew, Keg of Ale, Manacles, Boat Hook, Leather Jack, Crossbow"
   },
   {
     "Career": "Bawd",
@@ -3877,7 +3877,7 @@
     "Fel": 2,
     "Skills": "Melee(Basic),Dodge, Endurance, Intuition, Perception, Lore(Local)",
     "Talents": "Ambidextrous, Carouser, Criminal, Resistance (Disease)",
-    "Trappings": "Dose of Weirdroot, Quality Clothing"
+    "Trappings": "Flask of Spirits, Dose of Weirdroot, Quality Clothing"
   },
   {
     "Career": "Bawd",
@@ -3897,7 +3897,7 @@
     "Fel": 3,
     "Skills": "Cool, Evaluate, Language (any), Lore (Law)",
     "Talents": "Dealmaker, Embezzle, Etiquette (Any), Suave",
-    "Trappings": "A Ring of Hustlers"
+    "Trappings": "A Ring of Hustlers, Dose of Weirdroot, Quality Clothing"
   },
   {
     "Career": "Bawd",
@@ -3917,7 +3917,7 @@
     "Fel": 4,
     "Skills": "Leadership, Lore (Heraldry)",
     "Talents": "Briber, Kingpin, Numismatics, Savvy",
-    "Trappings": "Townhouse with Discreet Back Entrance, a Ring of Bawds"
+    "Trappings": "Townhouse with Discreet Back Entrance, a Ring of Bawds, Quality Clothing"
   },
   {
     "Career": "Charlatan",
@@ -3997,7 +3997,7 @@
     "Fel": 4,
     "Skills": "Lore (Genealogy), Research",
     "Talents": "Gregarious, Master of Disguise, Nose for Trouble, Suave",
-    "Trappings": "Forged Seal, Writing Kit"
+    "Trappings": "Forged Seal, Writing Kit, Disguise Kit, Lock Picks, Multiple Forged Documents"
   },
   {
     "Career": "Fence",
@@ -4017,7 +4017,7 @@
     "Fel": 1,
     "Skills": "Melee(Basic), Dodge, Charm, Evaluate, Gamble, Gossip, Haggle, Consume Alcohol",
     "Talents": "Alley Cat, Cardsharp, Dealmaker, Gregarious",
-    "Trappings": "Hand Weapon, Stolen Goods worth 3d10 Shillings"
+    "Trappings": "Hand Weapon, Stolen Goods worth 15s"
   },
   {
     "Career": "Fence",
@@ -4037,7 +4037,7 @@
     "Fel": 2,
     "Skills": "Cool, Intimidate, Intuition, Perception, Secret Signs(Thief), Trade (Engraver)",
     "Talents": "Criminal, Etiquette (Criminals), Numismatics, Savvy",
-    "Trappings": "Eye-glass, Trade Tools (Engraver), Writing Kit"
+    "Trappings": "Hand Weapon, Stolen Goods worth 15s, Eye-glass, Trade Tools (Engraver), Writing Kit"
   },
   {
     "Career": "Fence",
@@ -4137,7 +4137,7 @@
     "Fel": "",
     "Skills": "Pick Lock, Research, Set Trap, Lore (History)",
     "Talents": "Read/Write, Strike Mighty Blow, Tenacious, Tunnel Rat",
-    "Trappings": "Hand Weapon (Pick), Horse and Cart, Leather Jack, Rope, Trade Tools (Thief)"
+    "Trappings": "Hand Weapon, Pick, Horse and Cart, Leather Jack, Rope, Trade Tools (Thief)"
   },
   {
     "Career": "Grave Robber",
@@ -4157,7 +4157,7 @@
     "Fel": "",
     "Skills": "Navigation, Trade (Engineer)",
     "Talents": "Fearless (Undead), Sixth Sense, Strong-minded, Trapper",
-    "Trappings": "Bedroll, Maps, Tent, Trade Tools(Engineer), Writing Kit"
+    "Trappings": "Hand Weapon, Pick, Horse and Cart, Leather Jack, Rope, Trade Tools (Thief), Bedroll, Maps, Tent, Trade Tools(Engineer), Writing Kit"
   },
   {
     "Career": "Outlaw",
@@ -4197,7 +4197,7 @@
     "Fel": "",
     "Skills": "Ranged(Bow), Dodge, Heal, Perception,  Stealth(Rural), Lore(Local)",
     "Talents": "Dirty Fighting, Marksman, Strike to Stun, Trapper",
-    "Trappings": "Bow with 10 Arrows, Shield, Tent"
+    "Trappings": "Bedroll, Hand Weapon, Leather Jerkin, Tinderbox, Bow, Shield, Tent"
   },
   {
     "Career": "Outlaw",
@@ -4217,7 +4217,7 @@
     "Fel": "",
     "Skills": "Gossip, Intuition, Leadership, Ride (Horse)",
     "Talents": "Rapid Reload, Roughrider, Menacing, Very Resilient",
-    "Trappings": "Helmet, Riding Horse with Saddle and Tack, Sleeved Mail Shirt, Band of Outlaws"
+    "Trappings": "Bedroll, Hand Weapon, Tinderbox, Bow, Shield, Tent, Helmet, Riding Horse, Sleeved Mail Shirt, Band of Outlaws"
   },
   {
     "Career": "Outlaw",
@@ -4237,7 +4237,7 @@
     "Fel": 3,
     "Skills": "Charm, Lore (Empire)",
     "Talents": "Deadeye Shot, Fearless (Road Wardens), Iron Will, Robust",
-    "Trappings": "‘Fiefdom’ of Outlaw Chiefs, Lair"
+    "Trappings": "‘Fiefdom’ of Outlaw Chiefs, Lair, Sleeved Mail Shirt, Hand Weapon"
   },
   {
     "Career": "Racketeer",
@@ -4277,7 +4277,7 @@
     "Fel": 1,
     "Skills": "Melee (Basic), Bribery, Charm, Evaluate, Gossip, Language (Estalian or Tilean)",
     "Talents": "Dirty Fighting, Embezzle, Strike to Stun, Warrior Born",
-    "Trappings": "Hand Weapon, Hat, Mail Shirt"
+    "Trappings": "Knuckledusters, Hand Weapon, Hat, Mail Shirt"
   },
   {
     "Career": "Racketeer",
@@ -4297,7 +4297,7 @@
     "Fel": 2,
     "Skills": "Ranged(Crossbow), Perception, Intuition, Leadership",
     "Talents": "Fearless (Watchmen), Iron Will, Resistance (Poison), Robust",
-    "Trappings": "Crossbow Pistol with 10 Bolts, Gang of Thugs and Racketeers, Lair"
+    "Trappings": "Knuckledusters, Hand Weapon, Hat, Mail Shirt, Pistol, Gang of Thugs and Racketeers, Lair"
   },
   {
     "Career": "Racketeer",
@@ -4317,7 +4317,7 @@
     "Fel": 3,
     "Skills": "Lore (Law), Lore (Politics)",
     "Talents": "Commanding Presence, Kingpin, Frightening, Wealthy",
-    "Trappings": "Network of Informers, Quality Clothing and Hat, Subordinate Gang Bosses"
+    "Trappings": "Network of Informers, Quality Clothing and Hat, Subordinate Gang Bosses, Pistol, Hand Weapon"
   },
   {
     "Career": "Thief",
@@ -4357,7 +4357,7 @@
     "Fel": "",
     "Skills": "Sleight of Hand, Pick Lock, Evaluate, Gossip, Lore (Local), Secret Signs(Thief)",
     "Talents": "Break and Enter, Etiquette (Criminals), Fast Hands, Shadow",
-    "Trappings": "Trade Tools (Thief), Rope"
+    "Trappings": "Crowbar, Leather Jerkin, Sack, Trade Tools (Thief), Rope"
   },
   {
     "Career": "Thief",
@@ -4377,7 +4377,7 @@
     "Fel": "",
     "Skills": "Ranged(Crossbow), Intimidate, Bribery, Gamble",
     "Talents": "Night Vision, Nimble Fingered, Step Aside, Trapper",
-    "Trappings": "Crossbow Pistol with 10 Bolts"
+    "Trappings": "Crowbar, Leather Jerkin, Sack, Trade Tools (Thief), Rope, Crossbow"
   },
   {
     "Career": "Thief",
@@ -4397,7 +4397,7 @@
     "Fel": 3,
     "Skills": "Charm, Set Trap",
     "Talents": "Catfall, Scale Sheer Surface, Strong Legs, Wealthy",
-    "Trappings": "Dark Clothing, Grappling Hook, Mask or Scarves"
+    "Trappings": "Crowbar, Leather Jerkin, Sack, Trade Tools (Thief), Rope, Crossbow, Dark Clothing, Grappling Hook, [Mask/Scarves]"
   },
   {
     "Career": "Witch",
@@ -4436,7 +4436,7 @@
     "WP": 2,
     "Fel": "",
     "Skills": "Melee(Polearm), Dodge, Intuition, Perception, Charm Animal, Trade (Herbalist)",
-    "Talents": "Arcane Magic (Witchery), Attractive, Second Sight, Witch!",
+    "Talents": "Arcane Magic (Witchcraft), Attractive, Second Sight, Witch!",
     "Trappings": "Quarterstaff, Sack, Selection of Herbs, Trade Tools (Herbalist)"
   },
   {
@@ -4457,7 +4457,7 @@
     "Fel": 2,
     "Skills": "Bribery, Charm, Haggle, Lore (Dark Magic)",
     "Talents": "Animal Affinity, Fast Hands, Frightening, Magical Sense",
-    "Trappings": "Backpack, Cloak with Several Pockets, Lucky Charm"
+    "Trappings": "Quarterstaff, Sack, Selection of Herbs, Trade Tools (Herbalist), Backpack, Cloak with Several Pockets, Lucky Charm"
   },
   {
     "Career": "Witch",
@@ -4477,7 +4477,7 @@
     "Fel": 3,
     "Skills": "Lore (Daemonology), Lore (Magic)",
     "Talents": "Aethyric Attunement, Luck, Strong-minded, Very Resilient",
-    "Trappings": "Robes, Skull"
+    "Trappings": "Quarterstaff, Sack, Selection of Herbs, Trade Tools (Herbalist), Robes, Skull, Lucky Charm"
   },
   {
     "Career": "Cavalryman",
@@ -4497,7 +4497,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Charm Animal, Endurance, Perception, Animal Care, Language (Battle), Outdoor Survival, Ride(Horse)",
     "Talents": "Combat Aware, Crack the Whip, Lightning Reflexes, Roughrider",
-    "Trappings": "Leather Jack, Riding Horse with Saddle and Tack"
+    "Trappings": "Leather Jack, Riding Horse, Hand Weapon"
   },
   {
     "Career": "Cavalryman",
@@ -4517,7 +4517,7 @@
     "Fel": "",
     "Skills": "Melee(Cavalry), Ranged(Blackpowder), Charm, Cool, Gossip, Consume Alcohol",
     "Talents": "Etiquette (Soldiers), Gunner, Seasoned Traveller, Trick Riding",
-    "Trappings": "Breastplate, Helmet, Light Warhorse with Saddle and Tack, Pistol with 10 Shots, Shield"
+    "Trappings": "Breastplate, Helmet, Light Warhorse, Pistol, Shield, Hand Weapon"
   },
   {
     "Career": "Cavalryman",
@@ -4537,7 +4537,7 @@
     "Fel": "",
     "Skills": "Intimidate, Intuition, Leadership, Lore (Warfare)",
     "Talents": "Combat Reflexes, Fast Shot, Hatred (Any), War Leader",
-    "Trappings": "Sash"
+    "Trappings": "Sash, Breastplate, Helmet, Light Warhorse, Pistol, Shield, Hand Weapon"
   },
   {
     "Career": "Cavalryman",
@@ -4557,7 +4557,7 @@
     "Fel": 3,
     "Skills": "Gamble, Lore (Heraldry)",
     "Talents": "Accurate Shot, Inspiring, Reaction Strike, Robust",
-    "Trappings": "Deck of Cards, Quality Clothing"
+    "Trappings": "Deck of Cards, Quality Clothing, Sash, Breastplate, Helmet, Light Warhorse, Pistol, Shield, Hand Weapon"
   },
   {
     "Career": "Guard",
@@ -4597,7 +4597,7 @@
     "Fel": "",
     "Skills": "Melee(Polearm), Ranged(Bow), Dodge, Athletics, Cool, Intimidate",
     "Talents": "Relentless, Reversal, Shieldsman, Strike Mighty Blow",
-    "Trappings": "Bow with 10 Arrows, Sleeved Mail Shirt, Shield, Spear"
+    "Trappings": "Bow, Sleeved Mail Shirt, Shield, Spear"
   },
   {
     "Career": "Guard",
@@ -4617,7 +4617,7 @@
     "Fel": "",
     "Skills": "Melee (Two-handed), Heal, Language(Battle), Lore(Etiquette)",
     "Talents": "Fearless (Intruders), Jump Up, Stout-hearted, Unshakable",
-    "Trappings": "Great Weapon or Halberd, Helmet, Uniform"
+    "Trappings": "[Great Weapon/Halberd], Helmet, Uniform, Sleeved Mail Shirt"
   },
   {
     "Career": "Guard",
@@ -4637,7 +4637,7 @@
     "Fel": "",
     "Skills": "Leadership, Lore (Warfare)",
     "Talents": "Combat Master, Furious Assault, Iron Will, Robust",
-    "Trappings": "Breastplate"
+    "Trappings": "Breastplate, [Great Weapon/Halberd], Helmet, Uniform"
   },
   {
     "Career": "Knight",
@@ -4657,7 +4657,7 @@
     "Fel": "",
     "Skills": "Melee(Cavalry), Athletics, Animal Care, Charm Animal, Heal, Lore(Heraldry), Ride(Horse), Trade(Farrier)",
     "Talents": "Etiquette (any), Roughrider, Sturdy, Warrior Born",
-    "Trappings": "Leather Jack, Mail Shirt, Riding Horse with Saddle and Tack, Shield, Trade Tools (Farrier)"
+    "Trappings": "Leather Jack, Mail Shirt, Riding Horse, Shield, Trade Tools (Farrier)"
   },
   {
     "Career": "Knight",
@@ -4677,7 +4677,7 @@
     "Fel": "",
     "Skills": "Melee (Any), Dodge, Cool, Endurance, Intimidate, Language(Battle)",
     "Talents": "Menacing, Seasoned Traveller, Shieldsman, Strike Mighty Blow",
-    "Trappings": "Destrier with Saddle and Tack, Melee Weapon(Any), Lance, Plate Armour and Helm"
+    "Trappings": "Destrier, Hand Weapon, Lance, Plate Armour and Helm, Shield, Trade Tools (Farrier)"
   },
   {
     "Career": "Knight",
@@ -4697,7 +4697,7 @@
     "Fel": "",
     "Skills": "Charm, Consume Alcohol, Leadership, Lore(Warfare)",
     "Talents": "Fearless (Any), Stout-hearted, Unshakable, War Leader",
-    "Trappings": "Barding, Small Unit of Knights"
+    "Trappings": "Barding, Small Unit of Knights, Destrier, Hand Weapon, Lance, Plate Armour and Helm, Shield, Trade Tools (Farrier)"
   },
   {
     "Career": "Knight",
@@ -4717,7 +4717,7 @@
     "Fel": 3,
     "Skills": "Lore (Any), Secret Signs (Knightly Order)",
     "Talents": "Disarm, Inspiring, Iron Will, Strike to Injure",
-    "Trappings": "Plumed Great Helm, Squire, Large Unit of Knights or Several Small Units of Knights"
+    "Trappings": "Barding, Small Unit of Knights, Destrier, Hand Weapon, Lance, Plate Armour, Shield, Plumed Great Helm, Squire, [Large Unit of Knights/Several Small Units of Knights]"
   },
   {
     "Career": "Pit Fighter",
@@ -4757,7 +4757,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Melee(Flail or Two-handed), Ranged (Entangling), Intuition, Perception, Haggle",
     "Talents": "Ambidextrous, Combat Reflexes, Dual Wielder, Shieldsman",
-    "Trappings": "Flail or Great Weapon, Hand Weapon, Net or Whip, Shield or Buckler"
+    "Trappings": "Knuckledusters, Leather Jack, [Flail/Great Weapon], Hand Weapon, [Net/Whip], Buckler"
   },
   {
     "Career": "Pit Fighter",
@@ -4777,7 +4777,7 @@
     "Fel": "",
     "Skills": "Consume Alcohol, Gossip, Lore (Anatomy), Perform(Fight)",
     "Talents": "Combat Master, Disarm, Menacing, Robust",
-    "Trappings": "Breast Plate, Helmet"
+    "Trappings": "Breast Plate, Helmet, [Flail/Great Weapon], Hand Weapon, [Net/Whip], Buckler"
   },
   {
     "Career": "Pit Fighter",
@@ -4797,7 +4797,7 @@
     "Fel": 3,
     "Skills": "Charm, Ranged (Any)",
     "Talents": "Frightening, Furious Assault, Implacable, Reaction Strike",
-    "Trappings": "Quality Helmet"
+    "Trappings": "Breast Plate, Quality Helmet, [Flail/Great Weapon], Hand Weapon, [Net/Whip], Shield"
   },
   {
     "Career": "Protagonist",
@@ -4817,7 +4817,7 @@
     "Fel": "",
     "Skills": "Melee(Any), Endurance, Athletics, Dodge, Intimidate, Entertain (Taunt), Gossip, Haggle",
     "Talents": "In-fighter, Dirty Fighting, Menacing, Warrior Born",
-    "Trappings": "Hood or Mask, Knuckledusters, Leather Jack"
+    "Trappings": "[Hood/Mask], Knuckledusters, Leather Jack"
   },
   {
     "Career": "Protagonist",
@@ -4837,7 +4837,7 @@
     "Fel": "",
     "Skills": "Melee(Basic), Intuition, Ride(Horse), Perception, Charm, Bribery",
     "Talents": "Combat Reflexes, Criminal, Reversal, Strike to Stun",
-    "Trappings": "Hand Weapon, Mail Shirt, Riding Horse with Saddle and Tack, Shield"
+    "Trappings": "Hand Weapon, Mail Shirt, Riding Horse, Shield, [Hood/Mask], Knuckledusters"
   },
   {
     "Career": "Protagonist",
@@ -4857,7 +4857,7 @@
     "Fel": "",
     "Skills": "Ranged(Thrown), Cool, Climb, Navigation",
     "Talents": "Careful Strike, Disarm, Marksman, Relentless",
-    "Trappings": "Cloak, Garotte, Poison, Throwing"
+    "Trappings": "Hand Weapon, Mail Shirt, Riding Horse, Shield, [Hood/Mask], Knuckledusters, Cloak, Garotte, Poison, Throwing Knives"
   },
   {
     "Career": "Protagonist",
@@ -4877,7 +4877,7 @@
     "Fel": 3,
     "Skills": "Ranged(Crossbow), Entertain (Acting)",
     "Talents": "Accurate Shot, Ambidextrous, Furious Assault, Strike to Injure",
-    "Trappings": "Crossbow with 10 shots, Disguise Kit"
+    "Trappings": "Hand Weapon, Mail Shirt, Riding Horse, Shield, [Hood/Mask], Knuckledusters, Cloak, Garotte, Poison, Throwing Knives, Crossbow, Disguise Kit"
   },
   {
     "Career": "Slayer",
@@ -4917,7 +4917,7 @@
     "Fel": "",
     "Skills": "Melee(Two-handed), Evaluate, Intimidate, Language (Battle), Lore(Giants), Outdoor Survival",
     "Talents": "Hardy, Implacable, Menacing, Reversal",
-    "Trappings": "Great Axe, Jewellery, Troll’s Head"
+    "Trappings": "Great Axe, Jewellery, Troll’s Head, Flask of Spirits, Shame, Tattoos"
   },
   {
     "Career": "Slayer",
@@ -4937,7 +4937,7 @@
     "Fel": "",
     "Skills": "Ranged(Thrown), Perception, Entertain(Storytelling), Lore(Dragons)",
     "Talents": "Ambidextrous, Furious Assault, Relentless, Robust",
-    "Trappings": "Giant’s Head, Throwing Axes"
+    "Trappings": "Giant’s Head, Throwing Axes, Great Axe, Jewellery, Flask of Spirits, Shame, Tattoos"
   },
   {
     "Career": "Slayer",
@@ -4957,7 +4957,7 @@
     "Fel": "",
     "Skills": "Intuition, Lore (Chaos)",
     "Talents": "Combat Master, Frightening, Strike Mighty Blow, Very Strong",
-    "Trappings": "Dragon’s Head"
+    "Trappings": "Dragon’s Head, Throwing Axes, Great Axe, Jewellery, Flask of Spirits, Shame, Tattoos"
   },
   {
     "Career": "Soldier",
@@ -4997,7 +4997,7 @@
     "Fel": "",
     "Skills": "Melee(Any), Ranged(Any), Outdoor Survival, Consume Alcohol, Gamble, Gossip",
     "Talents": "Drilled, Etiquette (Soldiers), Rapid Reload, Shieldsman",
-    "Trappings": "Breastplate, Helmet, Weapon (Any)"
+    "Trappings": "Breastplate, Helmet, Hand Weapon, Dagger, Uniform"
   },
   {
     "Career": "Soldier",
@@ -5017,7 +5017,7 @@
     "Fel": "",
     "Skills": "Heal, Intuition, Leadership, Perception",
     "Talents": "Combat Aware, Enclosed Fighter, Unshakable, War Leader",
-    "Trappings": "Symbol of Rank, Unit of Troops"
+    "Trappings": "Breastplate, Helmet, Hand Weapon, Dagger, Symbol of Rank, Unit of Troops"
   },
   {
     "Career": "Soldier",
@@ -5037,7 +5037,7 @@
     "Fel": 3,
     "Skills": "Lore (Warfare), Navigation",
     "Talents": "Inspiring, Public Speaker, Seasoned Traveller, Stout-hearted",
-    "Trappings": "Letter of Commission, Light Warhorse with Saddle and Tack, Map, Orders, Unit of Soldiers, Quality Uniform, Symbol of Rank"
+    "Trappings": "Breastplate, Helmet, Hand Weapon, Dagger, Letter of Commission, Light Warhorse, Map, Orders, Unit of Soldiers, Quality Uniform, Symbol of Rank"
   },
   {
     "Career": "Warrior Priest",
@@ -5057,7 +5057,7 @@
     "Fel": "",
     "Skills": "Melee(Any), Dodge, Endurance, Cool, Heal, Leadership , Lore(Theology), Pray",
     "Talents": "Bless (Any), Etiquette (Cultists), Read/Write, Strong-minded",
-    "Trappings": "Book (Religion), Leather Jerkin, Religious Symbol, Robes, Weapon (Any Melee)"
+    "Trappings": "Book (Religion), Leather Jerkin, Religious Symbol, Robes, Hand Weapon"
   },
   {
     "Career": "Warrior Priest",
@@ -5077,7 +5077,7 @@
     "Fel": "",
     "Skills": "Melee(Any), Ranged(Any), Charm, Intimidate, Language(battle), Entertain (Speeches)",
     "Talents": "Dual Wielder, Inspiring, Invoke (Any), Seasoned Traveller",
-    "Trappings": "Breastplate, Weapon (Any)"
+    "Trappings": "Breastplate, Hand Weapon, Book (Religion), Religious Symbol"
   },
   {
     "Career": "Warrior Priest",
@@ -5097,7 +5097,7 @@
     "Fel": "",
     "Skills": "Intuition, Perception, Ride(Horse), Animal Care",
     "Talents": "Combat Aware, Holy Visions, Pure Soul, Stout-hearted",
-    "Trappings": "Light Warhorse with Saddle and Tack"
+    "Trappings": "Breastplate, Hand Weapon, Book (Religion), Religious Symbol, Light Warhorse"
   },
   {
     "Career": "Warrior Priest",
@@ -5117,6 +5117,6 @@
     "Fel": 3,
     "Skills": "Consume Alcohol, Lore (Warfare)",
     "Talents": "Fearless (Any), Furious Assault, Holy Hatred, War Leader",
-    "Trappings": "Religious Relic"
+    "Trappings": "Breastplate, Hand Weapon, Book (Religion), Religious Symbol, Light Warhorse, Religious Relic"
   }
 ]

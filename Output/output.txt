@@ -95,3 +95,7 @@ Cardsharp,  Diceman,  Etiquette (Any),
 Backpack,  2 Sets of Clothing,  Deck of Cards, 
  Dice, 
 
+Barge, The Reikland Siren
+Destination: Nuln
+Cargo: Metal - Ingots Iron
+

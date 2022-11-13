@@ -28,6 +28,33 @@ wealth_data = {
 
 magic_colours = ["Beasts", "Death", "Fire", "Heavens", "Metal", "Life", "Light", "Shadow"]
 gods = ["Manann", "Morr", "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena"]
+spells = {} # domain: [list of spells]
+blessings = {} # god: [list of blessings]
+
+
+def init_magic_data():
+    global spells, blessings
+    try:
+        with open("Data/Domain_Magic.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Domain_Magic.json!")
+    else:
+        for entry in data:
+            spell_list = entry["Spells"].split(",")
+            spell_list = [spell.strip() for spell in spell_list]
+            spells[entry["Domain"]] = spell_list
+            if len(entry["Blessings"]) > 0:
+                blessings_list = entry["Blessings"].split(",")
+                blessings_list = [blessing.strip() for blessing in blessings_list]
+                blessings[entry["Domain"]] = blessings_list
+    # print("Spells----------------------")
+    # for key, entry in spells.items():
+    #     print(f"{key} : {entry}")
+    # print("Blessings----------------------")
+    # for key, entry in blessings.items():
+    #     print(f"{key} : {entry}")
+
 
 def init_name_data():
     global names
@@ -234,13 +261,13 @@ class GameCharacter:
         self.set_attributes(path_data)
         self.skills = {}
         self.set_skills(levels_data)
-        # self.set_skills(levels_data[index]["Skills"])
-        # TODO talents list
+        self.magic = {}
+        # talents list
         self.talents = self.set_talents(levels_data)
         # self.set_talents(levels_data[index]["Talents"])
-        # TODO set wounds
+        # set wounds
         self.wounds = self.set_wounds()
-        # TODO trappings list
+        # trappings list
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
         self.details = details

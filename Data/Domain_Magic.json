@@ -91,7 +91,7 @@
   },
   {
     "Domain": "Hedgecraft",
-    "Spells": "Goodwill, Mirkride, Nepenthe, Nostrum, Part the Branches, Protective Charm,",
+    "Spells": "Goodwill, Mirkride, Nepenthe, Nostrum, Part the Branches, Protective Charm",
     "Blessings": ""
   },
   {
@@ -107,6 +107,11 @@
   {
     "Domain": "Necromancy",
     "Spells": "Raise Dead, Reanimate, Screaming Skull, Vanhels Call",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Petty",
+    "Spells": "Animal Friend, Bearings, Dazzle, Careful Step, Conserve, Dart, Drain, Eavesdrop, Gust, Light, Magic Flame, Marsh Lights, Murmured Whisper, Open Lock, Produce Small Animal, Protection from Rain, Purify Water, Rot, Sleep, Spring, Shock, Sly Hands, Sounds, Twitch, Warning",
     "Blessings": ""
   }
 ]

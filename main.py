@@ -5,7 +5,7 @@ import character_creator
 import trade_creator
 import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data
+    init_name_data, init_talents_data, init_magic_data
 from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -47,7 +47,7 @@ def click_create_vessel():
 
     # ---Display output
     label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
-    pyperclip.copy(vessel_details)
+    pyperclip.copy(label_output["text"])
 
 
 def click_details():
@@ -230,6 +230,7 @@ init_skills_data()
 init_trade_data()
 init_name_data()
 init_talents_data()
+init_magic_data()
 my_list = ["one", "two", "three"]
 new_list = utilities.get_random_list_items(my_list, 2)
 

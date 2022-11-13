@@ -5,7 +5,7 @@ import character_creator
 import trade_creator
 import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data, init_magic_data
+    init_name_data, init_talents_data, init_magic_data, is_valid_magic
 from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -38,7 +38,7 @@ def click_create_vessel():
     vessel_details = vessel.get_output()
     captain_origin = trade_creator.get_origin()
     captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
-    # TODO create captain as character & replace following
+    # create captain as character & replace following
     character_detail_text = create_character_details(get_gender(), captain_origin, captain_says)
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])
@@ -69,15 +69,23 @@ def click_create():
 
 def click_random():
     global character_detail_text
+    # clear magic input to prevent issues
+    input_magic.delete(0, END)
+    input_magic.insert(0, "None")
     character_detail_text = create_character_details(get_gender())
     create_character(get_random_career_key(), get_random_level())
 
 
 def click_save():
-    with open("Output/output.txt", "a") as save_data:
-        # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
-        text = pyperclip.paste() + "\n\n"
-        save_data.write(text)
+    if radio_save.get() == 1:
+        with open("Output/output.txt", "a") as save_data:
+            text = pyperclip.paste() + "\n\n"
+            save_data.write(text)
+    else:
+        with open("Output/output.txt", "w") as save_data:
+            # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
+            text = pyperclip.paste() + "\n\n"
+            save_data.write(text)
 
 
 def gender_set():
@@ -89,6 +97,8 @@ def attribute_test():
     for k, v in attribs.items():
         print(k)
 
+def save_type_set():
+    pass
 # ---------------------------- DATA SETUP ----------------------------- #
 
 def init_data():
@@ -143,8 +153,12 @@ def get_random_career_key():
 def create_character(career, level):
     global career_data, character
     magic_domain = input_magic.get()
-    character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, character_detail_text)
-    display_character_stats(character)
+    if is_valid_magic(magic_domain):
+        character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, character_detail_text)
+        display_character_stats(character)
+    else:
+        messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
+
 
 
 def display_character_stats(character):
@@ -181,6 +195,10 @@ window.config(padx=20, pady=20)
 
 button_clear = Button(text="Clear", width=15, command=click_clear)
 button_save = Button(text="Save", width=15, command=click_save)
+radio_save = IntVar()
+radio_save.set(1)
+radio_append = Radiobutton(text="Append", value=1, variable=radio_save, command=save_type_set)
+radio_replace = Radiobutton(text="Replace", value=2, variable=radio_save, command=save_type_set)
 
 button_details = Button(text="Details", width=15, command=click_details)
 label_gender = Label(text="Gender: ")
@@ -205,7 +223,9 @@ label_output = Label(text="Character output goes here", width=50, height=40, jus
 
 
 button_clear.grid(column=0, row=0, columnspan=3)
-button_save.grid(column=3, row=0, columnspan=3)
+button_save.grid(column=3, row=0, columnspan=2)
+radio_append.grid(column=5, row=0)
+radio_replace.grid(column=6, row=0)
 
 button_details.grid(column=0, row=1, columnspan=1)
 label_gender.grid(column=1, row=1)

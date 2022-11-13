@@ -251,6 +251,17 @@ def get_number_of_spells(magic_type, level):
     if magic_type == "Petty":
         return level + 2
     return level
+
+
+def is_valid_magic(magic):
+    if magic == "None":
+        return True
+    if magic in spells:
+        return True
+    if magic in blessings:
+        return True
+    return False
+
 # ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
 
 
@@ -335,12 +346,12 @@ class GameCharacter:
     def get_output(self, output_type="ui"):
         output = self.details
         if output_type == "ui":
-            output += f"{self.career} ({self.level} {self.path}) {self.status}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
         else:
-            output += f"{self.career} ({self.path}) {self.status}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
+            output += f"{self.get_title_output()}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
             output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
@@ -513,6 +524,9 @@ class GameCharacter:
         return output
 
     def get_title_output(self):
-        output = f"{self.career} ({self.level} {self.path}) {self.status}"
+        domain = self.get_magic_domain()
+        if domain != "None":
+            return f"{self.career} {domain} ({self.level} {self.path}) {self.status}"
+        return f"{self.career} ({self.level} {self.path}) {self.status}"
 
 

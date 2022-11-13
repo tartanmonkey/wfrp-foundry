@@ -1,101 +1,45 @@
-
-
-Soldier (Recruit) Silver 1
+Soldier (1 Recruit) Silver 1
 WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-35  30  30  35  30  30   30  30  35  30  12
+31  38  40  41  34  34   44  41  37  37  19
 -----SKILLS----------------
-Melee(Basic): 40, Athletics: 35, Dodge: 35, 
-Cool: 40, Endurance: 40, Language(Battle): 35, 
-Play (Drum or Fife): 35, Climb: 35, 
-
------TALENTS----------------
-Diceman,  Marksman,  Strong Back, 
- Warrior Born, 
+Melee(Basic): 36, Athletics: 39, Dodge: 38, 
+Cool: 39, Endurance: 43, Language(Battle): 45, 
+Play (Drum or Fife): 44, Climb: 41, 
+-----TALENTS---------------
+Nimble Fingered, Hardy, Artistic, Marksman, 
 
 -----TRAPPINGS----------------
-Dagger,  Leather Breastplate,  Uniform, 
+Dagger, Leather Breastplate, Uniform, 
+8s, 
 
-Thief (Prowler) Brass 1
-WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-30  30  30  30  35  35   30  30  35  30  12
+Large Barge, The Swift Knight
+Destination: Kemperbad
+
+--------CAPTAIN----------
+
+Sieglinde Ketelhut
+Well built, soft spoken.
+Origin: Kemperbad.
+Trait: Gregarious
+Motivation: Justice
+Ambition: To do the work of the Gods
+Quirk: Has a terrible short-term memory
+Says: Vessel in need of repair
+
+Merchant (2 Merchant) Silver 5
+WS  BS   S    T     I   Agi Dex Int WP Fel W
+41   26   35  30  35  46    25   37  40  45  13
 -----SKILLS----------------
-Dodge: 40, Athletics: 40, Endurance: 35, 
-Cool: 40, Intuition: 40, Perception: 40, 
-Stealth(Urban): 40, Climb: 35, 
-
------TALENTS----------------
-Alley Cat,  Criminal,  Flee!, 
- Strike to Stun, 
+Charm: 50, Gamble: 42, Gossip: 50, 
+Haggle: 50, Bribery: 50, Animal Care: 40, 
+Consume Alcohol: 35, Drive: 51, Evaluate: 39, 
+Intuition: 37, Perception: 36, Language(Any): 41, 
+Language(Guilder): 42, Lore(Local): 37, 
+-----TALENTS---------------
+Linguistics, Sturdy, Very Resilient, Blather, 
+Savvy, 
 
 -----TRAPPINGS----------------
-Crowbar,  Leather Jerkin,  Sack, 
-
-Fat dude
-Big Nose
-Old
-
-Soldier (Recruit) Silver 1
-WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-35  30  30  35  30  30   30  30  35  30  12
------SKILLS----------------
-Melee(Basic): 40, Athletics: 35, Dodge: 35, 
-Cool: 40, Endurance: 40, Language(Battle): 35, 
-Play (Drum or Fife): 35, Climb: 35, 
-
------TALENTS----------------
-Diceman,  Marksman,  Strong Back, 
- Warrior Born, 
-
------TRAPPINGS----------------
-Dagger,  Leather Breastplate,  Uniform, 
-
-Flamboyant, soft spoken.
-Trait: Charming
-Motivation: Gluttony
-Ambition: To avoid an obligation
-Quirk: Scandalous reputation
-
-
-Charlatan (Swindler) Brass 3
-WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-30  30  30  30  35  30   35  30  30  35  12
------SKILLS----------------
-Charm: 40, Haggle: 40, Sleight of Hand: 40, 
-Bribery: 40, Gamble: 35, Gossip: 40, 
-Consume Alcohol: 35, Entertain(Storytelling): 40, 
-
------TALENTS----------------
-Cardsharp,  Diceman,  Etiquette (Any), 
- Luck, 
-
------TRAPPINGS----------------
-Backpack,  2 Sets of Clothing,  Deck of Cards, 
- Dice, 
-
-Flamboyant, soft spoken.
-Trait: Charming
-Motivation: Gluttony
-Ambition: To avoid an obligation
-Quirk: Scandalous reputation
-
-
-Charlatan (Swindler) Brass 3
-WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-30  30  30  30  35  30   35  30  30  35  12
------SKILLS----------------
-Charm: 40, Haggle: 40, Sleight of Hand: 40, 
-Bribery: 40, Gamble: 35, Gossip: 40, 
-Consume Alcohol: 35, Entertain(Storytelling): 40, 
-
------TALENTS----------------
-Cardsharp,  Diceman,  Etiquette (Any), 
- Luck, 
-
------TRAPPINGS----------------
-Backpack,  2 Sets of Clothing,  Deck of Cards, 
- Dice, 
-
-Barge, The Reikland Siren
-Destination: Nuln
-Cargo: Metal - Ingots Iron
+2 Wagons, Guild License, 20GC, 
+37s, 
 

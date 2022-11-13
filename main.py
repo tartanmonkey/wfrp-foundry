@@ -142,7 +142,8 @@ def get_random_career_key():
 
 def create_character(career, level):
     global career_data, character
-    character = GameCharacter(career, level, career_data[career]['level_data'], character_detail_text)
+    magic_domain = input_magic.get()
+    character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, character_detail_text)
     display_character_stats(character)
 
 
@@ -190,9 +191,11 @@ radio_female = Radiobutton(text="Female", value=2, variable=radio_gender, comman
 radio_random = Radiobutton(text="Random", value=3, variable=radio_gender, command=gender_set)
 
 label_career = Label(text="Career: ")
-input_career = Entry(width=20)
+input_career = Entry(width=12)
 label_level = Label(text="Level: ")
 input_level = Entry(width=3)
+label_magic = Label(text="Magic:")
+input_magic = Entry(width=10)
 button_create = Button(text="Create", command=click_create)
 button_random = Button(text="Random", command=click_random)
 
@@ -216,8 +219,11 @@ input_career.insert(0, "Soldier")
 label_level.grid(column=2, row=2)
 input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
-button_create.grid(column=4, row=2)
-button_random.grid(column=5, row=2)
+label_magic.grid(column=4, row=2)
+input_magic.grid(column=5, row=2)
+input_magic.insert(0, "None")
+button_create.grid(column=6, row=2)
+button_random.grid(column=7, row=2)
 
 button_create_vessel.grid(column=0, row=3, columnspan=2)
 

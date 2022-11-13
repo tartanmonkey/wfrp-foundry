@@ -2,7 +2,7 @@ import json
 import math
 from tkinter import messagebox
 from random import randint, choice
-from utilities import get_random_chance_entry, get_stripped_list, get_random_list_items, get_key_from_string
+from utilities import *
 
 skills = {}
 levels = {
@@ -28,8 +28,10 @@ wealth_data = {
 
 magic_colours = ["Beasts", "Death", "Fire", "Heavens", "Metal", "Life", "Light", "Shadow"]
 gods = ["Manann", "Morr", "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena"]
-spells = {} # domain: [list of spells]
-blessings = {} # god: [list of blessings]
+spells = {}  # domain: [list of spells]
+blessings = {}  # god: [list of blessings]
+magic_talents = ["Petty Magic", "Arcane Magic (Arcane Lore)", "Bless (Any)", "Invoke (Any)", "Arcane Magic (Hedgecraft)"
+    , "Arcane Magic (Heavens)", "Arcane Magic (Witchcraft)"]
 
 
 def init_magic_data():
@@ -235,11 +237,25 @@ def get_extra_detail(gender, detail):
         else:
             return options[1]
     return detail
+
+
+def get_magic_talent(talents):
+    for talent in talents:
+        if talent in magic_talents:
+            return talent
+    return "None"
+
+
+def get_number_of_spells(magic_type, level):
+    # work out number of spells based on type & level
+    if magic_type == "Petty":
+        return level + 2
+    return level
 # ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
 
 
 class GameCharacter:
-    def __init__(self, career_name, level, levels_data, details=""):
+    def __init__(self, career_name, level, levels_data, magic_domain, details=""):
         self.level = level
         self.career = career_name
         index = level -1
@@ -261,10 +277,13 @@ class GameCharacter:
         self.set_attributes(path_data)
         self.skills = {}
         self.set_skills(levels_data)
-        self.magic = {}
+        self.magic = {}  #
+        self.spells = {}
         # talents list
-        self.talents = self.set_talents(levels_data)
+        self.talents = self.set_talents(levels_data, magic_domain)
         # self.set_talents(levels_data[index]["Talents"])
+        if len(self.magic) > 0:
+            self.set_spells()
         # set wounds
         self.wounds = self.set_wounds()
         # trappings list
@@ -329,6 +348,7 @@ class GameCharacter:
         output += self.get_skills_output()
         output += self.get_talents_output()
         output += get_list_output("trappings", self.trappings)
+        output += self.get_spells_output()
 
         return output
 
@@ -378,18 +398,19 @@ class GameCharacter:
                         value = get_random_skill_value(num_rolls)
                     self.skills[skill] = value
 
-    def set_talents(self, levels_data):
+    def set_talents(self, levels_data, magic_domain):
         # get 3 unique random talents
         talents = get_random_list_items(talents_random, 3)
         # get one Career Talent/level - data needs prep
         for i in range(self.level):
-            talents.append(self.get_career_talent(levels_data[i]["Talents"], talents))
+            talents.append(self.get_career_talent(levels_data[i]["Talents"], talents, magic_domain))
         # apply and Talent Attribute bonuses
         for talent in talents:
             self.apply_talent_attribute_bonus(talent)
         return talents
 
-    def get_career_talent(self, path_talents, my_talents):
+    def get_career_talent(self, path_talents, my_talents, magic_domain):
+        # prep list of current career level talents
         talent_list = path_talents.split(",")
         talent_list = [talent.strip() for talent in talent_list]
         # remove any talents i already have
@@ -399,9 +420,13 @@ class GameCharacter:
                 talent_list.remove(t)
         if len(talent_list) == 0:
             print("WARNING: already have all talents in list, returning none")
-            return ""
         # TODO check for essential career talents, i.e. Pray, Petty Magic etc
-        return choice(talent_list)
+        magic_talent = get_magic_talent(talent_list)
+        if magic_talent == "None":
+            return choice(talent_list)
+        else:
+            self.set_magic_talent(magic_talent, magic_domain)
+            return magic_talent
 
     def apply_talent_attribute_bonus(self, talent):
         talent_key = extract_key(talent)
@@ -423,3 +448,71 @@ class GameCharacter:
             #print("Increasing wounds as have Hardy Talent")
             wounds += tb
         return wounds
+
+    def set_magic_talent(self, talent, user_input):
+        print(f"Got magic talent: {talent}")
+        talent_key = extract_key(talent)
+        # if petty magic don't add a domain
+        if talent_key == "Petty Magic":
+            self.magic["Petty"] = ""
+        else:
+            if user_input != "None":
+                # TODO add safety here?
+                self.magic[talent_key] = user_input
+            else:
+                self.magic[talent_key] = self.set_magic_domain(talent, talent_key)
+        print(self.magic)
+
+    def get_magic_domain(self):
+        """Returns 'None' if there is no domain value in any of the self.magic items """
+        for magic, domain in self.magic.items():
+            if domain != "":
+                return domain
+        return "None"
+
+    def set_magic_domain(self, talent_string, talent_key):
+        for magic, domain in self.magic.items():
+            if domain != "":
+                return domain
+        domain = self.get_magic_domain()
+        if domain != "None":
+            return domain
+        # now get domain from talent_string as we don't already have one
+        my_domain = talent_string.split("(")
+        my_domain[1] = my_domain[1].replace(")", "")
+        if talent_key == "Arcane Magic":
+            if my_domain[1] != "Arcane Lore":
+                return my_domain[1]
+            return choice(magic_colours)
+        else:
+            return choice(gods)
+
+    def set_spells(self):
+        global spells
+        for key, domain in self.magic.items():
+            if key == "Bless":
+                self.spells["Bless"] = blessings[domain]
+            else:
+                spell_domain = domain
+                if len(domain) == 0:
+                    spell_domain = "Petty"
+                spell_list = get_random_list_items(spells[spell_domain], get_number_of_spells(spell_domain, self.level))
+                self.spells[spell_domain] = spell_list
+        for magic, my_spells in self.spells.items():
+            print(f"{magic} : {my_spells}")
+
+    def get_spells_output(self):
+        output = ""
+        if len(self.spells) > 0:
+            output += "\n\n-----SPELLS---------------"
+            for domain, spell_list in self.spells.items():
+                output += f"\n{domain} -------------------\n"
+                my_spells = convert_list_to_string(spell_list)
+                my_spells = split_into_lines(my_spells, 50)
+                output += my_spells + "\n"
+        return output
+
+    def get_title_output(self):
+        output = f"{self.career} ({self.level} {self.path}) {self.status}"
+
+

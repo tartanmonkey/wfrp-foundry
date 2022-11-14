@@ -1,45 +1,9 @@
-Soldier (1 Recruit) Silver 1
-WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-31  38  40  41  34  34   44  41  37  37  19
------SKILLS----------------
-Melee(Basic): 36, Athletics: 39, Dodge: 38, 
-Cool: 39, Endurance: 43, Language(Battle): 45, 
-Play (Drum or Fife): 44, Climb: 41, 
------TALENTS---------------
-Nimble Fingered, Hardy, Artistic, Marksman, 
+Hilda Reidinger
+Gaunt, has a limp.
+Trait: Cold
+Motivation: Charity
+Ambition: To earn affection
+Quirk: Addicted to illicit substances or acts
 
------TRAPPINGS----------------
-Dagger, Leather Breastplate, Uniform, 
-8s, 
 
-Large Barge, The Swift Knight
-Destination: Kemperbad
-
---------CAPTAIN----------
-
-Sieglinde Ketelhut
-Well built, soft spoken.
-Origin: Kemperbad.
-Trait: Gregarious
-Motivation: Justice
-Ambition: To do the work of the Gods
-Quirk: Has a terrible short-term memory
-Says: Vessel in need of repair
-
-Merchant (2 Merchant) Silver 5
-WS  BS   S    T     I   Agi Dex Int WP Fel W
-41   26   35  30  35  46    25   37  40  45  13
------SKILLS----------------
-Charm: 50, Gamble: 42, Gossip: 50, 
-Haggle: 50, Bribery: 50, Animal Care: 40, 
-Consume Alcohol: 35, Drive: 51, Evaluate: 39, 
-Intuition: 37, Perception: 36, Language(Any): 41, 
-Language(Guilder): 42, Lore(Local): 37, 
------TALENTS---------------
-Linguistics, Sturdy, Very Resilient, Blather, 
-Savvy, 
-
------TRAPPINGS----------------
-2 Wagons, Guild License, 20GC, 
-37s, 
 

@@ -71,18 +71,11 @@ def click_save():
             text = pyperclip.paste() + "\n\n"
             save_data.write(text)
 
-
-def gender_set():
-    print(radio_gender.get())
-
-
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():
         print(k)
 
-def save_type_set():
-    pass
 # ---------------------------- DATA SETUP ----------------------------- #
 
 def init_data():
@@ -203,16 +196,16 @@ button_clear = Button(text="Clear", width=15, command=click_clear)
 button_save = Button(text="Save", width=15, command=click_save)
 radio_save = IntVar()
 radio_save.set(1)
-radio_append = Radiobutton(text="Append", value=1, variable=radio_save, command=save_type_set)
-radio_replace = Radiobutton(text="Replace", value=2, variable=radio_save, command=save_type_set)
+radio_append = Radiobutton(text="Append", value=1, variable=radio_save)
+radio_replace = Radiobutton(text="Replace", value=2, variable=radio_save)
 
 button_details = Button(text="Details", width=15, command=click_details)
 label_gender = Label(text="Gender: ")
 radio_gender = IntVar()
 radio_gender.set(3)
-radio_male = Radiobutton(text="Male", value=1, variable=radio_gender, command=gender_set)
-radio_female = Radiobutton(text="Female", value=2, variable=radio_gender, command=gender_set)
-radio_random = Radiobutton(text="Random", value=3, variable=radio_gender, command=gender_set)
+radio_male = Radiobutton(text="Male", value=1, variable=radio_gender)
+radio_female = Radiobutton(text="Female", value=2, variable=radio_gender)
+radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
 
 label_career = Label(text="Career: ")
 input_career = Entry(width=12)

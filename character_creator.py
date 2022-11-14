@@ -143,22 +143,6 @@ def test_data(characters, data_type="skills"):
             with open("Output/missing_data.txt", "w") as data:
                 data.write(missing_data)
 
-# TODO Remove once new skill logic complete
-def get_skill_value(skill_name, attributes):
-    # print(f"skill name: {skill_name} * attributes: {attributes}")
-    skill_key = extract_key(skill_name)
-    print(skill_key)
-    # TODO set only some skills defined by Level
-    if skill_key in skills:
-        if skills[skill_key] in attributes:
-            attribute = skills[skill_key]
-            return attributes[attribute]["total"] + 5  # this probably needs to take level or distinguish between set & add
-        else:
-            messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
-    else:
-        messagebox.showinfo(title="Oops!", message=f"Missing {skills[skill_name]}!")
-    return 30
-
 
 def get_random_skill_value(num_rolls):
     value = 0
@@ -431,7 +415,7 @@ class GameCharacter:
                 talent_list.remove(t)
         if len(talent_list) == 0:
             print("WARNING: already have all talents in list, returning none")
-        # TODO check for essential career talents, i.e. Pray, Petty Magic etc
+        # check for essential career talents, i.e. Pray, Petty Magic etc
         magic_talent = get_magic_talent(talent_list)
         if magic_talent == "None":
             return choice(talent_list)

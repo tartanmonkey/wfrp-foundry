@@ -28,26 +28,10 @@ def click_clear():
 
 
 def click_create_vessel():
-    global character_detail_text, character
-    vessel = Vessel()
-    vessel_data = vessel.get_vessel_data()
-    passengers = get_passenger_numbers(vessel_data)
-    for i in range(len(passengers)):
-        passengers[i] = f"{passengers[i]} {get_random_career_key()}"
-    vessel.set_passengers(passengers)
-    vessel_details = vessel.get_output()
-    captain_origin = trade_creator.get_origin()
-    captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
-    # create captain as character & replace following
-    character_detail_text = create_character_details(get_gender(), captain_origin, captain_says)
-    captain_level = get_random_level(vessel_data["captain_level"])
-    captain_career = choice(vessel_data["captain_career"])
-    create_character(captain_career, captain_level)
-    #print(f"Captain: {captain_career} Level: {captain_level}")
+    create_vessel()
 
-    # ---Display output
-    label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
-    pyperclip.copy(label_output["text"])
+def click_random_vessel():
+    create_vessel()
 
 
 def click_details():
@@ -128,6 +112,28 @@ def init_data():
 
 # -------------------------- FUNCTIONALITY --------------------------------------
 
+
+def create_vessel():
+    global character_detail_text, character
+    vessel = Vessel()
+    vessel_data = vessel.get_vessel_data()
+    passengers = get_passenger_numbers(vessel_data)
+    for i in range(len(passengers)):
+        passengers[i] = f"{passengers[i]} {get_random_career_key()}"
+    vessel.set_passengers(passengers)
+    vessel_details = vessel.get_output()
+    captain_origin = trade_creator.get_origin()
+    captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
+    # create captain as character & replace following
+    character_detail_text = create_character_details(get_gender(), captain_origin, captain_says)
+    captain_level = get_random_level(vessel_data["captain_level"])
+    captain_career = choice(vessel_data["captain_career"])
+    create_character(captain_career, captain_level)
+    #print(f"Captain: {captain_career} Level: {captain_level}")
+
+    # ---Display output
+    label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
+    pyperclip.copy(label_output["text"])
 
 def get_gender():
     gender = radio_gender.get()
@@ -217,7 +223,11 @@ input_magic = Entry(width=10)
 button_create = Button(text="Create", command=click_create)
 button_random = Button(text="Random", command=click_random)
 
-button_create_vessel = Button(text="Create Vessel", width=15, command=click_create_vessel)
+label_vessel = Label(text="Vessel:")
+input_vessel = Entry(width=10)
+# TODO add checkbox for generate captain here
+button_create_vessel = Button(text="Create", command=click_create_vessel)
+button_random_vessel = Button(text="Random", command=click_random_vessel)
 
 label_output = Label(text="Character output goes here", width=50, height=40, justify="left", anchor="n", pady=20)
 
@@ -245,7 +255,10 @@ input_magic.insert(0, "None")
 button_create.grid(column=6, row=2)
 button_random.grid(column=7, row=2)
 
-button_create_vessel.grid(column=0, row=3, columnspan=2)
+label_vessel.grid(column=0, row=3)
+input_vessel.grid(column=1, row=3)
+button_create_vessel.grid(column=3, row=3)
+button_random_vessel.grid(column=4, row=3)
 
 label_output.grid(column=0, row=4, columnspan=6)
 

@@ -2,6 +2,7 @@ from tkinter import messagebox
 import json
 from random import randint, choice
 from utilities import *
+from math import floor
 
 name_data = {}  # string : [list]
 vessel_data = []  # list of dictionaries
@@ -175,8 +176,9 @@ def get_cargo(vessel):
             cargo_amount[0] = cargo_amount[0] - cargo_amount[1]
         for n in range(len(cargo_amount)):
             # TODO implement actual amount using capacity and include in string entry
+            amount = floor((cargo_amount[n] / 10) * vessel["cargo_capacity"])
             goods = get_random_chance_entry(goods_data, "chance")["trade_good"]
-            cargo.append(goods)
+            cargo.append(f"{goods} ({amount})")
     return cargo
 
 

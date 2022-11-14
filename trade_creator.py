@@ -190,12 +190,33 @@ def get_passenger_numbers(vessel):
             passenger_numbers.append(randint(1, passenger_numbers[0] - 2))
             passenger_numbers[0] = passenger_numbers[0] - passenger_numbers[1]
     return passenger_numbers
+
+
+def is_valid_vessel_type(vessel_type):
+    if len(vessel_type) > 0:
+        valid_types = ""
+        for entry in vessel_data:
+            valid_types += entry["vessel_type"] + ", "
+            if entry["vessel_type"] == vessel_type:
+                return True
+        messagebox.showinfo(title="Oops!", message=f"Invalid Vessel Type! valid types = {valid_types}")
+    return False
+
+
+def get_vessel_type(vessel_type):
+    for entry in vessel_data:
+        if entry["vessel_type"] == vessel_type:
+            return entry
 # ---------------------------- VESSEL CLASS------------------------------------------------------------- #
 
 
 class Vessel:
-    def __init__(self):
-        vessel = get_random_chance_entry(vessel_data, "chance")
+    def __init__(self, vessel_type=""):
+        # TODO get specific vessel if provided
+        if len(vessel_type) > 0:
+            vessel = get_vessel_type(vessel_type)
+        else:
+            vessel = get_random_chance_entry(vessel_data, "chance")
         self.vessel_type = vessel["vessel_type"]
         self.name = ""
         if vessel["has_name"]:

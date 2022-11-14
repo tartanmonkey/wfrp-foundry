@@ -28,7 +28,10 @@ def click_clear():
 
 
 def click_create_vessel():
-    create_vessel()
+    vessel = input_vessel.get()
+    if trade_creator.is_valid_vessel_type(vessel):
+        create_vessel(vessel)
+
 
 def click_random_vessel():
     create_vessel()
@@ -71,6 +74,7 @@ def click_save():
             text = pyperclip.paste() + "\n\n"
             save_data.write(text)
 
+
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():
@@ -106,9 +110,9 @@ def init_data():
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
-def create_vessel():
+def create_vessel(vessel_type=""):
     global character_detail_text, character
-    vessel = Vessel()
+    vessel = Vessel(vessel_type)
     vessel_data = vessel.get_vessel_data()
     passengers = get_passenger_numbers(vessel_data)
     for i in range(len(passengers)):

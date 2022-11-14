@@ -145,6 +145,7 @@ def get_gender():
 def get_random_career_key():
     roll = randint(1, 100)
     # print(f"random: {roll}")
+    # TODO add race then change to value = value['chance'][race]
     for key, value in career_data.items():
         chance = value['chance']
         # print(f"{chance}")

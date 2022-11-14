@@ -204,6 +204,7 @@ def create_character_details(gender, origin="", says=""):
 
 
 def create_attribute(race="human"):
+    # TODO add race
     roll_1 = randint(1, 10)
     roll_2 = randint(1, 10)
     return {"base": roll_1 + roll_2 + 20, "advances": 0, "total": roll_1 + roll_2 + 20}

@@ -33,6 +33,12 @@ blessings = {}  # god: [list of blessings]
 magic_talents = ["Petty Magic", "Arcane Magic (Arcane Lore)", "Bless (Any)", "Invoke (Any)", "Arcane Magic (Hedgecraft)"
     , "Arcane Magic (Heavens)", "Arcane Magic (Witchcraft)"]
 
+attribute_overrides = {
+    "Dwarf": {"WS": 30, "T": 30, "Agi": 10, "Dex": 30, "WP": 40, "Fel": 10},
+    "Halfling": {"WS": 10, "BS": 30, "S": 10, "Dex": 30, "WP": 30, "Fel": 30},
+    "High Elf": {"WS": 30, "BS": 30, "I": 40, "Agi": 30, "Dex": 30, "Int": 30, "WP": 30},
+    "Wood Elf": {"WS": 30, "BS": 30, "I": 40, "Agi": 30, "Dex": 30, "Int": 30, "WP": 30},
+}
 
 def init_magic_data():
     global spells, blessings
@@ -203,11 +209,15 @@ def create_character_details(gender, origin="", says=""):
     return details
 
 
-def create_attribute(race="human"):
+def create_attribute(attribute, race="Human"):
     # TODO add race
     roll_1 = randint(1, 10)
     roll_2 = randint(1, 10)
-    return {"base": roll_1 + roll_2 + 20, "advances": 0, "total": roll_1 + roll_2 + 20}
+    bonus = 20
+    if race in attribute_overrides:
+        if attribute in attribute_overrides[race]:
+            bonus = attribute_overrides[race][attribute]
+    return {"base": roll_1 + roll_2 + bonus, "advances": 0, "total": roll_1 + roll_2 + 20}
 
 
 def get_attribute_bonus(attribute):
@@ -259,16 +269,16 @@ class GameCharacter:
         self.status = levels_data[index]["Status"]
         path_data = levels_data[index]
         self.attributes = {
-            "WS": create_attribute(),
-            "BS": create_attribute(),
-            "S": create_attribute(),
-            "T": create_attribute(),
-            "I": create_attribute(),
-            "Agi": create_attribute(),
-            "Dex": create_attribute(),
-            "Int": create_attribute(),
-            "WP": create_attribute(),
-            "Fel": create_attribute(),
+            "WS": create_attribute("WS"),
+            "BS": create_attribute("BS"),
+            "S": create_attribute("S"),
+            "T": create_attribute("T"),
+            "I": create_attribute("I"),
+            "Agi": create_attribute("Agi"),
+            "Dex": create_attribute("Dex"),
+            "Int": create_attribute("Int"),
+            "WP": create_attribute("WP"),
+            "Fel": create_attribute("Fel"),
         }
         self.set_attributes(path_data)
         self.skills = {}
@@ -286,6 +296,8 @@ class GameCharacter:
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
         self.details = details
+        # for attribute, value in self.attributes.items():
+        #     print(f"{attribute} advances: {value['advances']}")
 
     def set_talents(self, talent_string):
         self.talents = talent_string.split(',')
@@ -324,7 +336,11 @@ class GameCharacter:
     def set_attributes(self, level_data):
         for attribute, value in self.attributes.items():
             level_multiplier = get_attribute_value(level_data[attribute])
-            self.attributes[attribute]["advances"] = level_multiplier * 5 + randint(0, 5)
+            if level_multiplier > 0:
+                level_multiplier -= 1
+                if level_multiplier < 0:
+                    level_multiplier = 0
+                self.attributes[attribute]["advances"] = level_multiplier * 5 + randint(0, 5)
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
 
 

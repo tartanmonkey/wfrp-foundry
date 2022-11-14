@@ -92,7 +92,7 @@ def init_data():
         messagebox.showinfo(title="Oops!", message="Missing data!")
     else:
         #print("Do stuff with found data here...")
-        chance_low = 0
+        chance_low = {"Human": 0, "Dwarf": 0, "Halfling": 0, "High Elf": 0, "Wood Elf": 0}
         for entry in data:
             # print(f"entry - career: {entry['Career']}")
             if entry['Career'] in career_data:
@@ -100,12 +100,23 @@ def init_data():
                 career_data[entry['Career']]['level_data'].insert(entry['Level'] - 1, entry)
             else:
                 # Create new Career entry
-                chance_high = chance_low + entry['Chance']
-                chance = (chance_low, chance_high)
-                chance_low = chance_high
+                career_chances = {}
+                for race, chance in chance_low.items():
+                    if entry[race] != 0:
+                        chance_high = chance + entry[race]
+                        chance_tuple = (chance, chance_high)
+                        chance_low[race] = chance_high
+                        career_chances[race] = chance_tuple
                 level_data = []
                 level_data.insert(entry['Level'] - 1, entry)
-                career_data[entry['Career']] = {'chance': chance, 'level_data': level_data}
+                career_data[entry['Career']] = {'chance': career_chances, 'level_data': level_data}
+
+                # chance_high = chance_low + entry['Chance']
+                # chance = (chance_low, chance_high)
+                # chance_low = chance_high
+                # level_data = []
+                # level_data.insert(entry['Level'] - 1, entry)
+                # career_data[entry['Career']] = {'chance': chance, 'level_data': level_data}
 
 # -------------------------- FUNCTIONALITY --------------------------------------
 
@@ -142,16 +153,17 @@ def get_gender():
         return "female"
 
 
-def get_random_career_key():
+def get_random_career_key(race="Human"):
     roll = randint(1, 100)
     # print(f"random: {roll}")
     # TODO add race then change to value = value['chance'][race]
     for key, value in career_data.items():
-        chance = value['chance']
-        # print(f"{chance}")
-        if roll > chance[0] and roll <= chance[1]:
-            return key
-    messagebox.showinfo(title="Oops!", message=f"Failed to find random character key! rolled: {roll}")
+        if race in value['chance']:
+            chance = value['chance'][race]
+            # print(f"{chance}")
+            if roll > chance[0] and roll <= chance[1]:
+                return key
+    messagebox.showinfo(title="Oops!", message=f"Failed to find random character key of race {race}! rolled: {roll}")
 
 
 def create_character(career, level):
@@ -170,15 +182,6 @@ def display_character_stats(character):
     label_output["text"] = character.get_output()
     pyperclip.copy(character.get_output("save"))
 
-
-def test_character_data():
-    all_characters = []
-    for career in career_data:
-        for level in range(1, 5):
-            all_characters.append(GameCharacter(career, level, career_data[career]['level_data']))
-
-    character_creator.test_data(all_characters)
-
 def output_trappings_data(data):
     text = ""
     for item, value in data.items():
@@ -188,6 +191,17 @@ def output_trappings_data(data):
     with open("Output/trappings_data.txt", "w") as trappings_data:
         trappings_data.write(text)
 
+
+def test_character_data():
+    all_characters = []
+    for career in career_data:
+        for level in range(1, 5):
+            all_characters.append(GameCharacter(career, level, career_data[career]['level_data']))
+    character_creator.test_data(all_characters)
+
+def test_random_race_data():
+    for career, data in career_data.items():
+        print(f"{career} chances: {data['chance']}")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -268,8 +282,7 @@ init_trade_data()
 init_name_data()
 init_talents_data()
 init_magic_data()
-my_list = ["one", "two", "three"]
-new_list = utilities.get_random_list_items(my_list, 2)
+#test_random_race_data()
 
 #output_trappings_data(career_data)
 #character_creator.test_data(career_data, "talents")

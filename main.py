@@ -50,8 +50,7 @@ def click_create():
     career_name = input_career.get()
     level = int(input_level.get())
     race = input_race.get()
-    if race not in valid_races:
-        messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
+    if not is_valid_race_input(race):
         return
     if career_name in career_data and level < len(career_data[career_name]['level_data'])+1:
         create_character(career_name, level, race)
@@ -66,10 +65,13 @@ def click_random():
     input_magic.insert(0, "None")
     character_detail_text = create_character_details(get_gender())
     # TODO get random race here if checkbox set
-    race = "Human"
+    race = input_race.get()
     if checked_random_race_state.get() == 1:
         race = character_creator.get_random_race()
         print(f"Got random race: {race}")
+    else:
+        if not is_valid_race_input(race):
+            return
     create_character(get_random_career_key(), get_random_level(), race)
 
 
@@ -89,6 +91,12 @@ def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():
         print(k)
+
+def is_valid_race_input(race):
+    if race not in valid_races:
+        messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
+        return False
+    return True
 
 # ---------------------------- DATA SETUP ----------------------------- #
 

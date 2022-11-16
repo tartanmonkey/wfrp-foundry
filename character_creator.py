@@ -466,6 +466,8 @@ class GameCharacter:
         tb = get_attribute_bonus(self.attributes["T"]["total"])
         sb = get_attribute_bonus(self.attributes["S"]["total"])
         wpb = get_attribute_bonus(self.attributes["WP"]["total"])
+        if self.race == "Halfling":
+            sb = 0
         wounds = (2 * tb) + sb + wpb
         if "Hardy" in self.talents:
             #print("Increasing wounds as have Hardy Talent")

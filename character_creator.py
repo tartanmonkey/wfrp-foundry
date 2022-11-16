@@ -40,6 +40,14 @@ attribute_overrides = {
     "Wood Elf": {"WS": 30, "BS": 30, "I": 40, "Agi": 30, "Dex": 30, "Int": 30, "WP": 30},
 }
 
+random_race = [
+    {"chance": (0, 90), "race": "Human"},
+    {"chance": (90, 94), "race": "Halfling"},
+    {"chance": (94, 98), "race": "Dwarf"},
+    {"chance": (98, 99), "race": "High Elf"},
+    {"chance": (99, 100), "race": "Wood Elf"}
+]
+
 def init_magic_data():
     global spells, blessings
     try:
@@ -210,7 +218,6 @@ def create_character_details(gender, origin="", says=""):
 
 
 def create_attribute(attribute, race="Human"):
-    # TODO add race
     roll_1 = randint(1, 10)
     roll_2 = randint(1, 10)
     bonus = 20
@@ -257,28 +264,32 @@ def is_valid_magic(magic):
         return True
     return False
 
+
+def get_random_race():
+    return get_random_chance_entry(random_race, "chance")["race"]
 # ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
 
 
 class GameCharacter:
-    def __init__(self, career_name, level, levels_data, magic_domain, details=""):
+    def __init__(self, career_name, level, levels_data, magic_domain, race, details=""):
         self.level = level
         self.career = career_name
+        self.race = race
         index = level -1
         self.path = levels_data[index]["Title"]
         self.status = levels_data[index]["Status"]
         path_data = levels_data[index]
         self.attributes = {
-            "WS": create_attribute("WS"),
-            "BS": create_attribute("BS"),
-            "S": create_attribute("S"),
-            "T": create_attribute("T"),
-            "I": create_attribute("I"),
-            "Agi": create_attribute("Agi"),
-            "Dex": create_attribute("Dex"),
-            "Int": create_attribute("Int"),
-            "WP": create_attribute("WP"),
-            "Fel": create_attribute("Fel"),
+            "WS": create_attribute("WS", self.race),
+            "BS": create_attribute("BS", self.race),
+            "S": create_attribute("S", self.race),
+            "T": create_attribute("T", self.race),
+            "I": create_attribute("I", self.race),
+            "Agi": create_attribute("Agi", self.race),
+            "Dex": create_attribute("Dex", self.race),
+            "Int": create_attribute("Int", self.race),
+            "WP": create_attribute("WP", self.race),
+            "Fel": create_attribute("Fel", self.race),
         }
         self.set_attributes(path_data)
         self.skills = {}
@@ -527,7 +538,7 @@ class GameCharacter:
     def get_title_output(self):
         domain = self.get_magic_domain()
         if domain != "None":
-            return f"{self.career} {domain} ({self.level} {self.path}) {self.status}"
-        return f"{self.career} ({self.level} {self.path}) {self.status}"
+            return f"{self.career} {domain} ({self.level} {self.path}) {self.status} - {self.race}"
+        return f"{self.career} ({self.level} {self.path}) {self.status} - {self.race}"
 
 

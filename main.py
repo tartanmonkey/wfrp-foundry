@@ -17,6 +17,7 @@ from utilities import split_into_lines
 career_data = {} # career_name : {chance: tuple, level_data: list}
 character_detail_text = ""
 character = None
+valid_races = []  # set in init_data for checking valid user input
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -45,11 +46,15 @@ def click_details():
 
 
 def click_create():
-    global career_data, character
+    global career_data, character, valid_races
     career_name = input_career.get()
     level = int(input_level.get())
+    race = input_race.get()
+    if race not in valid_races:
+        messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
+        return
     if career_name in career_data and level < len(career_data[career_name]['level_data'])+1:
-        create_character(career_name, level)
+        create_character(career_name, level, race)
     else:
         messagebox.showinfo(title="Oops!", message="Invalid Career or Level")
 
@@ -60,7 +65,12 @@ def click_random():
     input_magic.delete(0, END)
     input_magic.insert(0, "None")
     character_detail_text = create_character_details(get_gender())
-    create_character(get_random_career_key(), get_random_level())
+    # TODO get random race here if checkbox set
+    race = "Human"
+    if checked_random_race_state.get() == 1:
+        race = character_creator.get_random_race()
+        print(f"Got random race: {race}")
+    create_character(get_random_career_key(), get_random_level(), race)
 
 
 def click_save():
@@ -83,7 +93,7 @@ def attribute_test():
 # ---------------------------- DATA SETUP ----------------------------- #
 
 def init_data():
-    global career_data
+    global career_data, valid_races
     # career_name : {chance: tuple, level_data: list}
     try:
         with open("Data/RulesData-Careers.json", "r") as data_file:
@@ -102,6 +112,8 @@ def init_data():
                 # Create new Career entry
                 career_chances = {}
                 for race, chance in chance_low.items():
+                    if race not in valid_races: #  inits valid race list for later use
+                        valid_races.append(race)
                     if entry[race] != 0:
                         chance_high = chance + entry[race]
                         chance_tuple = (chance, chance_high)
@@ -136,7 +148,9 @@ def create_vessel(vessel_type=""):
     character_detail_text = create_character_details(get_gender(), captain_origin, captain_says)
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])
-    create_character(captain_career, captain_level)
+    # TODO consider if we rally want to randomize race, otherwise...
+    race = "Human"
+    create_character(captain_career, captain_level, race)
     #print(f"Captain: {captain_career} Level: {captain_level}")
 
     # ---Display output
@@ -166,11 +180,11 @@ def get_random_career_key(race="Human"):
     messagebox.showinfo(title="Oops!", message=f"Failed to find random character key of race {race}! rolled: {roll}")
 
 
-def create_character(career, level):
+def create_character(career, level, race):
     global career_data, character
     magic_domain = input_magic.get()
     if is_valid_magic(magic_domain):
-        character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, character_detail_text)
+        character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, character_detail_text)
         display_character_stats(character)
     else:
         messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
@@ -230,10 +244,17 @@ label_career = Label(text="Career: ")
 input_career = Entry(width=12)
 label_level = Label(text="Level: ")
 input_level = Entry(width=3)
+
+label_race = Label(text="Race:")
+input_race = Entry(width=10)
+
 label_magic = Label(text="Magic:")
 input_magic = Entry(width=10)
 button_create = Button(text="Create", command=click_create)
 button_random = Button(text="Random", command=click_random)
+checked_random_race_state = IntVar()
+checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
+checked_random_race_state.get()
 
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)
@@ -261,11 +282,15 @@ input_career.insert(0, "Soldier")
 label_level.grid(column=2, row=2)
 input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
-label_magic.grid(column=4, row=2)
-input_magic.grid(column=5, row=2)
+label_race.grid(column=4, row=2)
+input_race.grid(column=5, row=2)
+input_race.insert(0, "Human")
+label_magic.grid(column=6, row=2)
+input_magic.grid(column=7, row=2)
 input_magic.insert(0, "None")
-button_create.grid(column=6, row=2)
-button_random.grid(column=7, row=2)
+button_create.grid(column=8, row=2)
+button_random.grid(column=9, row=2)
+checkbutton_random_race.grid(column=10, row=2)
 
 label_vessel.grid(column=0, row=3)
 input_vessel.grid(column=1, row=3)

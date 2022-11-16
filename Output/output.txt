@@ -7,3 +7,59 @@ Quirk: Addicted to illicit substances or acts
 
 
 
+Katrina Radner
+Thin, shaved head.
+Trait: Naive
+Motivation: Authority
+Ambition: To become someone else
+Quirk: Recently retired from adventuring
+
+Beggar (2 Beggar) Brass 2
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+30  25  31  41  34  48   32  33  40  43  15
+-----SKILLS----------------
+Athletics: 53, Dodge: 53, Cool: 45, 
+Endurance: 46, Charm: 48, Intuition: 39, 
+Stealth(Urban): 53, Consume Alcohol: 46, Perception: 39, 
+Gossip: 45, Haggle: 43, Sleight of Hand: 37, 
+Entertain(Acting): 44, Entertain(Any): 44, 
+-----TALENTS---------------
+Luck, Coolheaded, Animal Affinity, Very Resilient, 
+Beneath Notice, 
+
+-----TRAPPINGS----------------
+Crutch, Bowl, Poor Quality Blanket, 
+24d, 
+
+Barge, Loyal Reik
+Destination: Nuln
+Cargo: Armaments (150), Wool (150)
+
+--------CAPTAIN----------
+
+Oma Ipsen
+Short, pony tail.
+Origin: Nuln.
+Trait: Reserved
+Motivation: Freedom
+Ambition: To locate something lost
+Quirk: Gossipy and overly informed
+Says: Chat about cargo
+
+Boatman (2 Boatman) Silver 2
+WS  BS   S    T     I   Agi Dex Int WP Fel W
+34   32   31  45  30  43    37   35  28  31  13
+-----SKILLS----------------
+Melee(Brawling): 39, Dodge: 48, Endurance: 50, 
+Gossip: 36, Row: 36, Sail: 48, 
+Swim: 36, Consume Alcohol: 50, Athletics: 48, 
+Perception: 34, Intuition: 34, Haggle: 33, 
+Entertain(Storytelling): 32, Lore(Riverways): 37, 
+-----TALENTS---------------
+Super Numerate, Orientation, Mimic, Strong Swimmer, 
+Etiquette (Guilder), 
+
+-----TRAPPINGS----------------
+Boat Hook, Leather Jack, Pole, 
+Rope, Rowboat, 14s, 
+

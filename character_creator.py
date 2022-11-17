@@ -103,6 +103,7 @@ def init_skills_data():
 
 def init_talents_data():
     global talents_random, talent_bonus
+    # TODO add human talents to race talents
     try:
         with open("Data/Talents_Random.txt", "r") as data_file:
             talents_random = data_file.readlines()
@@ -423,6 +424,13 @@ class GameCharacter:
 
     def set_talents(self, levels_data, magic_domain):
         # get 3 unique random talents
+        # TODO change to look up race for base set
+
+        # TODO get random set based on race
+
+        # TODO make new set from random set, removing any which are in base set
+
+        # TODO add random talents, using race list & race number
         talents = get_random_list_items(talents_random, 3)
         # get one Career Talent/level - data needs prep
         for i in range(self.level):

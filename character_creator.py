@@ -15,7 +15,13 @@ names = {
     "empire": {"male": [], "female": [], "surname": []}
 }
 
-talents_random = []
+talents_random = []  # this is the human list which is read in then added to talents_race_random on init
+talents_race_random = {
+    "Human": [],
+    "Dwarf": ["Resolute", "Strong-minded", "Relentless", "Read/Write"],
+    "High Elf": ["Coolheaded", "Savvy", "Second Sight", "Sixth Sense"],
+    "Wood Elf": ["Second Sight", "Read/Write", "Very Resilient", "Hardy"]
+}
 talent_bonus = {}  # talent name: attribute
 
 hand_weapons = ["Sword", "Axe", "Mace", "Studded Club"]
@@ -47,6 +53,14 @@ random_race = [
     {"chance": (98, 99), "race": "High Elf"},
     {"chance": (99, 100), "race": "Wood Elf"}
 ]
+
+race_data = {
+    "Human": { "base_talents": [], "random_talents": "Human", "num_random_talents" : 3, "skills": []},
+    "Dwarf": { "base_talents": ["Magic Resistance", "Night Vision", "Sturdy"], "random_talents": "Dwarf", "num_random_talents" : 1, "skills": []},
+    "Halfling": { "base_talents": ["Acute Sense (Taste)", "Night Vision", "Resistance (Chaos)", "Small"], "random_talents": "Human", "num_random_talents" : 2, "skills": []},
+    "High Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Read/Write"], "random_talents": "High Elf", "num_random_talents" : 1, "skills": []},
+    "Wood Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Rover"], "random_talents": "Wood Elf", "num_random_talents" : 1, "skills": []},
+}
 
 def init_magic_data():
     global spells, blessings
@@ -103,11 +117,11 @@ def init_skills_data():
 
 def init_talents_data():
     global talents_random, talent_bonus
-    # TODO add human talents to race talents
     try:
         with open("Data/Talents_Random.txt", "r") as data_file:
             talents_random = data_file.readlines()
-            talents_random = [talent.strip() for talent in talents_random]
+            # add human talents to race talents
+            talents_race_random["Human"] = [talent.strip() for talent in talents_random]
     except FileNotFoundError:
         messagebox.showinfo(title="Oops!", message="Talents_Random data!")
     try:
@@ -423,15 +437,22 @@ class GameCharacter:
                     self.skills[skill] = value
 
     def set_talents(self, levels_data, magic_domain):
-        # get 3 unique random talents
-        # TODO change to look up race for base set
+        # look up race for base set
+        base_set = race_data[self.race]["base_talents"]
+        # get random set based on race
+        talent_list_name = race_data[self.race]["random_talents"]
+        race_talents = talents_race_random[talent_list_name].copy()
+        # make new set from random set, removing any which are in base set
+        for talent in base_set:
+            if talent in race_talents:
+                race_talents.remove(talent)
 
-        # TODO get random set based on race
+        # add random talents, using race list & race number
+        num_race_talents = race_data[self.race]["num_random_talents"]
+        talents = get_random_list_items(race_talents, num_race_talents)
+        for talent in base_set:
+            talents.append(talent)
 
-        # TODO make new set from random set, removing any which are in base set
-
-        # TODO add random talents, using race list & race number
-        talents = get_random_list_items(talents_random, 3)
         # get one Career Talent/level - data needs prep
         for i in range(self.level):
             talents.append(self.get_career_talent(levels_data[i]["Talents"], talents, magic_domain))

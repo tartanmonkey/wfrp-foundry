@@ -72,7 +72,8 @@ def click_random():
     else:
         if not is_valid_race_input(race):
             return
-    create_character(get_random_career_key(), get_random_level(), race)
+    print(race)
+    create_character(get_random_career_key(race), get_random_level(), race)
 
 
 def click_save():
@@ -305,7 +306,7 @@ input_vessel.grid(column=1, row=3)
 button_create_vessel.grid(column=3, row=3)
 button_random_vessel.grid(column=4, row=3)
 
-label_output.grid(column=0, row=4, columnspan=6)
+label_output.grid(column=0, row=4, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 

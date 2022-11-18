@@ -1,5 +1,6 @@
 import json
 import math
+import pandas
 from tkinter import messagebox
 from random import randint, choice
 from utilities import *
@@ -12,7 +13,11 @@ levels = {
 }
 
 names = {
-    "empire": {"male": [], "female": [], "surname": []}
+    "empire": {"male": [], "female": [], "surname": []},
+    "halfling": {"male": [], "female": [], "surname": []},
+    "dwarf": {"male": [], "female": [], "surname": []},
+    "high elf": {"male": [], "female": [], "surname": []},
+    "wood elf": {"male": [], "female": [], "surname": []},
 }
 
 talents_random = []  # this is the human list which is read in then added to talents_race_random on init
@@ -55,12 +60,13 @@ random_race = [
 ]
 
 race_data = {
-    "Human": { "base_talents": [], "random_talents": "Human", "num_random_talents" : 3, "skills": []},
-    "Dwarf": { "base_talents": ["Magic Resistance", "Night Vision", "Sturdy"], "random_talents": "Dwarf", "num_random_talents" : 1, "skills": []},
-    "Halfling": { "base_talents": ["Acute Sense (Taste)", "Night Vision", "Resistance (Chaos)", "Small"], "random_talents": "Human", "num_random_talents" : 2, "skills": []},
-    "High Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Read/Write"], "random_talents": "High Elf", "num_random_talents" : 1, "skills": []},
-    "Wood Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Rover"], "random_talents": "Wood Elf", "num_random_talents" : 1, "skills": []},
+    "Human": { "base_talents": [], "random_talents": "Human", "num_random_talents" : 3, "skills": [], "name_table": "empire"},
+    "Dwarf": { "base_talents": ["Magic Resistance", "Night Vision", "Sturdy"], "random_talents": "Dwarf", "num_random_talents" : 1, "skills": [], "name_table": "dwarf"},
+    "Halfling": { "base_talents": ["Acute Sense (Taste)", "Night Vision", "Resistance (Chaos)", "Small"], "random_talents": "Human", "num_random_talents" : 2, "skills": [], "name_table": "halfling"},
+    "High Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Read/Write"], "random_talents": "High Elf", "num_random_talents" : 1, "skills": [], "name_table": "high elf"},
+    "Wood Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Rover"], "random_talents": "Wood Elf", "num_random_talents" : 1, "skills": [], "name_table": "wood elf"},
 }
+
 
 def init_magic_data():
     global spells, blessings
@@ -100,6 +106,26 @@ def init_name_data():
 
     with open("Data/Names/Data_Names_Empire_Surnames.txt", "r") as surnames:
         names["empire"]["surname"] = surnames.readlines()
+
+    non_human_data = pandas.read_csv("Data/Names/Names_Non-Human.csv")
+    names["halfling"]["male"] = [item for item in non_human_data["Halfling Male"].tolist() if type(item) == str]
+    names["halfling"]["female"] = [item for item in non_human_data["Halfling Female"].tolist() if type(item) == str]
+    names["halfling"]["surname"] = [item for item in non_human_data["Halfling Surname"].tolist() if type(item) == str]
+    names["dwarf"]["male"] = [item for item in non_human_data["Dwarf Male"].tolist() if type(item) == str]
+    names["dwarf"]["female"] = [item for item in non_human_data["Dwarf Female"].tolist() if type(item) == str]
+    names["dwarf"]["surname"] = [item for item in non_human_data["Dwarf Surname"].tolist() if type(item) == str]
+    names["high elf"]["male"] = [item for item in non_human_data["Elf Forename"].tolist() if type(item) == str]
+    names["high elf"]["female"] = names["high elf"]["male"]
+    names["high elf"]["surname"] = [item for item in non_human_data["High Elf"].tolist() if type(item) == str]
+    names["wood elf"]["male"] = names["high elf"]["male"]
+    names["wood elf"]["female"] = names["high elf"]["male"]
+    names["wood elf"]["surname"] = [item for item in non_human_data["Wood Elf"].tolist() if type(item) == str]
+
+    # for item in names["wood elf"]["surname"]:
+    #     print(item)
+    #halflings = non_human_data["Halfling Male"].tolist()
+    #print(halflings)
+
     # print(get_random_name("female"))
 
 
@@ -134,7 +160,8 @@ def init_talents_data():
             talent_bonus[entry["Talent"]] = entry["Attribute"]
 
 
-def get_random_name(gender, region="empire"):
+def get_random_name(gender, race="Human"):
+    region = race_data[race]["name_table"]
     if gender in names[region]:
         return f"{choice(names[region][gender])} {choice(names[region]['surname'])}"
     else:

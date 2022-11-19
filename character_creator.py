@@ -67,7 +67,7 @@ race_data = {
     "Wood Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Rover"], "random_talents": "Wood Elf", "num_random_talents" : 1, "skills": [], "name_table": "wood elf"},
 }
 
-details_data = {}  # a dictionary of lists keyed to detail type
+details_data = {}  # a dictionary of lists keyed to detail type, using Column titles exactly as they are in the csv
 
 
 def init_details():
@@ -79,8 +79,8 @@ def init_details():
     else:
         for col in data.columns:
             details_data[col] = [item for item in data[col].tolist() if type(item) == str]
-        for key, value in details_data.items():
-            print(f"{key}: {value}")
+        # for key, value in details_data.items():
+        #     print(f"{key}: {value}")
 
 
 def init_magic_data():
@@ -254,26 +254,18 @@ def get_random_level(max_level=4):
 def create_character_details(gender, race, **extra_details):
     details = {}
     details["Name"] = get_random_name(gender, race)
-    try:
-        with open("Data/Details_Data_GMS.json", "r") as data_file:
-            data = json.load(data_file)
-    except FileNotFoundError:
-        messagebox.showinfo(title="Oops!", message="Missing Details_Data_GMS.json!")
-    else:
-        cap = len(data) - 1
-        details["Description"] = f"{data[randint(0, cap)]['Description']}, "
-        details["Description"] += f"{get_extra_detail(gender, data[randint(0, cap)]['Detail'])}."
-        if "origin" in extra_details:
-            details["Origin"] = extra_details["origin"]
-        details["Trait"] = data[randint(0, cap)]['Trait']
-        details["Motivation"] = data[randint(0, cap)]['Motivation']
-        details["Ambition"] = data[randint(0, cap)]['Ambition']
-        details["Quirk"] = data[randint(0, cap)]['Quirk']
-        if "chat" in extra_details:
-            details["Chat"] = extra_details["chat"]
+    details["Description"] = f"{choice(details_data['Description'])}, "
+    details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
+    if "origin" in extra_details:
+        details["Origin"] = extra_details["origin"]
+    details["Trait"] = choice(details_data["Trait"])
+    details["Motivation"] = choice(details_data["Motivation"])
+    details["Ambition"] = choice(details_data["Ambition"])
+    details["Quirk"] = choice(details_data["Quirk"])
+    if "chat" in extra_details:
+        details["Chat"] = extra_details["chat"]
 
     return details
-
 
 def create_attribute(attribute, race="Human"):
     roll_1 = randint(1, 10)

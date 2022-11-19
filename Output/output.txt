@@ -89,3 +89,81 @@ Knuckledusters, Sword, Hat,
 Mail Shirt, Pistol, Gang of Thugs and Racketeers, 
 Lair, 24s, 
 
+Wilbert Radner
+Description: Crooked, has a limp.
+Trait: Naive
+Motivation: Authority
+Ambition: To uncover a conspiracy
+Quirk: Spotless reputation
+
+Boatman (2 Boatman) Silver 2 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+24  36  47  36  38  43   37  32  33  35  13
+-----SKILLS----------------
+Melee(Brawling): 29, Dodge: 48, Endurance: 41, 
+Gossip: 40, Row: 52, Sail: 48, 
+Swim: 52, Consume Alcohol: 41, Athletics: 43, 
+Perception: 38, Intuition: 43, Haggle: 35, 
+Entertain(Storytelling): 37, Lore(Riverways): 36, 
+-----TALENTS---------------
+Very Strong, Linguistics, Nimble Fingered, Fisherman, 
+Etiquette (Guilder), 
+
+-----TRAPPINGS----------------
+Boat Hook, Leather Jack, Pole, 
+Rope, Rowboat, 7s, 
+
+Barge, The Winter Jester
+Destination: Nuln
+Cargo: Wool (210), Brandy (30)
+Passengers: 1 Bailiff
+
+--------CAPTAIN----------
+
+Adalgisa Reidenbach
+Description: Grizzled, boils.
+Origin: Grunberg
+Trait: Charming
+Motivation: Power
+Ambition: To earn affection
+Quirk: On the run from a darker past
+Chat: Wants a message taken somewhere relating to  passenger 
+
+
+Boatman (1 Boat-hand) Silver 1 - Human
+WS  BS   S    T     I   Agi Dex Int WP Fel W
+32   26   32  30  34  37    28   29  34  28  12
+-----SKILLS----------------
+Melee(Brawling): 37, Dodge: 40, Endurance: 31, 
+Gossip: 29, Row: 34, Sail: 39, 
+Swim: 33, Consume Alcohol: 30, 
+-----TALENTS---------------
+Craftsman, Strong Legs, Animal Affinity, Dirty Fighting, 
+
+-----TRAPPINGS----------------
+Boat Hook, Leather Jack, Pole, 
+7s, 
+
+Mandel Niermann
+Description: Thin, heavily madeup.
+Trait: Gracious
+Motivation: Power
+Ambition: To earn recognition
+Quirk: Extremely religious
+
+Scholar (2 Scholar) Silver 2 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+29  32  29  42  33  31   32  39  38  37  13
+-----SKILLS----------------
+Gossip: 42, Haggle: 42, Research: 44, 
+Gamble: 44, Consume Alcohol: 47, Entertain(Storytelling): 42, 
+Language(Classical): 44, Lore(Any): 41, Intuition: 38, 
+Perception: 33, Trade(Any): 36, Language(Any): 43, 
+Art(Writing): 33, 
+-----TALENTS---------------
+Acute Sense (Sense), Attractive, Flee!, Carouser, 
+Etiquette (Scholars), 
+
+-----TRAPPINGS----------------
+Access to a Library, Degree, 9s, 
+

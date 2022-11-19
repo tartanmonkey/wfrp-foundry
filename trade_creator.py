@@ -150,6 +150,7 @@ def get_vessel_name():
 
 
 def get_origin():
+    # TODO pass in race and use
     origin = get_random_chance_entry(origin_data, "chance")["origin"]
     if origin == "[Destination]":
         origin = get_random_chance_entry(destination_data, "chance")["destination"]

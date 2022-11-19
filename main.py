@@ -9,21 +9,21 @@ from character_creator import GameCharacter, init_skills_data, create_character_
 from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
-from utilities import split_into_lines
+from utilities import split_into_lines, get_dictionary_as_string
 
 # ------------------------ VARIABLES ----------------------------
 
 
-career_data = {} # career_name : {chance: tuple, level_data: list}
-character_detail_text = ""
+career_data = {}  # career_name : {chance: tuple, level_data: list}
+character_details = {}
 character = None
 valid_races = []  # set in init_data for checking valid user input
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
 def click_clear():
-    global character_detail_text
-    character_detail_text = ""
+    global character_details
+    character_details = {}
     print("clear")
     label_output["text"] = ""
 
@@ -39,10 +39,13 @@ def click_random_vessel():
 
 
 def click_details():
-    global character_detail_text
-    character_detail_text = create_character_details(get_gender())
-    label_output["text"] = character_detail_text
-    pyperclip.copy(character_detail_text)
+    global character_details
+    race = input_race.get()
+    if not is_valid_race_input(race):
+        return
+    character_details = create_character_details(get_gender(), race)
+    label_output["text"] = get_dictionary_as_string(character_details, 50)
+    pyperclip.copy(label_output["text"])
 
 
 def click_create():
@@ -59,22 +62,27 @@ def click_create():
 
 
 def click_random():
-    global character_detail_text
+    global character_details
     # clear magic input to prevent issues
     input_magic.delete(0, END)
     input_magic.insert(0, "None")
-    character_detail_text = create_character_details(get_gender())
-    # TODO get random race here if checkbox set
-    race = input_race.get()
-    if checked_random_race_state.get() == 1:
-        race = character_creator.get_random_race()
-        print(f"Got random race: {race}")
-    else:
-        if not is_valid_race_input(race):
-            return
+
+    # get random race here if checkbox set
+    race = get_race()
+    character_details = create_character_details(get_gender(), race)
     print(race)
     create_character(get_random_career_key(race), get_random_level(), race)
 
+
+def get_race():
+    race = input_race.get()
+    if checked_random_race_state.get() == 1:
+        race = character_creator.get_random_race()
+        #print(f"Got random race: {race}")
+    else:
+        if not is_valid_race_input(race):
+            return "Human"
+    return race
 
 def click_save():
     if radio_save.get() == 1:
@@ -93,6 +101,7 @@ def attribute_test():
     for k, v in attribs.items():
         print(k)
 
+
 def is_valid_race_input(race):
     if race not in valid_races:
         messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
@@ -100,6 +109,7 @@ def is_valid_race_input(race):
     return True
 
 # ---------------------------- DATA SETUP ----------------------------- #
+
 
 def init_data():
     global career_data, valid_races
@@ -143,7 +153,7 @@ def init_data():
 
 
 def create_vessel(vessel_type=""):
-    global character_detail_text, character
+    global character_details, character
     vessel = Vessel(vessel_type)
     vessel_data = vessel.get_vessel_data()
     passengers = get_passenger_numbers(vessel_data)
@@ -151,15 +161,16 @@ def create_vessel(vessel_type=""):
         passengers[i] = f"{passengers[i]} {get_random_career_key()}"
     vessel.set_passengers(passengers)
     vessel_details = vessel.get_output()
+    captain_race = get_race()
     captain_origin = trade_creator.get_origin()
-    captain_says = split_into_lines(trade_creator.get_captain_data("captain_says"), 40)
+    captain_says = trade_creator.get_captain_data("captain_says")
+
     # create captain as character & replace following
-    character_detail_text = create_character_details(get_gender(), captain_origin, captain_says)
+    character_details = create_character_details(get_gender(), captain_race, origin=captain_origin, chat=captain_says)
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])
-    # TODO consider if we rally want to randomize race, otherwise...
-    race = "Human"
-    create_character(captain_career, captain_level, race)
+
+    create_character(captain_career, captain_level, captain_race)
     #print(f"Captain: {captain_career} Level: {captain_level}")
 
     # ---Display output
@@ -193,17 +204,17 @@ def create_character(career, level, race):
     global career_data, character
     magic_domain = input_magic.get()
     if is_valid_magic(magic_domain):
-        character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, character_detail_text)
+        character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, character_details)
         display_character_stats(character)
     else:
         messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
-
 
 
 def display_character_stats(character):
     # TODO replace logic with call to simply use character output
     label_output["text"] = character.get_output()
     pyperclip.copy(character.get_output("save"))
+
 
 def output_trappings_data(data):
     text = ""
@@ -222,10 +233,19 @@ def test_character_data():
             all_characters.append(GameCharacter(career, level, career_data[career]['level_data']))
     character_creator.test_data(all_characters)
 
+
 def test_random_race_data():
     for career, data in career_data.items():
         print(f"{career} chances: {data['chance']}")
 
+
+def kwarg_test(a, b, **my_data):
+    print(f"a = {a}")
+    print(f"a = {b}")
+    for key, value in my_data.items():
+        print(value)
+        if key == "gender":
+            print(f"We found an entry for gender: {key}")
 # ---------------------------- UI SETUP ------------------------------- #
 
 
@@ -316,6 +336,7 @@ init_trade_data()
 init_name_data()
 init_talents_data()
 init_magic_data()
+kwarg_test(1, 10, name="Jojo", gender="male")
 #test_random_race_data()
 
 #output_trappings_data(career_data)

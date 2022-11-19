@@ -235,26 +235,26 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_character_details(gender, origin="", says=""):
-    details = get_random_name(gender)
+def create_character_details(gender, race, **extra_details):
+    details = {}
+    details["Name"] = get_random_name(gender, race)
     try:
         with open("Data/Details_Data_GMS.json", "r") as data_file:
             data = json.load(data_file)
     except FileNotFoundError:
         messagebox.showinfo(title="Oops!", message="Missing Details_Data_GMS.json!")
     else:
-        rand_cap = len(data) - 1
-        details += f"{data[randint(0, rand_cap)]['Description']}, "
-        details += f"{get_extra_detail(gender, data[randint(0, rand_cap)]['Detail'])}.\n"
-        if len(origin) > 0:
-            details += f"Origin: {origin}.\n"
-        details += f"Trait: {data[randint(0, rand_cap)]['Trait']}\n"
-        details += f"Motivation: {data[randint(0, rand_cap)]['Motivation']}\n"
-        details += f"Ambition: {data[randint(0, rand_cap)]['Ambition']}\n"
-        details += f"Quirk: {data[randint(0, rand_cap)]['Quirk']}\n"
-        if len(says) > 0:
-            details += f"Says: {says}\n"
-        details += "\n"
+        cap = len(data) - 1
+        details["Description"] = f"{data[randint(0, cap)]['Description']}, "
+        details["Description"] += f"{get_extra_detail(gender, data[randint(0, cap)]['Detail'])}.\n"
+        if "origin" in extra_details:
+            details["Origin"] = extra_details["origin"]
+        details["Trait"] = data[randint(0, cap)]['Trait']
+        details["Motivation"] = data[randint(0, cap)]['Motivation']
+        details["Ambition"] = data[randint(0, cap)]['Ambition']
+        details["Quirk"] = data[randint(0, cap)]['Quirk']
+        if "chat" in extra_details:
+            details["Chat"] = extra_details["chat"]
 
     return details
 
@@ -313,7 +313,7 @@ def get_random_race():
 
 
 class GameCharacter:
-    def __init__(self, career_name, level, levels_data, magic_domain, race, details=""):
+    def __init__(self, career_name, level, levels_data, magic_domain, race, details={}):
         self.level = level
         self.career = career_name
         self.race = race
@@ -396,9 +396,8 @@ class GameCharacter:
                 self.attributes[attribute]["advances"] = level_multiplier * 5 + randint(0, 5)
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
 
-
     def get_output(self, output_type="ui"):
-        output = self.details
+        output = get_dictionary_as_string(self.details, 50) + "\n"
         if output_type == "ui":
             output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"

@@ -67,6 +67,21 @@ race_data = {
     "Wood Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Rover"], "random_talents": "Wood Elf", "num_random_talents" : 1, "skills": [], "name_table": "wood elf"},
 }
 
+details_data = {}  # a dictionary of lists keyed to detail type
+
+
+def init_details():
+    global details_data
+    try:
+        data = pandas.read_csv("Data/Details_Data_GMS.csv")
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Details_Data_GMS.csv")
+    else:
+        for col in data.columns:
+            details_data[col] = [item for item in data[col].tolist() if type(item) == str]
+        for key, value in details_data.items():
+            print(f"{key}: {value}")
+
 
 def init_magic_data():
     global spells, blessings

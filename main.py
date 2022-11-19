@@ -44,7 +44,7 @@ def click_details():
     if not is_valid_race_input(race):
         return
     character_details = create_character_details(get_gender(), race)
-    label_output["text"] = get_dictionary_as_string(character_details, 50)
+    label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"])
     pyperclip.copy(label_output["text"])
 
 

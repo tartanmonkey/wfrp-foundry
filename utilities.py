@@ -133,10 +133,14 @@ def get_random_item(string, divisor):
     return choice(items)
 
 
-def get_dictionary_as_string(data, line_length):
+def get_dictionary_as_string(data, line_length, exclude_keys=[]):
+    """creates a string with each key & value on a new line, will omit to print any keys in exclude_keys"""
     text = ""
     for key, value in data.items():
-        text += f"{key}: {split_into_lines(value, line_length)}\n"
+        if key not in exclude_keys:
+            text += f"{key}: {split_into_lines(value, line_length)}\n"
+        else:
+            text += f"{split_into_lines(value, line_length)}\n"
     return text
 
 

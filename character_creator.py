@@ -106,6 +106,7 @@ def init_name_data():
 
     with open("Data/Names/Data_Names_Empire_Surnames.txt", "r") as surnames:
         names["empire"]["surname"] = surnames.readlines()
+        names["empire"]["surname"] = [surname.strip() for surname in names["empire"]["surname"]]
 
     non_human_data = pandas.read_csv("Data/Names/Names_Non-Human.csv")
     names["halfling"]["male"] = [item for item in non_human_data["Halfling Male"].tolist() if type(item) == str]
@@ -246,7 +247,7 @@ def create_character_details(gender, race, **extra_details):
     else:
         cap = len(data) - 1
         details["Description"] = f"{data[randint(0, cap)]['Description']}, "
-        details["Description"] += f"{get_extra_detail(gender, data[randint(0, cap)]['Detail'])}.\n"
+        details["Description"] += f"{get_extra_detail(gender, data[randint(0, cap)]['Detail'])}."
         if "origin" in extra_details:
             details["Origin"] = extra_details["origin"]
         details["Trait"] = data[randint(0, cap)]['Trait']
@@ -397,7 +398,7 @@ class GameCharacter:
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
 
     def get_output(self, output_type="ui"):
-        output = get_dictionary_as_string(self.details, 50) + "\n"
+        output = get_dictionary_as_string(self.details, 50, ["Name"]) + "\n"
         if output_type == "ui":
             output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
@@ -510,12 +511,12 @@ class GameCharacter:
         talent_key = extract_key(talent)
         if talent_key in talent_bonus:
             self.increase_attribute(talent_bonus[talent_key], 5)
-            #print(f"Applied talent bonus: {talent}; {talent_bonus[talent_key]}")
+            # print(f"Applied talent bonus: {talent}; {talent_bonus[talent_key]}")
 
     def increase_attribute(self, attribute, amount):
         self.attributes[attribute]["base"] += amount
         self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
-        #print(f"Increased {attribute} to total {self.attributes[attribute]['total']}")
+        # print(f"Increased {attribute} to total {self.attributes[attribute]['total']}")
 
     def set_wounds(self):
         tb = get_attribute_bonus(self.attributes["T"]["total"])
@@ -525,7 +526,7 @@ class GameCharacter:
             sb = 0
         wounds = (2 * tb) + sb + wpb
         if "Hardy" in self.talents:
-            #print("Increasing wounds as have Hardy Talent")
+            # print("Increasing wounds as have Hardy Talent")
             wounds += tb
         return wounds
 

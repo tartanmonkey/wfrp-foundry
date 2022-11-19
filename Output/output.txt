@@ -63,3 +63,29 @@ Etiquette (Guilder),
 Boat Hook, Leather Jack, Pole, 
 Rope, Rowboat, 14s, 
 
+Imelda Falkenhagen
+Description: Grizzled, soft spoken.
+Trait: Crude
+Motivation: Recognition
+Ambition: To do the work of the Gods
+Quirk: Recently retired from adventuring
+
+Racketeer (3 Gang Boss) Silver 3 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+46  27  49  48  36  42   29  34  38  45  15
+-----SKILLS----------------
+Melee(Brawling): 56, Dodge: 52, Endurance: 58, 
+Cool: 48, Intimidate: 59, Lore(Local): 44, 
+Stealth(Urban): 52, Consume Alcohol: 58, Melee (Basic): 50, 
+Bribery: 52, Charm: 50, Evaluate: 41, 
+Gossip: 52, Language (Estalian or Tilean): 41, Ranged(Crossbow): 32, 
+Perception: 37, Intuition: 38, Leadership: 50, 
+-----TALENTS---------------
+Lightning Reflexes, Pure Soul, Artistic, Etiquette (Criminals), 
+Strike to Stun, Fearless (Watchmen), 
+
+-----TRAPPINGS----------------
+Knuckledusters, Sword, Hat, 
+Mail Shirt, Pistol, Gang of Thugs and Racketeers, 
+Lair, 24s, 
+

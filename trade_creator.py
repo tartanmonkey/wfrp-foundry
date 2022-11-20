@@ -149,8 +149,10 @@ def get_vessel_name():
     return name_format
 
 
-def get_origin():
+def get_origin(race):
     # TODO pass in race and use
+    if race != "Human":
+        return race
     origin = get_random_chance_entry(origin_data, "chance")["origin"]
     if origin == "[Destination]":
         origin = get_random_chance_entry(destination_data, "chance")["destination"]

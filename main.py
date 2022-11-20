@@ -53,12 +53,8 @@ def click_create():
     career_name = input_career.get()
     level = int(input_level.get())
     race = input_race.get()
-    if not is_valid_race_input(race):
-        return
-    if career_name in career_data and level < len(career_data[career_name]['level_data'])+1:
+    if is_valid_character_input(career_name, level, race):
         create_character(career_name, level, race)
-    else:
-        messagebox.showinfo(title="Oops!", message="Invalid Career or Level")
 
 
 def click_random():
@@ -84,6 +80,7 @@ def get_race():
             return "Human"
     return race
 
+
 def click_save():
     if radio_save.get() == 1:
         with open("Output/output.txt", "a") as save_data:
@@ -107,6 +104,33 @@ def is_valid_race_input(race):
         messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
         return False
     return True
+
+def is_valid_character_input(career_input, level_input, race):
+    if level_input < 1 or level_input > 4:
+        messagebox.showinfo(title="Oops!", message=f"Level must be between 1 and 4")
+        return False
+    if is_valid_race_input(race):
+        if career_input in career_data:
+            if race not in career_data[career_input]["chance"]:
+                show_valid_careers(race)
+                return False
+            else:
+                return True
+        else:
+            show_valid_careers(race)
+            return False
+    return False
+
+
+def show_valid_careers(race):
+    # print(f"invalid career for {race}")
+    header = f"Valid careers for {race}:\n"
+    output = ""
+    for career, data in career_data.items():
+        if race in data["chance"]:
+            output += f"{career}, "
+    label_output["text"] = header + utilities.split_into_lines(output, 100)
+
 
 # ---------------------------- DATA SETUP ----------------------------- #
 
@@ -162,7 +186,7 @@ def create_vessel(vessel_type=""):
     vessel.set_passengers(passengers)
     vessel_details = vessel.get_output()
     captain_race = get_race()
-    captain_origin = trade_creator.get_origin()
+    captain_origin = trade_creator.get_origin(captain_race)
     captain_says = trade_creator.get_captain_data("captain_says")
 
     # create captain as character & replace following
@@ -171,11 +195,22 @@ def create_vessel(vessel_type=""):
     captain_career = choice(vessel_data["captain_career"])
 
     create_character(captain_career, captain_level, captain_race)
-    #print(f"Captain: {captain_career} Level: {captain_level}")
 
     # ---Display output
     label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
     pyperclip.copy(label_output["text"])
+
+
+def create_captain(vessel_data):
+    global character_details, character
+    captain_race = get_race()
+    captain_origin = trade_creator.get_origin(captain_race)
+    captain_says = trade_creator.get_captain_data("captain_says")
+    character_details = create_character_details(get_gender(), captain_race, origin=captain_origin, chat=captain_says)
+    captain_level = get_random_level(vessel_data["captain_level"])
+    captain_career = choice(vessel_data["captain_career"])
+    create_character(captain_career, captain_level, captain_race)
+
 
 def get_gender():
     gender = radio_gender.get()
@@ -291,7 +326,7 @@ input_vessel = Entry(width=10)
 button_create_vessel = Button(text="Create", command=click_create_vessel)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
-label_output = Label(text="Character output goes here", width=50, height=40, justify="left", anchor="n", pady=20)
+label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
 
 
 button_clear.grid(column=0, row=0, columnspan=3)

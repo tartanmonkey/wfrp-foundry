@@ -14,7 +14,7 @@
   {
     "Chance_D": 1,
     "Destination": "Castle Reikguard",
-    "Chance_O": 6,
+    "Chance_O": 8,
     "Origin": "Tilean"
   },
   {
@@ -38,14 +38,14 @@
   {
     "Chance_D": 1,
     "Destination": "Buxhead",
-    "Chance_O": 1,
-    "Origin": "Dwarf"
+    "Chance_O": "",
+    "Origin": ""
   },
   {
     "Chance_D": 1,
     "Destination": "Ranzig",
-    "Chance_O": 1,
-    "Origin": "Elf"
+    "Chance_O": "",
+    "Origin": ""
   },
   {
     "Chance_D": 1,

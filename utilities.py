@@ -144,6 +144,16 @@ def get_dictionary_as_string(data, line_length, exclude_keys=[]):
     return text
 
 
+def cap_number(num, num_min, num_max):
+    """Returns the min if number less than min, max if greater than max, otherwise returns the number"""
+    if num < num_min:
+        return num_min
+    if num > num_max:
+        return num_max
+    return num
+
+
+
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
     """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and

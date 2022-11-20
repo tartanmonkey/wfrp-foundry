@@ -313,6 +313,8 @@ def get_number_of_spells(magic_type, level):
     # work out number of spells based on type & level
     if magic_type == "Petty":
         return level + 2
+    if magic_type == "Arcane Magic":
+        return level + randint(0, 2)
     return level
 
 
@@ -560,7 +562,7 @@ class GameCharacter:
                 self.magic[talent_key] = user_input
             else:
                 self.magic[talent_key] = self.set_magic_domain(talent, talent_key)
-        print(self.magic)
+        print(f"{self.magic}")
 
     def get_magic_domain(self):
         """Returns 'None' if there is no domain value in any of the self.magic items """
@@ -595,7 +597,14 @@ class GameCharacter:
                 spell_domain = domain
                 if len(domain) == 0:
                     spell_domain = "Petty"
-                spell_list = get_random_list_items(spells[spell_domain], get_number_of_spells(spell_domain, self.level))
+                num_spells = get_number_of_spells(key, self.level)
+                if key == "Arcane Magic":
+                    # work out number of Arcane spells & number of colour spells
+                    num_arcane = math.ceil(num_spells/2)
+                    num_spells = cap_number(num_spells - num_arcane, 1, 100)
+                    arcane_list = get_random_list_items(spells["Arcane"], num_arcane)
+                    self.spells["Arcane"] = arcane_list
+                spell_list = get_random_list_items(spells[spell_domain], num_spells)
                 self.spells[spell_domain] = spell_list
         for magic, my_spells in self.spells.items():
             print(f"{magic} : {my_spells}")
@@ -605,10 +614,10 @@ class GameCharacter:
         if len(self.spells) > 0:
             output += "\n\n-----SPELLS---------------"
             for domain, spell_list in self.spells.items():
-                output += f"\n{domain} -------------------\n"
+                output += f"\n------  {domain}  ------------\n"
                 my_spells = convert_list_to_string(spell_list)
                 my_spells = split_into_lines(my_spells, 50)
-                output += my_spells + "\n"
+                output += my_spells
         return output
 
     def get_title_output(self):

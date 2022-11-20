@@ -146,7 +146,7 @@ def init_name_data():
 
 
 def init_skills_data():
-    global skills
+    global skills, race_data
     try:
         with open("Data/Skills_Data.json", "r") as data_file:
             data = json.load(data_file)
@@ -155,7 +155,17 @@ def init_skills_data():
     else:
         for entry in data:
             skills[entry["Skill"]] = entry["Attribute"]
+    try:
+        data = pandas.read_csv("Data/Race_Skills.csv")
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Race_Skills.csv")
+    else:
+        for col in data.columns:
+            race_data[col]["skills"] = [item for item in data[col].tolist() if type(item) == str]
+            # details_data[col] = [item for item in data[col].tolist() if type(item) == str]
 
+    # for race, data in race_data.items():
+    #     print(f"{race} skills: {data['skills']}")
 
 def init_talents_data():
     global talents_random, talent_bonus

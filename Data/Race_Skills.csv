@@ -1,0 +1,13 @@
+Human,Dwarf,Halfling,High Elf,Wood Elf
+Animal Care,Consume Alcohol,Charm,Cool,Athletics
+Charm,Cool,Consume Alcohol,Entertain (Sing),Climb
+Cool,Endurance,Dodge,Evaluate,Endurance
+Evaluate,Entertain (Storytelling),Gamble,Language (Eltharin),Entertain (Sing)
+Gossip,Evaluate,Haggle,Leadership,Intimidate
+Haggle,Intimidate,Intuition,Melee (Basic),Language (Eltharin)
+Language (Bretonnian),Language (Khazalid),Language (Mootish),Navigation,Melee (Basic)
+Language (Wastelander),Lore (Dwarfs),Lore (Reikland),Perception,Outdoor Survival
+Leadership,Lore (Geology),"Perception,",Play (Any),Perception
+Lore (Reikland),Lore (Metallurgy),Sleight of Hand,Ranged (Bow),Ranged (Bow)
+Melee (Basic),Melee (Basic),Stealth (Any),Sail,Stealth (Rural)
+Ranged (Bow),Trade (Any),Trade (Cook),Swim,Track

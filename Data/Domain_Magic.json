@@ -1,7 +1,7 @@
 [
   {
     "Domain": "Beasts",
-    "Spells": "Amber Taons, Beast Form, Beast Master, Beast Tongue, Flock of Doom, Hunter's Hide",
+    "Spells": "Amber Talons, Beast Form, Beast Master, Beast Tongue, Flock of Doom, Hunter's Hide",
     "Blessings": ""
   },
   {
@@ -21,7 +21,7 @@
   },
   {
     "Domain": "Metal",
-    "Spells": "Crucible of Chamon, Enchant Weapon, Feather of Lead, Fool’s Gold, Forge of Chamon, Glittering Robe, Mutable Metal, Transmutation of Chamon",
+    "Spells": "Crucible of Chamon, Enchant Weapon, Feather of Lead, Fools Gold, Forge of Chamon, Glittering Robe, Mutable Metal, Transmutation of Chamon",
     "Blessings": ""
   },
   {
@@ -112,6 +112,11 @@
   {
     "Domain": "Petty",
     "Spells": "Animal Friend, Bearings, Dazzle, Careful Step, Conserve, Dart, Drain, Eavesdrop, Gust, Light, Magic Flame, Marsh Lights, Murmured Whisper, Open Lock, Produce Small Animal, Protection from Rain, Purify Water, Rot, Sleep, Spring, Shock, Sly Hands, Sounds, Twitch, Warning",
+    "Blessings": ""
+  },
+  {
+    "Domain": "Arcane",
+    "Spells": "Aethyric Armour, Aethyric Arms, Arrow Shield, Blast, Bolt, Breath, Bridge, Chain Attack, Corrosive Blood, Dark Vision, Distracting, Dome, Drop, Entangle, Fearsome, Flight, Magic Shield, Move Object, Mundane Aura, Push, Teleport, Terrifying, Ward",
     "Blessings": ""
   }
 ]

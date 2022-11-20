@@ -5,7 +5,7 @@ Motivation: Charity
 Ambition: To earn affection
 Quirk: Addicted to illicit substances or acts
 
-
+*****************************************
 
 Katrina Radner
 Thin, shaved head.
@@ -30,6 +30,8 @@ Beneath Notice,
 -----TRAPPINGS----------------
 Crutch, Bowl, Poor Quality Blanket, 
 24d, 
+
+*****************************************
 
 Barge, Loyal Reik
 Destination: Nuln
@@ -63,6 +65,8 @@ Etiquette (Guilder),
 Boat Hook, Leather Jack, Pole, 
 Rope, Rowboat, 14s, 
 
+*****************************************
+
 Imelda Falkenhagen
 Description: Grizzled, soft spoken.
 Trait: Crude
@@ -89,6 +93,8 @@ Knuckledusters, Sword, Hat,
 Mail Shirt, Pistol, Gang of Thugs and Racketeers, 
 Lair, 24s, 
 
+*****************************************
+
 Wilbert Radner
 Description: Crooked, has a limp.
 Trait: Naive
@@ -112,6 +118,8 @@ Etiquette (Guilder),
 -----TRAPPINGS----------------
 Boat Hook, Leather Jack, Pole, 
 Rope, Rowboat, 7s, 
+
+*****************************************
 
 Barge, The Winter Jester
 Destination: Nuln
@@ -144,6 +152,8 @@ Craftsman, Strong Legs, Animal Affinity, Dirty Fighting,
 Boat Hook, Leather Jack, Pole, 
 7s, 
 
+*****************************************
+
 Mandel Niermann
 Description: Thin, heavily madeup.
 Trait: Gracious
@@ -167,3 +177,112 @@ Etiquette (Scholars),
 -----TRAPPINGS----------------
 Access to a Library, Degree, 9s, 
 
+*****************************************
+
+Farica Mummert
+Description: Fat, smelly.
+Trait: Gregarious
+Motivation: Glory
+Ambition: To become someone else
+Quirk: Gossipy and overly informed
+Likes: Archery
+
+Flagellant (3 Penitent) Brass 0 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+36  34  44  42  35  30   33  24  43  31  16
+-----SKILLS----------------
+Melee(Flail): 46, Dodge: 40, Endurance: 52, 
+Heal: 34, Intimidate: 54, Intuition: 45, 
+Lore(Sigmar): 34, Outdoor Survival: 34, Ranged(Sling): 35, 
+Athletics: 37, Cool: 51, Language(Classical): 31, 
+Lore(The Empire): 32, Art(Icons): 35, Charm: 35, 
+Language (any): 27, Lore (Theology): 29, Perception: 35, 
+-----TALENTS---------------
+Coolheaded, Marksman, Craftsman, Berserk Charge, 
+Flagellant, Field Dressing, 
+
+-----TRAPPINGS----------------
+Flail, Tattered Robes, Placard, 
+Religious Symbol, Sling, Religious Relic, 
+0GC, 
+
+*****************************************
+
+Franz Pflughoeft
+Description: Flamboyant, pock-marked.
+Trait: Naive
+Motivation: Fame
+Ambition: To reclaim what was taken
+Quirk: Holds to revolutionary ideals
+Dislikes: Singing
+
+Envoy (3 Diplomat) Gold 2 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+35  33  26  47  37  41   31  42  36  46  13
+-----SKILLS----------------
+Dodge: 51, Endurance: 57, Athletics: 51, 
+Charm: 56, Drive: 51, Intuition: 47, 
+Ride (Horse): 51, Row: 36, Cool: 39, 
+Gossip: 50, Haggle: 48, Bribery: 54, 
+Lore(Politics): 43, Art (Writing): 39, Intimidate: 30, 
+Leadership: 47, Navigation: 39, Language(Any): 45, 
+-----TALENTS---------------
+Night Vision, Mimic, Flee!, Read/Write, 
+Cat-tongued, Gregarious, 
+
+-----TRAPPINGS----------------
+Aide, Quality Clothes, Map, 
+Scroll Case, Quill and Ink, 2GC,  + 
+
+*****************************************
+
+Klarissa Rout
+Description: Thin, heavily madeup.
+Trait: Confident
+Motivation: Justice
+Ambition: To make it through just one more day
+Quirk: Speaks prayers to Darker powers
+Likes: Halflings
+
+Artist (2 Artist) Silver 3 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+28  39  43  27  37  39   44  31  23  32  10
+-----SKILLS----------------
+Cool: 28, Endurance: 32, Stealth (Urban): 44, 
+Perception: 42, Gossip: 37, Evaluate: 36, 
+Consume Alcohol: 32, Art(Any): 49, Intuition: 38, 
+Climb: 46, Gamble: 34, Haggle: 37, 
+Language(Classical): 31, Trade(Art Supplies): 48, 
+-----TALENTS---------------
+Resistance (Threat), Strong Legs, Marksman, Artistic, 
+Nimble Fingered, 
+
+-----TRAPPINGS----------------
+Sling Bag containing Trade Tools (Artist), 13s,  + 
+
+*****************************************
+
+Townsman: Walda Raveling
+Description: Willowy, big nose.
+Trait: Brash
+Motivation: Love
+Ambition: To reclaim what was taken
+Quirk: Has a terrible short-term memory
+Likes: Men
+
+Townsman (2 Townsman) Silver 2 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+31  31  32  31  39  44   34  42  40  39  13
+-----SKILLS----------------
+Dodge: 49, Charm: 44, Gossip: 44, 
+Haggle: 44, Gamble: 47, Climb: 37, 
+Drive: 49, Consume Alcohol: 36, Melee(Brawling): 36, 
+Bribery: 44, Evaluate: 45, Intuition: 41, 
+Lore(Local): 42, Play(Any): 37, 
+-----TALENTS---------------
+Orientation, Read/Write, Savvy, Alley Cat, 
+Etiquette (Any), 
+
+-----TRAPPINGS----------------
+Modest Townhouse, Servant, Quill and Ink, 
+8s, 

@@ -262,6 +262,7 @@ def create_character_details(gender, race, **extra_details):
     details["Motivation"] = choice(details_data["Motivation"])
     details["Ambition"] = choice(details_data["Ambition"])
     details["Quirk"] = choice(details_data["Quirk"])
+    details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
     if "chat" in extra_details:
         details["Chat"] = extra_details["chat"]
 
@@ -405,7 +406,7 @@ class GameCharacter:
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
 
     def get_output(self, output_type="ui"):
-        output = get_dictionary_as_string(self.details, 50, ["Name"]) + "\n"
+        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'])}\n"
         if output_type == "ui":
             output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"

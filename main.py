@@ -84,7 +84,7 @@ def get_race():
 def click_save():
     if radio_save.get() == 1:
         with open("Output/output.txt", "a") as save_data:
-            text = pyperclip.paste() + "\n\n"
+            text = f"\n*****************************************\n\n{pyperclip.paste()}\n"
             save_data.write(text)
     else:
         with open("Output/output.txt", "w") as save_data:
@@ -166,13 +166,6 @@ def init_data():
                 level_data.insert(entry['Level'] - 1, entry)
                 career_data[entry['Career']] = {'chance': career_chances, 'level_data': level_data}
 
-                # chance_high = chance_low + entry['Chance']
-                # chance = (chance_low, chance_high)
-                # chance_low = chance_high
-                # level_data = []
-                # level_data.insert(entry['Level'] - 1, entry)
-                # career_data[entry['Career']] = {'chance': chance, 'level_data': level_data}
-
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
@@ -185,19 +178,12 @@ def create_vessel(vessel_type=""):
         passengers[i] = f"{passengers[i]} {get_random_career_key()}"
     vessel.set_passengers(passengers)
     vessel_details = vessel.get_output()
-    captain_race = get_race()
-    captain_origin = trade_creator.get_origin(captain_race)
-    captain_says = trade_creator.get_captain_data("captain_says")
-
-    # create captain as character & replace following
-    character_details = create_character_details(get_gender(), captain_race, origin=captain_origin, chat=captain_says)
-    captain_level = get_random_level(vessel_data["captain_level"])
-    captain_career = choice(vessel_data["captain_career"])
-
-    create_character(captain_career, captain_level, captain_race)
-
-    # ---Display output
-    label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
+    is_create_captain = True # temp until we add checkbox for 20-11-22
+    if is_create_captain:
+        create_captain(vessel_data)
+        label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
+    else:
+        label_output["text"] = vessel_details
     pyperclip.copy(label_output["text"])
 
 

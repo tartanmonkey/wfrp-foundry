@@ -178,8 +178,7 @@ def create_vessel(vessel_type=""):
         passengers[i] = f"{passengers[i]} {get_random_career_key()}"
     vessel.set_passengers(passengers)
     vessel_details = vessel.get_output()
-    is_create_captain = True # temp until we add checkbox for 20-11-22
-    if is_create_captain:
+    if checked_captain_state.get() == 1:
         create_captain(vessel_data)
         label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
     else:
@@ -308,7 +307,11 @@ checked_random_race_state.get()
 
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)
-# TODO add checkbox for generate captain here
+# checkbox for generate captain here
+checked_captain_state = IntVar()
+checkbutton_create_captain = Checkbutton(text="Create Captain?", variable=checked_captain_state)
+checked_captain_state.set(1)
+
 button_create_vessel = Button(text="Create", command=click_create_vessel)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
@@ -344,6 +347,8 @@ checkbutton_random_race.grid(column=10, row=2)
 
 label_vessel.grid(column=0, row=3)
 input_vessel.grid(column=1, row=3)
+input_vessel.insert(0, "Barge")
+checkbutton_create_captain.grid(column=2, row=3)
 button_create_vessel.grid(column=3, row=3)
 button_random_vessel.grid(column=4, row=3)
 

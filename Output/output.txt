@@ -286,3 +286,7 @@ Etiquette (Any),
 -----TRAPPINGS----------------
 Modest Townhouse, Servant, Quill and Ink, 
 8s, 
+
+*****************************************
+
+

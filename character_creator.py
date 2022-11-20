@@ -357,8 +357,8 @@ class GameCharacter:
         self.set_attributes(path_data)
         self.skills = {}
         self.set_skills(levels_data)
-        self.magic = {}  #
-        self.spells = {}
+        self.magic = {}  # talent key: specific domain
+        self.spells = {}  # Domain: spell list
         # talents list
         self.talents = self.set_talents(levels_data, magic_domain)
         # self.set_talents(levels_data[index]["Talents"])

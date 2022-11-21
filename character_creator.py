@@ -471,7 +471,7 @@ class GameCharacter:
         if self.level == 1:
             skill_list = get_stripped_list(level_data[0]["Skills"])
             for skill in skill_list:
-                self.skills[skill] = get_random_skill_value(1)
+                self.advance_skill(skill, get_random_skill_value(1))
         else:
             for i in range(self.level):
                 skill_list = get_stripped_list(level_data[i]["Skills"])
@@ -481,7 +481,14 @@ class GameCharacter:
                     else:
                         num_rolls = self.level - i
                         value = get_random_skill_value(num_rolls)
-                    self.skills[skill] = value
+                    # self.skills[skill] = value
+                    self.advance_skill(skill, value)
+
+    def advance_skill(self, skill, value):
+        if skill in self.skills:
+            self.skills[skill] += value
+        else:
+            self.skills[skill] = value
 
     def set_talents(self, levels_data, magic_domain):
         # look up race for base set
@@ -562,7 +569,7 @@ class GameCharacter:
                 self.magic[talent_key] = user_input
             else:
                 self.magic[talent_key] = self.set_magic_domain(talent, talent_key)
-        print(f"{self.magic}")
+        # print(f"{self.magic}")
 
     def get_magic_domain(self):
         """Returns 'None' if there is no domain value in any of the self.magic items """
@@ -606,8 +613,8 @@ class GameCharacter:
                     self.spells["Arcane"] = arcane_list
                 spell_list = get_random_list_items(spells[spell_domain], num_spells)
                 self.spells[spell_domain] = spell_list
-        for magic, my_spells in self.spells.items():
-            print(f"{magic} : {my_spells}")
+        # for magic, my_spells in self.spells.items():
+        #     print(f"{magic} : {my_spells}")
 
     def get_spells_output(self):
         output = ""

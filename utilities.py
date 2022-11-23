@@ -153,6 +153,10 @@ def cap_number(num, num_min, num_max):
     return num
 
 
+def get_first_word(text, divisor="("):
+    """Returns the text before the divisor, removing trailing space"""
+    words = text.split(divisor)
+    return words[0].strip()
 
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):

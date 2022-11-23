@@ -6,6 +6,8 @@ from random import randint, choice
 from utilities import *
 
 skills = {}
+skill_groups = {}
+SKILL_ANY_THRESHOLD = 10  # the threshold at which a new skill group is taken rather than increasing existing
 levels = {
     2: [{"chance": (0, 70), "level": 1}, {"chance": (70, 100), "level": 2}],
     3: [{"chance": (0, 60), "level": 1}, {"chance": (60, 85), "level": 2}, {"chance": (85, 100), "level": 3}],
@@ -163,7 +165,16 @@ def init_skills_data():
         for col in data.columns:
             race_data[col]["skills"] = [item for item in data[col].tolist() if type(item) == str]
             # details_data[col] = [item for item in data[col].tolist() if type(item) == str]
+    try:
+        data = pandas.read_csv("Data/Skill_Groups.csv")
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Skill_Groups.csv")
+    else:
+        for col in data.columns:
+            skill_groups[col] = [item for item in data[col].tolist() if type(item) == str]
 
+    # for group, data in skill_groups.items():
+    #     print(f"{group} : {data}")
     # for race, data in race_data.items():
     #     print(f"{race} skills: {data['skills']}")
 
@@ -330,6 +341,13 @@ def is_valid_magic(magic):
 
 def get_random_race():
     return get_random_chance_entry(random_race, "chance")["race"]
+
+
+def get_skill_from_group(skill_group, exclude):
+    group_list = [item for item in skill_groups[skill_group] if item not in exclude]
+    group_item = choice(group_list)
+    return f"{skill_group} ({group_item})"
+
 # ---------------------------- CHARACTER CLASS------------------------------------------------------------- #
 
 
@@ -468,6 +486,14 @@ class GameCharacter:
         return 0
 
     def set_skills(self, level_data):
+        # add race skills
+        race_skills = get_random_list_items(race_data[self.race]["skills"], 4)
+        # TODO replace Any if race_skills contains
+        # note in the rules it should actually be 3 at 5 and 3 at 3, instead I'm adding just 4 at 4
+        for skill in race_skills:
+            #self.skills[skill] = 4
+            self.advance_skill(skill, 4)
+        print(f"--- {self.career} - Race Skills: {self.skills} ------------")
         if self.level == 1:
             skill_list = get_stripped_list(level_data[0]["Skills"])
             for skill in skill_list:
@@ -484,11 +510,47 @@ class GameCharacter:
                     # self.skills[skill] = value
                     self.advance_skill(skill, value)
 
+
     def advance_skill(self, skill, value):
+        global skill_groups
         if skill in self.skills:
             self.skills[skill] += value
+            print(f"Increasing Previous skill: {skill} by {value} to {self.skills[skill]}")
         else:
-            self.skills[skill] = value
+            # check if 'Any'
+            if "Any" in skill:
+                skill_group = get_first_word(skill)
+                print(f"Got skill group: {skill_group}")
+                 # check if already have this key and only get a new one if advances high enough
+                skill_groups_known = []
+                for key, entry in self.skills.items():
+                    # check keys for skill_group and store if so
+                    if skill_group in key:
+                        skill_groups_known.append(key) # note this is the whole name
+                # iterate through know skills to decide whether to add a new group or increase existing
+                print(f"Skills Groups Known: {skill_groups_known}")
+                for known in skill_groups_known:
+                    if self.skills[known] < SKILL_ANY_THRESHOLD:
+                        print(f"increase {known} as its only {self.skills[known]}")
+                        self.skills[known] += value
+                        return
+                # get new skill group
+                if skill_group in skill_groups:
+                    # add a random item from skill_group, excluding any I currently have
+                    exclude = [get_key_from_string(item, "(", ")") for item in skill_groups_known]
+                    self.skills[get_skill_from_group(skill_group, exclude)] = value
+                else:
+                    print(f"Did not find {skill_group} in skill_groups, so adding {skill}")
+                     # simply add the whole skill name (with Any included)
+                    self.skills[skill] = value
+            elif "(" in skill and "/" in skill:
+                # check for options and use one if present
+                choices = get_key_from_string(skill, "(", ")")
+                new_skill = f"{get_first_word(skill)} ({get_random_item(choices, '/')})"
+                self.skills[new_skill] = value
+            else:
+                # otherwise set as usual
+                self.skills[skill] = value
 
     def set_talents(self, levels_data, magic_domain):
         # look up race for base set

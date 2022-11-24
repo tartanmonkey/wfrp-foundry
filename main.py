@@ -248,10 +248,12 @@ def output_trappings_data(data):
 
 def test_character_data():
     all_characters = []
+    race = "Wood Elf"
     for career in career_data:
-        for level in range(1, 5):
-            all_characters.append(GameCharacter(career, level, career_data[career]['level_data']))
-    character_creator.test_data(all_characters)
+        if race in career_data[career]["chance"]:
+            for level in range(1, 5):
+                all_characters.append(GameCharacter(career, level, career_data[career]['level_data'], "None", race))
+    # character_creator.test_data(all_characters)
 
 
 def test_random_race_data():
@@ -363,6 +365,8 @@ init_name_data()
 init_talents_data()
 init_magic_data()
 init_details()
+
+#test_character_data()
 #kwarg_test(1, 10, name="Jojo", gender="male")
 #test_random_race_data()
 

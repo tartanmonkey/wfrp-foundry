@@ -260,33 +260,5 @@ Nimble Fingered,
 -----TRAPPINGS----------------
 Sling Bag containing Trade Tools (Artist), 13s,  + 
 
-*****************************************
-
-Townsman: Walda Raveling
-Description: Willowy, big nose.
-Trait: Brash
-Motivation: Love
-Ambition: To reclaim what was taken
-Quirk: Has a terrible short-term memory
-Likes: Men
-
-Townsman (2 Townsman) Silver 2 - Human
-WS  BS  S   T   I   Agi Dex Int  WP Fel  W
-31  31  32  31  39  44   34  42  40  39  13
------SKILLS----------------
-Dodge: 49, Charm: 44, Gossip: 44, 
-Haggle: 44, Gamble: 47, Climb: 37, 
-Drive: 49, Consume Alcohol: 36, Melee(Brawling): 36, 
-Bribery: 44, Evaluate: 45, Intuition: 41, 
-Lore(Local): 42, Play(Any): 37, 
------TALENTS---------------
-Orientation, Read/Write, Savvy, Alley Cat, 
-Etiquette (Any), 
-
------TRAPPINGS----------------
-Modest Townhouse, Servant, Quill and Ink, 
-8s, 
-
-*****************************************
 
 

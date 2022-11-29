@@ -1,0 +1,25 @@
+Seaman: Theobold Nordhausen
+Description: Wide, warts.
+Trait: Confident
+Motivation: Servitude
+Ambition: To locate something lost
+Quirk: Holds to revolutionary ideals
+Dislikes: Northeners
+
+Seaman (2 Seaman) Silver 3 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+32  35  32  26  37  48   32  32  40  29  13
+-----SKILLS----------------
+Ranged (Bow): 39, Melee (Brawling): 37, Melee (Basic): 36, 
+Dodge: 48, Language (Wastelander): 37, Leadership: 33, 
+Cool: 44, Gamble: 37, Gossip: 34, 
+Climb: 37, Consume Alcohol: 31, Row: 37, 
+Sail: 53, Swim: 37, Athletics: 49, 
+Endurance: 28, Entertain (Singing): 32, 
+-----TALENTS---------------
+Hardy, Lightning Reflexes, Coolheaded, Strong Swimmer, 
+Strong Legs, 
+
+-----TRAPPINGS----------------
+Boat Hook, Leather Jerkin, 15s, 
+

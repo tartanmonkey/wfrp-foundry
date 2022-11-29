@@ -82,12 +82,20 @@ def get_race():
 
 
 def click_save():
+    save_to = f"Output/{input_filename.get()}.txt"
     if radio_save.get() == 1:
-        with open("Output/output.txt", "a") as save_data:
-            text = f"\n*****************************************\n\n{pyperclip.paste()}\n"
-            save_data.write(text)
+        try:
+            with open(save_to, "a") as save_data:
+                text = f"\n*****************************************\n\n{pyperclip.paste()}\n"
+                save_data.write(text)
+        except FileNotFoundError:
+            with open(save_to, "w") as save_data:
+                print("Creating new file")
+                # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
+                text = pyperclip.paste() + "\n\n"
+                save_data.write(text)
     else:
-        with open("Output/output.txt", "w") as save_data:
+        with open(save_to, "w") as save_data:
             # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
             text = pyperclip.paste() + "\n\n"
             save_data.write(text)
@@ -278,6 +286,8 @@ window.config(padx=20, pady=20)
 
 button_clear = Button(text="Clear", width=15, command=click_clear)
 button_save = Button(text="Save", width=15, command=click_save)
+label_filename = Label(text="Save to: ")
+input_filename = Entry(width=15)
 radio_save = IntVar()
 radio_save.set(1)
 radio_append = Radiobutton(text="Append", value=1, variable=radio_save)
@@ -320,10 +330,13 @@ button_random_vessel = Button(text="Random", command=click_random_vessel)
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
 
 
-button_clear.grid(column=0, row=0, columnspan=3)
-button_save.grid(column=3, row=0, columnspan=2)
-radio_append.grid(column=5, row=0)
-radio_replace.grid(column=6, row=0)
+button_clear.grid(column=0, row=0)
+button_save.grid(column=2, row=0, columnspan=2)
+label_filename.grid(column=4, row=0)
+input_filename.grid(column=5, row=0)
+input_filename.insert(0, "output")
+radio_append.grid(column=6, row=0)
+radio_replace.grid(column=7, row=0)
 
 button_details.grid(column=0, row=1, columnspan=1)
 label_gender.grid(column=1, row=1)

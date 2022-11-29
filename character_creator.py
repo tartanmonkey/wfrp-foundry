@@ -455,16 +455,6 @@ class GameCharacter:
 
         return output
 
-    def get_skills_output_legacy(self):
-        output = "\n-----SKILLS----------------\n"
-        index = 0
-        for skill, value in self.skills.items():
-            if index != 0 and index % 3 == 0:
-                output += "\n"
-            output += f"{skill}: {self.get_skill_total(skill)}, " #call to get skill total here
-            index += 1
-        return output
-
     def get_skills_output(self):
         # add combat & magic skills first
         ordered_skills = {key: value for key, value in self.skills.items() if "Melee" in key or "Ranged" in key or "Dodge" in key or "Channelling" in key or "Language (Magick)" in key or "Pray" in key}

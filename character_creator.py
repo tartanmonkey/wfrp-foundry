@@ -532,9 +532,12 @@ class GameCharacter:
         talents = get_random_list_items(race_talents, num_race_talents)
         for talent in base_set:
             talents.append(talent)
+        # now add career talents (hived off to facilitate add_level)
+        return self.add_career_talents(levels_data, talents, self.level, magic_domain)
 
+    def add_career_talents(self, levels_data, talents, level, magic_domain):
         # get one Career Talent/level - data needs prep
-        for i in range(self.level):
+        for i in range(level):
             talents.append(self.get_career_talent(levels_data[i]["Talents"], talents, magic_domain))
         # apply and Talent Attribute bonuses
         for talent in talents:
@@ -642,7 +645,7 @@ class GameCharacter:
         # for magic, my_spells in self.spells.items():
         #     print(f"{magic} : {my_spells}")
 
-    def add_level(self):
+    def add_levels(self):
         print(f"Add level to {self.career}")
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
@@ -688,6 +691,7 @@ class GameCharacter:
                 output += "\n"
             output += f"{self.talents[i]}, "
         return output
+
     def get_spells_output(self):
         output = ""
         if len(self.spells) > 0:

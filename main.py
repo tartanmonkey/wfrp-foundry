@@ -90,10 +90,10 @@ def click_save():
             save_data.write(text)
 
 
-def click_add_level():
+def click_add_levels():
     global character
     if character is not None:
-        character.add_level()
+        character.add_levels()
     else:
         print("No character to add level to")
 
@@ -325,7 +325,7 @@ button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
-button_add_level = Button(text="Add Level", command=click_add_level)
+button_add_level = Button(text="Add Level", command=click_add_levels)
 
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)

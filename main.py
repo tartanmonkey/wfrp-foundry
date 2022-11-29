@@ -70,17 +70,6 @@ def click_random():
     create_character(get_random_career_key(race), get_random_level(), race)
 
 
-def get_race():
-    race = input_race.get()
-    if checked_random_race_state.get() == 1:
-        race = character_creator.get_random_race()
-        #print(f"Got random race: {race}")
-    else:
-        if not is_valid_race_input(race):
-            return "Human"
-    return race
-
-
 def click_save():
     save_to = f"Output/{input_filename.get()}.txt"
     if radio_save.get() == 1:
@@ -101,10 +90,29 @@ def click_save():
             save_data.write(text)
 
 
+def click_add_level():
+    global character
+    if character is not None:
+        character.add_level()
+    else:
+        print("No character to add level to")
+
+
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():
         print(k)
+
+
+def get_race():
+    race = input_race.get()
+    if checked_random_race_state.get() == 1:
+        race = character_creator.get_random_race()
+        #print(f"Got random race: {race}")
+    else:
+        if not is_valid_race_input(race):
+            return "Human"
+    return race
 
 
 def is_valid_race_input(race):
@@ -112,6 +120,7 @@ def is_valid_race_input(race):
         messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
         return False
     return True
+
 
 def is_valid_character_input(career_input, level_input, race):
     if level_input < 1 or level_input > 4:
@@ -316,6 +325,7 @@ button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
+button_add_level = Button(text="Add Level", command=click_add_level)
 
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)
@@ -359,6 +369,7 @@ input_magic.insert(0, "None")
 button_create.grid(column=8, row=2)
 button_random.grid(column=9, row=2)
 checkbutton_random_race.grid(column=10, row=2)
+button_add_level.grid(column=11, row=2)
 
 label_vessel.grid(column=0, row=3)
 input_vessel.grid(column=1, row=3)

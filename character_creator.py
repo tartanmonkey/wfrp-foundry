@@ -355,9 +355,10 @@ class GameCharacter:
     def __init__(self, career_name, level, levels_data, magic_domain, race, details={}):
         self.level = level
         self.career = career_name
+        self.path = {career_name: level}
         self.race = race
         index = level -1
-        self.path = levels_data[index]["Title"]
+        self.title = levels_data[index]["Title"]
         self.status = levels_data[index]["Status"]
         path_data = levels_data[index]
         self.attributes = {
@@ -435,48 +436,7 @@ class GameCharacter:
                 self.attributes[attribute]["advances"] = level_multiplier * 5 + randint(0, 5)
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
 
-    def get_output(self, output_type="ui"):
-        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'])}\n"
-        if output_type == "ui":
-            output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
-            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
-            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
-            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
-        else:
-            output += f"{self.get_title_output()}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
-            output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
-            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
-            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
 
-        output += self.get_skills_output()
-        output += self.get_talents_output()
-        output += get_list_output("trappings", self.trappings)
-        output += self.get_spells_output()
-
-        return output
-
-    def get_skills_output(self):
-        # add combat & magic skills first
-        ordered_skills = {key: value for key, value in self.skills.items() if "Melee" in key or "Ranged" in key or "Dodge" in key or "Channelling" in key or "Language (Magick)" in key or "Pray" in key}
-        for skill, value in self.skills.items():
-            if skill not in ordered_skills:
-                ordered_skills[skill] = value
-        output = "\n-----SKILLS----------------\n"
-        index = 0
-        for skill, value in ordered_skills.items():
-            if index != 0 and index % 3 == 0:
-                output += "\n"
-            output += f"{skill}: {self.get_skill_total(skill)}, " #call to get skill total here
-            index += 1
-        return output
-
-    def get_talents_output(self):
-        output = "\n-----TALENTS---------------\n"
-        for i in range(len(self.talents)):
-            if i != 0 and i % 4 == 0:
-                output += "\n"
-            output += f"{self.talents[i]}, "
-        return output
 
     def get_skill_total(self, skill_name):
         skill_key = extract_key(skill_name)
@@ -682,6 +642,52 @@ class GameCharacter:
         # for magic, my_spells in self.spells.items():
         #     print(f"{magic} : {my_spells}")
 
+    def add_level(self):
+        print(f"Add level to {self.career}")
+# -------------- CHARACTER OUTPUT ----------------------------------------------------------
+
+    def get_output(self, output_type="ui"):
+        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'])}\n"
+        if output_type == "ui":
+            output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
+            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
+        else:
+            output += f"{self.get_title_output()}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
+            output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
+            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
+
+        output += self.get_skills_output()
+        output += self.get_talents_output()
+        output += get_list_output("trappings", self.trappings)
+        output += self.get_spells_output()
+
+        return output
+
+    def get_skills_output(self):
+        # add combat & magic skills first
+        ordered_skills = {key: value for key, value in self.skills.items() if "Melee" in key or "Ranged" in key or "Dodge" in key or "Channelling" in key or "Language (Magick)" in key or "Pray" in key}
+        for skill, value in self.skills.items():
+            if skill not in ordered_skills:
+                ordered_skills[skill] = value
+        output = "\n-----SKILLS----------------\n"
+        index = 0
+        for skill, value in ordered_skills.items():
+            if index != 0 and index % 3 == 0:
+                output += "\n"
+            output += f"{skill}: {self.get_skill_total(skill)}, " #call to get skill total here
+            index += 1
+        return output
+
+    def get_talents_output(self):
+        output = "\n-----TALENTS---------------\n"
+        for i in range(len(self.talents)):
+            if i != 0 and i % 4 == 0:
+                output += "\n"
+            output += f"{self.talents[i]}, "
+        return output
     def get_spells_output(self):
         output = ""
         if len(self.spells) > 0:
@@ -696,7 +702,7 @@ class GameCharacter:
     def get_title_output(self):
         domain = self.get_magic_domain()
         if domain != "None":
-            return f"{self.career} {domain} ({self.level} {self.path}) {self.status} - {self.race}"
-        return f"{self.career} ({self.level} {self.path}) {self.status} - {self.race}"
+            return f"{self.career} {domain} ({self.level} {self.title}) {self.status} - {self.race}"
+        return f"{self.career} ({self.level} {self.title}) {self.status} - {self.race}"
 
 

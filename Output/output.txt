@@ -262,3 +262,32 @@ Sling Bag containing Trade Tools (Artist), 13s,  +
 
 
 
+
+*****************************************
+
+Stevedore: Mariel Seufert
+Description: Stocky, pock-marked.
+Trait: Worrisome
+Motivation: Gluttony
+Ambition: To steal something of value
+Quirk: Utterly and desperately broke
+Dislikes: Tall tales
+
+Stevedore (2 Stevedore) Silver 1 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+44  29  34  39  36  36   28  38  30  28  12
+-----SKILLS----------------
+Melee (Basic): 53, Ranged (Bow): 33, Dodge: 41, 
+Cool: 34, Haggle: 32, Athletics: 41, 
+Endurance: 44, Gossip: 33, Climb: 39, 
+Consume Alcohol: 44, Swim: 39, Intimidate: 36, 
+Perception: 39, Stealth (Urban): 41, Bribery: 28, 
+Gamble: 42, Entertain (Storytelling): 31, 
+-----TALENTS---------------
+Warrior Born, Suave, Savvy, Very Strong, 
+Strong Legs, 
+
+-----TRAPPINGS----------------
+Guild Licence, Leather Jerkin, Pipe and Tobacco, 
+Porter Cap, Boat Hook, Leather Gloves, 
+3s, 

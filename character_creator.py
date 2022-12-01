@@ -379,7 +379,7 @@ class GameCharacter:
         self.magic = {}  # talent key: specific domain
         self.spells = {}  # Domain: spell list
         # talents list
-        self.talents = self.set_talents(levels_data, magic_domain)
+        self.talents = self.set_talents(levels_data, magic_domain, level)
         # self.set_talents(levels_data[index]["Talents"])
         if len(self.magic) > 0:
             self.set_spells()
@@ -516,7 +516,7 @@ class GameCharacter:
                 # otherwise set as usual
                 self.skills[skill] = value
 
-    def set_talents(self, levels_data, magic_domain):
+    def set_talents(self, levels_data, magic_domain, level):
         # look up race for base set
         base_set = race_data[self.race]["base_talents"]
         # get random set based on race
@@ -533,7 +533,7 @@ class GameCharacter:
         for talent in base_set:
             talents.append(talent)
         # now add career talents (hived off to facilitate add_level)
-        return self.add_career_talents(levels_data, talents, self.level, magic_domain)
+        return self.add_career_talents(levels_data, talents, level, magic_domain)
 
     def add_career_talents(self, levels_data, talents, level, magic_domain):
         # get one Career Talent/level - data needs prep
@@ -646,7 +646,9 @@ class GameCharacter:
         #     print(f"{magic} : {my_spells}")
 
     def add_levels(self, career_name, level, levels_data, magic_domain):
+        print(f"Adding... {career_name} level to {self.career}")
         # TODO decide what to do about actual level value
+        self.level = level
         if career_name == self.career:
             # TODO handle actually adding a level to current career - a BIG task!
             messagebox.showinfo(title="Oops!", message=f"You cannot currently add another level of the same Career!")
@@ -659,18 +661,32 @@ class GameCharacter:
         self.status = levels_data[index]["Status"]
         self.set_attributes(path_data)
         self.add_career_skills(levels_data, level)
-        print(f"Add level to {self.career}")
+        self.talents = self.add_career_talents(levels_data, self.talents, level, magic_domain)
+        # TODO handle safety for magic_domain, cannot have 2
+        if len(self.magic) > 0:
+            self.set_spells()
+        # set wounds
+        self.wounds = self.set_wounds()
+        # trappings list
+        self.trappings = []
+        self.set_trappings(levels_data[index]["Trappings"])
+
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, output_type="ui"):
-        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'])}\n"
+        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'])}\n{self.get_title_output()}\n"
+        if len(self.path) > 1:
+            path_output = "Path: "
+            for key, value in self.path.items():
+                path_output += f"{key}: {value}, "
+            output += f"{path_output}\n"
         if output_type == "ui":
-            output += f"{self.get_title_output()}\nWS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += "WS  BS   S    T     I   Agi Dex Int WP Fel W"
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
         else:
-            output += f"{self.get_title_output()}\nWS  BS  S   T   I   Agi Dex Int  WP Fel  W"
+            output += "WS  BS  S   T   I   Agi Dex Int  WP Fel  W"
             output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"

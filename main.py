@@ -91,9 +91,18 @@ def click_save():
 
 
 def click_add_levels():
-    global character
+    global character, career_data
     if character is not None:
-        character.add_levels()
+        career_name = input_career.get()
+        level = int(input_level.get())
+        if is_valid_character_input(career_name, level, character.race):
+            # TODO check here or elsewhere that we are not adding a new magic domain
+            magic_domain = input_magic.get()
+            if is_valid_magic(magic_domain):
+                character.add_levels(career_name, level, career_data[career_name]['level_data'], magic_domain)
+                display_character_stats(character)
+            else:
+                messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
     else:
         print("No character to add level to")
 
@@ -325,7 +334,7 @@ button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
-button_add_level = Button(text="Add Level", command=click_add_levels)
+button_add_level = Button(text="Add Career", command=click_add_levels)
 
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)

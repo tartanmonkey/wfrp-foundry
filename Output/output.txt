@@ -291,3 +291,42 @@ Strong Legs,
 Guild Licence, Leather Jerkin, Pipe and Tobacco, 
 Porter Cap, Boat Hook, Leather Gloves, 
 3s, 
+
+
+
+
+*****************************************
+
+Wizard: Bertram Raveling
+Description: Well dressed, nose ring.
+Trait: Crude
+Motivation: Knowledge
+Ambition: To regain honour
+Quirk: Gifted with recent good luck
+Likes: Jokes
+
+Wizard Life (3 Master) Gold 1 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+48  40  34  27  36  32   27  53  39  32  10
+-----SKILLS----------------
+Melee (Basic): 58, Melee (Polearm): 58, Channelling (Colour): 49, 
+Language (Magick): 63, Dodge: 42, Cool: 46, 
+Language (Wastelander): 64, Charm: 40, Evaluate: 57, 
+Perception: 46, Intuition: 46, Lore (Magic): 63, 
+Gossip: 37, Intimidate: 37, Language (Battle): 57, 
+Animal Care: 36, Lore (Warfare): 56, Ride (Horse): 36, 
+-----TALENTS---------------
+Linguistics, Savvy, Resistance (Threat), Petty Magic, 
+Arcane Magic (Arcane Lore), Menacing, 
+
+-----TRAPPINGS----------------
+Magical License, Grimoire, Apprentice, 
+Light Warhorse, Magical Item, 1GC, 
+
+-----SPELLS---------------
+------  Petty  ------------
+Dart, Twitch, Eavesdrop, Rot, Magic Flame
+------  Arcane  ------------
+Push, Ward
+------  Life  ------------
+Fat of the Land

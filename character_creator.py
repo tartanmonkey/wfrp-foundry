@@ -392,9 +392,6 @@ class GameCharacter:
         # for attribute, value in self.attributes.items():
         #     print(f"{attribute} advances: {value['advances']}")
 
-    def set_talents(self, talent_string):
-        self.talents = talent_string.split(',')
-
     def set_trappings(self, trappings_string):
         self.trappings = trappings_string.split(',')
         self.trappings = [item.strip() for item in self.trappings]
@@ -422,7 +419,6 @@ class GameCharacter:
         else:
             return f"{money}{wealth_data[wealth[0]]['coin']}"
 
-
     def set_details(self, details):
         self.details = details
 
@@ -433,10 +429,13 @@ class GameCharacter:
                 level_multiplier -= 1
                 if level_multiplier < 0:
                     level_multiplier = 0
-                self.attributes[attribute]["advances"] = level_multiplier * 5 + randint(0, 5)
+                # if new value greater than current set advances
+                value = level_multiplier * 5 + randint(0, 5)
+                if value < self.attributes[attribute]["advances"]:
+                    value = self.attributes[attribute]["advances"]
+                    print(f"Not increasing {self.attributes[attribute]} as current value higher than new one")
+                self.attributes[attribute]["advances"] = value
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
-
-
 
     def get_skill_total(self, skill_name):
         skill_key = extract_key(skill_name)
@@ -453,26 +452,27 @@ class GameCharacter:
     def set_skills(self, level_data):
         # add race skills
         race_skills = get_random_list_items(race_data[self.race]["skills"], 4)
-        # TODO replace Any if race_skills contains
+        # replace Any if race_skills contains
         # note in the rules it should actually be 3 at 5 and 3 at 3, instead I'm adding just 4 at 4
         for skill in race_skills:
-            #self.skills[skill] = 4
             self.advance_skill(skill, 4)
         print(f"--- {self.career} - Race Skills: {self.skills} ------------")
-        if self.level == 1:
+        self.add_career_skills(level_data, self.level)
+
+    def add_career_skills(self, level_data, level_num):
+        if level_num == 1:
             skill_list = get_stripped_list(level_data[0]["Skills"])
             for skill in skill_list:
                 self.advance_skill(skill, get_random_skill_value(1))
         else:
-            for i in range(self.level):
+            for i in range(level_num):
                 skill_list = get_stripped_list(level_data[i]["Skills"])
                 for skill in skill_list:
                     if i == 0:
-                        value = (self.level - 1) * 5
+                        value = (level_num - 1) * 5
                     else:
-                        num_rolls = self.level - i
+                        num_rolls = level_num - i
                         value = get_random_skill_value(num_rolls)
-                    # self.skills[skill] = value
                     self.advance_skill(skill, value)
 
     def advance_skill(self, skill, value):
@@ -645,7 +645,20 @@ class GameCharacter:
         # for magic, my_spells in self.spells.items():
         #     print(f"{magic} : {my_spells}")
 
-    def add_levels(self):
+    def add_levels(self, career_name, level, levels_data, magic_domain):
+        # TODO decide what to do about actual level value
+        if career_name == self.career:
+            # TODO handle actually adding a level to current career - a BIG task!
+            messagebox.showinfo(title="Oops!", message=f"You cannot currently add another level of the same Career!")
+            return
+        self.path[career_name] = level
+        self.career = career_name
+        index = level - 1
+        path_data = levels_data[index]
+        self.title = levels_data[index]["Title"]
+        self.status = levels_data[index]["Status"]
+        self.set_attributes(path_data)
+        self.add_career_skills(levels_data, level)
         print(f"Add level to {self.career}")
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 

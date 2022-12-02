@@ -97,6 +97,7 @@ def click_add_levels():
         level = int(input_level.get())
         if is_valid_character_input(career_name, level, character.race):
             # TODO check here or elsewhere that we are not adding a new magic domain
+            # Its not actually possible to check here as problems are likely ony caused when Talents are added
             magic_domain = input_magic.get()
             if is_valid_magic(magic_domain):
                 character.add_levels(career_name, level, career_data[career_name]['level_data'], magic_domain)
@@ -236,7 +237,6 @@ def get_gender():
 def get_random_career_key(race="Human"):
     roll = randint(1, 100)
     # print(f"random: {roll}")
-    # TODO add race then change to value = value['chance'][race]
     for key, value in career_data.items():
         if race in value['chance']:
             chance = value['chance'][race]
@@ -365,7 +365,7 @@ radio_random.grid(column=4, row=1)
 
 label_career.grid(column=0, row=2)
 input_career.grid(column=1, row=2)
-input_career.insert(0, "Soldier")
+# input_career.insert(0, "Soldier")
 label_level.grid(column=2, row=2)
 input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
@@ -398,6 +398,8 @@ init_name_data()
 init_talents_data()
 init_magic_data()
 init_details()
+
+input_career.insert(0, get_random_career_key())
 
 #test_character_data()
 #kwarg_test(1, 10, name="Jojo", gender="male")

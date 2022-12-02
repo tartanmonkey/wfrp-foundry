@@ -648,11 +648,11 @@ class GameCharacter:
     def add_levels(self, career_name, level, levels_data, magic_domain):
         print(f"Adding... {career_name} level to {self.career}")
         # TODO decide what to do about actual level value
-        self.level = level
         if career_name == self.career:
             # TODO handle actually adding a level to current career - a BIG task!
             messagebox.showinfo(title="Oops!", message=f"You cannot currently add another level of the same Career!")
             return
+        self.level = level
         self.path[career_name] = level
         self.career = career_name
         index = level - 1
@@ -662,7 +662,7 @@ class GameCharacter:
         self.set_attributes(path_data)
         self.add_career_skills(levels_data, level)
         self.talents = self.add_career_talents(levels_data, self.talents, level, magic_domain)
-        # TODO handle safety for magic_domain, cannot have 2
+        # TODO handle only adding spells for this new career, otherwise will always add spells!
         if len(self.magic) > 0:
             self.set_spells()
         # set wounds

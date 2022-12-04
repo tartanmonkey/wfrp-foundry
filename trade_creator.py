@@ -149,18 +149,18 @@ def get_vessel_name():
     return name_format
 
 
-def get_origin(race):
+def get_origin(**kwargs):
     # TODO pass in race and use
-    if race != "Human":
-        return race
+    if kwargs["race"] != "Human":
+        return kwargs["race"]
     origin = get_random_chance_entry(origin_data, "chance")["origin"]
     if origin == "[Destination]":
         origin = get_random_chance_entry(destination_data, "chance")["destination"]
     return origin
 
 
-def get_captain_data(key):
-    data = get_random_key_value(key, captain_data)
+def get_captain_data(**kwargs):
+    data = get_random_key_value(kwargs["args"], captain_data)
     print(data)
     if "[" in data and "/" in data:
         choices = get_key_from_string(data, "[", "]")

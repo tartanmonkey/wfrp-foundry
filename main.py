@@ -18,6 +18,11 @@ career_data = {}  # career_name : {chance: tuple, level_data: list}
 character_details = {}
 character = None
 valid_races = []  # set in init_data for checking valid user input
+
+extra_details = {
+    "Origin": {"function": trade_creator.get_origin, "args": ""},
+    "Chat": {"function": trade_creator.get_captain_data, "args": "captain_says"}
+}
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -216,8 +221,8 @@ def create_vessel(vessel_type=""):
 def create_captain(vessel_data):
     global character_details, character
     captain_race = get_race()
-    captain_origin = trade_creator.get_origin(captain_race)
-    captain_says = trade_creator.get_captain_data("captain_says")
+    captain_origin = extra_details["Origin"]["function"](race=captain_race) # trade_creator.get_origin(race=captain_race)
+    captain_says = extra_details["Chat"]["function"](args=extra_details["Chat"]["args"]) # trade_creator.get_captain_data(args="captain_says")
     character_details = create_character_details(get_gender(), captain_race, origin=captain_origin, chat=captain_says)
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])

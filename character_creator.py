@@ -272,7 +272,7 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_character_details(gender, race, **extra_details):
+def create_character_details_LEGACY(gender, race, **extra_details):
     details = {}
     details["Name"] = get_random_name(gender, race)
     details["Description"] = f"{choice(details_data['Description'])}, "
@@ -286,6 +286,23 @@ def create_character_details(gender, race, **extra_details):
     details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
     if "chat" in extra_details:
         details["Chat"] = extra_details["chat"]
+
+    return details
+
+def create_character_details(gender, race, detail_set):
+    details = {}
+    details["Name"] = get_random_name(gender, race)
+    details["Description"] = f"{choice(details_data['Description'])}, "
+    details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
+
+    for key, value in detail_set.items():
+        if key == "Opinion":
+            details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
+        elif value == "":
+            details[key] = choice(details_data[key])
+        else:
+            # TODO double  check if need to format the key text
+            details[key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
 
     return details
 

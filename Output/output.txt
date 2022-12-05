@@ -330,3 +330,36 @@ Dart, Twitch, Eavesdrop, Rot, Magic Flame
 Push, Ward
 ------  Life  ------------
 Fat of the Land
+
+*****************************************
+
+Barge, The White Witch
+Destination: The Abbey of St Olga
+Cargo: Charcoal (180)
+
+--------CAPTAIN----------
+
+Boatman: Maritza Ploetz
+Description: Filthy, long red hair.
+Origin: Kemperbad
+Trait: Gloomy
+Motivation: Change
+Ambition: To avoid an obligation
+Quirk: Surprisingly literate / illiterate
+Dislikes: Jokes
+Chat: Has sick crew or passengers
+
+Boatman (1 Boat-hand) Silver 1 - Human
+WS  BS   S    T     I   Agi Dex Int WP Fel W
+29   31   31  37  25  37    31   23  38  29  12
+-----SKILLS----------------
+Ranged (Bow): 35, Melee (Brawling): 32, Dodge: 38, 
+Evaluate: 27, Cool: 42, Charm: 33, 
+Endurance: 40, Gossip: 32, Row: 33, 
+Sail: 42, Swim: 31, Consume Alcohol: 38, 
+-----TALENTS---------------
+Lightning Reflexes, Coolheaded, Flee!, Strong Back, 
+
+-----TRAPPINGS----------------
+Boat Hook, Leather Jack, Pole, 
+5s, 

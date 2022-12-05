@@ -23,6 +23,11 @@ extra_details = {
     "Origin": {"function": trade_creator.get_origin, "args": ""},
     "Chat": {"function": trade_creator.get_captain_data, "args": "captain_says"}
 }
+
+detail_data_sets = {
+    "Default": ["Trait", "Motivation", "Ambition", "Quirk", "Opinion"],
+    "Captain": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"]
+}
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -48,7 +53,8 @@ def click_details():
     race = input_race.get()
     if not is_valid_race_input(race):
         return
-    character_details = create_character_details(get_gender(), race)
+    # TODO once input for Detail Sets is added uses that
+    character_details = create_character_details(get_gender(), race, get_details_data(race, "Default"))
     label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"])
     pyperclip.copy(label_output["text"])
 
@@ -70,7 +76,8 @@ def click_random():
 
     # get random race here if checkbox set
     race = get_race()
-    character_details = create_character_details(get_gender(), race)
+    # TODO once input for Detail Sets is added uses that
+    character_details = create_character_details(get_gender(), race, get_details_data(race, "Default"))
     print(race)
     create_character(get_random_career_key(race), get_random_level(), race)
 
@@ -221,12 +228,24 @@ def create_vessel(vessel_type=""):
 def create_captain(vessel_data):
     global character_details, character
     captain_race = get_race()
-    captain_origin = extra_details["Origin"]["function"](race=captain_race) # trade_creator.get_origin(race=captain_race)
-    captain_says = extra_details["Chat"]["function"](args=extra_details["Chat"]["args"]) # trade_creator.get_captain_data(args="captain_says")
-    character_details = create_character_details(get_gender(), captain_race, origin=captain_origin, chat=captain_says)
+    character_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
     captain_level = get_random_level(vessel_data["captain_level"])
     captain_career = choice(vessel_data["captain_career"])
     create_character(captain_career, captain_level, captain_race)
+
+
+def get_details_data(race, set_name):
+    details_data = {}
+    if set_name in detail_data_sets:
+        # print(f"detail set {set_name}: {detail_data_sets[set_name]}")
+        for key in detail_data_sets[set_name]:
+            # print(f"key: {key}")
+            if key in extra_details:
+                details_data[key] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
+            else:
+                details_data[key] = ""
+    # print(details_data)
+    return details_data
 
 
 def get_gender():
@@ -267,7 +286,7 @@ def display_character_stats(character):
     pyperclip.copy(character.get_output("save"))
 
 
-def output_trappings_data(data):
+def output_trappings_data(data): # TODO double check if this is still used
     text = ""
     for item, value in data.items():
         text += f"----------- {item} ----------------\n"

@@ -388,3 +388,32 @@ Super Numerate, Animal Affinity, Nimble Fingered, In-fighter,
 -----TRAPPINGS----------------
 Bandages, Knuckledusters, Leather Jack, 
 46d, 
+
+*****************************************
+
+Hedge Witch: Della Christlieb
+Description: Old, boils.
+Trait: Cold
+Motivation: Revenge
+Ambition: To earn affection
+Quirk: Extremely religious
+Dislikes: Clever people
+
+Hedge Witch (1 Apprentice) Brass 1 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+31  35  31  37  33  27   29  33  28  30  14
+-----SKILLS----------------
+Melee (Basic): 35, Language (Magick): 36, Channelling: 31, 
+Leadership: 34, Language (Wastelander): 37, Gossip: 34, 
+Endurance: 39, Intuition: 34, Perception: 38, 
+Lore (Folklore): 33, Lore (Herbs): 38, Outdoor Survival: 35, 
+-----TALENTS---------------
+Flee!, Sharp, Hardy, Petty Magic, 
+
+-----TRAPPINGS----------------
+1d10 Lucky Charms, Quarterstaff, Backpack, 
+10d, 
+
+-----SPELLS---------------
+------  Petty  ------------
+Dart, Bearings, Marsh Lights

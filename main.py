@@ -53,8 +53,7 @@ def click_details():
     race = input_race.get()
     if not is_valid_race_input(race):
         return
-    # TODO once input for Detail Sets is added uses that
-    character_details = create_character_details(get_gender(), race, get_details_data(race, "Default"))
+    character_details = create_character_details(get_gender(), race, get_details_data(race, input_details.get()))
     label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"])
     pyperclip.copy(label_output["text"])
 
@@ -76,8 +75,7 @@ def click_random():
 
     # get random race here if checkbox set
     race = get_race()
-    # TODO once input for Detail Sets is added uses that
-    character_details = create_character_details(get_gender(), race, get_details_data(race, "Default"))
+    character_details = create_character_details(get_gender(), race, get_details_data(race, input_details.get()))
     print(race)
     create_character(get_random_career_key(race), get_random_level(), race)
 

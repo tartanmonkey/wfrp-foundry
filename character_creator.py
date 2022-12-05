@@ -272,23 +272,6 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_character_details_LEGACY(gender, race, **extra_details):
-    details = {}
-    details["Name"] = get_random_name(gender, race)
-    details["Description"] = f"{choice(details_data['Description'])}, "
-    details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
-    if "origin" in extra_details:
-        details["Origin"] = extra_details["origin"]
-    details["Trait"] = choice(details_data["Trait"])
-    details["Motivation"] = choice(details_data["Motivation"])
-    details["Ambition"] = choice(details_data["Ambition"])
-    details["Quirk"] = choice(details_data["Quirk"])
-    details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
-    if "chat" in extra_details:
-        details["Chat"] = extra_details["chat"]
-
-    return details
-
 def create_character_details(gender, race, detail_set):
     details = {}
     details["Name"] = get_random_name(gender, race)

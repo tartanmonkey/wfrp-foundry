@@ -119,6 +119,8 @@ def click_add_levels():
     else:
         print("No character to add level to")
 
+def click_create_group():
+    print("Clicked create group!!!!")
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -325,7 +327,7 @@ def kwarg_test(a, b, **my_data):
 window = Tk()
 window.title("Character Creator")
 window.config(padx=20, pady=20)
-
+# Save & Output
 button_clear = Button(text="Clear", width=15, command=click_clear)
 button_save = Button(text="Save", width=15, command=click_save)
 label_filename = Label(text="Save to: ")
@@ -335,14 +337,18 @@ radio_save.set(1)
 radio_append = Radiobutton(text="Append", value=1, variable=radio_save)
 radio_replace = Radiobutton(text="Replace", value=2, variable=radio_save)
 
-button_details = Button(text="Details", width=15, command=click_details)
+# Details & Sets
+label_details = Label(text="Detail Set:")
+input_details = Entry(width=12)
 label_gender = Label(text="Gender: ")
 radio_gender = IntVar()
 radio_gender.set(3)
 radio_male = Radiobutton(text="Male", value=1, variable=radio_gender)
 radio_female = Radiobutton(text="Female", value=2, variable=radio_gender)
 radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
+button_details = Button(text="Create Details", width=15, command=click_details)
 
+# Career
 label_career = Label(text="Career: ")
 input_career = Entry(width=12)
 label_level = Label(text="Level: ")
@@ -360,6 +366,7 @@ checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_r
 checked_random_race_state.get()
 button_add_level = Button(text="Add Career", command=click_add_levels)
 
+# Vessels
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)
 # checkbox for generate captain here
@@ -370,9 +377,16 @@ checked_captain_state.set(1)
 button_create_vessel = Button(text="Create", command=click_create_vessel)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
+# Groups
+label_group = Label(text="Group:")
+input_group = Entry(width=15)
+button_group = Button(text="Create Group", command=click_create_group)
+
+# Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
 
 
+# Save & Output ----------------------------------------
 button_clear.grid(column=0, row=0)
 button_save.grid(column=2, row=0, columnspan=2)
 label_filename.grid(column=4, row=0)
@@ -381,15 +395,19 @@ input_filename.insert(0, "output")
 radio_append.grid(column=6, row=0)
 radio_replace.grid(column=7, row=0)
 
-button_details.grid(column=0, row=1, columnspan=1)
-label_gender.grid(column=1, row=1)
-radio_male.grid(column=2, row=1)
-radio_female.grid(column=3, row=1)
-radio_random.grid(column=4, row=1)
+# Details & Sets
+label_details.grid(column=0, row=1)
+input_details.grid(column=1, row=1)
+input_details.insert(0, "Default")
+label_gender.grid(column=2, row=1)
+radio_male.grid(column=3, row=1)
+radio_female.grid(column=4, row=1)
+radio_random.grid(column=5, row=1)
+button_details.grid(column=6, row=1, columnspan=1)
 
+# Career
 label_career.grid(column=0, row=2)
 input_career.grid(column=1, row=2)
-# input_career.insert(0, "Soldier")
 label_level.grid(column=2, row=2)
 input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
@@ -404,6 +422,7 @@ button_random.grid(column=9, row=2)
 checkbutton_random_race.grid(column=10, row=2)
 button_add_level.grid(column=11, row=2)
 
+# Vessels
 label_vessel.grid(column=0, row=3)
 input_vessel.grid(column=1, row=3)
 input_vessel.insert(0, "Barge")
@@ -411,7 +430,13 @@ checkbutton_create_captain.grid(column=2, row=3)
 button_create_vessel.grid(column=3, row=3)
 button_random_vessel.grid(column=4, row=3)
 
-label_output.grid(column=0, row=4, columnspan=10)
+#Groups
+label_group.grid(column=0, row=4)
+input_group.grid(column=1, row=4)
+input_group.insert(0, "None")
+button_group.grid(column=2, row=4)
+
+label_output.grid(column=0, row=5, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 

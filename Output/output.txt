@@ -363,3 +363,28 @@ Lightning Reflexes, Coolheaded, Flee!, Strong Back,
 -----TRAPPINGS----------------
 Boat Hook, Leather Jack, Pole, 
 5s, 
+
+*****************************************
+
+Pit Fighter: Leona Almer
+Description: Athletic, hair tied up in a bun.
+Trait: Rude
+Motivation: Gluttony
+Ambition: To uncover a conspiracy
+Quirk: Gossipy and overly informed
+Dislikes: The Watch
+
+Pit Fighter (1 Pugilist) Brass 4 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+38  33  41  33  34  36   33  29  30  33  13
+-----SKILLS----------------
+Ranged (Bow): 37, Melee (Flail): 43, Melee (Brawling): 43, 
+Dodge: 41, Language (Bretonnian): 33, Language (Wastelander): 33, 
+Lore (Reikland): 33, Endurance: 33, Athletics: 37, 
+Cool: 33, Gamble: 33, Intimidate: 44, 
+-----TALENTS---------------
+Super Numerate, Animal Affinity, Nimble Fingered, In-fighter, 
+
+-----TRAPPINGS----------------
+Bandages, Knuckledusters, Leather Jack, 
+46d, 

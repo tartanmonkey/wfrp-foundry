@@ -64,20 +64,18 @@ def click_create():
     level = int(input_level.get())
     race = input_race.get()
     if is_valid_character_input(career_name, level, race):
-        create_character(career_name, level, race)
+        character = create_character(career_name, level, race, input_magic.get(), character_details)
+        if character is not None:
+            display_character_stats(character)
 
 
 def click_random():
-    global character_details
-    # clear magic input to prevent issues
-    input_magic.delete(0, END)
-    input_magic.insert(0, "None")
-
+    global character_details, character
     # get random race here if checkbox set
     race = get_race()
     character_details = create_character_details(get_gender(), race, get_details_data(race, input_details.get()))
-    print(race)
-    create_character(get_random_career_key(race), get_random_level(), race)
+    character = create_character(get_random_career_key(race), get_random_level(), race, "None", character_details)
+    display_character_stats(character)
 
 
 def click_save():
@@ -218,20 +216,16 @@ def create_vessel(vessel_type=""):
     vessel.set_passengers(passengers)
     vessel_details = vessel.get_output()
     if checked_captain_state.get() == 1:
-        create_captain(vessel_data)
+        captain_race = get_race()
+        character_details = create_character_details(get_gender(), captain_race,
+                                                     get_details_data(captain_race, "Captain"))
+        captain_level = get_random_level(vessel_data["captain_level"])
+        captain_career = choice(vessel_data["captain_career"])
+        character = create_character(captain_career, captain_level, captain_race, "None", character_details)
         label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
     else:
         label_output["text"] = vessel_details
     pyperclip.copy(label_output["text"])
-
-
-def create_captain(vessel_data):
-    global character_details, character
-    captain_race = get_race()
-    character_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
-    captain_level = get_random_level(vessel_data["captain_level"])
-    captain_career = choice(vessel_data["captain_career"])
-    create_character(captain_career, captain_level, captain_race)
 
 
 def get_details_data(race, set_name):
@@ -270,14 +264,13 @@ def get_random_career_key(race="Human"):
     messagebox.showinfo(title="Oops!", message=f"Failed to find random character key of race {race}! rolled: {roll}")
 
 
-def create_character(career, level, race):
+def create_character(career, level, race, magic_domain, details):
     global career_data, character
-    magic_domain = input_magic.get()
     if is_valid_magic(magic_domain):
-        character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, character_details)
-        display_character_stats(character)
+        return GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, details)
     else:
         messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
+        return
 
 
 def display_character_stats(character):

@@ -28,6 +28,12 @@ detail_data_sets = {
     "Default": ["Trait", "Motivation", "Ambition", "Quirk", "Opinion"],
     "Captain": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"]
 }
+
+# note members can also have a "magic" key
+# level will randomize if 2 vals not equal, using 2nd as 'highest'
+group_data = {
+    "card game": [{"number": (2, 5), "career": ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"], "level": (1, 2), "details": ["Default", "Captain", "None"]}]
+}
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -115,8 +121,14 @@ def click_add_levels():
     else:
         print("No character to add level to")
 
+
 def click_create_group():
-    print("Clicked create group!!!!")
+    group_type = input_group.get()
+    if group_type in group_data:
+        create_group(group_type)
+    else:
+        messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group type!")
+
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -206,6 +218,34 @@ def init_data():
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
+def create_group(group_type):
+    print(f"Clicked create group: {group_type}")
+    group = []
+    for members in group_data[group_type]:
+        num_members = randint(members["number"][0], members["number"][1])
+        print(f"would create {num_members} group members")
+        # TODO at some point drive race from data rather than hard coded, complicated just due to career chances
+        race = "Human"
+        magic = "None"
+        if "magic" in members:
+            magic = members["magic"]
+        for member in range(num_members):
+            details = create_character_details(get_gender(), race, get_details_data(race, choice(members["details"])))
+            level = members["level"][1]
+            if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
+                level = get_random_level(level)
+            career_key = choice(members["career"])
+            group.append(create_character(career_key, level, race, magic, details))
+    group_text = ""
+    save_text = ""
+    for person in group:
+        group_text += person.get_output() + "\n\n"
+        save_text += person.get_output("save") + "\n\n****************************************************\n"
+
+    label_output["text"] = group_text
+    pyperclip.copy(save_text)
+
+
 def create_vessel(vessel_type=""):
     global character_details, character
     vessel = Vessel(vessel_type)
@@ -223,9 +263,10 @@ def create_vessel(vessel_type=""):
         captain_career = choice(vessel_data["captain_career"])
         character = create_character(captain_career, captain_level, captain_race, "None", character_details)
         label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
+        pyperclip.copy(vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output("save"))
     else:
         label_output["text"] = vessel_details
-    pyperclip.copy(label_output["text"])
+        pyperclip.copy(label_output["text"])
 
 
 def get_details_data(race, set_name):
@@ -234,7 +275,7 @@ def get_details_data(race, set_name):
         # print(f"detail set {set_name}: {detail_data_sets[set_name]}")
         for key in detail_data_sets[set_name]:
             # print(f"key: {key}")
-            if key in extra_details:
+            if key in extra_details:  # extra details contains the instructions on how to create the initial data
                 details_data[key] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
             else:
                 details_data[key] = ""

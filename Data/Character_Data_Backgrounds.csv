@@ -1,0 +1,1001 @@
+Question,Background Type,Detail Type Id,Detail Title,Detail
+Where are you from?,Character Background,11,Childhood Misfortunes,Character was abused as a child
+,,11,,"Orphaned early, raised by distant relatives"
+,,11,,Sickly and weak as a child
+,,11,,Mocked and teased by other children
+,,11,,"Parents had to move a lot, never rooted"
+,,11,,Resents parents and upbringing to this day
+,,11,,Always felt out of place as a child
+,,11,,Mistreated by stepmother or father
+,,11,,As a child regarded as weird by everyone
+,,11,,Resented schooling or similar education
+,,12,"As a child, character was",known as a dreamer
+,,12,,quite bright and was considered for schooling
+,,12,,cold and deliberate
+,,12,,Known for his good manners and politeness
+,,12,,sometimes running away for days
+,,12,,prematurely adult and conscientious
+,,12,,proficient in some sport or art
+,,12,,disobedient and rude to his parents
+,,12,,"a good child: helpful, loving and sweet"
+,,12,,religious and had an early awakened piety
+,,13,"While growing up, character",spent summers with relatives in the countryside
+,,13,,spent winters in a city with friends of his parents
+,,13,,Intermittently worked for a distant relative
+,,13,,was sent to a nearby village during the harvest
+,,13,,always tried to impress a neighbour but failed
+,,13,,often found a reason to visit the next village
+,,13,,ran away and spent the evening in a close-by inn
+,,13,,often hid from mother – sometimes for days
+,,13,,was considered somewhat slow
+,,13,,never felt they really could talk to either parent
+,,14,Family’s roots in community,Recently driven from ancestral home
+,,14,,Has always moved around throughout province
+,,14,,Moved there [1*10] years ago
+,,14,,Lived in community for [1*10] generations
+,,14,,Family recently moved to another province
+,,14,,Entire extended family lives elsewhere
+,,14,,Extended family lives in same community
+,,14,,Parents recently moved back to ancestral home
+,,14,,Parents alternated between two homes
+,,14,,Family never had a steady home
+,,15,Feelings on home community,Feels people there care for each other
+,,15,,Proud of a famous figure or feature
+,,15,,Constantly felt estranged
+,,15,,People back home are insular and bigoted
+,,15,,Something goes on behind the scenes
+,,15,,Always felt the wrong people had authority
+,,15,,The community is hiding a sinister secret
+,,15,,Lately treated as an outsider back home
+,,15,,Family has never felt part of community
+,,15,,Gets a special feeling treading those streets
+,,16,Has traces of the accent of,Averland
+,,16,,Hochland
+,,16,,Middenland
+,,16,,Nordland
+,,16,,Ostermark
+,,16,,Ostland
+,,16,,Reikland
+,,16,,Stirland
+,,16,,Talabecland
+,,16,,Wissenland
+,,17,Once spent [1*10] months in,another province in the Empire
+,,17,,"Bretonnia, visiting distant family"
+,,17,,"Kislev, in the line of work"
+,,17,,"Tillea, to find someone who fled there"
+,,17,,"Border Princes, to hide out for a while"
+,,17,,"Estalia, visiting the temple of Myrmidia"
+,,17,,"Marienburg, working off a debt"
+,,17,,"Nuln, seeking a scholar’s advice"
+,,17,,"Altdorf, to address the Emperor!"
+,,17,,"prison, mental asylum or slavery"
+,,18,Nurtures a lifelong dream to,live in a another country
+,,18,,marry someone “untouchable” due to class
+,,18,,"move to another town, city or province"
+,,18,,live [on the sea/in the mountains]
+,,18,,take up a different profession
+,,18,,buy a certain farm or townhouse
+,,18,,reacquire some family estate or heirloom
+,,18,,"visit friends or relatives that live far, far away"
+,,18,,visit a settlement of [Elves/Dwarfs/Halflings]
+,,18,,say “I’m sorry” to someone he hurt years ago
+,,19,Fond memories of a nearby,Lake
+,,19,,River
+,,19,,Town
+,,19,,Village
+,,19,,Forest
+,,19,,farmstead
+,,19,,Ruin
+,,19,,Field
+,,19,,Temple
+,,19,,Shrine
+,,20,Place,the character has very bad memories of the [19]
+,,20,,was born in the [19]
+,,20,,they used to hide from everyone in [19]
+,,20,,the [19] left an unforgettable impression as it burned
+,,20,,they had his first real experience of death in [19]
+,,20,,they knew the [19] to be haunted
+,,20,,they return to the [19] in dreams
+,,20,,"the [19], where a loved one wanted to be buried"
+,,20,,"the [19], where they were almost killed at [10+1*10] years old"
+,,20,,"the [19], where they had their first brush with love"
+What is your family like?,Family and Heritage,21,Character is very fond of their,mother
+,,21,,Father
+,,21,,grandmother
+,,21,,grandfather
+,,21,,Sister
+,,21,,brother
+,,21,,aunt
+,,21,,Uncle
+,,21,,Niece
+,,21,,Nephew
+,,22,Relative,[21] was killed and eaten by Beastmen
+,,22,,[21] was hunted through the forest by Mutants
+,,22,,[21] was robbed and killed by Outlaws
+,,22,,[21] is rumoured to have had dealings with smugglers
+,,22,,[21] was [raped/beaten] and left for dead
+,,22,,[21] once stumbled upon a Goblin lair
+,,22,,[21] Claimed to have seen a Ghost once
+,,22,,[21] saw all they ever owned burnt by Orcs
+,,22,,[21] once saw a Troll distressingly close to home
+,,22,,[21] spread rumours of Dragons or such
+,,23,Relative,has an ongoing conflict with [21]
+,,23,,[21] who is never talked about in the family
+,,23,,"[21] was considered weak, but surprised everyone"
+,,23,,[21] in the family has an influential position
+,,23,,[21] is an important figure in another town
+,,23,,[21] is quite an accomplished entertainer
+,,23,,particularly wants to impress their [21]
+,,23,,[21] is the true leader in the family
+,,23,,[21] was quite successful in some kind of sport
+,,23,,[21] is [famous/infamous] for their cooking
+,,24,Relative,[21] moved after accusations of witchcraft
+,,24,,mourns death of their [21]
+,,24,,[21] is an Agitator to the dismay of the family
+,,24,,[21] died in the Storm of Chaos
+,,24,,[21] was murdered [1*10] months ago
+,,24,,[21] was punished by a local noble for disobedience
+,,24,,[21] is the black sheep of the family
+,,24,,[21] returned changed from the siege of Middenheim
+,,24,,[21] suffers from some incurable wasting disease
+,,24,,[21] introduced them to their present walk of life
+,,25,Character’s family,originates from another part of the Empire
+,,25,,is often turned to for advice and help
+,,25,,is anonymous in their community
+,,25,,and home sees a lot of visitors and friends
+,,25,,is known for generations of piety
+,,25,,owes a lot of money to various people
+,,25,,is generally well seen in their community
+,,25,,is considered something of an upstart
+,,25,,Suffered a major blow [1*10] years ago
+,,25,,has economically been on the decline of late
+,,26,Heritage & ancestry: character,is ashamed of their ancestry
+,,26,,feels insignificant compared to ancestors
+,,26,,is something of a genealogist
+,,26,,is unduly boastful of their blood-line
+,,26,,mourns their lineage’s greater days
+,,26,,thinks their family deserves a better reputation
+,,26,,has sworn to give own children a better start in life
+,,26,,frequently goes to family cemetery to pay respect
+,,26,,dreams of being knighted
+,,26,,has illicitly adopted some sort of title or heraldry
+,,27,Central relative growing up,Very young when mother died
+,,27,,Always afraid of father
+,,27,,"Never met their father, thinks about him a lot"
+,,27,,Recently learnt who was their real father
+,,27,,Secretly related to local Noble
+,,27,,Often turned to an aunt for advice and guidance
+,,27,,Looked up to and loved an older sibling
+,,27,,Was great friends with a cousin of same age
+,,27,,Family reveres memory of a great grandparent
+,,27,,Family terrorized by a distant relative
+,,28,Character’s opinion of their family,Never talks about their family
+,,28,,Isn’t truthful when talking about family
+,,28,,Favourite son or daughter
+,,28,,Is the black/white sheep of the family
+,,28,,Seems to be fond of a sister or brother
+,,28,,Seems proud of their family and upbringing
+,,28,,Full of stories about various relatives
+,,28,,Always trying to keep in touch with family
+,,28,,Obsessed with birthdays of extended family
+,,28,,Seems to do relatives favours all the time
+,,29,Views on childbirth and rearing,Upbringing is the domain of the father alone
+,,29,,Pregnancy is a holy state
+,,29,,The mother–daughter bond is holy
+,,29,,Children should be educated by Priests of Sigmar
+,,29,,Parents are forever responsible for their children
+,,29,,Begetting heirs is the most important thing in life
+,,29,,The child’s name says a lot about the parents
+,,29,,The Dooming ritual is extremely important
+,,29,,Corporal punishment is a valuable instrument
+,,29,,Children should learn early on how hard life is
+,,30,Family needs character to find,the means to continuously support family
+,,30,,[medicine/cure] for parent (or other relative)
+,,30,,out what happened to a missing sibling
+,,30,,an heirloom stolen [1*10] months ago
+,,30,,father before it’s too late
+,,30,,a close friend of character’s parents
+,,30,,[1*100] gc to pay a debt within [1*10] weeks
+,,30,,a way do a favour to a local potentate
+,,30,,a deed proving the right to something
+,,30,,the means to clear the family name
+What is your social class?,Social Status,31,The emperor must restrain the,Grand County of Averland
+,,31,,Barony of Hochland
+,,31,,Grand Duchy of Middenland
+,,31,,Barony of Nordland
+,,31,,League of Ostermark
+,,31,,Grand Principality of Ostland
+,,31,,Grand County of Stirland
+,,31,,County of Sylvania
+,,31,,Grand Duchy of Talabecland
+,,31,,County of Wissenland
+,,32,Views on existing class system,Your birth shouldn’t decide your life
+,,32,,The nobility exists to help and protect us
+,,32,,Your parents moved up in society
+,,32,,Your parents lost in wealth and influence
+,,32,,The lower classes should keep in their place
+,,32,,The peasantry is the backbone of society
+,,32,,Burghers are the true rulers in the Empire
+,,32,,Guilds and societies need to be checked
+,,32,,Religious cults and orders are too influential
+,,32,,The Empire needs a revolution!
+,,33,The Emperor,has lost too much power to the Electors
+,,33,,should look to the needs of the little people
+,,33,,is a demi-god who should be worshipped
+,,33,,doesn’t care about us normal folks
+,,33,,must unite the Empire against external threats
+,,33,,should be restrained by the Electors
+,,33,,is probably the target of a vast conspiracy
+,,33,,should take steps to ensure his successors
+,,33,,should be replaced with a theocracy
+,,33,,needs to think twice about this griffon thing
+,,34,Particularly distrusts,Physicians
+,,34,,Merchants
+,,34,,Politicians and Agitators
+,,34,,Lawyers and Bureaucrats
+,,34,,Burghers
+,,34,,Beggars and Bone Pickers
+,,34,,"Priests of all kinds (Zealots, Friars)"
+,,34,,"Scholars, Students and Scribes"
+,,34,,Watchmen and Roadwardens
+,,34,,Peasants
+,,35,Particularly loathes a crime,"Arson, especially in villages and towns"
+,,35,,Blackmail and extortion
+,,35,,Embezzlement and fraud
+,,35,,Murder
+,,35,,Rape and other violations of women
+,,35,,Misuse of power and political corruption
+,,35,,"Thievery, pickpockets, burglary, shoplifting"
+,,35,,Treason
+,,35,,Uncalled-for beatings and physical abuse
+,,35,,Worship of the Ruinous Powers
+,,36,Despises the background of,Bourgeois
+,,36,,Mercantile
+,,36,,Military
+,,36,,Rural
+,,36,,Urban
+,,36,,Wanderer
+,,36,,Waterline
+,,36,,Wilderness
+,,36,,"Rural, Wanderer, and Wilderness"
+,,36,,"Bourgeois, Mercantile, and Urban"
+,,37,Opinion on wizards and magic,Once had their life saved by a wizard
+,,37,,Heretics and Chaos cultist–burn them all!
+,,37,,It’s the Hedge magicians one must fear
+,,37,,Only Priests should be allowed to use magic
+,,37,,Colleges of Magic attract the Chaos hordes
+,,37,,They should be sacrificed fighting Chaos
+,,37,,Someone close was burned for witchcraft
+,,37,,All wizards cause dangerous phenomena
+,,37,,You should never look directly at a Wizard
+,,37,,All wizards fear garlic and silver
+,,38,Power in the empire should,be in the hands of the taxpaying burghers
+,,38,,be accorded relative to wealth
+,,38,,emanate from the villages and towns
+,,38,,be a matter for all citizens
+,,38,,lie less in the hands of those with money
+,,38,,be withdrawn from the Church of Sigmar
+,,38,,be collected in the hand of the Emperor
+,,38,,be completely held by the Electors
+,,38,,belong to the major cults
+,,38,,"belong to landowners, they own the Empire"
+,,39,Opinions on marriage,It is the only licit union of man and woman
+,,39,,Thinks marriage is a form of slavery–for all
+,,39,,Finds monogamy unnatural and unrealistic
+,,39,,Hopes to marry well
+,,39,,Has a sweetheart he never dared to approach
+,,39,,Family tells him to marry someone he loathes
+,,39,,Parents worry because he still hasn’t married
+,,39,,Children born out of wedlock are aberrations
+,,39,,Thinks the dowry is the essence of marriage
+,,39,,Loathes this formalization of love
+,,40,Habits & quirks,Constantly picks nose
+,,40,,Should change clothes a bit more often
+,,40,,Worries incessantly about their hair
+,,40,,Continuously scratches arse
+,,40,,Hypochondriac – always thinks they are ill
+,,40,,Has a… peculiar smell
+,,40,,Draws attention due to loud voice
+,,40,,Can't leave scabs alone
+,,40,,Overuses colourful language
+,,40,,Borderline compulsive pedantic
+What did you do before you became an adventurer?,Personal History,41,Has bad memories of a nearby,coaching Inn
+,,41,,Brothel
+,,41,,Tradesman
+,,41,,Garrison
+,,41,,court of law
+,,41,,toll gate
+,,41,,Temple
+,,41,,town Gate
+,,41,,Graveyard
+,,41,,guild house
+,,42,Current physical health,Suffers from haemorrhoids (prefers to stand)
+,,42,,"Some sort of skin disease (rash, itch)"
+,,42,,Recovering from the Galloping Trots
+,,42,,Lice or fleas
+,,42,,Fits of violent coughing
+,,42,,Venereal disease (darn that brothel!)
+,,42,,Almost died of pneumonia [1*10] months ago
+,,42,,Limps due to a stupid accident
+,,42,,Suffers from the mother of all hangovers
+,,42,,Has a wound still needing regular attention
+,,43,Touch of disorder,Blasted Brain
+,,43,,Beast Within
+,,43,,Blasphemous Rage
+,,43,,Desperate & Doomed
+,,43,,Firebug
+,,43,,Heart of Despair
+,,43,,Knives of Memory
+,,43,,Lost Heart
+,,43,,Restless Fingers
+,,43,,Venomous Thoughts
+,,44,Eagerly longs for,Hexensnacht
+,,44,,Year Blessing
+,,44,,Start Growth
+,,44,,First Day of Summer
+,,44,,Sun Still
+,,44,,Geheimnistag
+,,44,,Less Growth
+,,44,,World Still
+,,44,,Own Birthday
+,,44,,Other special day
+,,45,Sleep has recently been,filled with dreams of the end of the world
+,,45,,onset by sad dreams from their childhood
+,,45,,troubled by a face character can’t place
+,,45,,particularly sound and restive
+,,45,,in short supply and character is very tired
+,,45,,full of horrible nightmares
+,,45,,disturbed with visions of their own death
+,,45,,bad due to much tossing and turning
+,,45,,wakeful and restless
+,,45,,haunted by a recurring dream
+,,46,Mental health: recently,suffered a major loss and is grieving
+,,46,,felt harmonic and spiritually refreshed
+,,46,,been moody and disharmonic
+,,46,,been reminded of own mortality
+,,46,,experienced how cruel the world is
+,,46,,felt the attraction of the Ruinous Powers
+,,46,,been melancholic without knowing why
+,,46,,missed family and home so much it hurt
+,,46,,pondered the swift passing of time
+,,46,,suffered from Fear and is still a bit shaky
+,,47,Swore a few days ago to,never have another drink – ever!
+,,47,,stay away from the opposite sex – for now
+,,47,,keep mouth shut and eyes open
+,,47,,choose friends with more care
+,,47,,get even – for the umpteenth time
+,,47,,get back in shape – physically and mentally
+,,47,,one day have more money than that other guy
+,,47,,never again pay in advance – for anything
+,,47,,let family know they are doing alright
+,,47,,somehow make the best of the situation
+,,48,Last employer was a,local noble
+,,48,,friend of the family
+,,48,,Inn-Keeper
+,,48,,Merchant
+,,48,,trade guild
+,,48,,"military body (mercenary unit, army)"
+,,48,,religious order
+,,48,,law enforcement agency (Town Watch etc)
+,,48,,coaching house (Four Seasons Coaches etc)
+,,48,,a criminal: [Smuggler/Outlaw Chief/Racketeer]
+,,49,Previously crossed a pc’s path,because they hold a grudge against the family
+,,49,,because they once hired one of the PC’s friends
+,,49,,as were travel companions [1*10] days ago
+,,49,,when injured in an accident caused by the PC
+,,49,,in the form of a name in a document
+,,49,,during a drinking binge that ended gloriously
+,,49,,many years ago in the character’s childhood
+,,49,,when the PC did them a small favour
+,,49,,although the PC doesn’t remember it at all
+,,49,,but went under another name back then
+,,50,Manifest trait of his career,Form of dress
+,,50,,Some sort of mannerism
+,,50,,Very specialised jargon
+,,50,,Default choice of employer
+,,50,,Outward respect for deity
+,,50,,Strict adherence to professional code
+,,50,,Views on importance of social class
+,,50,,Favoured form of lodging
+,,50,,"Choice of weapon, armour and combat style"
+,,50,,View on magic and wizards
+Why did you become an adventurer?,Personality,51,"Philosophy, morals or attitude",Conceited and judgemental
+,,51,,"Conformist and law-abiding, law equals morals"
+,,51,,Conservative
+,,51,,Liberal and open minded
+,,51,,Rebellious
+,,51,,Righteous
+,,51,,Unorthodox
+,,51,,Dignified
+,,51,,Charitable and generous
+,,51,,"Dreamer, otherwordly"
+,,52,Character’s spirit is said to be,manic
+,,52,,feisty
+,,52,,lively
+,,52,,animated
+,,52,,enthusiastic
+,,52,,forceful
+,,52,,pptimistic
+,,52,,dwindling
+,,52,,pessimistic
+,,52,,dull
+,,53,Character is socially known as,compromising
+,,53,,proud
+,,53,,pmpious
+,,53,,stubborn
+,,53,,inquisitive
+,,53,,humble
+,,53,,confident
+,,53,,irresolute
+,,53,,compassionate
+,,53,,shrewd
+,,54,Eating habits,is a strict vegetarian
+,,54,,has particularly disgusting table manners
+,,54,,doesn’t like eating in public
+,,54,,is very choosy when it comes to drinks
+,,54,,will eat anything without complaint
+,,54,,doesn’t drink alcohol
+,,54,,always complains about his meals
+,,54,,Thinks fruits and veggetables are for sissies!
+,,54,,doesn’t like foreign food
+,,54,,likes his meal hot
+,,55,Default modus operandi,"Deceitful, selfish and scheming"
+,,55,,Merciful and humble
+,,55,,"Honest, trustworthy and upright"
+,,55,,"Mentally unstable and violent, likes using force"
+,,55,,Merciless and uncaring to the point of sadistic
+,,55,,Squeamish - doesn’t like doing the dirty work
+,,55,,Righteous – always lets the end justify the means
+,,55,,Always does things in big style
+,,55,,Puppet master – likes using others like pawns
+,,55,,"If you want something done well, do it yourself"
+,,56,Primary motivation,is exceedingly greedy
+,,56,,is honour bound
+,,56,,will protect his bloodline at all costs
+,,56,,will satisfy his bloodlust no matter what
+,,56,,is driven by ambition to excel in his profession
+,,56,,wants to bring anarchy to the world
+,,56,,is a gambler in all aspects of life
+,,56,,is a stalwart and chauvinistic patriot
+,,56,,is a hopeless romantic and dreamer
+,,56,,lives to have his revenge
+,,57,Character has a soft spot for,furry little animals
+,,57,,toddlers and small children
+,,57,,the opposite sex
+,,57,,artists and musicians
+,,57,,the elderly
+,,57,,"outcasts, beggars and other unfortunate people"
+,,57,,"military veterans, war-wounded amputees"
+,,57,,"Dwarves, and everything about this stout race"
+,,57,,"Elves, and things associated with this fair people"
+,,57,,"Halflings, and things related to this merry race"
+,,58,With opposite sex character is,extremely conservative and conventional
+,,58,,"gracious, courtly and chivalrous"
+,,58,,"flirty, even seductive"
+,,58,,"indifferent, considers gender unimportant"
+,,58,,"uneasy, innocent and inexperienced"
+,,58,,constantly falling in love…
+,,58,,promiscuous to the point of compulsive
+,,58,,romantic and idealistic
+,,58,,"insightful, through seedy books, poems & songs"
+,,58,,completely uninterested
+,,59,Personality flaws,Spendthrift – has never been good with money
+,,59,,Can’t adapt according to social context
+,,59,,Compulsively honest – can’t lie
+,,59,,Outspoken – can’t hold their mouth
+,,59,,"Mysterious and secretive, likes talking in riddles"
+,,59,,Loathes [51] people
+,,59,,Despises [52] people
+,,59,,Detests [53] people
+,,59,,Abhors people who [54]
+,,59,,Dislikes [55] people
+,,60,When drunk gets,emotional and sentimental
+,,60,,aggressive and bullying
+,,60,,disoriented
+,,60,,loud
+,,60,,silent and introspective
+,,60,,boastful and reckless
+,,60,,regretful and brooding
+,,60,,frequent blackouts
+,,60,,"flirty, even abusive"
+,,60,,horrible hangovers next day
+How religious are you?,Religiosity,61,Particularly devoted to,Verena
+,,61,,Ulric
+,,61,,Morr
+,,61,,Myrmidia
+,,61,,Manaan
+,,61,,Sigmar
+,,61,,Ranald
+,,61,,Shallya
+,,61,,Taal
+,,61,,Rhya
+,,62,Religiousness,Pious – adamantly devoted and righteous
+,,62,,Religious – believes in the power of gods
+,,62,,Conformist – trusts in creed rather than faith
+,,62,,Monotheistic – only worships one deity
+,,62,,Worships no deity in particular
+,,62,,Unorthodox – worships in a peculiar fashion
+,,62,,Hypocritical – shows only outward respect
+,,62,,Profane – doesn’t care much for religion
+,,62,,Irreverent – impious of all deities
+,,62,,Heretical – thinks religion is a thing of evil
+,,63,Predominantly prays,before every meal
+,,63,,when waking in the morning
+,,63,,only when protocol calls for it
+,,63,,before going to bed
+,,63,,at regular intervals during the day
+,,63,,during religious festivals and celebrations
+,,63,,when it doesn’t impair his daily life
+,,63,,"before, during and after combat"
+,,63,,when somebody dies
+,,63,,"when alone, thinks religion is a private matter"
+,,64,Fate & superstition,Worries constantly about their dooming
+,,64,,Thinks star sign is key to peoples’ personalities
+,,64,,Has lost their birth coin
+,,64,,Don’t like crossing open water
+,,64,,Black cats are heralds of doom and defeat
+,,64,,Never passes a shrine without an offering
+,,64,,Thinks killing someone you know is bad luck
+,,64,,Seeing a dead person brings ill fortune
+,,64,,A woman brings bad luck during her period
+,,64,,Looking a stranger into eyes brings bad luck
+,,65,Cultist connections,Knows the care-taker of local shrine
+,,65,,Friends with a Priest in nearby temple
+,,65,,Has a childhood friend turned crazed Zealot
+,,65,,Used to be friends with an Initiate
+,,65,,Is quite close with a wandering Friar
+,,65,,Close family member is a Priest
+,,65,,Character once considered becoming an Initiate
+,,65,,Asked an oracle for guidance but got none
+,,65,,Frequently visits the tomb of a saint or cleric
+,,65,,Listens to an unorthodox Priest
+,,66,Recently undertook pilgrimage,to repent for a very real sin
+,,66,,as a cover to do something far less pious
+,,66,,that ended in personal disaster
+,,66,,during which he made a spiritual discovery
+,,66,,hoping to get some peace of mind
+,,66,,to the cathedral of Sigmar in Altdorf
+,,66,,to the temple of Manaan in Marienburg
+,,66,,to the temple of Ulric in Middenheim
+,,66,,to the temple of Myrmidia in Magritta
+,,66,,to the temple of Shallya in Couronne
+,,67,Once suffered contrition,Bagging
+,,67,,Fine
+,,67,,Fast
+,,67,,Whipping
+,,67,,Leeching
+,,67,,Blood Tithe
+,,67,,The Anvil
+,,67,,Pilgrimage
+,,67,,Incarceration
+,,67,,Other
+,,68,Character dislikes cult of,Verena
+,,68,,Ulric
+,,68,,Morr
+,,68,,Myrmidia
+,,68,,Manaan
+,,68,,Sigmar
+,,68,,Ranald
+,,68,,Shallya
+,,68,,Taal & Rhya
+,,68,,minor local deity or aspect of deity
+,,69,Character was once lured by,an aesthetic cult
+,,69,,a blood cult
+,,69,,a corruption cult
+,,69,,a death cult
+,,69,,a pleasure cult
+,,69,,a political cult
+,,69,,a cult of Khorne
+,,69,,a cult of Tzeentch
+,,69,,a cult of Slaanesh
+,,69,,a cult of Nurgle
+,,70,Strictly observes a creed,related to eating or drinking
+,,70,,dictating the roles of men and women
+,,70,,regarding sacrifices and offerings
+,,70,,that concerns a religious holiday
+,,70,,concerning dress
+,,70,,governing the relations with another cult
+,,70,,deciding what is Chaotic and evil
+,,70,,concerning the role of Priests in the cult
+,,70,,stressing the importance of class in worship
+,,70,,dictating the use of violence
+Who are your best friends and worst enemies?,Friends & Enemies,71,Contact in the trade guild of,Merchants
+,,71,,Stevedores
+,,71,,Scriveners
+,,71,,Carpenter
+,,71,,Teamsters
+,,71,,Tanner
+,,71,,Metalworkers
+,,71,,Bookbinders
+,,71,,Builders
+,,71,,Masons
+,,72,Recently befriended a,jittery Messenger from a nearby town
+,,72,,fat and messy but capable Barber-Surgeon
+,,72,,keen and correct Bodyguard
+,,72,,sophisticated but progressive Burgher
+,,72,,Widely-travelled but insular Coachman
+,,72,,ruthless and yet strangely mild Mercenary
+,,72,,Dwarven Miner from the Grey Mountains
+,,72,,"silent, mysterious and aged Outrider"
+,,72,,young and already rather eccentric Scribe
+,,72,,corrupt but benevolent Bailiff
+,,73,Had a good friend who is now,"held captive, charged with theft"
+,,73,,held in loving memory from childhood days
+,,73,,a pile of ashes and charred bones
+,,73,,an outlaw against [his/her] will
+,,73,,a bit of a boss in the streets of a nearby town
+,,73,,the character’s sweetheart
+,,73,,someone important in a town not far away
+,,73,,incarcerated and treated for insanity
+,,73,,training to become an Initiate
+,,73,,on a romantic escapade with character’s sister
+,,74,Has a place of refuge in a,"coaching inn, friends with the inn-keeper"
+,,74,,Temple
+,,74,,deserted or condemned house
+,,74,,Noble’s household where he knows a cook
+,,74,,farmstead owned by a friend of parents
+,,74,,woods outside the town
+,,74,,cottage or cabin hidden in the hills
+,,74,,stable where there is this small crawl space
+,,74,,"brothel, run by someone with a good heart"
+,,74,,town house that belongs to a relative
+,,75,Character’s friendship is,worth little if required to do something
+,,75,,strong if he can rely on his friend in turn
+,,75,,"fleeting, makes new friends and forgets old"
+,,75,,fraught with confusion and preconceptions
+,,75,,"absolute, does anything for his friends"
+,,75,,"lifelong, never forgets a friend"
+,,75,,"unwanted at times, gets overzealous at times"
+,,75,,reserved for those who’ve proven themselves
+,,75,,"hearty, warm and cheerful"
+,,75,,"rather formal, indifferent and dispassionate"
+,,76,Racist when it comes to,"Elves, particularly the wood-dwelling kind"
+,,76,,"Dwarves, especially from outside the Empire"
+,,76,,"Halflings, above all those from the Moot"
+,,76,,Humans from Border Princes
+,,76,,Humans from Bretonnia
+,,76,,Humans from Kislev
+,,76,,Humans from Marienburg
+,,76,,Humans from Norsca
+,,76,,"No one, is racially tolerant"
+,,76,,Everyone different from them
+,,77,Judgmental of people from,Averland (“Inbred hillbillies”)
+,,77,,Sudenland (“No respect for law and order”)
+,,77,,Middenland (“They had it coming”)
+,,77,,Nordland (“Who?”)
+,,77,,Ostermark (“Let the hordes just walk through”)
+,,77,,Ostland (“Ignorant country bumpkins”)
+,,77,,Reikland (“Arrogant and self-important bullies”)
+,,77,,Stirland (“Halfling-loving half-wits”)
+,,77,,Talabecland (“Greedy upstarts”)
+,,77,,Wissenland (“Nuln’s lapdog”)
+,,78,A childhood rival is now,an aging Militiaman
+,,78,,(allegedly) a Grave Robber
+,,78,,a disillusioned Soldier
+,,78,,accused of heinous crimes
+,,78,,leading a small revolt or uprising somewhere
+,,78,,someone to go to for news and gossip
+,,78,,rumoured to be somewhere around here
+,,78,,dying from some incurable disease
+,,78,,a celebrated [entertainer/author/poet]
+,,78,,carefully watched by the authorities
+,,79,Recently made an enemy of a,browbeaten Road Warden
+,,79,,lenient Tax Collector
+,,79,,corrupt Bailiff
+,,79,,humane Jailer who got fired for leniency
+,,79,,drunken Lawyer that used to be sharp
+,,79,,retired Sergeant of the Watch
+,,79,,bossy Guildsman in a local chapter
+,,79,,broke Tradesman
+,,79,,Scribe who works in a public office
+,,79,,Noble who could care less about him
+,,80,Regarding enemies,contempt is scalding hot and very explicit
+,,80,,"hate simmers, but rarely boils"
+,,80,,respectful and courteous
+,,80,,hate shows in the little things
+,,80,,"fearful of his enemies, looking the other way"
+,,80,,quite good-natured; suffers fools gladly
+,,80,,borderline psychopathic; beware of his rage!
+,,80,,compelled to pray to a deity
+,,80,,inclined to avoid things he dislikes
+,,80,,hatred is reserved for battle
+What are your prized possessions?,Peculiar Possessions,81,Foodstuffs,Sack of [2*10] sour apples
+,,81,,[1*10] trail rations
+,,81,,Two spicy sausages
+,,81,,One small keg of rather watery ale
+,,81,,Sandwich (ham & mustard) wrapped in cloth
+,,81,,Large sack of potatoes
+,,81,,Half a bottle of poor quality spirits
+,,81,,Two large loafs of rye bread
+,,81,,Bottle of decent red wine
+,,81,,Large piece of very smelly (but tasty) cheese
+,,82,"Coins, cash & currency",[1*10] gc of foreign coinage
+,,82,,[1*10] counterfeited silver shillings
+,,82,,[1*10] archaic-looking pennies
+,,82,,"Someone owes [2*10] gcs, due in [1*10] weeks"
+,,82,,"Recently won at cards, has an extra [1*10] gc"
+,,82,,Owes a friend or relative [4*10] s
+,,82,,Bar or brothel tab ([1*10] s) to settle next day
+,,82,,Steady income of [2*10] gc/month
+,,82,,"Yesterday, character found [1*10] gc"
+,,82,,"Was robbed [1*10] days ago, lost [1*10] s"
+,,83,Pet,Small but vicious dog
+,,83,,Tame bird that can’t fly
+,,83,,Proud but quite fat tomcat
+,,83,,Impossibly big rat
+,,83,,"Almost deaf, smelly and very old mutt"
+,,83,,Two small birds and ornate cage
+,,83,,Keeps collar or leash as memory of dead dog
+,,83,,“Pet” [cow/sheep/pig/rabbit] back home
+,,83,,Old and sagging pony or horse (poor quality)
+,,83,,"Good saddle, harness and 2 saddlebags"
+,,84,"Deeds, books & documents",Letter of recommendation from former boss
+,,84,,Permit to carry arms in a town where required
+,,84,,Deed of partnership with Tradesman ([1*10] %)
+,,84,,Letter of introduction from home town
+,,84,,"Written invitation to market, festival or fair"
+,,84,,"“Wanted” poster, a few days old"
+,,84,,"[1*10] letters from lover, relative or friend"
+,,84,,Book of Tillean poetry (poor quality-lousy)
+,,84,,Cooking book (“100 Precious Pies”)
+,,84,,Book of Averland history
+,,85,Weapons & armour,A rusty shortsword
+,,85,,Short bow with [1*10] arrows
+,,85,,"Ornate, balanced and sharp (good) dagger"
+,,85,,Worn leather jerkin
+,,85,,Dented pot helmet
+,,85,,Nice (but empty) scabbard for longsword
+,,85,,Warhammer with the insignia of military unit
+,,85,,Old wooden shield with fading coat of arms
+,,85,,Rusty and torn mail shirt (poor quality)
+,,85,,Pistol balls and powder for [1*10] shots
+,,86,Religious symbols and trappings,Religious symbol worth [1*10] s
+,,86,,"Religious symbol worth [1*10] s, but not for preferred deity"
+,,86,,Medallion portraying local saint or hero
+,,86,,Pictogram woven into seem of clothes
+,,86,,Symbol of deity of another pantheon
+,,86,,Beautiful symbol worth [1*10] gc
+,,86,,Treasured religious relic
+,,86,,Neatly folded religious robes
+,,86,,Book of religious tenets (thin and leafed)
+,,86,,Lucky charm
+,,87,Clothing (other than worn),Two good quality shirts wrapped in cloth
+,,87,,Pair of rather nice leather shoes
+,,87,,Nicely clad (considered social status)
+,,87,,Set of torn and blood clothes
+,,87,,"Attire is wrinkled, worn and dirty"
+,,87,,Garments of other career
+,,87,,Old uniform that doesn’t fit character
+,,87,,Warm and sturdy but worn overcoat
+,,87,,Richly embroidered traveller’s mantle
+,,87,,A pair of very smelly but sturdy boots
+,,88,Travel & services,Paid for passage on coach or boat
+,,88,,Has paid for a bath he never had time to take
+,,88,,An artisan is repairing one of his trappings
+,,88,,Some labourers owe him a favour
+,,88,,A Barber-Surgeon owes him a treatment
+,,88,,Has recently befriended a decent Entertainer
+,,88,,Has the trust of a local Merchant’s Servant
+,,88,,[1*10x5]% discount at one skilled Artisan
+,,88,,Knows a cheap dealer in various items
+,,88,,Knows of a Tradesman who is also a Fence
+,,89,Lodgings,has paid for three days in a private room
+,,89,,has paid for [1*10] days in a common room
+,,89,,owns a tiny but cosy hunting cottage
+,,89,,has a small apartment paid for [1*10] weeks
+,,89,,"rents a room in a house, paid for two weeks"
+,,89,,a isolated cottage just outside of town
+,,89,,owns a neglected house [in/near] home town
+,,89,,has lived with relatives for [1*10] weeks
+,,89,,has camped out during the last [1*10] days
+,,89,,frequently gets free beers at favourite inn
+,,90,Miscellaneous trappings,[2*10] yards of strong rope
+,,90,,[1*10] tallow candles
+,,90,,A tarnished copper lantern
+,,90,,[1*10] sheets of paper
+,,90,,"A rather nice, embroidered blanket"
+,,90,,A healing draught
+,,90,,A pair of ornate (good quality) metal flasks
+,,90,,Pewter tankard which is actually an antique
+,,90,,[1*10] matches
+,,90,,3 treated torches
+Who are you loyal to?,Loyalties,91,Is loyal to,each and everyone according to their pay
+,,91,,Himself
+,,91,,their family; blood and ancestry
+,,91,,"their country, a true patriot"
+,,91,,their close friends
+,,91,,influential allies and people of power
+,,91,,the nobility
+,,91,,a foreign power
+,,91,,a [trading/coaching/mining] company
+,,91,,a military
+,,92,Is devoted to the,Grand County of Averland
+,,92,,Barony of Hochland
+,,92,,Grand Duchy of Middenland
+,,92,,Barony of Nordland
+,,92,,League of Ostermark
+,,92,,Grand Principality of Ostland
+,,92,,Grand County of Stirland
+,,92,,County of Sylvania
+,,92,,Grand Duchy of Talabecland
+,,92,,County of Wissenland
+,,93,Loyal to the trade guild of,Merchants
+,,93,,Stevedores
+,,93,,Scriveners
+,,93,,Carpenter
+,,93,,Teamsters
+,,93,,Tanner
+,,93,,Metalworkers
+,,93,,Bookbinders
+,,93,,Builders
+,,93,,Masons
+,,94,Loyal to the local cult of,Verena
+,,94,,Ulric
+,,94,,Morr
+,,94,,Myrmidia
+,,94,,Manaan
+,,94,,Sigmar
+,,94,,Ranald
+,,94,,Shallya
+,,94,,Taa
+,,94,,Rhya
+,,95,Once had their trust broken by a,person they believed a faithful friend
+,,95,,member of their closest family
+,,95,,former employer who never paid
+,,95,,Stranger who promised greatness
+,,95,,Religious authority in whom they confided
+,,95,,Political leader who changed their mind
+,,95,,lover who didn’t feel anything after all
+,,95,,person they had sworn never to trust again
+,,95,,witness who suddenly remembered nothing
+,,95,,"colleague, whom had promised a 50-50 split"
+,,96,Once betrayed,favoured cult
+,,96,,"home province, town or village"
+,,96,,close family
+,,96,,"employer, colleague or business associate"
+,,96,,a good friend
+,,96,,"their love, fiancée or spouse"
+,,96,,their country
+,,96,,someone wanting them to betray someone else
+,,96,,the memory of their ancestors
+,,96,,"himself: plans for the future, wants, wishes"
+,,97,Blackmailed or extorted by,"law agency (Roadwardens, Town Watch)"
+,,97,,a merchant with whom they has illicit business
+,,97,,a prosperous farmer who saw something
+,,97,,a Witch Hunter to look for deviants
+,,97,,a Crime Lord for information
+,,97,,a lowly fellow who saw something they did
+,,97,,a relative or friend using love as leverage
+,,97,,a Priest who knows something about his faith
+,,97,,a Noble who uses the leverage for fun
+,,97,,a foreign power who uses character as spy
+,,98,Leadership is,reluctant
+,,98,,manipulative and scheming
+,,98,,Charismatic
+,,98,,physically brutal
+,,98,,well-liked
+,,98,,Ruthless
+,,98,,"purely based on rank (military, noble, other)"
+,,98,,secretive and indirect
+,,98,,the continuation of character’s parents
+,,98,,Nonexistent (weak indeed)
+,,99,"If betrayed, character likely",plans and plots in order to have their revenge
+,,99,,"attacks right out, verbally and/or physically"
+,,99,,"swallows their anger, which festers for ages"
+,,99,,spares no means to restore their honour
+,,99,,strikes back at betrayer’s family or friends
+,,99,,"breaks down, cursing the unfairness of life"
+,,99,,has a hard time accepting they've been betrayed
+,,99,,accredits all disloyalty to own shortcomings
+,,99,,runs and hides (literarily or figuratively)
+,,99,,cuddles up with mommy or ole’ teddy
+,,100,Fervently disloyal to,[91]
+,,100,,[92]
+,,100,,[93]
+,,100,,[94]
+,,100,,[71]
+,,100,,Those of the same trade (career)
+,,100,,Those of same background
+,,100,,Those of other social standing
+,,100,,People of the same social class
+,,100,,Pretty much everyone…
+Who do you love/hate?,Loves & Hates,101,Exceptional fear of,heights
+,,101,,open spaces
+,,101,,Confined spaces
+,,101,,ghosts and undead (and rumours thereof)
+,,101,,Outlaws (and being robbed)
+,,101,,Failure
+,,101,,lightning and thunderstorms
+,,101,,darkness
+,,101,,"cold, snow & ice"
+,,101,,Cultural and social change
+,,102,Life taught them to avoid,bogs & marshes
+,,102,,burial grounds
+,,102,,Crowded streets and squares
+,,102,,deep forests
+,,102,,lakes and oceans
+,,102,,mountains
+,,102,,plains and vast open spaces
+,,102,,rivers and rapids
+,,102,,the outdoors at night
+,,102,,"underground locations (cellars, mines)"
+,,103,Favourite food,all kinds of fish
+,,103,,juicy steaks
+,,103,,kidney pie
+,,103,,meaty sausages
+,,103,,roast lamb
+,,103,,mushroom stew
+,,103,,fresh salads and fruits
+,,103,,foreign cuisine (in general or one specific)
+,,103,,pretty much anything spicy and hot
+,,103,,never cares about what they eat
+,,104,Favourite entertainment,Juggling and similar jests
+,,104,,A good fist-fight
+,,104,,Public executions & punishments
+,,104,,Card games
+,,104,,A beer or two with the guys
+,,104,,"Going for nature-walks, pick-nicks, camping"
+,,104,,Eating out and eating well
+,,104,,Storytelling
+,,104,,Music (in general or one particular type)
+,,104,,Dancing (in general or one particular style)
+,,105,Favourite time of year or day,"Revels in winter, snow and cold weather"
+,,105,,"Adores first signs of spring (chicks, buds)"
+,,105,,Bit of a hibernator–lives for the summer
+,,105,,"Storms, foods, smells and colours of autumn"
+,,105,,Strangely enticed when Mannslieb is full
+,,105,,"Creature of the night, sleeps late"
+,,105,,Loves mornings–at least when in bed
+,,105,,Worships daylight and basking in the sun
+,,105,,"Evenings, when people come together"
+,,105,,Loves storms and thunder
+,,106,Fascinated by,the mechanics of clocks
+,,106,,the engineering behind bridges and domes
+,,106,,gun powder and gunpowder weapons
+,,106,,"forts, castles and fortifications"
+,,106,,siege machinery
+,,106,,locks all of kinds
+,,106,,"pottery, stoneware and chinaware"
+,,106,,book printing
+,,106,,"painting (one particular theme, origin, painter)"
+,,106,,magic
+,,107,Knows to appreciate the,handiwork of good carpenters
+,,107,,efforts of skilled masons
+,,107,,brains and experience of sharp lawyers
+,,107,,zeal and zest of devoted agitators
+,,107,,piety of fervent priests
+,,107,,precision of capable engineers
+,,107,,"labours of bakers, cooks and brewers"
+,,107,,precise work of illuminators
+,,107,,administrative capabilities of innkeepers
+,,107,,"shows of acrobats, jugglers and fire eaters"
+,,108,Dislikes an institution,Banks and moneylenders
+,,108,,Large merchant houses
+,,108,,Organized worship (religious cults)
+,,108,,Bureaucracy involved in census
+,,108,,Bailiffs and other tax-collectors
+,,108,,Trade guilds
+,,108,,Professional military or mercenary outfits
+,,108,,[Road Wardens/River Wardens/Road & River Wardens]
+,,108,,City watch and sheriffs of larger towns
+,,108,,Colleges of magic
+,,109,Finds inner peace & harmony in,solitude
+,,109,,woods and forests
+,,109,,"rain, soft and warm if possible"
+,,109,,"sunbathing, relies in the sun’s healing effect"
+,,109,,sleeping
+,,109,,"sunsets, that magic marriage of day and night"
+,,109,,drunkenness
+,,109,,"bed, preferably not alone"
+,,109,,taking long walks alone
+,,109,,Meditation
+,,110,Loves someone,they have known their entire life
+,,110,,"for a few weeks, then finds somebody else"
+,,110,,they recently met for one night at an inn
+,,110,,who can’t return love due to religious calling
+,,110,,"Married, but returning their love at great risk"
+,,110,,who they secretly betrothed [1*10] weeks ago
+,,110,,they can’t marry until they has saved [1*10x100] gc
+,,110,,who is already expecting their heir…
+,,110,,who died [1*10] years ago and they can’t let go
+,,110,,who hasn’t got a clue

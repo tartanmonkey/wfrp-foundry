@@ -5,7 +5,7 @@ import character_creator
 import trade_creator
 import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details
+    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, init_backgrounds_data
 from random import randint, choice
 import pyperclip # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -25,14 +25,21 @@ extra_details = {
 }
 
 detail_data_sets = {
-    "Default": ["Trait", "Motivation", "Ambition", "Quirk", "Opinion"],
-    "Captain": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"]
+    "Default": ["Trait", "Ambition", "Opinion"],
+    "Captain": ["Origin", "Trait", "Quirk", "Opinion", "Chat"],
+    "All": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"],
+    "Motivated": ["Trait", "Motivation"],
+    "Quirky": ["Origin", "Trait", "Quirk"]
 }
+
+# career lists by context
+tavern_clientele = ["Lawyer", "Physician", "Scholar", "Agitator", "Artisan", "Townsman", "Servant", "Bailiff", "Hunter", "Merchant", "Miner", "Villager", "Coachman", "Entertainer", "Messenger", "Pedlar", "Huffer", "Boatman", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Racketeer", "Thief", "Protagonist", "Soldier"]
+town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"]
 
 # note members can also have a "magic" key
 # level will randomize if 2 vals not equal, using 2nd as 'highest'
 group_data = {
-    "card game": [{"number": (2, 5), "career": ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"], "level": (1, 2), "details": ["Default", "Captain", "None"]}]
+    "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky"]}]
 }
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
@@ -479,6 +486,7 @@ init_name_data()
 init_talents_data()
 init_magic_data()
 init_details()
+init_backgrounds_data()
 
 input_career.insert(0, get_random_career_key())
 

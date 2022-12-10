@@ -417,3 +417,29 @@ Flee!, Sharp, Hardy, Petty Magic,
 -----SPELLS---------------
 ------  Petty  ------------
 Dart, Bearings, Marsh Lights
+
+*****************************************
+
+Thief: Uta Zahl
+Description: Well built, fidgety.
+Trait: Honest
+Ambition: To make enough money for...
+Likes: Religion
+
+Thief (2 Thief) Brass 3 - Human
+WS  BS  S   T   I   Agi Dex Int  WP Fel  W
+39  31  32  34  39  47   33  32  38  36  12
+-----SKILLS----------------
+Ranged (Bow): 35, Dodge: 52, Evaluate: 37, 
+Animal Care: 36, Cool: 47, Athletics: 52, 
+Endurance: 39, Intuition: 44, Perception: 44, 
+Stealth (Urban): 52, Climb: 37, Sleight of Hand: 38, 
+Pick Lock: 36, Gossip: 41, Lore (Local): 34, 
+Secret Signs (Thief): 33, 
+-----TALENTS---------------
+Luck, Nimble Fingered, Warrior Born, Criminal, 
+Etiquette (Criminals), 
+
+-----TRAPPINGS----------------
+Crowbar, Leather Jerkin, Sack, 
+Trade Tools (Thief), Rope, 44d, 

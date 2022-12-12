@@ -1,15 +1,18 @@
 from tkinter import *
 from tkinter import messagebox
 import json
+
+import backgrounds
 import character_creator
 import trade_creator
 import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, init_backgrounds_data
+    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details
 from random import randint, choice
-import pyperclip # for using the clipboard
+import pyperclip  # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
 from utilities import split_into_lines, get_dictionary_as_string
+from backgrounds import init_backgrounds_data
 
 # ------------------------ VARIABLES ----------------------------
 
@@ -21,7 +24,8 @@ valid_races = []  # set in init_data for checking valid user input
 
 extra_details = {
     "Origin": {"function": trade_creator.get_origin, "args": ""},
-    "Chat": {"function": trade_creator.get_captain_data, "args": "captain_says"}
+    "Chat": {"function": trade_creator.get_captain_data, "args": "captain_says"},
+    "Background": {"function": backgrounds.get_background, "args": ""}
 }
 
 detail_data_sets = {
@@ -29,7 +33,8 @@ detail_data_sets = {
     "Captain": ["Origin", "Trait", "Quirk", "Opinion", "Chat"],
     "All": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"],
     "Motivated": ["Trait", "Motivation"],
-    "Quirky": ["Origin", "Trait", "Quirk"]
+    "Quirky": ["Origin", "Trait", "Quirk"],
+    "Background": ["Background"]  # this is a temp set up for testing, ideally should be 'Verbose' or something 11-12-22
 }
 
 # career lists by context
@@ -486,7 +491,7 @@ init_name_data()
 init_talents_data()
 init_magic_data()
 init_details()
-init_backgrounds_data()
+init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
 
 input_career.insert(0, get_random_career_key())
 

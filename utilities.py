@@ -133,12 +133,15 @@ def get_random_item(string, divisor):
     return choice(items)
 
 
-def get_dictionary_as_string(data, line_length, exclude_keys=[]):
-    """creates a string with each key & value on a new line, will omit to print any keys in exclude_keys"""
+def get_dictionary_as_string(data, line_length, exclude_keys=[], do_not_split=[]):
+    """creates a string with each key & value on a new line, will omit to print any keys in exclude_keys, and won't line split any values which are in do_not_split"""
     text = ""
     for key, value in data.items():
         if key not in exclude_keys:
-            text += f"{key}: {split_into_lines(value, line_length)}\n"
+            if key in do_not_split:
+                text += f"{key}: {value}\n"
+            else:
+                text += f"{key}: {split_into_lines(value, line_length)}\n"
         else:
             text += f"{split_into_lines(value, line_length)}\n"
     return text
@@ -157,6 +160,7 @@ def get_first_word(text, divisor="("):
     """Returns the text before the divisor, removing trailing space"""
     words = text.split(divisor)
     return words[0].strip()
+
 
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):

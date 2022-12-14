@@ -25,7 +25,8 @@ valid_races = []  # set in init_data for checking valid user input
 extra_details = {
     "Origin": {"function": trade_creator.get_origin, "args": ""},
     "Chat": {"function": trade_creator.get_captain_data, "args": "captain_says"},
-    "Background": {"function": backgrounds.get_background, "args": ""}
+    "Background": {"function": backgrounds.get_background, "args": ""},
+    "[Background]short": {"function": backgrounds.get_background, "args": "short"},
 }
 
 detail_data_sets = {
@@ -34,7 +35,8 @@ detail_data_sets = {
     "All": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"],
     "Motivated": ["Trait", "Motivation"],
     "Quirky": ["Origin", "Trait", "Quirk"],
-    "Background": ["Background"]  # this is a temp set up for testing, ideally should be 'Verbose' or something 11-12-22
+    "Background": ["Background"],  # this is a temp set up for testing, ideally should be 'Verbose' or something 11-12-22
+    "Background short": ["[Background]short"]  # as above
 }
 
 # career lists by context
@@ -72,7 +74,7 @@ def click_details():
     if not is_valid_race_input(race):
         return
     character_details = create_character_details(get_gender(), race, get_details_data(race, input_details.get()))
-    label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"])
+    label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
     pyperclip.copy(label_output["text"])
 
 
@@ -288,7 +290,10 @@ def get_details_data(race, set_name):
         for key in detail_data_sets[set_name]:
             # print(f"key: {key}")
             if key in extra_details:  # extra details contains the instructions on how to create the initial data
-                details_data[key] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
+                if "[" in key: # brackets used for having different behaviours for the same key, added for Backgrounds random
+                    details_data[utilities.get_key_from_string(key)] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
+                else:
+                    details_data[key] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
             else:
                 details_data[key] = ""
     # print(details_data)
@@ -442,7 +447,8 @@ radio_replace.grid(column=7, row=0)
 # Details & Sets
 label_details.grid(column=0, row=1)
 input_details.grid(column=1, row=1)
-input_details.insert(0, "Default")
+# input_details.insert(0, "Default")
+input_details.insert(0, "Background")
 label_gender.grid(column=2, row=1)
 radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
@@ -495,6 +501,8 @@ init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-
 
 input_career.insert(0, get_random_career_key())
 
+#backgrounds.test("I have a [21] with [2*10+10] [pennies/warts/problems]")
+#backgrounds.test("I have a [21]")
 #test_character_data()
 #kwarg_test(1, 10, name="Jojo", gender="male")
 #test_random_race_data()

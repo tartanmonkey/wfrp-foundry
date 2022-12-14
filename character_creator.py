@@ -675,7 +675,7 @@ class GameCharacter:
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, output_type="ui"):
-        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'])}\n{self.get_title_output()}\n"
+        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
         if len(self.path) > 1:
             path_output = "Path: "
             for key, value in self.path.items():

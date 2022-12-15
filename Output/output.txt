@@ -443,3 +443,20 @@ Etiquette (Criminals),
 -----TRAPPINGS----------------
 Crowbar, Leather Jerkin, Sack, 
 Trade Tools (Thief), Rope, 44d, 
+
+*****************************************
+
+Unser Routzahn
+Description: Good looking, scarred.
+Background: 
+Place: the character has very bad memories of the Lake
+Relative: Niece was murdered 2 months ago
+The emperor must restrain the: County of Wissenland
+Touch of disorder: Knives of Memory
+Character’s spirit is said to be: pptimistic
+Fate & superstition: Never passes a shrine without an offering
+Judgmental of people from: Ostland (“Ignorant country bumpkins”)
+Foodstuffs: Sandwich (ham & mustard) wrapped in cloth
+Once had their trust broken by a: witness who suddenly remembered nothing
+Favourite entertainment: Juggling and similar jests
+

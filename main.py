@@ -36,7 +36,8 @@ detail_data_sets = {
     "Motivated": ["Trait", "Motivation"],
     "Quirky": ["Origin", "Trait", "Quirk"],
     "Background": ["Background"],  # this is a temp set up for testing, ideally should be 'Verbose' or something 11-12-22
-    "Background short": ["[Background]short"]  # as above
+    "Background short": ["Trait", "[Background]short", "Opinion"],  # as above
+    "None": []
 }
 
 # career lists by context
@@ -73,7 +74,10 @@ def click_details():
     race = input_race.get()
     if not is_valid_race_input(race):
         return
-    character_details = create_character_details(get_gender(), race, get_details_data(race, input_details.get()))
+    detail_set = input_details.get()
+    if checked_random_details_state.get() == 1:
+        detail_set = choice(list(detail_data_sets.keys()))
+    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
     label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
     pyperclip.copy(label_output["text"])
 
@@ -93,7 +97,10 @@ def click_random():
     global character_details, character
     # get random race here if checkbox set
     race = get_race()
-    character_details = create_character_details(get_gender(), race, get_details_data(race, input_details.get()))
+    detail_set = input_details.get()
+    if checked_random_details_state.get() == 1:
+        detail_set = choice(list(detail_data_sets.keys()))
+    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
     character = create_character(get_random_career_key(race), get_random_level(), race, "None", character_details)
     display_character_stats(character)
 
@@ -395,6 +402,9 @@ radio_gender.set(3)
 radio_male = Radiobutton(text="Male", value=1, variable=radio_gender)
 radio_female = Radiobutton(text="Female", value=2, variable=radio_gender)
 radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
+checked_random_details_state = IntVar()
+checkbutton_random_details = Checkbutton(text="Random Details Set?", variable=checked_random_details_state)
+checked_random_details_state.get()
 button_details = Button(text="Create Details", width=15, command=click_details)
 
 # Career
@@ -447,13 +457,14 @@ radio_replace.grid(column=7, row=0)
 # Details & Sets
 label_details.grid(column=0, row=1)
 input_details.grid(column=1, row=1)
-# input_details.insert(0, "Default")
-input_details.insert(0, "Background")
+input_details.insert(0, "Default")
+# input_details.insert(0, "Background")
 label_gender.grid(column=2, row=1)
 radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
 radio_random.grid(column=5, row=1)
-button_details.grid(column=6, row=1, columnspan=1)
+checkbutton_random_details.grid(column=6, row=1)
+button_details.grid(column=7, row=1, columnspan=1)
 
 # Career
 label_career.grid(column=0, row=2)

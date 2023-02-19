@@ -47,7 +47,12 @@ town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant
 # note members can also have a "magic" key
 # level will randomize if 2 vals not equal, using 2nd as 'highest'
 group_data = {
-    "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky"]}]
+    "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky"]}],
+    "river patrol": [
+        {"number": (1, 1), "career": ["Riverwarden"], "level": (3, 3), "details": ["Captain"]},
+        {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky"]},
+        {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky"]}
+    ]
 }
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 

@@ -1,34 +1,55 @@
-Halfling Male,Halfling Female,Halfling Surname,Dwarf Male,Dwarf Female,Dwarf Surname,Elf Forename,High Elf,Wood Elf
-Alasdair (Alan),Anastasia (Anna),Applebag,Bardin,Astrid,Angrund,Aerandir,Brightheart,Auroraworn
-Barnaby (Barny),Gwendolyn (Gwen),Cloverhill,Bronn,Berta,Barruk,Ainares,Clearmind,Birchsand
-Fidelius (Fi),Hyacinth (Cindi),Crumpot,Cranneg,Freda,Cragbrow,Ardagnirhir,"Dreamborn,",Claycaller
-Ignatious (Nat),Lilliana (Lilli),Bumbleberry,Dorbi,Karelia,Dunrakin,Belannaer,Eastwalker,Darkcreeper
-Josias (Jo),Odette (Detta),Dibbly,Drong,Lenka,Flintbeard,Bellepheron,Farsight,Elkrunner
-Lawrence (Larry),Seraphina (Sera),Fatside,Enlag,Thindra,Grimhelm,Calarion,Glorysoul,Fishspeaker
-Montgomery (Monty),Cassandra (Cassi),Firken,Fimbur,Vanyra,Guttrik,Caradryel,Highbringer,Greyleaf
-Oskar,Eleanor (Ella),Fudge,Gomrund,Zylra,Hammerback,Dorenellion,Icecall,Heeljaw
-Phineas (Phin),Frederica (Fred),Furrows,Grindol,Vala,Ironarm,Elrahil,Lightfinder,Mossborn
-Tobias (Toby),Rosie,Greenthistle,Haakon,Olka,Kaznagar,Eltharion,Morningstar,Plumecrest
-Alfred (Alfie),Bella,Honeyheld,Helgar,Gottra,Magrest,Farsoryn,Noonchaser,Runningstream
-Brandon (Bran),Marianna (Anna),Huppernitzle,Kazrik,Ulla,Norgrimling,Finuval,Opaleyes,Starglaive
-Bulgaria (Bull),Salondra (Sally),Kettlebrew,Kurgan,Yanni,Redbeard,Galmarnoc,Pyrehand,Trillsong
-Archiebald (Archie),Philomandra (Fi),Meadowfoot,Lunn,Menni,Silverscar,Gilaeth,Ritewise,Vinehair
-,,Rounderbend,Norgrim,Mendri,Svengeln,Helidain,Stormblade,Wingbreeze
-,,Scrumper,Okri,Zamni,Thunderstone,Imawyth,Towerback,Yewmane
-,,Tippingtree,Rorek,,Varnskan,Irithok,Underfoot,Zephyrhand
-,,Udderbucket,Sigrun,,Yinlinsson,Kheral,Windcall,
-,,Yellowbutter,Skalf,,Anvilfist,Korhil,,
-,,Ashfield,Skalli,,Barleymalt,Lirrian,,
-,,Brambledown,Solveig,,Blackhammer,Lothiarn,,
-,,Brandysnap,Thingrim,,Goatstaff,Minathar,,
-,,Hollyfoot,Thyk,,Greatmallet,Naestra,,
-,,Lostpocket,Ulfar,,Hammerback,Nuirathil,,
-,,Lowhaven,Vragni,,Ironplough,Olora,,
-,,Shortbottom,Yorri,,Oakbarrel,Rethias,,
-,,Rumster,,,Oldpick,Sapherior,,
-,,Skelsider,,,Silverscar,Scarloc,,
-,,Thorncobble,,,Silverstones,Therais,,
-,,Tumbleberry,,,Strongpick,Thoronthol,,
-,,,,,Surehammer,Ullias,,
-,,,,,,Valandil,,
-,,,,,,Valentyr,,
+Halfling Male,Halfling Female,Halfling Surname,Dwarf Male,Dwarf Female,Dwarf Surname,Elf Forename,High Elf,Wood Elf,Goblin
+Alasdair (Alan),Anastasia (Anna),Applebag,Bardin,Astrid,Angrund,Aerandir,Brightheart,Auroraworn,Bozfag
+Barnaby (Barny),Gwendolyn (Gwen),Cloverhill,Bronn,Berta,Barruk,Ainares,Clearmind,Birchsand,Gitsnicker
+Fidelius (Fi),Hyacinth (Cindi),Crumpot,Cranneg,Freda,Cragbrow,Ardagnirhir,"Dreamborn,",Claycaller,Gurg
+Ignatious (Nat),Lilliana (Lilli),Bumbleberry,Dorbi,Karelia,Dunrakin,Belannaer,Eastwalker,Darkcreeper,Gibs
+Josias (Jo),Odette (Detta),Dibbly,Drong,Lenka,Flintbeard,Bellepheron,Farsight,Elkrunner,Flarg
+Lawrence (Larry),Seraphina (Sera),Fatside,Enlag,Thindra,Grimhelm,Calarion,Glorysoul,Fishspeaker,Stanker
+Montgomery (Monty),Cassandra (Cassi),Firken,Fimbur,Vanyra,Guttrik,Caradryel,Highbringer,Greyleaf,Bits
+Oskar,Eleanor (Ella),Fudge,Gomrund,Zylra,Hammerback,Dorenellion,Icecall,Heeljaw,Nagdorok
+Phineas (Phin),Frederica (Fred),Furrows,Grindol,Vala,Ironarm,Elrahil,Lightfinder,Mossborn,Awp
+Tobias (Toby),Rosie,Greenthistle,Haakon,Olka,Kaznagar,Eltharion,Morningstar,Plumecrest,Braco
+Alfred (Alfie),Bella,Honeyheld,Helgar,Gottra,Magrest,Farsoryn,Noonchaser,Runningstream,Cramp
+Brandon (Bran),Marianna (Anna),Huppernitzle,Kazrik,Ulla,Norgrimling,Finuval,Opaleyes,Starglaive,Sneck
+Bulgaria (Bull),Salondra (Sally),Kettlebrew,Kurgan,Yanni,Redbeard,Galmarnoc,Pyrehand,Trillsong,Slorp
+Archiebald (Archie),Philomandra (Fi),Meadowfoot,Lunn,Menni,Silverscar,Gilaeth,Ritewise,Vinehair,Narkle
+,,Rounderbend,Norgrim,Mendri,Svengeln,Helidain,Stormblade,Wingbreeze,Spike
+,,Scrumper,Okri,Zamni,Thunderstone,Imawyth,Towerback,Yewmane,Whee
+,,Tippingtree,Rorek,,Varnskan,Irithok,Underfoot,Zephyrhand,Narlo
+,,Udderbucket,Sigrun,,Yinlinsson,Kheral,Windcall,,Stan
+,,Yellowbutter,Skalf,,Anvilfist,Korhil,,,Wags
+,,Ashfield,Skalli,,Barleymalt,Lirrian,,,Zoggle
+,,Brambledown,Solveig,,Blackhammer,Lothiarn,,,Shriek
+,,Brandysnap,Thingrim,,Goatstaff,Minathar,,,Naxbor
+,,Hollyfoot,Thyk,,Greatmallet,Naestra,,,Gog
+,,Lostpocket,Ulfar,,Hammerback,Nuirathil,,,Fug
+,,Lowhaven,Vragni,,Ironplough,Olora,,,Ognad
+,,Shortbottom,Yorri,,Oakbarrel,Rethias,,,Crusti
+,,Rumster,,,Oldpick,Sapherior,,,Gimby
+,,Skelsider,,,Silverscar,Scarloc,,,Gaw
+,,Thorncobble,,,Silverstones,Therais,,,Gonkle
+,,Tumbleberry,,,Strongpick,Thoronthol,,,Urgle
+,,,,,Surehammer,Ullias,,,Ulp
+,,,,,,Valandil,,,Danky
+,,,,,,Valentyr,,,Nasha
+,,,,,,,,,Slimetrat
+,,,,,,,,,Slagg
+,,,,,,,,,Princess
+,,,,,,,,,Nog
+,,,,,,,,,Swabli
+,,,,,,,,,Potterwang
+,,,,,,,,,Fracken
+,,,,,,,,,Squabble
+,,,,,,,,,Mindlick
+,,,,,,,,,Burble
+,,,,,,,,,Stenky
+,,,,,,,,,Lurp
+,,,,,,,,,Spocky
+,,,,,,,,,Toerag
+,,,,,,,,,Poth
+,,,,,,,,,Bat
+,,,,,,,,,Disky
+,,,,,,,,,Stank
+,,,,,,,,,Noms
+,,,,,,,,,Mots
+,,,,,,,,,Urtz

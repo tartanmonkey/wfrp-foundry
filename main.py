@@ -52,7 +52,8 @@ group_data = {
         {"number": (1, 1), "career": ["Riverwarden"], "level": (3, 3), "details": ["Captain"]},
         {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky"]},
         {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky"]}
-    ]
+    ],
+    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky"]}]
 }
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
@@ -153,7 +154,10 @@ def click_create_group():
     if group_type in group_data:
         create_group(group_type)
     else:
-        messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group type!")
+        valid_groups = ""
+        for k, v in group_data.items():
+            valid_groups += k + ", "
+        messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group, choose from: {valid_groups}")
 
 
 def attribute_test():
@@ -265,8 +269,12 @@ def create_group(group_type):
     group_text = ""
     save_text = ""
     for person in group:
-        group_text += person.get_output() + "\n\n"
-        save_text += person.get_output("save") + "\n\n****************************************************\n"
+        if checked_minimal_stats_state.get() == 0:
+            group_text += person.get_output() + "\n\n"
+            save_text += person.get_output("save") + "\n\n****************************************************\n"
+        else:  # output minimal description
+            group_text += person.get_output("minimal") + "\n"
+            save_text += person.get_output("minimal") + "\n"
 
     label_output["text"] = group_text
     pyperclip.copy(save_text)
@@ -444,7 +452,10 @@ button_random_vessel = Button(text="Random", command=click_random_vessel)
 # Groups
 label_group = Label(text="Group:")
 input_group = Entry(width=15)
+checked_minimal_stats_state = IntVar()
+checkbutton_minimal_stats = Checkbutton(text="Display minimal stats?", variable=checked_minimal_stats_state)
 button_group = Button(text="Create Group", command=click_create_group)
+
 
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
@@ -500,7 +511,8 @@ button_random_vessel.grid(column=4, row=3)
 label_group.grid(column=0, row=4)
 input_group.grid(column=1, row=4)
 input_group.insert(0, "None")
-button_group.grid(column=2, row=4)
+checkbutton_minimal_stats.grid(column=2, row=4)
+button_group.grid(column=3, row=4)
 
 label_output.grid(column=0, row=5, columnspan=10)
 

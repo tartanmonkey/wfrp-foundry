@@ -675,6 +675,10 @@ class GameCharacter:
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, output_type="ui"):
+        if output_type == "minimal":
+            # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
+            return f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
+
         output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
         if len(self.path) > 1:
             path_output = "Path: "

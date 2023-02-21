@@ -32,11 +32,13 @@ extra_details = {
 detail_data_sets = {
     "Default": ["Trait", "Ambition", "Opinion"],
     "Captain": ["Origin", "Trait", "Quirk", "Opinion", "Chat"],
-    "All": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"],
+    "All": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"], #  this is no longer actually All! 21-02-23
     "Motivated": ["Trait", "Motivation"],
     "Quirky": ["Origin", "Trait", "Quirk"],
     "Background": ["Background"],  # this is a temp set up for testing, ideally should be 'Verbose' or something 11-12-22
     "Background short": ["Trait", "[Background]short", "Opinion"],  # as above
+    "Conflict": ["Driven by", "Towards", "Is"],  # inspired by https://playfulvoid.game.blog/2023/02/10/internal-conflicts-in-osr-play/
+    "5e": ["Ideal", "Bond", "Flaw"],  # from https://traversefantasy.blogspot.com/2023/02/d-5es-dialogue-procedure-npc-traits.html
     "None": []
 }
 
@@ -47,13 +49,13 @@ town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant
 # note members can also have a "magic" key
 # level will randomize if 2 vals not equal, using 2nd as 'highest'
 group_data = {
-    "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky"]}],
+    "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "Conflict"]}],
     "river patrol": [
         {"number": (1, 1), "career": ["Riverwarden"], "level": (3, 3), "details": ["Captain"]},
-        {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky"]},
-        {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky"]}
+        {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]},
+        {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky", "5e"]}
     ],
-    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky"]}]
+    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}]
 }
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
@@ -83,6 +85,13 @@ def click_details():
     detail_set = input_details.get()
     if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
+    # TODO now check if detail set is present, print list of possible if not
+    if detail_set not in detail_data_sets:
+        valid_sets = ""
+        for k, v in detail_data_sets.items():
+            valid_sets += k + ", "
+        messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
+        return
     character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
     label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
     pyperclip.copy(label_output["text"])

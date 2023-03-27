@@ -273,9 +273,12 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_character_details(gender, race, detail_set):
+def create_character_details(gender, race, detail_set, wiki_output):
     details = {}
-    details["Name"] = get_random_name(gender, race)
+    if wiki_output:
+        details["Name"] = f"*{get_random_name(gender, race)}*"
+    else:
+        details["Name"] = get_random_name(gender, race)
     details["Description"] = f"{choice(details_data['Description'])}, "
     details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
 
@@ -674,7 +677,7 @@ class GameCharacter:
 
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
-    def get_output(self, output_type="ui"):
+    def get_output(self, wiki_output, output_type="ui"):
         if output_type == "minimal":
             # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
             return f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
@@ -690,6 +693,12 @@ class GameCharacter:
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
+        elif wiki_output:
+            output += "<<|\nWS| BS| S| T| I| Agi| Dex| Int| WP| Fel| W\n"
+            output += f"{self.attributes['WS']['total']}| {self.attributes['BS']['total']}| {self.attributes['S']['total']}| {self.attributes['T']['total']}| "
+            output += f"{self.attributes['I']['total']}| {self.attributes['Agi']['total']}| {self.attributes['Dex']['total']}| {self.attributes['Int']['total']}| "
+            output += f"{self.attributes['WP']['total']}| {self.attributes['Fel']['total']}| {self.wounds}|\n>>"
+
         else:
             output += "WS  BS  S   T   I   Agi Dex Int  WP Fel  W"
             output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"

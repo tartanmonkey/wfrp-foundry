@@ -60,6 +60,24 @@ group_data = {
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
+def click_csv_to_wiki():
+    print("csv_to_wiki")
+    # TODO read in csv data file
+    try:
+        with open("Data/csv_to_wiki_data.csv", mode="r") as data_file:
+            data = data_file.readlines()
+    except FileNotFoundError:
+        print("Missing CSV file!")
+        return
+    # TODO replace commas with "|"
+    wiki_string = "<<|\n"
+    for lines in data:
+        wiki_string += lines.replace(",", " |")
+    wiki_string += "\n>>"
+    # TODO copy to clipboard
+    pyperclip.copy(wiki_string)
+
+
 def click_clear():
     global character_details
     character_details = {}
@@ -92,7 +110,7 @@ def click_details():
             valid_sets += k + ", "
         messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
         return
-    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
+    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
     label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
     pyperclip.copy(label_output["text"])
 
@@ -115,7 +133,7 @@ def click_random():
     detail_set = input_details.get()
     if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
-    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
+    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
     character = create_character(get_random_career_key(race), get_random_level(), race, "None", character_details)
     display_character_stats(character)
 
@@ -269,7 +287,7 @@ def create_group(group_type):
         if "magic" in members:
             magic = members["magic"]
         for member in range(num_members):
-            details = create_character_details(get_gender(), race, get_details_data(race, choice(members["details"])))
+            details = create_character_details(get_gender(), race, get_details_data(race, choice(members["details"])), checked_wiki_output_state.get())
             level = members["level"][1]
             if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
                 level = get_random_level(level)
@@ -279,11 +297,11 @@ def create_group(group_type):
     save_text = ""
     for person in group:
         if checked_minimal_stats_state.get() == 0:
-            group_text += person.get_output() + "\n\n"
-            save_text += person.get_output("save") + "\n\n****************************************************\n"
+            group_text += person.get_output(checked_wiki_output_state.get()) + "\n\n"
+            save_text += person.get_output(checked_wiki_output_state.get(), "save") + "\n\n****************************************************\n"
         else:  # output minimal description
-            group_text += person.get_output("minimal") + "\n"
-            save_text += person.get_output("minimal") + "\n"
+            group_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
+            save_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
 
     label_output["text"] = group_text
     pyperclip.copy(save_text)
@@ -301,12 +319,12 @@ def create_vessel(vessel_type=""):
     if checked_captain_state.get() == 1:
         captain_race = get_race()
         character_details = create_character_details(get_gender(), captain_race,
-                                                     get_details_data(captain_race, "Captain"))
+                                                     get_details_data(captain_race, "Captain"), checked_wiki_output_state.get())
         captain_level = get_random_level(vessel_data["captain_level"])
         captain_career = choice(vessel_data["captain_career"])
         character = create_character(captain_career, captain_level, captain_race, "None", character_details)
-        label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output()
-        pyperclip.copy(vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output("save"))
+        label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(checked_wiki_output_state.get())
+        pyperclip.copy(vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(checked_wiki_output_state.get(), "save"))
     else:
         label_output["text"] = vessel_details
         pyperclip.copy(label_output["text"])
@@ -362,8 +380,8 @@ def create_character(career, level, race, magic_domain, details):
 
 def display_character_stats(character):
     # TODO replace logic with call to simply use character output
-    label_output["text"] = character.get_output()
-    pyperclip.copy(character.get_output("save"))
+    label_output["text"] = character.get_output(checked_wiki_output_state.get())
+    pyperclip.copy(character.get_output(checked_wiki_output_state.get(), "save"))
 
 
 def output_trappings_data(data): # TODO double check if this is still used
@@ -414,6 +432,10 @@ radio_save = IntVar()
 radio_save.set(1)
 radio_append = Radiobutton(text="Append", value=1, variable=radio_save)
 radio_replace = Radiobutton(text="Replace", value=2, variable=radio_save)
+checked_wiki_output_state = IntVar()
+checkbutton_wiki_output = Checkbutton(text="Wiki Output?", variable=checked_wiki_output_state)
+checked_wiki_output_state.get()
+button_csv_to_wiki = Button(text="csv to wiki", width=15, command=click_csv_to_wiki)
 
 # Details & Sets
 label_details = Label(text="Detail Set:")
@@ -478,6 +500,8 @@ input_filename.grid(column=5, row=0)
 input_filename.insert(0, "output")
 radio_append.grid(column=6, row=0)
 radio_replace.grid(column=7, row=0)
+checkbutton_wiki_output.grid(column=8, row=0)
+button_csv_to_wiki.grid(column=11, row=0)
 
 # Details & Sets
 label_details.grid(column=0, row=1)

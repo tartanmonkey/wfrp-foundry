@@ -45,6 +45,8 @@ detail_data_sets = {
 # career lists by context
 tavern_clientele = ["Lawyer", "Physician", "Scholar", "Agitator", "Artisan", "Townsman", "Servant", "Bailiff", "Hunter", "Merchant", "Miner", "Villager", "Coachman", "Entertainer", "Messenger", "Pedlar", "Huffer", "Boatman", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Racketeer", "Thief", "Protagonist", "Soldier"]
 town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"]
+dock_gang = ["Stevedore", "Racketeer", "Protagonist", "Smuggler"]
+guardian_band = ["Servant", "Hunter", "Villager", "Pedlar", "Stevedore", "Bawd", "Outlaw", "Soldier"]
 
 # note members can also have a "magic" key
 # level will randomize if 2 vals not equal, using 2nd as 'highest'
@@ -55,7 +57,24 @@ group_data = {
         {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]},
         {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky", "5e"]}
     ],
-    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}]
+    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}],
+    "dock gang": [
+            {"number": (1, 1), "career": ["Racketeer"], "level": (2, 3), "details": ["Motivated"]},
+            {"number": (2, 3), "career": dock_gang, "level": (2, 2), "details": ["None"]},
+            {"number": (1, 2), "career": dock_gang, "level": (1, 1), "details": ["None"]}
+        ],
+    "pit fight": [
+                {"number": (2, 4), "career": ["Pit Fighter"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]}
+            ],
+    "guardian band": [
+            {"number": (1, 1), "career": ["Agitator", "Priest", "Soldier", "Entertainer"], "level": (2, 3), "details": ["Motivated"]},
+            {"number": (2, 6), "career": guardian_band, "level": (1, 2), "details": ["Default", "None", "Quirky"]}
+        ],
+    "soldier squad": [
+        {"number": (1, 1), "career": ["Soldier"], "level": (2, 3), "details": ["Captain"]},
+        {"number": (3, 5), "career": ["Soldier"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]},
+        {"number": (1, 5), "career": ["Soldier"], "level": (1, 1), "details": ["Default", "None", "Quirky"]}
+    ]
 }
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
@@ -177,7 +196,7 @@ def click_add_levels():
 
 
 def click_create_group():
-    group_type = input_group.get()
+    group_type = input_group.get().lower()
     if group_type in group_data:
         create_group(group_type)
     else:
@@ -434,7 +453,7 @@ radio_append = Radiobutton(text="Append", value=1, variable=radio_save)
 radio_replace = Radiobutton(text="Replace", value=2, variable=radio_save)
 checked_wiki_output_state = IntVar()
 checkbutton_wiki_output = Checkbutton(text="Wiki Output?", variable=checked_wiki_output_state)
-checked_wiki_output_state.get()
+checked_wiki_output_state.set(1)
 button_csv_to_wiki = Button(text="csv to wiki", width=15, command=click_csv_to_wiki)
 
 # Details & Sets

@@ -1,10 +1,6 @@
-Condition,Chance,Cart,Foot,Horse
-Quality Road,60,20,22,48
-Decent Road,50,20,22,48
-Poor Road,40,20,22,42
-Path,30,18,20,40
-Open Terrain*,20,16,18,38
-Difficult Terrain*,0,12,16,20
-Bad Weather,-10/-20,,,
-Injured/Fatigued,-10/-20,,,
-Encumbered,-10/-20,,,
+11. Army,21. Omen,31. Crusaders,41. Ruins,51. Healers,61. Judges
+12. Church,22. Ally,32. Vagrant,42. Knowledge,52. Cult,62. Storm
+13. Ghost,23. Family,33. Rival,43. Cave,53. Guardian,63. Demon
+14. Nobility,24. Wizard,34. Artifact,44. Dream,54. Settlers,64. Court
+15. Otherworldly,25. Guild,35. Messenger,45. Hamlet,55. Monument,65. Theater
+16. Plague,26. Architect,36. Inquisitors,46. Outlaws,56. Food,66. Assassins

@@ -314,14 +314,20 @@ def create_group(group_type):
             group.append(create_character(career_key, level, race, magic, details))
     group_text = ""
     save_text = ""
-    for person in group:
-        if checked_minimal_stats_state.get() == 0:
-            group_text += person.get_output(checked_wiki_output_state.get()) + "\n\n"
-            save_text += person.get_output(checked_wiki_output_state.get(), "save") + "\n\n****************************************************\n"
-        else:  # output minimal description
+    if checked_minimal_stats_state.get() == 1:  # output minimal description
+        for person in group:
             group_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
             save_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
-
+    else:
+        for person in group:
+            # get all descriptions
+            group_text += person.get_output(checked_wiki_output_state.get(), "ignore", 1)
+            save_text += person.get_output(checked_wiki_output_state.get(), "save", 1)
+        for person in group:
+            # get all stats
+            group_text += person.get_output(False, "ui", 2) + "\n"
+            save_text += person.get_output(checked_wiki_output_state.get(),
+                                           "save", 2) + "\n"
     label_output["text"] = group_text
     pyperclip.copy(save_text)
 

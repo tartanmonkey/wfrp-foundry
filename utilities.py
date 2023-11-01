@@ -6,10 +6,19 @@ def get_key_from_string(text, sep_start='[', sep_end=']'):
     """returns the text in a string found between the separators"""
     start = text.index(sep_start) + 1
     end = text.index(sep_end)
+    print(f"start: {start} end: {end}")
     key = ""
     for n in range(start, end):
         key += text[n]
     return key
+
+
+def get_random_list_item(list_items, exclude=None):
+    """Returns a random item from a list, excluding the specified arg """
+    if exclude is None:
+        return choice(list_items)
+    pruned_list = [item for item in list_items if item != exclude]
+    return choice(pruned_list)
 
 
 def get_random_from_keyed_lists(key, dictionary):

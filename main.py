@@ -312,6 +312,15 @@ def create_group(group_type):
                 level = get_random_level(level)
             career_key = choice(members["career"])
             group.append(create_character(career_key, level, race, magic, details))
+    # TODO if Add Relationship ticked add one for each member of group
+    if checked_add_relationships_state.get() == 1:
+        print("would create relationships now")
+        for person in group:
+            # TODO get random person in group who is not me
+            subject = utilities.get_random_list_item(group, person)
+            subject_name = subject.details['Name'].replace('*', '')
+            # TODO add_detail("Relationship", name-of-other-person)
+            person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
     group_text = ""
     save_text = ""
     if checked_minimal_stats_state.get() == 1:  # output minimal description
@@ -510,6 +519,8 @@ label_group = Label(text="Group:")
 input_group = Entry(width=15)
 checked_minimal_stats_state = IntVar()
 checkbutton_minimal_stats = Checkbutton(text="Display minimal stats?", variable=checked_minimal_stats_state)
+checked_add_relationships_state = IntVar()
+checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
 button_group = Button(text="Create Group", command=click_create_group)
 
 
@@ -568,9 +579,10 @@ button_random_vessel.grid(column=4, row=3)
 #Groups
 label_group.grid(column=0, row=4)
 input_group.grid(column=1, row=4)
-input_group.insert(0, "None")
+#input_group.insert(0, "None")
 checkbutton_minimal_stats.grid(column=2, row=4)
-button_group.grid(column=3, row=4)
+checkbutton_add_relationships.grid(column=3, row=4)
+button_group.grid(column=4, row=4)
 
 label_output.grid(column=0, row=5, columnspan=10)
 
@@ -586,6 +598,7 @@ init_details()
 init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
 
 input_career.insert(0, get_random_career_key())
+input_group.insert(0, choice(list(group_data.keys())))
 
 #backgrounds.test("I have a [21] with [2*10+10] [pennies/warts/problems]")
 #backgrounds.test("I have a [21]")

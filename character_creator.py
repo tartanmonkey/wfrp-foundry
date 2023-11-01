@@ -71,6 +71,8 @@ race_data = {
 
 details_data = {}  # a dictionary of lists keyed to detail type, using Column titles exactly as they are in the csv
 
+relationship_types = []
+
 
 def init_details():
     global details_data
@@ -83,7 +85,15 @@ def init_details():
             details_data[col] = [item for item in data[col].tolist() if type(item) == str]
         # for key, value in details_data.items():
         #     print(f"{key}: {value}")
-
+    global relationship_types
+    try:
+        with open("Data/Relationships.txt", "r") as data_file:
+            relationship_data = data_file.readlines()
+            relationship_types = [relationship.strip() for relationship in relationship_data]
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Relationships data!")
+    # for r in relationship_types:
+        # print(r)
 
 def init_magic_data():
     global spells, blessings
@@ -675,6 +685,8 @@ class GameCharacter:
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
 
+    def add_detail(self, key, value):
+        self.details[key] = value
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, wiki_output, output_type="ui", group_stage=0):

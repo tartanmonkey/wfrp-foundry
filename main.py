@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 import json
 
+import pandas
+
 import backgrounds
 import character_creator
 import trade_creator
@@ -76,6 +78,9 @@ group_data = {
         {"number": (1, 5), "career": ["Soldier"], "level": (1, 1), "details": ["Default", "None", "Quirky"]}
     ]
 }
+
+dreams_data = [] # a list of lists
+
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -206,6 +211,10 @@ def click_create_group():
         messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group, choose from: {valid_groups}")
 
 
+def click_create_dreams():
+    create_dreams(int(input_number_dreams.get()))
+
+
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():
@@ -290,9 +299,46 @@ def init_data():
                 level_data = []
                 level_data.insert(entry['Level'] - 1, entry)
                 career_data[entry['Career']] = {'chance': career_chances, 'level_data': level_data}
+    init_dream_data()
+
+
+def init_dream_data():
+    print("Dream Data Init")
+    global dreams_data
+    try:
+        data = pandas.read_csv("Data/Character_Data-Dreams.csv")
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops!", message="Missing Character_Data-Dreams.csv")
+    else:
+        for col in data.columns:
+            dreams = data[col].tolist()
+            dreams.append(col)
+            dreams_data.append(dreams)
+        # for dreams in dreams_data:
+        #     for dream in dreams:
+        #         print(dream)
 
 # -------------------------- FUNCTIONALITY --------------------------------------
 
+
+def create_dreams(num_dreams):
+    dream_text = ""
+    for n in range(num_dreams):
+        print(f"dream {n}")
+        dream_text += (utilities.get_random_list_item(utilities.get_random_list_item(dreams_data))) + "\n"
+        dream_index = (randint(1, len(dreams_data))) -1
+        dream_text += choice(dreams_data[dream_index]) + "\n"
+        # TODO should add this as a variable somewhere, essentially its hard coded that there will be between 2 to 5 elements in a dream
+        num_tries = 3
+        while num_tries > 0:
+            num_tries -= 1
+            dream_index = utilities.get_next_number(dream_index, len(dreams_data) -1)
+            if utilities.roll_under(50):
+                dream_text += choice(dreams_data[dream_index]) + "\n"
+        dream_text += "\n"
+    print(dream_text)
+    label_output["text"] = dream_text
+    pyperclip.copy(dream_text)
 
 def create_group(group_type):
     print(f"Clicked create group: {group_type}")
@@ -523,6 +569,11 @@ checked_add_relationships_state = IntVar()
 checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
 button_group = Button(text="Create Group", command=click_create_group)
 
+# Dreams
+
+label_dreams = Label(text="Dreams (number): ")
+input_number_dreams = Entry(width=3)
+button_dreams = Button(text="Create Dreams", command=click_create_dreams)
 
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
@@ -577,6 +628,7 @@ button_create_vessel.grid(column=3, row=3)
 button_random_vessel.grid(column=4, row=3)
 
 #Groups
+
 label_group.grid(column=0, row=4)
 input_group.grid(column=1, row=4)
 #input_group.insert(0, "None")
@@ -584,7 +636,14 @@ checkbutton_minimal_stats.grid(column=2, row=4)
 checkbutton_add_relationships.grid(column=3, row=4)
 button_group.grid(column=4, row=4)
 
-label_output.grid(column=0, row=5, columnspan=10)
+#Dreams
+
+label_dreams.grid(column=0, row=5)
+input_number_dreams.grid(column=1, row=5)
+input_number_dreams.insert(0, "5")
+button_dreams.grid(column=2, row=5)
+
+label_output.grid(column=0, row=6, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 

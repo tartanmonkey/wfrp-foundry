@@ -164,6 +164,12 @@ def cap_number(num, num_min, num_max):
         return num_max
     return num
 
+def get_next_number(num, num_max):
+    """Increments num and returns, returns 0 if greater than num_max"""
+    new_num = num + 1
+    if new_num > num_max:
+        return 0
+    return new_num
 
 def get_first_word(text, divisor="("):
     """Returns the text before the divisor, removing trailing space"""

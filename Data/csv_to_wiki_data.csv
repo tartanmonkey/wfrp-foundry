@@ -1,6 +1,4 @@
-11. Army,21. Omen,31. Crusaders,41. Ruins,51. Healers,61. Judges
-12. Church,22. Ally,32. Vagrant,42. Knowledge,52. Cult,62. Storm
-13. Ghost,23. Family,33. Rival,43. Cave,53. Guardian,63. Demon
-14. Nobility,24. Wizard,34. Artifact,44. Dream,54. Settlers,64. Court
-15. Otherworldly,25. Guild,35. Messenger,45. Hamlet,55. Monument,65. Theater
-16. Plague,26. Architect,36. Inquisitors,46. Outlaws,56. Food,66. Assassins
+SL,Effect
+4,The hunters find the Beast within an hour and can Surprise it sneaking up under the cover of its pained cries.
+0 - 3,It takes a few hours to find the Beast. If night -10 penalty to sight-based tests due to the heavy cool mists of the twilight forest.
+-1,The Beast finds the hunters - It Surprises its foes on the first round of combat.

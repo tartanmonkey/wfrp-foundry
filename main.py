@@ -46,6 +46,7 @@ detail_data_sets = {
 
 # career lists by context
 tavern_clientele = ["Lawyer", "Physician", "Scholar", "Agitator", "Artisan", "Townsman", "Servant", "Bailiff", "Hunter", "Merchant", "Miner", "Villager", "Coachman", "Entertainer", "Messenger", "Pedlar", "Huffer", "Boatman", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Racketeer", "Thief", "Protagonist", "Soldier"]
+tavern_seedy_clientele = ["Agitator", "Artisan", "Townsman", "Servant", "Coachman", "Entertainer", "Messenger", "Pedlar", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Racketeer", "Thief", "Protagonist", "Watchman", "Beggar", "Rat Catcher", "Grave Robber", "Outlaw", "Pit Fighter"]
 town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"]
 dock_gang = ["Stevedore", "Racketeer", "Protagonist", "Smuggler"]
 guardian_band = ["Servant", "Hunter", "Villager", "Pedlar", "Stevedore", "Bawd", "Outlaw", "Soldier"]
@@ -60,6 +61,7 @@ group_data = {
         {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky", "5e"]}
     ],
     "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}],
+    "seedy tavern": [{"number": (5, 12), "career": tavern_seedy_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}],
     "dock gang": [
             {"number": (1, 1), "career": ["Racketeer"], "level": (2, 3), "details": ["Motivated"]},
             {"number": (2, 3), "career": dock_gang, "level": (2, 2), "details": ["None"]},
@@ -593,7 +595,7 @@ button_csv_to_wiki.grid(column=11, row=0)
 # Details & Sets
 label_details.grid(column=0, row=1)
 input_details.grid(column=1, row=1)
-input_details.insert(0, "Default")
+input_details.insert(0, "Motivated")
 # input_details.insert(0, "Background")
 label_gender.grid(column=2, row=1)
 radio_male.grid(column=3, row=1)

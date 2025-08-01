@@ -283,10 +283,18 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
+def create_one_line_details(gender, race):
+    # function assumes we want wiki output and will handle detail set type itself
+    details = f"*{get_random_name(gender, race)}* {choice(details_data['Description'])}, {get_extra_detail(gender, choice(details_data['Detail']))}"
+    return details
+
+
 def create_character_details(gender, race, detail_set, wiki_output):
     details = {}
     if wiki_output:
         details["Name"] = f"*{get_random_name(gender, race)}*"
+        # TODO potentially catch Cairn here and return it once generated?
+        # TODO Actually not the way to do it - see main 149
     else:
         details["Name"] = get_random_name(gender, race)
     details["Description"] = f"{choice(details_data['Description'])}, "
@@ -297,11 +305,14 @@ def create_character_details(gender, race, detail_set, wiki_output):
             details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
         elif value == "":
             details[key] = choice(details_data[key])
+        elif key == "Cairn":
+            print("Got Cairn Details!")
         else:
             # TODO double  check if need to format the key text
             details[key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
 
     return details
+
 
 def create_attribute(attribute, race="Human"):
     roll_1 = randint(1, 10)

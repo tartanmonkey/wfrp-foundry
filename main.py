@@ -9,7 +9,7 @@ import character_creator
 import trade_creator
 import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details
+    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details
 from random import randint, choice
 import pyperclip  # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -41,6 +41,9 @@ detail_data_sets = {
     "Background short": ["Trait", "[Background]short", "Opinion"],  # as above
     "Conflict": ["Driven by", "Towards", "Is"],  # inspired by https://playfulvoid.game.blog/2023/02/10/internal-conflicts-in-osr-play/
     "5e": ["Ideal", "Bond", "Flaw"],  # from https://traversefantasy.blogspot.com/2023/02/d-5es-dialogue-procedure-npc-traits.html
+    "Basic": ["Personality"],
+    "Cairn": ["CairnBackground", "CairnQuirk", "CairnGoal", "CairnVirtue", "CairnVice"], # from https://cairnrpg.com/second-edition/wardens-guide/npc-tables/
+    "CairnShort": ["CairnQuirk", "CairnGoal", "CairnVirtue", "CairnVice"],
     "None": []
 }
 
@@ -57,28 +60,35 @@ group_data = {
     "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "Conflict"]}],
     "river patrol": [
         {"number": (1, 1), "career": ["Riverwarden"], "level": (3, 3), "details": ["Captain"]},
-        {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]},
-        {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky", "5e"]}
+        {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]},
+        {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky", "5e", "Basic"]}
     ],
-    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}],
-    "seedy tavern": [{"number": (5, 12), "career": tavern_seedy_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e"]}],
+    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e", "Basic"]}],
+    "seedy tavern": [{"number": (5, 12), "career": tavern_seedy_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e", "Basic"]}],
     "dock gang": [
-            {"number": (1, 1), "career": ["Racketeer"], "level": (2, 3), "details": ["Motivated"]},
-            {"number": (2, 3), "career": dock_gang, "level": (2, 2), "details": ["None"]},
+            {"number": (1, 1), "career": ["Racketeer"], "level": (2, 3), "details": ["Motivated", "Basic"]},
+            {"number": (2, 3), "career": dock_gang, "level": (2, 2), "details": ["None", "Basic"]},
             {"number": (1, 2), "career": dock_gang, "level": (1, 1), "details": ["None"]}
         ],
     "pit fight": [
-                {"number": (2, 4), "career": ["Pit Fighter"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]}
+                {"number": (2, 4), "career": ["Pit Fighter"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
             ],
     "guardian band": [
-            {"number": (1, 1), "career": ["Agitator", "Priest", "Soldier", "Entertainer"], "level": (2, 3), "details": ["Motivated"]},
-            {"number": (2, 6), "career": guardian_band, "level": (1, 2), "details": ["Default", "None", "Quirky"]}
+            {"number": (1, 1), "career": ["Agitator", "Priest", "Soldier", "Entertainer"], "level": (2, 3), "details": ["Motivated", "Basic"]},
+            {"number": (2, 6), "career": guardian_band, "level": (1, 2), "details": ["Default", "None", "Quirky", "Basic"]}
         ],
     "soldier squad": [
         {"number": (1, 1), "career": ["Soldier"], "level": (2, 3), "details": ["Captain"]},
-        {"number": (3, 5), "career": ["Soldier"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict"]},
-        {"number": (1, 5), "career": ["Soldier"], "level": (1, 1), "details": ["Default", "None", "Quirky"]}
-    ]
+        {"number": (3, 5), "career": ["Soldier"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]},
+        {"number": (1, 5), "career": ["Soldier"], "level": (1, 1), "details": ["Default", "None", "Quirky", "Basic"]}
+    ],
+    "caravan guards": [
+            {"number": (1, 1), "career": ["Guard"], "level": (2, 3), "details": ["Captain"]},
+            {"number": (3, 3), "career": ["Guard"], "level": (1, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]},
+        ],
+    "fist fight": [
+                    {"number": (2, 5), "career": ["Pit Fighter", "Villager", "Stevedore", "Soldier", "Protagonist"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
+                ]
 }
 
 dreams_data = [] # a list of lists
@@ -129,15 +139,19 @@ def click_details():
     detail_set = input_details.get()
     if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
-    # TODO now check if detail set is present, print list of possible if not
+    # now check if detail set is present, print list of possible if not
     if detail_set not in detail_data_sets:
         valid_sets = ""
         for k, v in detail_data_sets.items():
             valid_sets += k + ", "
         messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
         return
-    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
-    label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
+    if checked_one_line_details_state.get():
+        label_output["text"] = create_one_line_details(get_gender(), race)
+    else:
+        character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
+        #label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
+        label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name", "CairnBackground", "CairnQuirk", "CairnGoal", "CairnVirtue", "CairnVice"], ['Background'], ['CairnBackground', 'CairnQuirk', 'CairnGoal', 'CairnVirtue'])
     pyperclip.copy(label_output["text"])
 
 
@@ -360,14 +374,14 @@ def create_group(group_type):
                 level = get_random_level(level)
             career_key = choice(members["career"])
             group.append(create_character(career_key, level, race, magic, details))
-    # TODO if Add Relationship ticked add one for each member of group
+    # if Add Relationship ticked add one for each member of group
     if checked_add_relationships_state.get() == 1:
         print("would create relationships now")
         for person in group:
-            # TODO get random person in group who is not me
+            # get random person in group who is not me
             subject = utilities.get_random_list_item(group, person)
             subject_name = subject.details['Name'].replace('*', '')
-            # TODO add_detail("Relationship", name-of-other-person)
+            # add_detail("Relationship", name-of-other-person)
             person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
     group_text = ""
     save_text = ""
@@ -531,6 +545,9 @@ radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
 checked_random_details_state = IntVar()
 checkbutton_random_details = Checkbutton(text="Random Details Set?", variable=checked_random_details_state)
 checked_random_details_state.get()
+checked_one_line_details_state = IntVar()
+checkbutton_one_line = Checkbutton(text="One line only?", variable=checked_one_line_details_state)
+checked_one_line_details_state.get()
 button_details = Button(text="Create Details", width=15, command=click_details)
 
 # Career
@@ -602,7 +619,8 @@ radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
 radio_random.grid(column=5, row=1)
 checkbutton_random_details.grid(column=6, row=1)
-button_details.grid(column=7, row=1, columnspan=1)
+checkbutton_one_line.grid(column=7, row=1)
+button_details.grid(column=8, row=1, columnspan=1)
 
 # Career
 label_career.grid(column=0, row=2)

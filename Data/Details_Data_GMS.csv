@@ -1,50 +1,101 @@
-Trait,Motivation,Ambition,Quirk,Description,Detail,Opinions,Driven by,Towards,Is,Ideal,Bond,Flaw
-Arrogant,Authority,To avoid an obligation,A late bloomer of magical talent,Fat,braided hair,Dwarfs,Desire,Home,Devoted,Beauty,Dedicated to fulfilling a personal life goal,Forbidden love or susceptibility to romance
-Bawdy,Change,To be immortalised,Addicted to illicit substances or acts,Thin,pony tail,Halflings,Need,God,Antagonistic,Charity,Protective of close family members,Enjoys decadent pleasures
-Brash,Charity,To become someone else,Chronically unlucky,Stocky,pock-marked,Men,Duty,Family,Dependent,Greater good,Protective of colleagues or compatriots,Arrogance
-Calculating,Control,To convince someone to take the fall,Deeply in debt to the wrong people,Lanky,scarred,Women,Fear,Friend,Unaware,Life,"Loyal to a benefactor, patron, or employer",Envies another creature's possessions or station
-Cavalier,Envy,To cure themselves or a loved one,Erring on the side of heresy,Young,tattooed,Red heads,Obligation,Enemy faction,Treacherous,Respect,Captivated by a romantic interest,Overpowering greed
-Charming,Fame,To do the work of the Gods,Extremely religious,Old,glasses,Blondes,,Friendly faction,Protective,Self-sacrifice,Drawn to a special place,Prone to rage
-Cold,Freedom,To earn affection,Gifted with recent good luck,Weathered,bruised,Poor people,,Sibling,Authoritative,Domination,Protective of a sentimental keepsake,Has a powerful enemy
-Confident,Glory,To earn recognition,Gossipy and overly informed,Hulking,curly hair,Rich people,,Magic,Dedicated,Greed,Protective of a valuable possession,Specific phobia
-Crude,Gluttony,To explore a mystery,Has a hidden talent,Short,nose ring,Wardens,,Riches,Coercive,Might,Out for revenge,Shameful or scandalous history
-Dishonest,Happiness,To gain a promotion,Has a terrible short-term memory,Wide,bald/long red hair,Witch Hunters,,Body,Aggressive,Pain,,Secret crime or misdeed
-Fierce,Infamy,To help a family member or friend,Hides a minor mutation,Grizzled,shaved head,Priests,,,,Retribution,,Possession of forbidden lore
-Gloomy,Justice,To hide from a shameful past,Holds to revolutionary ideals,Flamboyant,beard/hair tied up in a bun,Short people,,,,Slaughter,,Foolhardy bravery
-Gracious,Knowledge,To improve themselves,Looking for investors for a new scheme,Filthy,one eyed,Tall people,,,,Community,,
-Gregarious,Love,To kill a hated enemy,Needlessly superstitious,Well dressed,bad cough,Drunks,,,,Fairness,,
-Honest,Obligation,To locate something lost,Not who they say they are,Bandy legged,smelly,Card games,,,,Honor,,
-Indignant,Pleasure,To make enough money for...,On the run from a darker past,Pale skinned,has a limp,Nobles,,,,Logic,,
-Naive,Power,To make it through just one more day,Outcast from their friends and family,Gaunt,missing teeth,Religion,,,,Responsibility,,
-Obsessive,Recognition,To prove a point,Recently retired from adventuring,Fat,rash/spotty,The Watch,,,,Tradition,,
-Quiet,Respect,To prove their worth,Repeats themselves again and again,Willowy,stutter,Cleanliness,,,,Change,,
-Reserved,Revenge,To reclaim what was taken,Scandalous reputation,Athletic,soft spoken,Jokes,,,,Creativity,,
-Rude,Ruin,To regain honour,Speaks prayers to Darker powers,Crooked,warts/boils,Wine,,,,Freedom,,
-Shrewd,Servitude,To restore the family name,Spotless reputation,Wiry,fidgety,Soldiers,,,,Independence,,
-Vain,Survival,To spread suffering,Surprisingly literate / illiterate,Scrawny,monobrow/heavily madeup,Cakes,,,,No limits,,
-Worrisome,Unity,To steal something of value,Utterly and desperately broke,Good looking,big nose,Young people,,,,Whimsy,,
-Zealous,Wealth,To uncover a conspiracy,Well known in their community,Well built,moustache/bob,Old people,,,,Balance,,
-,,,,Average build,wheezy,Loud noise,,,,Knowledge,,
-,,,,Broad shouldered,wild hair,Clever people,,,,Live and let live,,
-,,,,Burly,wide mouth,Water,,,,Moderation,,
-,,,,Cadaverous,big ears,Stupid people,,,,Neutrality,,
-,,,,Bony,patched clothes,Fancy clothes,,,,People,,
-,,,,Slight,"exhausted, blood shot eyes",The forest,,,,Aspiration,,
-,,,,Haggered,husky voice,Mountains,,,,Discovery,,
-,,,,Wizened,top-knot hair,Warm weather,,,,Glory,,
-,,,,,,Northeners,,,,Nation,,
-,,,,,,Foreigners,,,,Redemption,,
-,,,,,,Strigany,,,,Self-knowledge,,
-,,,,,,Hard work,,,,,,
-,,,,,,Travelling,,,,,,
-,,,,,,Singing,,,,,,
-,,,,,,Omens,,,,,,
-,,,,,,Blade weapons,,,,,,
-,,,,,,Gossip,,,,,,
-,,,,,,Horses,,,,,,
-,,,,,,Dogs,,,,,,
-,,,,,,Archery,,,,,,
-,,,,,,Opera,,,,,,
-,,,,,,Solitude,,,,,,
-,,,,,,Tradition,,,,,,
-,,,,,,Tall tales,,,,,,
+Trait,Motivation,Ambition,Quirk,Description,Detail,Opinions,Driven by,Towards,Is,Ideal,Bond,Flaw,Personality,CairnBackground,CairnQuirk,CairnGoal,CairnVirtue,CairnVice
+Arrogant,Authority,To avoid an obligation,A late bloomer of magical talent,Fat,braided hair,Dwarfs,Desire,Home,Devoted,Beauty,Dedicated to fulfilling a personal life goal,Forbidden love or susceptibility to romance,Always bored,Academic,Alert,Ascension,Cautious,Aloof
+Bawdy,Change,To be immortalised,Addicted to illicit substances or acts,Thin,pony tail,Halflings,Need,God,Antagonistic,Charity,Protective of close family members,Enjoys decadent pleasures,Klutz,Cooper,Bald,Cleansing,Compassionate,Corrupt
+Brash,Charity,To become someone else,Chronically unlucky,Stocky,pock-marked,Men,Duty,Family,Dependent,Greater good,Protective of colleagues or compatriots,Arrogance,Anxious,Blacksmith,Bright Eyes,Conservation,Connected,Craven
+Calculating,Control,To convince someone to take the fall,Deeply in debt to the wrong people,Lanky,scarred,Women,Fear,Friend,Unaware,Life,"Loyal to a benefactor, patron, or employer",Envies another creature's possessions or station,Know-it-all,Farmer,Broad Face,Defense,Courageous,Cruel
+Cavalier,Envy,To cure themselves or a loved one,Erring on the side of heresy,Young,tattooed,Red heads,Obligation,Enemy faction,Treacherous,Respect,Captivated by a romantic interest,Overpowering greed,Sarcastic jester,Soldier,Crooked Teeth,Domination,Disciplined,Cynical
+Charming,Fame,To do the work of the Gods,Extremely religious,Old,glasses,Blondes,,Friendly faction,Protective,Self-sacrifice,Drawn to a special place,Prone to rage,Knows everybody,Gravedigger,Gaunt,Enrichment,Discreet,Deceptive
+Cold,Freedom,To earn affection,Gifted with recent good luck,Weathered,bruised,Poor people,,Sibling,Authoritative,Domination,Protective of a sentimental keepsake,Has a powerful enemy,Arrogant,Guard,Good Posture,Expansion,Honest,Greedy
+Confident,Glory,To earn recognition,Gossipy and overly informed,Hulking,curly hair,Rich people,,Magic,Dedicated,Greed,Protective of a valuable possession,Specific phobia,Logical,Weaver,Grimy,Freedom,Intelligent,Impulsive
+Crude,Gluttony,To explore a mystery,Has a hidden talent,Short,nose ring,Wardens,,Riches,Coercive,Might,Out for revenge,Shameful or scandalous history,Blunt,Jailer,Harsh Voice,Healing,Judicious,Incompetent
+Dishonest,Happiness,To gain a promotion,Has a terrible short-term memory,Wide,bald/long red hair,Witch Hunters,,Body,Aggressive,Pain,,Secret crime or misdeed,Love-struck,Laborer,Heavy Brow,Integration,Loyal,Inflexible
+Fierce,Infamy,To help a family member or friend,Hides a minor mutation,Grizzled,shaved head,Priests,,,,Retribution,,Possession of forbidden lore,Bossy,Acolyte,Limps,Justice,Methodical,Manipulative
+Gloomy,Justice,To hide from a shameful past,Holds to revolutionary ideals,Flamboyant,beard/hair tied up in a bun,Short people,,,,Slaughter,,Foolhardy bravery,Manic,Merchant,Missing Ear,Peace,Meticulous,Mercurial
+Gracious,Knowledge,To improve themselves,Looking for investors for a new scheme,Filthy,one eyed,Tall people,,,,Community,,,Braggart,Monk,Muscular,Power,Polite,Naive
+Gregarious,Love,To kill a hated enemy,Needlessly superstitious,Well dressed,bad cough,Drunks,,,,Fairness,,,Melancholic,Mystic,Notable Hair,Preservation,Popular,Pedantic
+Honest,Obligation,To locate something lost,Not who they say they are,Bandy legged,smelly,Card games,,,,Honor,,,Bully,Scribe,Pleasant Voice,Purification,Pragmatic,Ruthless
+Indignant,Pleasure,To make enough money for...,On the run from a darker past,Pale skinned,has a limp,Nobles,,,,Logic,,,Misanthrope,Peddler,Squints,Redemption,Resourceful,Sarcastic
+Naive,Power,To make it through just one more day,Outcast from their friends and family,Gaunt,missing teeth,Religion,,,,Responsibility,,,Can-do attitude,Messenger,Strong,Revenge,Suave,Selfish
+Obsessive,Recognition,To prove a point,Recently retired from adventuring,Fat,rash/spotty,The Watch,,,,Tradition,,,Miserly,Spy,Thick Eyebrows,Survival,Shrewd,Stubborn
+Quiet,Respect,To prove their worth,Repeats themselves again and again,Willowy,stutter,Cleanliness,,,,Change,,,Chatterbox,Thief,Tired,Unity,Tenacious,Vain
+Reserved,Revenge,To reclaim what was taken,Scandalous reputation,Athletic,soft spoken,Jokes,,,,Creativity,,,Morbid,Thug,Young,Wealth,Witty,Xenophobic
+Rude,Ruin,To regain honour,Speaks prayers to Darker powers,Crooked,warts/boils,Wine,,,,Freedom,,,Chipper,Beggar,,,,
+Shrewd,Servitude,To restore the family name,Spotless reputation,Wiry,fidgety,Soldiers,,,,Independence,,,Naive,Cook,,,,
+Vain,Survival,To spread suffering,Surprisingly literate / illiterate,Scrawny,monobrow/heavily madeup,Cakes,,,,No limits,,,Chummy,Servant,,,,
+Worrisome,Unity,To steal something of value,Utterly and desperately broke,Good looking,big nose,Young people,,,,Whimsy,,,Narcissist,Hunter,,,,
+Zealous,Wealth,To uncover a conspiracy,Well known in their community,Well built,moustache/bob,Old people,,,,Balance,,,Competitive,Ratcatcher,,,,
+,,,,Average build,wheezy,Loud noise,,,,Knowledge,,,Nerd,Miner,,,,
+,,,,Broad shouldered,wild hair,Clever people,,,,Live and let live,,,Compulsive liar,Carpenter,,,,
+,,,,Burly,wide mouth,Water,,,,Moderation,,,Never gives up,Herbalist,,,,
+,,,,Cadaverous,big ears,Stupid people,,,,Neutrality,,,Condescending,Mason,,,,
+,,,,Bony,patched clothes,Fancy clothes,,,,People,,,Obsessive,Shoemaker,,,,
+,,,,Slight,exhausted blood shot eyes,The forest,,,,Aspiration,,,Conniving,Lunatic,,,,
+,,,,Haggered,husky voice,Mountains,,,,Discovery,,,Over-cautious,Baker,,,,
+,,,,Wizened,top-knot hair,Warm weather,,,,Glory,,,Courageous,Physician,,,,
+,,,,,poor eyesight,Northeners,,,,Nation,,,Paranoid,Engineer,,,,
+,,,,,crooked teeth,Foreigners,,,,Redemption,,,Cowardly,Coachman,,,,
+,,,,,no eyebrows,Strigany,,,,Self-knowledge,,,Patriotic,Swineherd,,,,
+,,,,,rosy faced,Hard work,,,,,,,Creep,Brewer,,,,
+,,,,,chinless,Travelling,,,,,,,Pedantic,,,,,
+,,,,,heavy brow,Singing,,,,,,,Cryptic,,,,,
+,,,,,,Omens,,,,,,,Perfect manners,,,,,
+,,,,,,Blade weapons,,,,,,,Debonair,,,,,
+,,,,,,Gossip,,,,,,,Perfectionist,,,,,
+,,,,,,Horses,,,,,,,Decadent,,,,,
+,,,,,,Dogs,,,,,,,Pious,,,,,
+,,,,,,Archery,,,,,,,Ditz,,,,,
+,,,,,,Opera,,,,,,,Power-hungry,,,,,
+,,,,,,Solitude,,,,,,,Dogmatic,,,,,
+,,,,,,Tradition,,,,,,,Prejudiced,,,,,
+,,,,,,Tall tales,,,,,,,Droll,,,,,
+,,,,,,,,,,,,,Prickly,,,,,
+,,,,,,,,,,,,,Epicurean,,,,,
+,,,,,,,,,,,,,Proselytizer,,,,,
+,,,,,,,,,,,,,Fanatic,,,,,
+,,,,,,,,,,,,,Righteous,,,,,
+,,,,,,,,,,,,,Femme fatale,,,,,
+,,,,,,,,,,,,,Rigid discipline,,,,,
+,,,,,,,,,,,,,Fiercely loyal,,,,,
+,,,,,,,,,,,,,Ruthless,,,,,
+,,,,,,,,,,,,,Flamboyant,,,,,
+,,,,,,,,,,,,,Sadist,,,,,
+,,,,,,,,,,,,,Flirt,,,,,
+,,,,,,,,,,,,,Sarcastic,,,,,
+,,,,,,,,,,,,,Folksy,,,,,
+,,,,,,,,,,,,,Self-pitying,,,,,
+,,,,,,,,,,,,,Formal,,,,,
+,,,,,,,,,,,,,Serene,,,,,
+,,,,,,,,,,,,,Generous,,,,,
+,,,,,,,,,,,,,Skeptical,,,,,
+,,,,,,,,,,,,,Germaphobe,,,,,
+,,,,,,,,,,,,,Slacker,,,,,
+,,,,,,,,,,,,,Glutton,,,,,
+,,,,,,,,,,,,,Slovenly,,,,,
+,,,,,,,,,,,,,Gossip,,,,,
+,,,,,,,,,,,,,Snitch,,,,,
+,,,,,,,,,,,,,Gullible,,,,,
+,,,,,,,,,,,,,Snob,,,,,
+,,,,,,,,,,,,,Hard-boiled,,,,,
+,,,,,,,,,,,,,Sophist,,,,,
+,,,,,,,,,,,,,Holds a grudge,,,,,
+,,,,,,,,,,,,,Spacey,,,,,
+,,,,,,,,,,,,,Honorable,,,,,
+,,,,,,,,,,,,,Superstitious,,,,,
+,,,,,,,,,,,,,Hothead,,,,,
+,,,,,,,,,,,,,Terrible memory,,,,,
+,,,,,,,,,,,,,Humorless,,,,,
+,,,,,,,,,,,,,Thick,,,,,
+,,,,,,,,,,,,,Idealistic,,,,,
+,,,,,,,,,,,,,Toady,,,,,
+,,,,,,,,,,,,,Imperious,,,,,
+,,,,,,,,,,,,,Totally unreliable,,,,,
+,,,,,,,,,,,,,Impulsive,,,,,
+,,,,,,,,,,,,,Truthful,,,,,
+,,,,,,,,,,,,,Insecure,,,,,
+,,,,,,,,,,,,,Uptight,,,,,
+,,,,,,,,,,,,,Intense,,,,,
+,,,,,,,,,,,,,Whiner,,,,,
+,,,,,,,,,,,,,Jealous,,,,,
+,,,,,,,,,,,,,Windbag,,,,,
+,,,,,,,,,,,,,Jerk,,,,,
+,,,,,,,,,,,,,Wisecracking,,,,,

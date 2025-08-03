@@ -9,7 +9,8 @@ import character_creator
 import trade_creator
 import utilities
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details
+    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
+    get_one_line_traits
 from random import randint, choice
 import pyperclip  # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -147,7 +148,10 @@ def click_details():
         messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
         return
     if checked_one_line_details_state.get():
-        label_output["text"] = create_one_line_details(get_gender(), race)
+        career = ""
+        if checked_one_line_career_state.get():
+            career = f"({get_random_career_key()}) "
+        label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career)
     else:
         character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
         #label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
@@ -385,20 +389,27 @@ def create_group(group_type):
             person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
     group_text = ""
     save_text = ""
-    if checked_minimal_stats_state.get() == 1:  # output minimal description
+    if checked_one_line_details_state.get():
         for person in group:
-            group_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
-            save_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
+            traits = ""
+            if checked_one_line_traits_state.get():
+                traits = get_one_line_traits()
+            group_text += f"{person.details['Name']} ({person.career} {person.level}) {person.details['Description']} {traits} \n"
     else:
-        for person in group:
-            # get all descriptions
-            group_text += person.get_output(checked_wiki_output_state.get(), "ignore", 1)
-            save_text += person.get_output(checked_wiki_output_state.get(), "save", 1)
-        for person in group:
-            # get all stats
-            group_text += person.get_output(False, "ui", 2) + "\n"
-            save_text += person.get_output(checked_wiki_output_state.get(),
-                                           "save", 2) + "\n"
+        if checked_minimal_stats_state.get() == 1:  # output minimal description
+            for person in group:
+                group_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
+                save_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
+        else:
+            for person in group:
+                # get all descriptions
+                group_text += person.get_output(checked_wiki_output_state.get(), "ignore", 1)
+                save_text += person.get_output(checked_wiki_output_state.get(), "save", 1)
+            for person in group:
+                # get all stats
+                group_text += person.get_output(False, "ui", 2) + "\n"
+                save_text += person.get_output(checked_wiki_output_state.get(),
+                                               "save", 2) + "\n"
     label_output["text"] = group_text
     pyperclip.copy(save_text)
 
@@ -545,9 +556,6 @@ radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
 checked_random_details_state = IntVar()
 checkbutton_random_details = Checkbutton(text="Random Details Set?", variable=checked_random_details_state)
 checked_random_details_state.get()
-checked_one_line_details_state = IntVar()
-checkbutton_one_line = Checkbutton(text="One line only?", variable=checked_one_line_details_state)
-checked_one_line_details_state.get()
 button_details = Button(text="Create Details", width=15, command=click_details)
 
 # Career
@@ -568,6 +576,30 @@ checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_r
 checked_random_race_state.get()
 button_add_level = Button(text="Add Career", command=click_add_levels)
 
+
+# Groups
+label_group = Label(text="Group:")
+input_group = Entry(width=15)
+checked_minimal_stats_state = IntVar()
+checkbutton_minimal_stats = Checkbutton(text="Display minimal stats?", variable=checked_minimal_stats_state)
+checked_add_relationships_state = IntVar()
+checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
+button_group = Button(text="Create Group", command=click_create_group)
+
+
+# Details Options
+label_details_options = Label(text="Details Options", bg="lightblue")
+checked_one_line_details_state = IntVar()
+checkbutton_one_line = Checkbutton(text="One line only?", variable=checked_one_line_details_state)
+checked_one_line_details_state.get()
+checked_one_line_traits_state = IntVar()
+checkbutton_one_line_traits = Checkbutton(text="Include Traits?", variable=checked_one_line_traits_state)
+checked_one_line_traits_state.set(1)
+checked_one_line_career_state = IntVar()
+checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=checked_one_line_career_state)
+checked_one_line_career_state.set(1)
+
+
 # Vessels
 label_vessel = Label(text="Vessel:")
 input_vessel = Entry(width=10)
@@ -579,24 +611,15 @@ checked_captain_state.set(1)
 button_create_vessel = Button(text="Create", command=click_create_vessel)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
-# Groups
-label_group = Label(text="Group:")
-input_group = Entry(width=15)
-checked_minimal_stats_state = IntVar()
-checkbutton_minimal_stats = Checkbutton(text="Display minimal stats?", variable=checked_minimal_stats_state)
-checked_add_relationships_state = IntVar()
-checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
-button_group = Button(text="Create Group", command=click_create_group)
-
 # Dreams
 
 label_dreams = Label(text="Dreams (number): ")
 input_number_dreams = Entry(width=3)
 button_dreams = Button(text="Create Dreams", command=click_create_dreams)
 
+
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
-
 
 # Save & Output ----------------------------------------
 button_clear.grid(column=0, row=0)
@@ -619,8 +642,7 @@ radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
 radio_random.grid(column=5, row=1)
 checkbutton_random_details.grid(column=6, row=1)
-checkbutton_one_line.grid(column=7, row=1)
-button_details.grid(column=8, row=1, columnspan=1)
+button_details.grid(column=7, row=1, columnspan=1)
 
 # Career
 label_career.grid(column=0, row=2)
@@ -639,31 +661,40 @@ button_random.grid(column=9, row=2)
 checkbutton_random_race.grid(column=10, row=2)
 button_add_level.grid(column=11, row=2)
 
-# Vessels
-label_vessel.grid(column=0, row=3)
-input_vessel.grid(column=1, row=3)
-input_vessel.insert(0, "Barge")
-checkbutton_create_captain.grid(column=2, row=3)
-button_create_vessel.grid(column=3, row=3)
-button_random_vessel.grid(column=4, row=3)
 
-#Groups
-
-label_group.grid(column=0, row=4)
-input_group.grid(column=1, row=4)
+# Groups
+label_group.grid(column=0, row=3)
+input_group.grid(column=1, row=3)
 #input_group.insert(0, "None")
-checkbutton_minimal_stats.grid(column=2, row=4)
-checkbutton_add_relationships.grid(column=3, row=4)
-button_group.grid(column=4, row=4)
+checkbutton_minimal_stats.grid(column=2, row=3)
+checkbutton_add_relationships.grid(column=3, row=3)
+button_group.grid(column=4, row=3)
 
-#Dreams
+# Details Options
 
-label_dreams.grid(column=0, row=5)
-input_number_dreams.grid(column=1, row=5)
+label_details_options.grid(column=0, row=4)
+checkbutton_one_line.grid(column=1, row=4)
+checkbutton_one_line_traits.grid(column=2, row=4)
+checkbutton_one_line_career.grid(column=3, row=4)
+
+# Vessels
+label_vessel.grid(column=0, row=5)
+input_vessel.grid(column=1, row=5)
+input_vessel.insert(0, "Barge")
+checkbutton_create_captain.grid(column=2, row=5)
+button_create_vessel.grid(column=3, row=5)
+button_random_vessel.grid(column=4, row=5)
+
+
+# Dreams
+label_dreams.grid(column=0, row=6)
+input_number_dreams.grid(column=1, row=6)
 input_number_dreams.insert(0, "5")
-button_dreams.grid(column=2, row=5)
+button_dreams.grid(column=2, row=6)
 
-label_output.grid(column=0, row=6, columnspan=10)
+
+# Output
+label_output.grid(column=0, row=7, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 

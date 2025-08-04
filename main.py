@@ -8,6 +8,7 @@ import backgrounds
 import character_creator
 import trade_creator
 import utilities
+import group_data
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
     init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
     get_one_line_traits
@@ -16,6 +17,7 @@ import pyperclip  # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
 from utilities import split_into_lines, get_dictionary_as_string
 from backgrounds import init_backgrounds_data
+from group_data import groups
 
 # ------------------------ VARIABLES ----------------------------
 
@@ -48,49 +50,7 @@ detail_data_sets = {
     "None": []
 }
 
-# career lists by context
-tavern_clientele = ["Lawyer", "Physician", "Scholar", "Agitator", "Artisan", "Townsman", "Servant", "Bailiff", "Hunter", "Merchant", "Miner", "Villager", "Coachman", "Entertainer", "Messenger", "Pedlar", "Huffer", "Boatman", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Racketeer", "Thief", "Protagonist", "Soldier"]
-tavern_seedy_clientele = ["Agitator", "Artisan", "Townsman", "Servant", "Coachman", "Entertainer", "Messenger", "Pedlar", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Racketeer", "Thief", "Protagonist", "Watchman", "Beggar", "Rat Catcher", "Grave Robber", "Outlaw", "Pit Fighter"]
-town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"]
-dock_gang = ["Stevedore", "Racketeer", "Protagonist", "Smuggler"]
-guardian_band = ["Servant", "Hunter", "Villager", "Pedlar", "Stevedore", "Bawd", "Outlaw", "Soldier"]
 
-# note members can also have a "magic" key
-# level will randomize if 2 vals not equal, using 2nd as 'highest'
-group_data = {
-    "card game": [{"number": (2, 5), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "Conflict"]}],
-    "river patrol": [
-        {"number": (1, 1), "career": ["Riverwarden"], "level": (3, 3), "details": ["Captain"]},
-        {"number": (3, 5), "career": ["Riverwarden"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]},
-        {"number": (1, 5), "career": ["Riverwarden"], "level": (1, 1), "details": ["Default", "None", "Motivated", "Quirky", "5e", "Basic"]}
-    ],
-    "tavern": [{"number": (3, 8), "career": tavern_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e", "Basic"]}],
-    "seedy tavern": [{"number": (5, 12), "career": tavern_seedy_clientele, "level": (1, 2), "details": ["Default", "Captain", "None", "Motivated", "Quirky", "5e", "Basic"]}],
-    "dock gang": [
-            {"number": (1, 1), "career": ["Racketeer"], "level": (2, 3), "details": ["Motivated", "Basic"]},
-            {"number": (2, 3), "career": dock_gang, "level": (2, 2), "details": ["None", "Basic"]},
-            {"number": (1, 2), "career": dock_gang, "level": (1, 1), "details": ["None"]}
-        ],
-    "pit fight": [
-                {"number": (2, 4), "career": ["Pit Fighter"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
-            ],
-    "guardian band": [
-            {"number": (1, 1), "career": ["Agitator", "Priest", "Soldier", "Entertainer"], "level": (2, 3), "details": ["Motivated", "Basic"]},
-            {"number": (2, 6), "career": guardian_band, "level": (1, 2), "details": ["Default", "None", "Quirky", "Basic"]}
-        ],
-    "soldier squad": [
-        {"number": (1, 1), "career": ["Soldier"], "level": (2, 3), "details": ["Captain"]},
-        {"number": (3, 5), "career": ["Soldier"], "level": (2, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]},
-        {"number": (1, 5), "career": ["Soldier"], "level": (1, 1), "details": ["Default", "None", "Quirky", "Basic"]}
-    ],
-    "caravan guards": [
-            {"number": (1, 1), "career": ["Guard"], "level": (2, 3), "details": ["Captain"]},
-            {"number": (3, 3), "career": ["Guard"], "level": (1, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]},
-        ],
-    "fist fight": [
-                    {"number": (2, 5), "career": ["Pit Fighter", "Villager", "Stevedore", "Soldier", "Protagonist"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
-                ]
-}
 
 dreams_data = [] # a list of lists
 
@@ -222,11 +182,11 @@ def click_add_levels():
 
 def click_create_group():
     group_type = input_group.get().lower()
-    if group_type in group_data:
+    if group_type in groups:
         create_group(group_type)
     else:
         valid_groups = ""
-        for k, v in group_data.items():
+        for k, v in groups.items():
             valid_groups += k + ", "
         messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group, choose from: {valid_groups}")
 
@@ -363,7 +323,7 @@ def create_dreams(num_dreams):
 def create_group(group_type):
     print(f"Clicked create group: {group_type}")
     group = []
-    for members in group_data[group_type]:
+    for members in groups[group_type]:
         num_members = randint(members["number"][0], members["number"][1])
         print(f"would create {num_members} group members")
         # TODO at some point drive race from data rather than hard coded, complicated just due to career chances
@@ -395,6 +355,7 @@ def create_group(group_type):
             if checked_one_line_traits_state.get():
                 traits = get_one_line_traits()
             group_text += f"{person.details['Name']} ({person.career} {person.level}) {person.details['Description']} {traits} \n"
+            save_text = group_text
     else:
         if checked_minimal_stats_state.get() == 1:  # output minimal description
             for person in group:
@@ -708,7 +669,7 @@ init_details()
 init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
 
 input_career.insert(0, get_random_career_key())
-input_group.insert(0, choice(list(group_data.keys())))
+input_group.insert(0, choice(list(groups.keys())))
 
 #backgrounds.test("I have a [21] with [2*10+10] [pennies/warts/problems]")
 #backgrounds.test("I have a [21]")

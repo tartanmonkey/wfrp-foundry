@@ -56,11 +56,6 @@ detail_data_sets = {
 dreams_data = [] # a list of lists
 
 
-def show():
-    lbl.config(text=cb.get())
-
-# Dropdown options
-a = ["Apple", "Banana", "Cherry", "Date", "Elderberry"]
 detail_set_dropdown_head = "Select a Detail Set"
 detail_set_options = []
 
@@ -108,9 +103,9 @@ def click_details():
     race = input_race.get()
     if not is_valid_race_input(race):
         return
-    detail_set = cb.get() # input_details.get()
+    detail_set = detail_set_dropdown.get() # input_details.get()
     # if no detail set chosen do random
-    if checked_random_details_state.get() == 1 or detail_set == detail_set_dropdown_head :
+    if checked_random_details_state.get() == 1 or detail_set == detail_set_dropdown_head:
         detail_set = choice(list(detail_data_sets.keys()))
     # now check if detail set is present, print list of possible if not
     # if detail_set not in detail_data_sets:
@@ -142,16 +137,16 @@ def click_create():
             display_character_stats(character)
 
 
-def click_random():
-    global character_details, character
-    # get random race here if checkbox set
-    race = get_race()
-    detail_set = input_details.get()
-    if checked_random_details_state.get() == 1:
-        detail_set = choice(list(detail_data_sets.keys()))
-    character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
-    character = create_character(get_random_career_key(race), get_random_level(), race, "None", character_details)
-    display_character_stats(character)
+# def click_random():
+#     global character_details, character
+#     # get random race here if checkbox set
+#     race = get_race()
+#     detail_set = input_details.get()
+#     if checked_random_details_state.get() == 1:
+#         detail_set = choice(list(detail_data_sets.keys()))
+#     character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
+#     character = create_character(get_random_career_key(race), get_random_level(), race, "None", character_details)
+#     display_character_stats(character)
 
 
 def click_save():
@@ -310,7 +305,8 @@ def init_dream_data():
         #     for dream in dreams:
         #         print(dream)
 
-def init_ui():
+
+def init_ui_dropdowns():
     for k, v in detail_data_sets.items():
         detail_set_options.append(k)
 # -------------------------- FUNCTIONALITY --------------------------------------
@@ -499,9 +495,20 @@ def kwarg_test(a, b, **my_data):
         print(value)
         if key == "gender":
             print(f"We found an entry for gender: {key}")
+
+# ---------------------------- DATA SETUP ----------------------------- #
+
+init_data()
+init_skills_data()
+init_trade_data()
+init_name_data()
+init_talents_data()
+init_magic_data()
+init_details()
+init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
+init_ui_dropdowns()
+
 # ---------------------------- UI SETUP ------------------------------- #
-
-
 
 window = Tk()
 window.title("Character Creator")
@@ -522,7 +529,9 @@ button_csv_to_wiki = Button(text="csv to wiki", width=15, command=click_csv_to_w
 
 # Details & Sets
 label_details = Label(text="Detail Set:")
-input_details = Entry(width=12)
+#input_details = Entry(width=12)
+detail_set_dropdown = ttk.Combobox(values=detail_set_options)
+detail_set_dropdown.set(detail_set_dropdown_head)
 label_gender = Label(text="Gender: ")
 radio_gender = IntVar()
 radio_gender.set(3)
@@ -546,7 +555,7 @@ input_race = Entry(width=10)
 label_magic = Label(text="Magic:")
 input_magic = Entry(width=10)
 button_create = Button(text="Create", command=click_create)
-button_random = Button(text="Random", command=click_random)
+#button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
@@ -610,9 +619,10 @@ button_csv_to_wiki.grid(column=11, row=0)
 
 # Details & Sets
 label_details.grid(column=0, row=1)
-input_details.grid(column=1, row=1)
-input_details.insert(0, "Motivated")
+#input_details.grid(column=1, row=1)
+#input_details.insert(0, "Motivated")
 # input_details.insert(0, "Background")
+detail_set_dropdown.grid(column=1, row=1) # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 label_gender.grid(column=2, row=1)
 radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
@@ -633,7 +643,7 @@ label_magic.grid(column=6, row=2)
 input_magic.grid(column=7, row=2)
 input_magic.insert(0, "None")
 button_create.grid(column=8, row=2)
-button_random.grid(column=9, row=2)
+#button_random.grid(column=9, row=2)
 checkbutton_random_race.grid(column=10, row=2)
 button_add_level.grid(column=11, row=2)
 
@@ -669,35 +679,10 @@ input_number_dreams.insert(0, "5")
 button_dreams.grid(column=2, row=6)
 
 
-
 # Output
 label_output.grid(column=0, row=8, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
-
-init_data()
-init_skills_data()
-init_trade_data()
-init_name_data()
-init_talents_data()
-init_magic_data()
-init_details()
-init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
-init_ui()
-
-# Combobox
-cb = ttk.Combobox(values=detail_set_options)
-cb.set(detail_set_dropdown_head)
-cb.grid(column=1, row=7)
-
-# Button to display selection
-
-Button(text="Show Selection", command=show).grid(column=2, row=7)
-
-# Label to show selected value
-
-lbl = Label(text=" ")
-lbl.grid(column=3, row=7)
 
 input_career.insert(0, get_random_career_key())
 input_group.insert(0, choice(list(groups.keys())))

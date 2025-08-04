@@ -206,6 +206,13 @@ def is_valid_vessel_type(vessel_type):
     return False
 
 
+def get_vessel_types():
+    vessel_types = []
+    for entry in vessel_data:
+        vessel_types.append(entry["vessel_type"])
+    return vessel_types
+
+
 def get_vessel_type(vessel_type):
     for entry in vessel_data:
         if entry["vessel_type"] == vessel_type:

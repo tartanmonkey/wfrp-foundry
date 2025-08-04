@@ -54,10 +54,12 @@ detail_data_sets = {
 
 
 dreams_data = [] # a list of lists
-
-
-detail_set_dropdown_head = "Select a Detail Set"
 detail_set_options = []
+career_options = []
+magic_options = ["None", "Beasts", "Death", "Fire", "Heavens", "Metal", "Life", "Light", "Shadow", "Manann", "Morr",
+                  "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena", "Hedgecraft",
+                  "Witchcraft", "Daemonology", "Necromancy", "Petty", "Arcane"]
+group_options = []
 
 
 # ------------------------ BUTTON FUNCTIONS ----------------------------
@@ -89,7 +91,7 @@ def click_clear():
 
 
 def click_create_vessel():
-    vessel = input_vessel.get()
+    vessel = vessel_dropdown.get()
     if trade_creator.is_valid_vessel_type(vessel):
         create_vessel(vessel)
 
@@ -100,12 +102,12 @@ def click_random_vessel():
 
 def click_details():
     global character_details
-    race = input_race.get()
+    race = race_dropdown.get()
     if not is_valid_race_input(race):
         return
     detail_set = detail_set_dropdown.get() # input_details.get()
     # if no detail set chosen do random
-    if checked_random_details_state.get() == 1 or detail_set == detail_set_dropdown_head:
+    if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
     # now check if detail set is present, print list of possible if not
     # if detail_set not in detail_data_sets:
@@ -128,11 +130,11 @@ def click_details():
 
 def click_create():
     global career_data, character, valid_races
-    career_name = input_career.get()
+    career_name = careers_dropdown.get() #input_career.get()
     level = int(input_level.get())
-    race = input_race.get()
+    race = race_dropdown.get()
     if is_valid_character_input(career_name, level, race):
-        character = create_character(career_name, level, race, input_magic.get(), character_details)
+        character = create_character(career_name, level, race, magic_dropdown.get(), character_details)
         if character is not None:
             display_character_stats(character)
 
@@ -172,12 +174,12 @@ def click_save():
 def click_add_levels():
     global character, career_data
     if character is not None:
-        career_name = input_career.get()
+        career_name = careers_dropdown.get()
         level = int(input_level.get())
         if is_valid_character_input(career_name, level, character.race):
             # TODO check here or elsewhere that we are not adding a new magic domain
             # Its not actually possible to check here as problems are likely ony caused when Talents are added
-            magic_domain = input_magic.get()
+            magic_domain = magic_dropdown.get()
             if is_valid_magic(magic_domain):
                 character.add_levels(career_name, level, career_data[career_name]['level_data'], magic_domain)
                 display_character_stats(character)
@@ -188,7 +190,7 @@ def click_add_levels():
 
 
 def click_create_group():
-    group_type = input_group.get().lower()
+    group_type = groups_dropdown.get()
     if group_type in groups:
         create_group(group_type)
     else:
@@ -209,9 +211,10 @@ def attribute_test():
 
 
 def get_race():
-    race = input_race.get()
+    race = race_dropdown.get()
     if checked_random_race_state.get() == 1:
         race = character_creator.get_random_race()
+        race_dropdown.set(race)
         #print(f"Got random race: {race}")
     else:
         if not is_valid_race_input(race):
@@ -309,6 +312,18 @@ def init_dream_data():
 def init_ui_dropdowns():
     for k, v in detail_data_sets.items():
         detail_set_options.append(k)
+    init_ui_career_dropdown()
+    for k, v in groups.items():
+        group_options.append(k)
+
+
+def init_ui_career_dropdown(race='Human'):  # Note hack (maybe?) of passing race - shouldn't do this?
+    career_options.clear()
+    for key, value in career_data.items():
+        if race in value['chance']:
+            career_options.append(key)
+    career_options.sort()
+
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
@@ -531,7 +546,7 @@ button_csv_to_wiki = Button(text="csv to wiki", width=15, command=click_csv_to_w
 label_details = Label(text="Detail Set:")
 #input_details = Entry(width=12)
 detail_set_dropdown = ttk.Combobox(values=detail_set_options)
-detail_set_dropdown.set(detail_set_dropdown_head)
+detail_set_dropdown.set(detail_set_options[0])  # note could also use choice(detail_set_options) to have random start
 label_gender = Label(text="Gender: ")
 radio_gender = IntVar()
 radio_gender.set(3)
@@ -545,15 +560,21 @@ button_details = Button(text="Create Details", width=15, command=click_details)
 
 # Career
 label_career = Label(text="Career: ")
-input_career = Entry(width=12)
+#input_career = Entry(width=12)
+careers_dropdown = ttk.Combobox(values=career_options)
+careers_dropdown.set(get_random_career_key())
 label_level = Label(text="Level: ")
 input_level = Entry(width=3)
 
 label_race = Label(text="Race:")
-input_race = Entry(width=10)
+#input_race = Entry(width=10)
+race_dropdown = ttk.Combobox(values=valid_races)
+race_dropdown.set("Human")
 
 label_magic = Label(text="Magic:")
-input_magic = Entry(width=10)
+#input_magic = Entry(width=10)
+magic_dropdown = ttk.Combobox(values=magic_options)
+magic_dropdown.set(magic_options[0])
 button_create = Button(text="Create", command=click_create)
 #button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
@@ -564,7 +585,9 @@ button_add_level = Button(text="Add Career", command=click_add_levels)
 
 # Groups
 label_group = Label(text="Group:")
-input_group = Entry(width=15)
+#input_group = Entry(width=15)
+groups_dropdown = ttk.Combobox(values=group_options)
+groups_dropdown.set(choice(group_options))
 checked_minimal_stats_state = IntVar()
 checkbutton_minimal_stats = Checkbutton(text="Display minimal stats?", variable=checked_minimal_stats_state)
 checked_add_relationships_state = IntVar()
@@ -587,7 +610,9 @@ checked_one_line_career_state.set(1)
 
 # Vessels
 label_vessel = Label(text="Vessel:")
-input_vessel = Entry(width=10)
+#input_vessel = Entry(width=10)
+vessel_dropdown = ttk.Combobox(values=trade_creator.get_vessel_types())
+vessel_dropdown.set("Barge")  # this is a bit hacky as it relies on Barge being in the data
 # checkbox for generate captain here
 checked_captain_state = IntVar()
 checkbutton_create_captain = Checkbutton(text="Create Captain?", variable=checked_captain_state)
@@ -632,16 +657,15 @@ button_details.grid(column=7, row=1, columnspan=1)
 
 # Career
 label_career.grid(column=0, row=2)
-input_career.grid(column=1, row=2)
+#input_career.grid(column=1, row=2)
+careers_dropdown.grid(column=1, row=2)
 label_level.grid(column=2, row=2)
 input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
 label_race.grid(column=4, row=2)
-input_race.grid(column=5, row=2)
-input_race.insert(0, "Human")
+race_dropdown.grid(column=5, row=2)
 label_magic.grid(column=6, row=2)
-input_magic.grid(column=7, row=2)
-input_magic.insert(0, "None")
+magic_dropdown.grid(column=7, row=2)
 button_create.grid(column=8, row=2)
 #button_random.grid(column=9, row=2)
 checkbutton_random_race.grid(column=10, row=2)
@@ -650,7 +674,7 @@ button_add_level.grid(column=11, row=2)
 
 # Groups
 label_group.grid(column=0, row=3)
-input_group.grid(column=1, row=3)
+groups_dropdown.grid(column=1, row=3)
 #input_group.insert(0, "None")
 checkbutton_minimal_stats.grid(column=2, row=3)
 checkbutton_add_relationships.grid(column=3, row=3)
@@ -665,8 +689,7 @@ checkbutton_one_line_career.grid(column=3, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)
-input_vessel.grid(column=1, row=5)
-input_vessel.insert(0, "Barge")
+vessel_dropdown.grid(column=1, row=5)
 checkbutton_create_captain.grid(column=2, row=5)
 button_create_vessel.grid(column=3, row=5)
 button_random_vessel.grid(column=4, row=5)
@@ -684,8 +707,8 @@ label_output.grid(column=0, row=8, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 
-input_career.insert(0, get_random_career_key())
-input_group.insert(0, choice(list(groups.keys())))
+# input_career.insert(0, get_random_career_key())
+# input_group.insert(0, choice(list(groups.keys())))
 
 #backgrounds.test("I have a [21] with [2*10+10] [pennies/warts/problems]")
 #backgrounds.test("I have a [21]")

@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import ttk
 import json
 
 import pandas
@@ -54,6 +55,16 @@ detail_data_sets = {
 
 dreams_data = [] # a list of lists
 
+
+def show():
+    lbl.config(text=cb.get())
+
+# Dropdown options
+a = ["Apple", "Banana", "Cherry", "Date", "Elderberry"]
+detail_set_dropdown_head = "Select a Detail Set"
+detail_set_options = []
+
+
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -97,16 +108,17 @@ def click_details():
     race = input_race.get()
     if not is_valid_race_input(race):
         return
-    detail_set = input_details.get()
-    if checked_random_details_state.get() == 1:
+    detail_set = cb.get() # input_details.get()
+    # if no detail set chosen do random
+    if checked_random_details_state.get() == 1 or detail_set == detail_set_dropdown_head :
         detail_set = choice(list(detail_data_sets.keys()))
     # now check if detail set is present, print list of possible if not
-    if detail_set not in detail_data_sets:
-        valid_sets = ""
-        for k, v in detail_data_sets.items():
-            valid_sets += k + ", "
-        messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
-        return
+    # if detail_set not in detail_data_sets:
+    #     valid_sets = ""
+    #     for k, v in detail_data_sets.items():
+    #         valid_sets += k + ", "
+    #     messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
+    #     return
     if checked_one_line_details_state.get():
         career = ""
         if checked_one_line_career_state.get():
@@ -298,6 +310,9 @@ def init_dream_data():
         #     for dream in dreams:
         #         print(dream)
 
+def init_ui():
+    for k, v in detail_data_sets.items():
+        detail_set_options.append(k)
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
@@ -654,8 +669,9 @@ input_number_dreams.insert(0, "5")
 button_dreams.grid(column=2, row=6)
 
 
+
 # Output
-label_output.grid(column=0, row=7, columnspan=10)
+label_output.grid(column=0, row=8, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 
@@ -667,6 +683,21 @@ init_talents_data()
 init_magic_data()
 init_details()
 init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
+init_ui()
+
+# Combobox
+cb = ttk.Combobox(values=detail_set_options)
+cb.set(detail_set_dropdown_head)
+cb.grid(column=1, row=7)
+
+# Button to display selection
+
+Button(text="Show Selection", command=show).grid(column=2, row=7)
+
+# Label to show selected value
+
+lbl = Label(text=" ")
+lbl.grid(column=3, row=7)
 
 input_career.insert(0, get_random_career_key())
 input_group.insert(0, choice(list(groups.keys())))

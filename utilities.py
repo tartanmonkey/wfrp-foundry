@@ -167,6 +167,7 @@ def cap_number(num, num_min, num_max):
         return num_max
     return num
 
+
 def get_next_number(num, num_max):
     """Increments num and returns, returns 0 if greater than num_max"""
     new_num = num + 1
@@ -174,11 +175,19 @@ def get_next_number(num, num_max):
         return 0
     return new_num
 
+
 def get_first_word(text, divisor="("):
     """Returns the text before the divisor, removing trailing space"""
     words = text.split(divisor)
     return words[0].strip()
 
+
+def get_first_key(dictionary):
+    """Returns the first key found in the dictionary passed - note not the value"""
+    if len(dictionary) > 0:
+        return next(iter(dictionary))
+    else:
+        return "null"
 
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):

@@ -3,6 +3,8 @@ import math
 import pandas
 from tkinter import messagebox
 from random import randint, choice
+
+import utilities
 from utilities import *
 
 skills = {}
@@ -708,11 +710,14 @@ class GameCharacter:
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, wiki_output, output_type="ui", group_stage=0):
+        output = ""
         if output_type == "minimal":
             # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
             return f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
-
-        output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
+        if utilities.get_first_key(self.details) == "OneLine":
+            output = f"{self.details['OneLine']}\n"
+        else:
+            output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
         if group_stage == 1:
             return f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n"
         if group_stage == 2:

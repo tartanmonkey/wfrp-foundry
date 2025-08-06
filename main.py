@@ -121,6 +121,8 @@ def click_details():
         if checked_one_line_career_state.get():
             career = f"({get_random_career_key()}) "
         label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career)
+        character_details.clear()
+        character_details["OneLine"] = label_output["text"]
     else:
         character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
         #label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
@@ -465,6 +467,7 @@ def get_random_career_key(race="Human"):
 
 def create_character(career, level, race, magic_domain, details):
     global career_data, character
+    # this check for valid magic should now be redundant now that dropdowns are implemented 6/7/25
     if is_valid_magic(magic_domain):
         return GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, details)
     else:
@@ -575,7 +578,7 @@ label_magic = Label(text="Magic:")
 #input_magic = Entry(width=10)
 magic_dropdown = ttk.Combobox(values=magic_options)
 magic_dropdown.set(magic_options[0])
-button_create = Button(text="Create", command=click_create)
+button_create = Button(text="Create Character", command=click_create)
 #button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
@@ -589,7 +592,7 @@ label_group = Label(text="Group:")
 groups_dropdown = ttk.Combobox(values=group_options)
 groups_dropdown.set(choice(group_options))
 checked_minimal_stats_state = IntVar()
-checkbutton_minimal_stats = Checkbutton(text="Display minimal stats?", variable=checked_minimal_stats_state)
+checkbutton_minimal_stats = Checkbutton(text="No Stats?", variable=checked_minimal_stats_state)
 checked_add_relationships_state = IntVar()
 checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
 button_group = Button(text="Create Group", command=click_create_group)
@@ -605,7 +608,7 @@ checkbutton_one_line_traits = Checkbutton(text="Include Traits?", variable=check
 checked_one_line_traits_state.set(1)
 checked_one_line_career_state = IntVar()
 checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=checked_one_line_career_state)
-checked_one_line_career_state.set(1)
+checked_one_line_career_state = IntVar()
 
 
 # Vessels

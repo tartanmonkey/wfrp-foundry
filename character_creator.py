@@ -709,15 +709,21 @@ class GameCharacter:
         self.details[key] = value
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
-    def get_output(self, wiki_output, output_type="ui", group_stage=0):
+    def get_output(self, wiki_output, output_type="ui", group_stage=0, one_line_stats=False):
         output = ""
         if output_type == "minimal":
             # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
             return f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
+        # Details: If character_details is just one line, print rather than iterate through dictionary printing keys
         if utilities.get_first_key(self.details) == "OneLine":
             output = f"{self.details['OneLine']}\n"
+            # todo if One Line Stats call function here THEN Return
+            if one_line_stats:
+                output += f"{self.get_one_line_stats()}\n"
+                return output
         else:
             output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
+        # group_stages used for splitting details from stats, likely to use left after One Line Stats added 7/8/25
         if group_stage == 1:
             return f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n"
         if group_stage == 2:
@@ -737,7 +743,6 @@ class GameCharacter:
             output += f"{self.attributes['WS']['total']}| {self.attributes['BS']['total']}| {self.attributes['S']['total']}| {self.attributes['T']['total']}| "
             output += f"{self.attributes['I']['total']}| {self.attributes['Agi']['total']}| {self.attributes['Dex']['total']}| {self.attributes['Int']['total']}| "
             output += f"{self.attributes['WP']['total']}| {self.attributes['Fel']['total']}| {self.wounds}|\n>>"
-
         else:
             output += "WS  BS  S   T   I   Agi Dex Int  WP Fel  W"
             output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
@@ -750,6 +755,14 @@ class GameCharacter:
         output += self.get_spells_output()
 
         return output
+
+    def get_one_line_stats(self):
+        ol_attributes = self.get_one_line_attributes()
+        return f"{ol_attributes} - My Trait - Melee weapon, ranged weapon, armour (value), random thing, 99d"
+
+    def get_one_line_attributes(self):
+        text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"
+        return text
 
     def get_skills_output(self):
         # add combat & magic skills first

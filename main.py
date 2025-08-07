@@ -383,6 +383,9 @@ def create_group(group_type):
             if checked_one_line_traits_state.get():
                 traits = get_one_line_traits()
             group_text += f"{person.details['Name']} ({person.career} {person.level}) {person.details['Description']} {traits} \n"
+            # todo now check for one line stats and handle here - would mean for a group must also have one line deets
+            if checked_one_line_stats_state.get():  # <<<< Now implement Checkbox
+                group_text += f"{person.get_one_line_stats()}\n\n"
             save_text = group_text
     else:
         if checked_minimal_stats_state.get() == 1:  # output minimal description
@@ -477,7 +480,8 @@ def create_character(career, level, race, magic_domain, details):
 
 def display_character_stats(character):
     # TODO replace logic with call to simply use character output
-    label_output["text"] = character.get_output(checked_wiki_output_state.get())
+    # TODO replace get_output args with kwargs - this one only has "ui" and 0 entry to make it work
+    label_output["text"] = character.get_output(checked_wiki_output_state.get(), "ui", 0, (checked_one_line_stats_state.get() == 1))
     pyperclip.copy(character.get_output(checked_wiki_output_state.get(), "save"))
 
 
@@ -602,14 +606,15 @@ button_group = Button(text="Create Group", command=click_create_group)
 label_details_options = Label(text="Details Options", bg="lightblue")
 checked_one_line_details_state = IntVar()
 checkbutton_one_line = Checkbutton(text="One line only?", variable=checked_one_line_details_state)
-checked_one_line_details_state.get()
+checked_one_line_details_state.set(1)
 checked_one_line_traits_state = IntVar()
 checkbutton_one_line_traits = Checkbutton(text="Include Traits?", variable=checked_one_line_traits_state)
 checked_one_line_traits_state.set(1)
 checked_one_line_career_state = IntVar()
 checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=checked_one_line_career_state)
-checked_one_line_career_state = IntVar()
-
+checked_one_line_stats_state = IntVar()
+checkbutton_one_line_stats = Checkbutton(text="One line stats?", variable=checked_one_line_stats_state)
+checked_one_line_stats_state.set(1)
 
 # Vessels
 label_vessel = Label(text="Vessel:")
@@ -689,6 +694,7 @@ label_details_options.grid(column=0, row=4)
 checkbutton_one_line.grid(column=1, row=4)
 checkbutton_one_line_traits.grid(column=2, row=4)
 checkbutton_one_line_career.grid(column=3, row=4)
+checkbutton_one_line_stats.grid(column=4, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)

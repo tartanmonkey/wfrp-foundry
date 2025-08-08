@@ -718,7 +718,19 @@ class GameCharacter:
         self.details[key] = value
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
-    def get_output(self, wiki_output, output_type="ui", group_stage=0, one_line_stats=False):
+    def get_output(self, **options):
+        wiki_output = False
+        if "wiki_output" in options:
+            wiki_output = options['wiki_output']
+        output_type = "ui"
+        if "output_type" in options:
+            output_type = options['output_type']
+        group_stage = 0
+        if "group_stage" in options:
+            group_stage = options['group_stage']
+        one_line_stats = False
+        if "one_line_stats" in options:
+            one_line_stats = options['one_line_stats']
         output = ""
         if output_type == "minimal":
             # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
@@ -726,7 +738,7 @@ class GameCharacter:
         # Details: If character_details is just one line, print rather than iterate through dictionary printing keys
         if utilities.get_first_key(self.details) == "OneLine":
             output = f"{self.details['OneLine']}\n"
-            # todo if One Line Stats call function here THEN Return
+            # if One Line Stats call function here THEN Return
             if one_line_stats:
                 output += f"{self.get_one_line_stats()}\n"
                 return output
@@ -764,6 +776,7 @@ class GameCharacter:
         output += self.get_spells_output()
 
         return output
+
 
     def get_one_line_stats(self):
         ol_attributes = self.get_one_line_attributes()

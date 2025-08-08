@@ -388,20 +388,20 @@ def create_group(group_type):
                 group_text += f"{person.get_one_line_stats()}\n\n"
             save_text = group_text
     else:
+
         if checked_minimal_stats_state.get() == 1:  # output minimal description
             for person in group:
-                group_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
-                save_text += person.get_output(checked_wiki_output_state.get(), "minimal") + "\n"
+                group_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
+                save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
         else:
             for person in group:
                 # get all descriptions
-                group_text += person.get_output(checked_wiki_output_state.get(), "ignore", 1)
-                save_text += person.get_output(checked_wiki_output_state.get(), "save", 1)
+                group_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="ignore", group_stage=1)
+                save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="save", group_stage=1)
             for person in group:
                 # get all stats
-                group_text += person.get_output(False, "ui", 2) + "\n"
-                save_text += person.get_output(checked_wiki_output_state.get(),
-                                               "save", 2) + "\n"
+                group_text += person.get_output(wiki_output=False, group_stage=2) + "\n"
+                save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="save", group_stage=2) + "\n"
     label_output["text"] = group_text
     pyperclip.copy(save_text)
 
@@ -422,8 +422,8 @@ def create_vessel(vessel_type=""):
         captain_level = get_random_level(vessel_data["captain_level"])
         captain_career = choice(vessel_data["captain_career"])
         character = create_character(captain_career, captain_level, captain_race, "None", character_details)
-        label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(checked_wiki_output_state.get())
-        pyperclip.copy(vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(checked_wiki_output_state.get(), "save"))
+        label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(wiki_output=checked_wiki_output_state.get())
+        pyperclip.copy(vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(wiki_output=checked_wiki_output_state.get(), output_type="save"))
     else:
         label_output["text"] = vessel_details
         pyperclip.copy(label_output["text"])
@@ -480,12 +480,12 @@ def create_character(career, level, race, magic_domain, details):
 
 def display_character_stats(character):
     # TODO replace logic with call to simply use character output
-    # TODO replace get_output args with kwargs - this one only has "ui" and 0 entry to make it work
-    label_output["text"] = character.get_output(checked_wiki_output_state.get(), "ui", 0, (checked_one_line_stats_state.get() == 1))
-    pyperclip.copy(character.get_output(checked_wiki_output_state.get(), "save", 0, (checked_one_line_stats_state.get() == 1)))
+    one_line_only = checked_one_line_stats_state.get() == 1
+    label_output["text"] = character.get_output(wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only)
+    pyperclip.copy(character.get_output(wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only))
 
 
-def output_trappings_data(data): # TODO double check if this is still used
+def output_trappings_data(data):  # Just a Test function
     text = ""
     for item, value in data.items():
         text += f"----------- {item} ----------------\n"
@@ -513,6 +513,8 @@ def test_random_race_data():
 def kwarg_test(a, b, **my_data):
     print(f"a = {a}")
     print(f"a = {b}")
+    if "name" in my_data:
+        print(f"Got name: {my_data['name']}")
     for key, value in my_data.items():
         print(value)
         if key == "gender":
@@ -626,7 +628,7 @@ checked_captain_state = IntVar()
 checkbutton_create_captain = Checkbutton(text="Create Captain?", variable=checked_captain_state)
 checked_captain_state.set(1)
 
-button_create_vessel = Button(text="Create", command=click_create_vessel)
+button_create_vessel = Button(text="Create Vessel", command=click_create_vessel)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
 # Dreams

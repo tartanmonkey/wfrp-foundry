@@ -482,7 +482,7 @@ def display_character_stats(character):
     # TODO replace logic with call to simply use character output
     # TODO replace get_output args with kwargs - this one only has "ui" and 0 entry to make it work
     label_output["text"] = character.get_output(checked_wiki_output_state.get(), "ui", 0, (checked_one_line_stats_state.get() == 1))
-    pyperclip.copy(character.get_output(checked_wiki_output_state.get(), "save"))
+    pyperclip.copy(character.get_output(checked_wiki_output_state.get(), "save", 0, (checked_one_line_stats_state.get() == 1)))
 
 
 def output_trappings_data(data): # TODO double check if this is still used

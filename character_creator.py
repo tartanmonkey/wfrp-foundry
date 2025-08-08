@@ -33,7 +33,8 @@ talents_race_random = {
 }
 talent_bonus = {}  # talent name: attribute
 
-hand_weapons = ["Sword", "Axe", "Mace", "Studded Club"]
+hand_weapons = ["Sword", "Axe", "Mace", "Warhammer", "Sword", "Sword"]
+hand_weapons_brass = ["Club", "Axe", "Dagger", "Studded Club", "Spear", "Axe"]
 
 wealth_data = {
     "Brass": {"coin": "d", "rolls": 2},
@@ -432,12 +433,20 @@ class GameCharacter:
         for i in range(len(self.trappings)):
             if self.trappings[i] == "Hand Weapon":
                 # replace hand weapon if it exists
-                self.trappings[i] = choice(hand_weapons)
+                if "Brass" in self.status:
+                    print("I'm Brass - need cheapo weapon")
+                    self.trappings[i] = choice(hand_weapons_brass)
+                else:
+                    self.trappings[i] = choice(hand_weapons)
+            elif self.trappings[i] == "Quality Hand Weapon":
+                self.trappings[i] = f"Quality {choice(hand_weapons)}"
             elif "[" in self.trappings[i]:
                 # replace options with one
                 item = get_key_from_string(self.trappings[i], '[', ']')
                 item = item.split('/')
                 self.trappings[i] = choice(item)
+                if self.trappings[i] == "Hand Weapon":
+                    self.trappings[i] = choice(hand_weapons)
         # now add money
         self.trappings.append(self.get_money())
 
@@ -758,11 +767,44 @@ class GameCharacter:
 
     def get_one_line_stats(self):
         ol_attributes = self.get_one_line_attributes()
-        return f"{ol_attributes} - My Trait - Melee weapon, ranged weapon, armour (value), random thing, 99d"
+        return f"{ol_attributes} {self.get_one_line_talents()} {self.get_one_line_trappings()}"
 
     def get_one_line_attributes(self):
-        text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"
-        return text
+        # text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"
+        ws = 0
+        bs = 0
+        print("get_one_line_attributes...")
+        for key, value in self.skills.items():
+            if 'Melee' in key:
+                print(f"{key} = {self.skills[key]}")
+                if self.skills[key] > ws:
+                    ws = self.skills[key]
+                    print(f"Melee Skill: {key} new WS: {ws}")
+            elif 'Ranged' in key:
+                if self.skills[key] > bs:
+                    bs = self.skills[key]
+                    print(f"Ranged Skill: {key} new BS: {bs}")
+        ws += self.attributes['WS']['total']
+        bs += self.attributes['BS']['total']
+        return f"WS: {ws} BS: {bs} W: {self.wounds}"
+
+    def get_one_line_talents(self):
+        num_talents = len(self.talents)
+        if num_talents > 0:
+            return f"*{self.talents[num_talents -1]}*"
+        return "-"
+
+    def get_one_line_trappings(self):
+        max_entry_length = 16
+        trappings_pruned = []
+        for t in self.trappings:
+            if len(t) < max_entry_length:
+                trappings_pruned.append(t)
+        trappings_string = str(trappings_pruned)
+        to_remove = "[]']"
+        for char in to_remove:
+            trappings_string = trappings_string.replace(char, "")
+        return trappings_string
 
     def get_skills_output(self):
         # add combat & magic skills first

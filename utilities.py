@@ -189,6 +189,13 @@ def get_first_key(dictionary):
     else:
         return "null"
 
+
+def insert_after_char(text, char, insertion):
+    """Returns text with insertion added after the last instance of the char specified - does not add any extra spaces"""
+    index = text.rfind(char) + 1
+    return text[:index] + insertion + text[index:]
+
+
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
     """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and

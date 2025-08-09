@@ -738,6 +738,9 @@ class GameCharacter:
         # Details: If character_details is just one line, print rather than iterate through dictionary printing keys
         if utilities.get_first_key(self.details) == "OneLine":
             output = f"{self.details['OneLine']}\n"
+            # add career in as it didn't exist when details created
+            career_text = f" ({self.career} {self.level})"
+            output = utilities.insert_after_char(output, "*", career_text)
             # if One Line Stats call function here THEN Return
             if one_line_stats:
                 output += f"{self.get_one_line_stats()}\n"

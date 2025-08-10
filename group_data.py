@@ -4,6 +4,7 @@ tavern_seedy_clientele = ["Agitator", "Artisan", "Townsman", "Servant", "Coachma
 town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant"]
 dock_gang = ["Stevedore", "Racketeer", "Protagonist", "Smuggler"]
 guardian_band = ["Servant", "Hunter", "Villager", "Pedlar", "Stevedore", "Bawd", "Outlaw", "Soldier"]
+bandit_gang = ["Hunter", "Soldier", "Outlaw", "Outlaw", "Villager", "Protagonist"]
 
 # note members can also have a "magic" key
 # level will randomize if 2 vals not equal, using 2nd as 'highest'
@@ -39,5 +40,9 @@ groups = {
         ],
     "fist fight": [
                     {"number": (2, 5), "career": ["Pit Fighter", "Villager", "Stevedore", "Soldier", "Protagonist"], "level": (1, 3), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
-                ]
+                ],
+    "bandit gang": [
+            {"number": (1, 1), "career": ["Outlaw"], "level": (2, 3), "details": ["Motivated", "Basic"]},
+            {"number": (2, 6), "career": bandit_gang, "level": (1, 2), "details": ["Default", "None", "Quirky", "Basic"]}
+        ]
 }

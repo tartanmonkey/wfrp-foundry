@@ -109,13 +109,6 @@ def click_details():
     # if no detail set chosen do random
     if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
-    # now check if detail set is present, print list of possible if not
-    # if detail_set not in detail_data_sets:
-    #     valid_sets = ""
-    #     for k, v in detail_data_sets.items():
-    #         valid_sets += k + ", "
-    #     messagebox.showinfo(title="Oops!", message=f"{detail_set} is not valid Detail Set, choose from: {valid_sets}")
-    #     return
     if checked_one_line_details_state.get():
         career = ""
         if checked_one_line_career_state.get():
@@ -382,10 +375,14 @@ def create_group(group_type):
             traits = ""
             if checked_one_line_traits_state.get():
                 traits = get_one_line_traits()
-            group_text += f"{person.details['Name']} ({person.career} {person.level}) {person.details['Description']} {traits} \n"
+            group_text += f"{person.details['Name']} {person.get_one_line_title()} {person.details['Description']} {traits} \n"
             # todo now check for one line stats and handle here - would mean for a group must also have one line deets
             if checked_one_line_stats_state.get():  # <<<< Now implement Checkbox
-                group_text += f"{person.get_one_line_stats()}\n\n"
+                group_text += f"{person.get_one_line_stats()}\n"
+            if "Relationship" in person.details:
+                group_text += f"{person.details['Relationship']}\n\n"
+            else:
+                group_text += "\n"
             save_text = group_text
     else:
 

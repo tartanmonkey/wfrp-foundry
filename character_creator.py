@@ -72,6 +72,8 @@ race_data = {
     "Wood Elf": { "base_talents": ["Acute Sense (Sight)", "Night Vision", "Rover"], "random_talents": "Wood Elf", "num_random_talents" : 1, "skills": [], "name_table": "wood elf"},
 }
 
+trades = ['Chandler', 'Mason', 'Cook', 'Cooper', 'Baker', 'Cartwright', 'Carpenter', 'Blacksmith', 'Miller', 'Farmer', 'Tailor', 'Shoemaker', 'Locksmith', 'Weaver', 'Thatcher', 'Bowyer']
+
 details_data = {}  # a dictionary of lists keyed to detail type, using Column titles exactly as they are in the csv
 
 relationship_types = []
@@ -296,7 +298,10 @@ def create_one_line_details(gender, race, add_traits, career):
 
 
 def get_one_line_traits():
-    traits = f"- {choice(details_data['Personality'])} - Motivation: {choice(details_data['Motivation'])}"
+    motivation = choice(details_data['Motivation'])
+    if motivation == "God":
+        motivation = choice(gods)
+    traits = f"- {choice(details_data['Personality'])} - Motivation: {motivation}"
     return traits
 
 def create_character_details(gender, race, detail_set, wiki_output):
@@ -502,6 +507,7 @@ class GameCharacter:
         print(f"--- {self.career} - Race Skills: {self.skills} ------------")
         self.add_career_skills(level_data, self.level)
 
+
     def add_career_skills(self, level_data, level_num):
         if level_num == 1:
             skill_list = get_stripped_list(level_data[0]["Skills"])
@@ -549,6 +555,7 @@ class GameCharacter:
                 else:
                     print(f"Did not find {skill_group} in skill_groups, so adding {skill}")
                      # simply add the whole skill name (with Any included)
+                    # TODO i think it would be here we replace Any for trades
                     self.skills[skill] = value
             elif "(" in skill and "/" in skill:
                 # check for options and use one if present
@@ -601,7 +608,14 @@ class GameCharacter:
         # check for essential career talents, i.e. Pray, Petty Magic etc
         magic_talent = get_magic_talent(talent_list)
         if magic_talent == "None":
-            return choice(talent_list)
+            # check for replacing Any here
+            talent = choice(talent_list)
+            if "Any" in talent:
+                if "Craftsman" in talent:
+                    craft = choice(skill_groups["Trade"])
+                    # print(f"Got Any for Craft - replacing with: {craft}")
+                    talent = talent.replace("Any", craft)
+            return talent
         else:
             self.set_magic_talent(magic_talent, magic_domain)
             return magic_talent
@@ -739,7 +753,7 @@ class GameCharacter:
         if utilities.get_first_key(self.details) == "OneLine":
             output = f"{self.details['OneLine']}\n"
             # add career in as it didn't exist when details created
-            career_text = f" ({self.career} {self.level})"
+            career_text = f" {self.get_one_line_title()}"
             output = utilities.insert_after_char(output, "*", career_text)
             # if One Line Stats call function here THEN Return
             if one_line_stats:
@@ -780,6 +794,17 @@ class GameCharacter:
 
         return output
 
+    def get_one_line_title(self):
+        for skill, value in self.skills.items():
+            if "Trade" in skill:
+                trade = utilities.get_key_from_string(skill, "(", ")")
+                return f"({self.career} {self.level} {trade})"
+        for talent in self.talents:
+            if "Craftsman" in talent:
+                if "(" in talent and ")" in talent:
+                    craft = utilities.get_key_from_string(talent, "(", ")")
+                    return f"({self.career} {self.level} {craft})"
+        return f"({self.career} {self.level})"
 
     def get_one_line_stats(self):
         ol_attributes = self.get_one_line_attributes()

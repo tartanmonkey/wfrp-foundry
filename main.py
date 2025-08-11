@@ -288,7 +288,7 @@ def init_data():
 
 
 def init_dream_data():
-    print("Dream Data Init")
+    #print("Dream Data Init")
     global dreams_data
     try:
         data = pandas.read_csv("Data/Character_Data-Dreams.csv")
@@ -354,11 +354,19 @@ def create_group(group_type):
             magic = members["magic"]
         for member in range(num_members):
             details = create_character_details(get_gender(), race, get_details_data(race, choice(members["details"])), checked_wiki_output_state.get())
+            # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
             level = members["level"][1]
             if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
-                level = get_random_level(level)
+                if members["level"][0] > 1:
+                    level = randint(members["level"][0], members["level"][1])
+                else:
+                    level = get_random_level(level)
             career_key = choice(members["career"])
-            group.append(create_character(career_key, level, race, magic, details))
+            group_member = create_character(career_key, level, race, magic, details)
+            # test for leader = should always be first
+            if len(group) == 0:
+                print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
+            group.append(group_member)
     # if Add Relationship ticked add one for each member of group
     if checked_add_relationships_state.get() == 1:
         print("would create relationships now")

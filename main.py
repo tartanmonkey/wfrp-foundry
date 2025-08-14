@@ -10,6 +10,7 @@ import character_creator
 import trade_creator
 import utilities
 import group_data
+import inn_creator
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
     init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
     get_one_line_traits
@@ -19,6 +20,7 @@ from trade_creator import init_trade_data, Vessel, get_passenger_numbers
 from utilities import split_into_lines, get_dictionary_as_string
 from backgrounds import init_backgrounds_data
 from group_data import groups
+from inn_creator import Inn
 
 # ------------------------ VARIABLES ----------------------------
 
@@ -60,7 +62,7 @@ magic_options = ["None", "Beasts", "Death", "Fire", "Heavens", "Metal", "Life", 
                   "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena", "Hedgecraft",
                   "Witchcraft", "Daemonology", "Necromancy", "Petty", "Arcane"]
 group_options = []
-
+inn = None
 
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
@@ -198,6 +200,13 @@ def click_create_group():
 def click_create_dreams():
     create_dreams(int(input_number_dreams.get()))
 
+
+def click_create_inn():
+    global inn
+    inn = Inn()
+    label_output["text"] = inn.get_output()
+    pyperclip.copy(label_output["text"])
+    
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -535,6 +544,7 @@ init_talents_data()
 init_magic_data()
 init_details()
 init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
+inn_creator.init_data()
 init_ui_dropdowns()
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -642,6 +652,10 @@ label_dreams = Label(text="Dreams (number): ")
 input_number_dreams = Entry(width=3)
 button_dreams = Button(text="Create Dreams", command=click_create_dreams)
 
+# Inns
+
+label_inns = Label(text="Inns: ")
+button_inns = Button(text="Create Inn", command=click_create_inn)
 
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
@@ -718,8 +732,13 @@ input_number_dreams.insert(0, "5")
 button_dreams.grid(column=2, row=6)
 
 
+# Inns
+label_inns.grid(column=0, row=7)
+button_inns.grid(column=1, row=7)
+
+
 # Output
-label_output.grid(column=0, row=8, columnspan=10)
+label_output.grid(column=0, row=9, columnspan=10)
 
 # ---------------------------- MAIN ------------------------------- #
 

@@ -206,7 +206,7 @@ def click_create_inn():
     inn = Inn()
     label_output["text"] = inn.get_output()
     pyperclip.copy(label_output["text"])
-    
+
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}

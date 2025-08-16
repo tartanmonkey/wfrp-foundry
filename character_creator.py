@@ -795,6 +795,9 @@ class GameCharacter:
         return output
 
     def get_one_line_title(self):
+        race = ""
+        if self.race != "Human":
+            race = f"{self.race} "
         for skill, value in self.skills.items():
             if "Trade" in skill:
                 trade = utilities.get_key_from_string(skill, "(", ")")
@@ -804,7 +807,7 @@ class GameCharacter:
                 if "(" in talent and ")" in talent:
                     craft = utilities.get_key_from_string(talent, "(", ")")
                     return f"({self.career} {self.level} {craft})"
-        return f"({self.career} {self.level})"
+        return f"({race}{self.career} {self.level})"
 
     def get_one_line_stats(self):
         ol_attributes = self.get_one_line_attributes()

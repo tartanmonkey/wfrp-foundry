@@ -315,16 +315,19 @@ def create_character_details(gender, race, detail_set, wiki_output):
     details["Description"] = f"{choice(details_data['Description'])}, "
     details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
 
-    for key, value in detail_set.items():
-        if key == "Opinion":
-            details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
-        elif value == "":
-            details[key] = choice(details_data[key])
-        elif key == "Cairn":
-            print("Got Cairn Details!")
-        else:
-            # TODO double  check if need to format the key text
-            details[key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
+    if detail_set == "one_line_traits":  # one_line_traits treated differently as the format is different and its not in details_data
+        details["one_line_traits"] = get_one_line_traits()
+    else:
+        for key, value in detail_set.items():
+            if key == "Opinion":
+                details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
+            elif value == "":
+                details[key] = choice(details_data[key])
+            elif key == "Cairn":
+                print("Got Cairn Details!")
+            else:
+                # TODO double  check if need to format the key text
+                details[key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
 
     return details
 
@@ -813,6 +816,8 @@ class GameCharacter:
         ol_attributes = self.get_one_line_attributes()
         return f"{ol_attributes} {self.get_one_line_talents()} {self.get_one_line_trappings()}"
 
+    def get_one_line_details(self):
+        pass
     def get_one_line_attributes(self):
         # text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"
         ws = 0

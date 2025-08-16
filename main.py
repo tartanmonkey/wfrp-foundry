@@ -204,6 +204,13 @@ def click_create_dreams():
 def click_create_inn():
     global inn
     inn = Inn()
+    innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
+    # print(f"Inkeep race: {innkeep_data['race']} family chance: {innkeep_data['family_chance']}")
+    gender = choice(["male", "female"])
+    details = create_character_details(gender, innkeep_data['race'], "one_line_traits", checked_wiki_output_state.get())
+    level = 2  # TODO probs add a range, or maybe even user input here
+    innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
+    inn.set_proprietor(innkeep, innkeep_data['family_chance'])
     label_output["text"] = inn.get_output()
     pyperclip.copy(label_output["text"])
 
@@ -446,6 +453,7 @@ def create_vessel(vessel_type=""):
     else:
         label_output["text"] = vessel_details
         pyperclip.copy(label_output["text"])
+
 
 
 def get_details_data(race, set_name):

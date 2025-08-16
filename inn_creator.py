@@ -36,7 +36,9 @@ class Inn:
         self.description = choice(inn_data["Size"])
         self.condition = choice(inn_data["State of repair"])
         self.details = choice(inn_data["Details"])
+        # TODO remove proprietor_type from here and the csv data
         self.proprietor_type = choice(inn_data["Proprietor"])
+        self.proprietor = None
         self.known_for = f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
         self.drinks = []
         self.menu = []
@@ -60,14 +62,16 @@ class Inn:
         self.menu.append(choice(inn_data['Food_Common']))
         self.menu.append(choice(inn_data['Food_Good']))
 
-
+    def set_proprietor(self, innkeep, family_chance):
+        self.proprietor = innkeep
+        # TODO now create family
 
     def get_output(self):
         # TODO Add kwargs - see same method in character_creator
         text = self.name
         text += f"\n{self.description}, {self.condition} with {self.details}"
         text += f"\nKnown for {self.known_for}"
-        text += f"\nInnkeep: {self.proprietor_type}"
+        text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
         text += f"\nProduce:\n"
         for d in self.drinks:
             text += f"{d}, "

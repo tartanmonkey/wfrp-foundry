@@ -816,8 +816,11 @@ class GameCharacter:
         ol_attributes = self.get_one_line_attributes()
         return f"{ol_attributes} {self.get_one_line_talents()} {self.get_one_line_trappings()}"
 
-    def get_one_line_details(self):
-        pass
+    def get_one_line_details(self, include_traits):
+        traits = ""
+        if include_traits and "one_line_traits" in self.details:
+            traits = self.details["one_line_traits"]
+        return f"{self.details['Name']} {self.get_one_line_title()} {self.details['Description']} {traits}"
     def get_one_line_attributes(self):
         # text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"
         ws = 0

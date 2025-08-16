@@ -362,7 +362,11 @@ def create_group(group_type):
         if "magic" in members:
             magic = members["magic"]
         for member in range(num_members):
-            details = create_character_details(get_gender(), race, get_details_data(race, choice(members["details"])), checked_wiki_output_state.get())
+            details_set = "one_line_traits"
+            if not checked_one_line_details_state.get():
+                details_set = get_details_data(race, choice(members["details"]))
+                print("!!Not One Line Details!!")
+            details = create_character_details(get_gender(), race, details_set, checked_wiki_output_state.get())
             # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
             level = members["level"][1]
             if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
@@ -389,10 +393,11 @@ def create_group(group_type):
     save_text = ""
     if checked_one_line_details_state.get():
         for person in group:
-            traits = ""
-            if checked_one_line_traits_state.get():
-                traits = get_one_line_traits()
-            group_text += f"{person.details['Name']} {person.get_one_line_title()} {person.details['Description']} {traits} \n"
+            # traits = ""
+            # if checked_one_line_traits_state.get():
+            #     traits = get_one_line_traits()
+            # group_text += f"{person.details['Name']} {person.get_one_line_title()} {person.details['Description']} {traits} \n"
+            group_text += f"{person.get_one_line_details(checked_one_line_traits_state.get())} \n"
             # todo now check for one line stats and handle here - would mean for a group must also have one line deets
             if checked_one_line_stats_state.get():  # <<<< Now implement Checkbox
                 group_text += f"{person.get_one_line_stats()}\n"

@@ -217,7 +217,7 @@ def get_random_name(gender, race="Human", first_name_only=False):
     region = race_data[race]["name_table"]
     if gender in names[region]:
         if first_name_only:
-            choice(names[region][gender])
+            return choice(names[region][gender])
         else:
             return f"{choice(names[region][gender])} {choice(names[region]['surname'])}"
     else:
@@ -435,6 +435,7 @@ class GameCharacter:
         self.trappings = []
         self.set_trappings(levels_data[index]["Trappings"])
         self.details = details
+        self.family = []  # added 17/8/25 for Innkeeps
         # for attribute, value in self.attributes.items():
         #     print(f"{attribute} advances: {value['advances']}")
 
@@ -736,6 +737,9 @@ class GameCharacter:
 
     def add_detail(self, key, value):
         self.details[key] = value
+
+    def has_family(self):
+        return len(self.family) > 0
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, **options):

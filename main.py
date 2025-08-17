@@ -11,6 +11,8 @@ import trade_creator
 import utilities
 import group_data
 import inn_creator
+import family_member
+from family_member import FamilyMember
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
     init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
     get_one_line_traits
@@ -205,16 +207,36 @@ def click_create_inn():
     global inn
     inn = Inn()
     innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
+    innkeep = create_innkeep(innkeep_data)
+    innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
+    inn.set_proprietor(innkeep)
+    label_output["text"] = inn.get_output()
+    pyperclip.copy(label_output["text"])
+
+def create_innkeep(innkeep_data):
     # print(f"Inkeep race: {innkeep_data['race']} family chance: {innkeep_data['family_chance']}")
     gender = choice(["male", "female"])
     details = create_character_details(gender, innkeep_data['race'], "one_line_traits", checked_wiki_output_state.get())
     level = 2  # TODO probs add a range, or maybe even user input here
     innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
-    inn.set_proprietor(innkeep, innkeep_data['family_chance'])
-    label_output["text"] = inn.get_output()
-    pyperclip.copy(label_output["text"])
+    return innkeep
 
+def create_character_family(person, family_chance):
+    family = []
+    roll = randint(1, 100)
+    if roll <= family_chance:
+        is_other_adult = choice([True, False])
+        if is_other_adult:
+            other_adult = FamilyMember(True, person.details["Gender"], person.race)
+            family.append(other_adult)
+            if other_adult.is_sibling():
+                return family  # if its a sibling we stop here and don't roll any children
+        num_children = choice([0, 0, 0, 0, 1, 2, 3, 5])
+        for x in range(0, num_children):
+            child = FamilyMember(False, person.details["Gender"], person.race)
+            family.append(child)
 
+    return family
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():

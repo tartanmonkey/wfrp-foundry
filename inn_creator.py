@@ -2,12 +2,14 @@ import json
 import math
 import pandas
 import random
+import family_member
 
 import utilities
 from utilities import *
+from family_member import FamilyMember
 
 proprietor_type = [
-    {"chance": (0, 90), "race": "Human", "family_chance": 40},
+    {"chance": (0, 90), "race": "Human", "family_chance": 50},
     {"chance": (90, 94), "race": "Halfling", "family_chance": 25},
     {"chance": (94, 98), "race": "Dwarf", "family_chance": 10},
 ]
@@ -62,9 +64,8 @@ class Inn:
         self.menu.append(choice(inn_data['Food_Common']))
         self.menu.append(choice(inn_data['Food_Good']))
 
-    def set_proprietor(self, innkeep, family_chance):
+    def set_proprietor(self, innkeep):
         self.proprietor = innkeep
-        # TODO now create family
 
     def get_output(self):
         # TODO Add kwargs - see same method in character_creator
@@ -72,9 +73,25 @@ class Inn:
         text += f"\n{self.description}, {self.condition} with {self.details}"
         text += f"\nKnown for {self.known_for}"
         text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
+        if self.proprietor.has_family():
+            text += self.get_family_output()
         text += f"\nProduce:\n"
         for d in self.drinks:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
+        return text
+
+    def get_family_output(self):
+        text = f"\nFamily: "
+        added_child = False
+        for n in range(0, len(self.proprietor.family)):
+            if self.proprietor.family[n].relationship == "Child":
+                if added_child:
+                    text += f", {self.proprietor.family[n].get_output()}"
+                else:
+                    text += f"\nChildren: {self.proprietor.family[n].get_output()}"
+                    added_child = True
+            else:
+                text += f"{self.proprietor.family[n].get_output()}"
         return text

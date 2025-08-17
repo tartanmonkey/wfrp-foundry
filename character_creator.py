@@ -213,10 +213,13 @@ def init_talents_data():
             talent_bonus[entry["Talent"]] = entry["Attribute"]
 
 
-def get_random_name(gender, race="Human"):
+def get_random_name(gender, race="Human", first_name_only=False):
     region = race_data[race]["name_table"]
     if gender in names[region]:
-        return f"{choice(names[region][gender])} {choice(names[region]['surname'])}"
+        if first_name_only:
+            choice(names[region][gender])
+        else:
+            return f"{choice(names[region][gender])} {choice(names[region]['surname'])}"
     else:
         messagebox.showinfo(title="Oops!", message=f"Missing {gender} from {region}")
 
@@ -312,9 +315,9 @@ def create_character_details(gender, race, detail_set, wiki_output):
         # TODO Actually not the way to do it - see main 149
     else:
         details["Name"] = get_random_name(gender, race)
+    details["Gender"] = gender
     details["Description"] = f"{choice(details_data['Description'])}, "
     details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
-
     if detail_set == "one_line_traits":  # one_line_traits treated differently as the format is different and its not in details_data
         details["one_line_traits"] = get_one_line_traits()
     else:

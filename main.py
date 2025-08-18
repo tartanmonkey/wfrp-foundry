@@ -224,6 +224,7 @@ def create_innkeep(innkeep_data):
 def create_character_family(person, family_chance):
     family = []
     roll = randint(1, 100)
+    # TODO implement using some kind of data here rather than hard coded number of adults and children
     if roll <= family_chance:
         is_other_adult = choice([True, False])
         if is_other_adult:

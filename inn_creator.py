@@ -14,6 +14,15 @@ proprietor_type = [
     {"chance": (94, 98), "race": "Dwarf", "family_chance": 10},
 ]
 
+food_type_cost = {
+    "Food_Dessert": 5,
+    "Food_Seafood": 6,
+    "Food_Poor": 3,
+    "Food_Common": 4,
+    "Food_Good": 6,
+    "Food_Best": 8
+}
+
 inn_data = {}  # Dictionary for holding all Inn data keyed to column headings in the csv
 
 
@@ -28,6 +37,21 @@ def init_data():
             inn_data[col] = [item for item in data[col].tolist() if type(item) == str]
         print(f"Inn Data initialised - num entries: {len(inn_data)}")
 
+
+def get_cost(goods, cost):
+    cost_value = int(cost) #  in case this is a string
+    # TODO now check for Food or Drink Tags &  modify accordingly
+    if goods == "Drink":
+        cost_value *= 2
+    elif goods == "Food":
+        cost_value *= 3
+    return cost_value
+
+
+def get_food_item(food_type):
+    food = choice(inn_data[food_type])
+    cost = get_cost("Food", food_type_cost[food_type])
+    return f"{food} ({cost})"
 # ---------------------------- INN CLASS ----------------------------------------
 
 
@@ -53,16 +77,27 @@ class Inn:
         return f"The {name_1} {name_2}"
 
     def create_drinks(self):
+        # gets price from string and modifies if needed
         for i in range(random.randint(1,3)):
-            drink = f"{choice(inn_data['Drink_1'])} {choice(inn_data['Drink_2'])}"
+            drink_type = choice(inn_data['Drink_2'])
+            cost = utilities.get_key_from_string(drink_type)
+            to_remove = f"[{cost}]"
+            cost = get_cost("Drink", cost)
+            to_add = f"({cost})"
+            type_with_price = drink_type.replace(to_remove, to_add)
+            drink_adjective = choice(inn_data['Drink_1'])
+            drink = f"{drink_adjective} {type_with_price}"
             self.drinks.append(drink)
 
     def create_menu(self):
         # TODO actually make this be a dictionary with costs
         # TODO have specifics depend on Quality or Condition of Inn
-        self.menu.append(choice(inn_data['Food_Poor']))
-        self.menu.append(choice(inn_data['Food_Common']))
-        self.menu.append(choice(inn_data['Food_Good']))
+
+        self.menu.append(get_food_item('Food_Poor'))
+        self.menu.append(get_food_item('Food_Common'))
+        self.menu.append(get_food_item('Food_Good'))
+
+
 
     def set_proprietor(self, innkeep):
         self.proprietor = innkeep

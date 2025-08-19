@@ -23,6 +23,10 @@ food_type_cost = {
     "Food_Best": 6
 }
 
+known_for_sets = [
+    [0], [1], [2], [1, 2], [1, 2], [1, 1, 2], [1, 2, 2]
+]
+
 inn_data = {}  # Dictionary for holding all Inn data keyed to column headings in the csv
 
 
@@ -51,11 +55,9 @@ class Inn:
         self.description = self.get_text(inn_data["Size"])
         self.condition = self.get_text(inn_data["State of repair"])
         self.details = self.get_text(inn_data["Details"])
-        # TODO remove proprietor_type from here and the csv data
-        self.proprietor_type = choice(inn_data["Proprietor"])
         self.proprietor = None
         # TODO known_for probs needs own method to deal with tags
-        self.known_for = f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
+        self.known_for = self.get_known_for()  # f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
         # TODO add process tags to set cost_mods etc
         self.set_cost_mods()
         self.drinks = []
@@ -67,6 +69,11 @@ class Inn:
         name_1 = choice(inn_data["Name_1"])
         name_2 = choice(inn_data["Name_2"])
         return f"The {name_1} {name_2}"
+
+    def get_known_for(self):
+        known_for = ""
+        # TODO get choice(known_for_sets) above and iterate through
+        return known_for
 
     def get_text(self, text_list):
         text = choice(text_list)

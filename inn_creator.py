@@ -38,20 +38,7 @@ def init_data():
         print(f"Inn Data initialised - num entries: {len(inn_data)}")
 
 
-def get_cost(goods, cost):
-    cost_value = int(cost) #  in case this is a string
-    # TODO now check for Food or Drink Tags &  modify accordingly
-    if goods == "Drink":
-        cost_value *= 2
-    elif goods == "Food":
-        cost_value *= 3
-    return cost_value
 
-
-def get_food_item(food_type):
-    food = choice(inn_data[food_type])
-    cost = get_cost("Food", food_type_cost[food_type])
-    return f"{food} ({cost})"
 # ---------------------------- INN CLASS ----------------------------------------
 
 
@@ -59,12 +46,14 @@ class Inn:
 
     def __init__(self):
         self.name = self.create_name()
-        self.description = choice(inn_data["Size"])
-        self.condition = choice(inn_data["State of repair"])
-        self.details = choice(inn_data["Details"])
+        self.cost_mods = {"All": -0.5, "Food": 1.0, "Drink": 2.1, "Rooms": 1.0}
+        self.description = self.get_text(inn_data["Size"])
+        self.condition = self.get_text(inn_data["State of repair"])
+        self.details = self.get_text(inn_data["Details"])
         # TODO remove proprietor_type from here and the csv data
         self.proprietor_type = choice(inn_data["Proprietor"])
         self.proprietor = None
+        # TODO known_for probs needs own method to deal with tags
         self.known_for = f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
         self.drinks = []
         self.menu = []
@@ -76,13 +65,16 @@ class Inn:
         name_2 = choice(inn_data["Name_2"])
         return f"The {name_1} {name_2}"
 
+    def get_text(self, text_list):
+        return choice(text_list)
+
     def create_drinks(self):
         # gets price from string and modifies if needed
         for i in range(random.randint(1,3)):
             drink_type = choice(inn_data['Drink_2'])
             cost = utilities.get_key_from_string(drink_type)
             to_remove = f"[{cost}]"
-            cost = get_cost("Drink", cost)
+            cost = self.get_cost("Drink", cost)
             to_add = f"({cost})"
             type_with_price = drink_type.replace(to_remove, to_add)
             drink_adjective = choice(inn_data['Drink_1'])
@@ -93,11 +85,24 @@ class Inn:
         # TODO actually make this be a dictionary with costs
         # TODO have specifics depend on Quality or Condition of Inn
 
-        self.menu.append(get_food_item('Food_Poor'))
-        self.menu.append(get_food_item('Food_Common'))
-        self.menu.append(get_food_item('Food_Good'))
+        self.menu.append(self.get_food_item('Food_Poor'))
+        self.menu.append(self.get_food_item('Food_Common'))
+        self.menu.append(self.get_food_item('Food_Good'))
 
+    def get_food_item(self, food_type):
+        food = choice(inn_data[food_type])
+        cost = self.get_cost("Food", food_type_cost[food_type])
+        return f"{food} ({cost})"
 
+    def get_cost(self, goods, cost):
+        cost_value = int(cost)  # in case this is a string
+        goods_type = goods
+        if "Food" in goods:
+            goods_type = "Food"
+        print("Got Food Type: " + goods_type)
+        multiplier = self.cost_mods["All"] + self.cost_mods[goods_type]
+        cost_value = round(cost_value * multiplier)
+        return cost_value
 
     def set_proprietor(self, innkeep):
         self.proprietor = innkeep

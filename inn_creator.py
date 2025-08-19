@@ -15,12 +15,12 @@ proprietor_type = [
 ]
 
 food_type_cost = {
-    "Food_Dessert": 5,
+    "Food_Dessert": 6,
     "Food_Seafood": 6,
-    "Food_Poor": 3,
-    "Food_Common": 4,
+    "Food_Poor": 6,
+    "Food_Common": 6,
     "Food_Good": 6,
-    "Food_Best": 8
+    "Food_Best": 6
 }
 
 inn_data = {}  # Dictionary for holding all Inn data keyed to column headings in the csv
@@ -46,7 +46,8 @@ class Inn:
 
     def __init__(self):
         self.name = self.create_name()
-        self.cost_mods = {"All": -0.5, "Food": 1.0, "Drink": 2.1, "Rooms": 1.0}
+        self.tags = []
+        self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 2.1, "Rooms": 1.0}
         self.description = self.get_text(inn_data["Size"])
         self.condition = self.get_text(inn_data["State of repair"])
         self.details = self.get_text(inn_data["Details"])
@@ -55,6 +56,8 @@ class Inn:
         self.proprietor = None
         # TODO known_for probs needs own method to deal with tags
         self.known_for = f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
+        # TODO add process tags to set cost_mods etc
+        self.set_cost_mods()
         self.drinks = []
         self.menu = []
         self.create_drinks()
@@ -66,7 +69,28 @@ class Inn:
         return f"The {name_1} {name_2}"
 
     def get_text(self, text_list):
-        return choice(text_list)
+        text = choice(text_list)
+        print(text)
+        if "[" in text:
+            tag = utilities.get_key_from_string(text)
+            if len(tag) > 0:
+                self.tags.append(tag)
+                text = utilities.replace_text(text, f"[{tag}]", '')
+        # TODO check for bracketed options now too
+        # TODO probably also worth creating function for 'replace_in_string'
+        return text
+
+    def set_cost_mods(self):
+        increment = 0.25
+        for tag in self.tags:
+            if tag == "Expensive":
+                self.cost_mods["All"] += increment
+            elif tag == "Cheap":
+                self.cost_mods["All"] -= increment
+            elif "Expensive" in tag:
+                # TODO handle specific goods
+                print(f"Got tag: {tag}")
+
 
     def create_drinks(self):
         # gets price from string and modifies if needed

@@ -29,6 +29,8 @@ def get_random_from_keyed_lists(key, dictionary):
         messagebox.showinfo(title="Oops!", message=f"ERROR - failed to find {key} in \n{dictionary}")
         return "ERROR"
 
+def get_random_int_from_tuple(tuple_data):
+    return randint(tuple_data[0], tuple_data[1])
 
 def get_random_chance_entry(dictionary_list, chance_key):
     """returns a dictionary from a list by making a random 1 - 100 roll and consulting the chance_key in the dictionary

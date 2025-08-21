@@ -23,6 +23,12 @@ food_type_cost = {
     "Food_Best": 6
 }
 
+food_type_available = {
+    "Cheap": {"Food_Common": (0, 2), "Food_Poor": (2, 3)},
+    "Average": {"Food_Good": (0, 1), "Food_Common": (1, 3), "Food_Poor": (1, 1)},
+    "Expensive": {"Food_Best": (0, 1), "Food_Good": (2, 3), "Food_Common": (1, 1)}
+}
+
 known_for_sets = [
     [0], [1], [2], [1, 2], [1, 2], [1, 1, 2], [1, 2, 2]
 ]
@@ -79,10 +85,9 @@ class Inn:
         self.details = self.get_text(inn_data["Details"])
         self.proprietor = None
         # TODO known_for probs needs own method to deal with tags
-        self.known_for = self.get_known_for()  # f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
+        self.known_for = self.get_known_for(quality)
         # TODO add process tags to set cost_mods etc
         self.quality = self.set_quality(quality)
-        self.process_tags()
         self.drinks = []
         self.menu = []
         self.create_drinks()
@@ -94,12 +99,16 @@ class Inn:
         return f"The {name_1} {name_2}"
 
     def set_quality(self, quality):
-        if quality != "None":
+        if quality == "None":
             return self.process_tags()
         else:
+            # TODO we should possibly create tags for user input Quality? and/or cost_mods?
             return quality
 
-    def get_known_for(self):
+    def get_known_for(self, quality):
+        # TODO set known for according to quality - could be list subsets?
+        if quality != "None":
+            return
         known_for = ""
         known_for_set = choice(known_for_sets)
         if len(known_for_set) > 0:
@@ -149,7 +158,6 @@ class Inn:
             elif "Cheap" in tag:
                 self.modify_cost_mods(tag, "Cheap")
             print(tag)
-
         return create_quality_from_cost_mods(self.cost_mods)
 
     def modify_cost_mods(self, tag_line, cost_type):
@@ -173,12 +181,20 @@ class Inn:
             self.drinks.append(drink)
 
     def create_menu(self):
-        # TODO use Quality of Inn
-        # TODO check all tags to see if any contain 'Dessert' - could optimise in get_tags_from_string
-
-        self.menu.append(self.get_food_item('Food_Poor'))
-        self.menu.append(self.get_food_item('Food_Common'))
-        self.menu.append(self.get_food_item('Food_Good'))
+        print(f"In Create Menu - Quality = {self.quality}")
+        available_food = food_type_available[self.quality]
+        for food_type in available_food:
+            num_type = utilities.get_random_int_from_tuple(available_food[food_type])
+            for n in range(num_type):
+                self.menu.append(self.get_food_item(food_type))
+        # Now Add Dessert if available
+        for t in self.tags:
+            if "Dessert" in t:
+                print("!!!!Dessert Found!!!!")
+                num_desserts = randint(1, 3)
+                for d in range(num_desserts):
+                    self.menu.append(self.get_food_item("Food_Dessert"))
+                return
 
     def get_food_item(self, food_type):
         food = choice(inn_data[food_type])
@@ -197,6 +213,8 @@ class Inn:
 
     def set_proprietor(self, innkeep):
         self.proprietor = innkeep
+
+# ----------------------------------------- GET OUTPUT ----------------------------
 
     def get_output(self):
         # TODO Add kwargs - see same method in character_creator

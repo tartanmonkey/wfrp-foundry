@@ -42,16 +42,38 @@ def init_data():
         print(f"Inn Data initialised - num entries: {len(inn_data)}")
 
 
+def get_cost_mod(cost):
+    if cost == "Expensive":
+        return 0.25
+    if cost == "Cheap":
+        return -0.25
+    else:
+        print(f"WARNING: got unhandled cos mod: {cost}")
+        return 0
+
+
+def create_quality_from_cost_mods(cost_mods):
+    value = 0
+    quality = "Average"
+    for k in cost_mods:
+        value += cost_mods[k]
+    if value > 3:
+        quality = "Expensive"
+    elif value < 3:
+        quality = "Cheap"
+    print(f"TOTAL VALUE: {value} - QUALITY: {quality}")
+    return quality
+
 
 # ---------------------------- INN CLASS ----------------------------------------
 
 
 class Inn:
 
-    def __init__(self):
+    def __init__(self, quality="None"):
         self.name = self.create_name()
         self.tags = []
-        self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 2.1, "Rooms": 1.0}
+        self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 1.0, "Rooms": 1.0}
         self.description = self.get_text(inn_data["Size"])
         self.condition = self.get_text(inn_data["State of repair"])
         self.details = self.get_text(inn_data["Details"])
@@ -59,7 +81,8 @@ class Inn:
         # TODO known_for probs needs own method to deal with tags
         self.known_for = self.get_known_for()  # f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
         # TODO add process tags to set cost_mods etc
-        self.set_cost_mods()
+        self.quality = self.set_quality(quality)
+        self.process_tags()
         self.drinks = []
         self.menu = []
         self.create_drinks()
@@ -70,34 +93,71 @@ class Inn:
         name_2 = choice(inn_data["Name_2"])
         return f"The {name_1} {name_2}"
 
+    def set_quality(self, quality):
+        if quality != "None":
+            return self.process_tags()
+        else:
+            return quality
+
     def get_known_for(self):
         known_for = ""
-        # TODO get choice(known_for_sets) above and iterate through
+        known_for_set = choice(known_for_sets)
+        if len(known_for_set) > 0:
+            for s in known_for_set:
+                # TODO could add logic to catch if not 1 line and last line and add 'and'
+                # TODO or instead make known_for a list and handle in get_output
+                if s == 1:
+                    # TODO handle duplicates, possibly make local list of know_for 2 to check against
+                    text = f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
+                    text = self.get_text(text, False)
+                    known_for += f"{text}, "
+                elif s == 2:
+                    known_for += f"{self.get_text(inn_data['Known_for_3'])} {self.get_text(inn_data['Known_for_4'])}, "
         return known_for
 
-    def get_text(self, text_list):
-        text = choice(text_list)
+    def get_text(self, text, is_list=True):
+        if is_list:
+            text = choice(text)
         print(text)
         if "[" in text:
-            tag = utilities.get_key_from_string(text)
-            if len(tag) > 0:
-                self.tags.append(tag)
-                text = utilities.replace_text(text, f"[{tag}]", '')
+            text = self.get_tags_from_string(text)
         # TODO check for bracketed options now too
-        # TODO probably also worth creating function for 'replace_in_string'
         return text
 
-    def set_cost_mods(self):
-        increment = 0.25
-        for tag in self.tags:
-            if tag == "Expensive":
-                self.cost_mods["All"] += increment
-            elif tag == "Cheap":
-                self.cost_mods["All"] -= increment
-            elif "Expensive" in tag:
-                # TODO handle specific goods
-                print(f"Got tag: {tag}")
+    def get_tags_from_string(self, text):
+        num_tags = text.count("[")
+        tag = ""
+        # TODO could add a local tag list here to deal with Dessert which doesn't take an adjective
+        while num_tags > 0:
+            new_tag = utilities.get_key_from_string(text)
+            text = utilities.replace_text(text, f"[{new_tag}]", '')
+            # TODO *might* need to add a space if more than one tag
+            tag += new_tag
+            num_tags -= 1
+        if len(tag) > 0:
+            self.tags.append(tag)
+        return text
 
+    def process_tags(self):
+        # TODO remember we need to handle Dessert
+        for tag in self.tags:
+            if tag == "Expensive" or tag == "Cheap":
+                self.cost_mods["All"] += get_cost_mod(tag)
+            # now handle specific goods
+            elif "Expensive" in tag:
+                self.modify_cost_mods(tag, "Expensive")
+            elif "Cheap" in tag:
+                self.modify_cost_mods(tag, "Cheap")
+            print(tag)
+
+        return create_quality_from_cost_mods(self.cost_mods)
+
+    def modify_cost_mods(self, tag_line, cost_type):
+        tag_subject = utilities.replace_text(tag_line, cost_type, '')
+        if tag_subject in self.cost_mods:
+            self.cost_mods[tag_subject] += get_cost_mod(cost_type)
+        else:
+            print(f"Missing tag_subject from self.cost_mods: {tag_subject}")
 
     def create_drinks(self):
         # gets price from string and modifies if needed
@@ -113,8 +173,8 @@ class Inn:
             self.drinks.append(drink)
 
     def create_menu(self):
-        # TODO actually make this be a dictionary with costs
-        # TODO have specifics depend on Quality or Condition of Inn
+        # TODO use Quality of Inn
+        # TODO check all tags to see if any contain 'Dessert' - could optimise in get_tags_from_string
 
         self.menu.append(self.get_food_item('Food_Poor'))
         self.menu.append(self.get_food_item('Food_Common'))
@@ -142,7 +202,7 @@ class Inn:
         # TODO Add kwargs - see same method in character_creator
         text = self.name
         text += f"\n{self.description}, {self.condition} with {self.details}"
-        text += f"\nKnown for {self.known_for}"
+        text += self.get_known_for_output()
         text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
         if self.proprietor.has_family():
             text += self.get_family_output()
@@ -151,6 +211,13 @@ class Inn:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
+        return text
+
+    def get_known_for_output(self):
+        text = ""
+        # TODO probably update to handle known_for as a list rather than string so we can add 'and'
+        if len(self.known_for) > 0:
+            text = f"\nKnown for {self.known_for}"
         return text
 
     def get_family_output(self):

@@ -111,17 +111,26 @@ class Inn:
             return
         known_for = ""
         known_for_set = choice(known_for_sets)
+        track_duplicates = []
         if len(known_for_set) > 0:
+            set_adj = "Known_for_1"
+            set_noun = "Known_for_2"
             for s in known_for_set:
                 # TODO could add logic to catch if not 1 line and last line and add 'and'
                 # TODO or instead make known_for a list and handle in get_output
-                if s == 1:
-                    # TODO handle duplicates, possibly make local list of know_for 2 to check against
-                    text = f"{choice(inn_data['Known_for_1'])} {choice(inn_data['Known_for_2'])}"
+                if s == 2:
+                    set_adj = "Known_for_3"
+                    set_noun = "Known_for_4"
+                noun = choice(inn_data[set_noun])
+                if noun not in track_duplicates:
+                    track_duplicates.append(noun)
+                    adjective = choice(inn_data[set_adj])
+                    text = f"{adjective} {noun}"
                     text = self.get_text(text, False)
                     known_for += f"{text}, "
-                elif s == 2:
-                    known_for += f"{self.get_text(inn_data['Known_for_3'])} {self.get_text(inn_data['Known_for_4'])}, "
+                else:
+                    # For debug only...
+                    print(f"!!!!!!!!!!! Binning duplicate Known For noun: {noun}")
         return known_for
 
     def get_text(self, text, is_list=True):
@@ -148,7 +157,7 @@ class Inn:
         return text
 
     def process_tags(self):
-        # TODO remember we need to handle Dessert
+        # Note we don't handle Dessert and just check for it in create_menu
         for tag in self.tags:
             if tag == "Expensive" or tag == "Cheap":
                 self.cost_mods["All"] += get_cost_mod(tag)
@@ -186,7 +195,12 @@ class Inn:
         for food_type in available_food:
             num_type = utilities.get_random_int_from_tuple(available_food[food_type])
             for n in range(num_type):
-                self.menu.append(self.get_food_item(food_type))
+                food = self.get_food_item(food_type)
+                if food not in self.menu:
+                    self.menu.append(food)
+                else:
+                    # For Debug only
+                    print(f"!!!!! Duplicate Food - binning: {food}")
         # Now Add Dessert if available
         for t in self.tags:
             if "Dessert" in t:
@@ -206,7 +220,7 @@ class Inn:
         goods_type = goods
         if "Food" in goods:
             goods_type = "Food"
-        print("Got Food Type: " + goods_type)
+        # print("Got Food Type: " + goods_type)
         multiplier = self.cost_mods["All"] + self.cost_mods[goods_type]
         cost_value = round(cost_value * multiplier)
         return cost_value

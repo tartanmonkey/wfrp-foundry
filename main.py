@@ -793,7 +793,8 @@ label_output.grid(column=0, row=9, columnspan=10)
 #print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()
 
-
+# test_pennies = 256
+# print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
 
 
 window.mainloop()

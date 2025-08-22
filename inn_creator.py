@@ -82,6 +82,7 @@ class Inn:
         self.name = self.create_name()
         self.tags = []
         self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 1.0, "Rooms": 1.0}
+        # TODO if passed in quality it really ought to affect description & condition - could build list using tags?
         self.description = self.get_text(inn_data["Size"])
         self.condition = self.get_text(inn_data["State of repair"])
         self.details = self.get_text(inn_data["Details"])
@@ -226,7 +227,8 @@ class Inn:
         # print("Got Food Type: " + goods_type)
         multiplier = self.cost_mods["All"] + self.cost_mods[goods_type]
         cost_value = round(cost_value * multiplier)
-        return cost_value
+        cost_notation = utilities.get_cash_notation(cost_value)
+        return cost_notation
 
     def set_proprietor(self, innkeep):
         self.proprietor = innkeep

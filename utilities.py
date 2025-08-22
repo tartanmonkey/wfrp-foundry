@@ -207,6 +207,30 @@ def replace_text(text, replace, new):
         return text
 
 
+def get_cash_notation(pennies):
+    """Gets correct money notation requires pennies as argument"""
+    pennies_value = int(pennies)  # in case this is a string
+    if pennies_value < 12:
+        return f"{pennies}d"
+    elif pennies_value > 239:
+        gold_remainder = pennies_value % 240
+        if gold_remainder == 0:
+            gold = int(pennies_value/240)
+            return f"{gold}GC"
+        else:
+            gold = int((pennies_value - gold_remainder) / 240)
+            remainder = gold_remainder % 12
+            silver = int((gold_remainder - remainder) / 12)
+            if remainder == 0:
+                remainder = '-'
+            return f"{gold}GC {silver}/{remainder}"
+    else:
+        remainder = pennies_value % 12
+        silver = int((pennies_value - remainder)/12)
+        if remainder == 0:
+            remainder = '-'
+        return f"{silver}/{remainder}"
+
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
     """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and

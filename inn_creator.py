@@ -15,13 +15,15 @@ proprietor_type = [
 ]
 
 food_type_cost = {
-    "Food_Dessert": 6,
-    "Food_Seafood": 6,
+    "Food_Dessert": 8,
+    "Food_Seafood": 12,
     "Food_Poor": 6,
-    "Food_Common": 6,
-    "Food_Good": 6,
-    "Food_Best": 6
+    "Food_Common": 10,
+    "Food_Good": 14,
+    "Food_Best": 18
 }
+
+room_cost = {"Common": 10, "Private": 120}
 
 food_type_available = {
     "Cheap": {"Food_Common": (0, 2), "Food_Poor": (2, 3)},
@@ -239,6 +241,7 @@ class Inn:
         text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
         if self.proprietor.has_family():
             text += self.get_family_output()
+        text += f"\n{self.get_rooms_output()}"
         text += f"\nProduce:\n"
         for d in self.drinks:
             text += f"{d}, "
@@ -265,4 +268,10 @@ class Inn:
                     added_child = True
             else:
                 text += f"{self.proprietor.family[n].get_output()}"
+        return text
+
+    def get_rooms_output(self):
+        text = "Rooms:"
+        for rooms in room_cost:
+            text += f" {rooms} ({self.get_cost('Rooms', room_cost[rooms])}),"
         return text

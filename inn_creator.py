@@ -187,7 +187,8 @@ class Inn:
             type_with_price = drink_type.replace(to_remove, to_add)
             drink_adjective = choice(inn_data['Drink_1'])
             drink = f"{drink_adjective} {type_with_price}"
-            self.drinks.append(drink)
+            if drink not in self.drinks:
+                self.drinks.append(drink)
 
     def create_menu(self):
         print(f"In Create Menu - Quality = {self.quality}")

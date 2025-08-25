@@ -210,6 +210,7 @@ def click_create_inn():
     innkeep = create_innkeep(innkeep_data)
     innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
     inn.set_proprietor(innkeep)
+    # TODO add get clientele numbers here, create and set
     label_output["text"] = inn.get_output()
     pyperclip.copy(label_output["text"])
 
@@ -560,6 +561,12 @@ def test_random_race_data():
         print(f"{career} chances: {data['chance']}")
 
 
+def test_print_careers(race="Human"):
+    for key, value in career_data.items():
+        if race in value['chance']:
+            print(key)
+
+
 def kwarg_test(a, b, **my_data):
     print(f"a = {a}")
     print(f"a = {b}")
@@ -796,5 +803,6 @@ label_output.grid(column=0, row=9, columnspan=10)
 # test_pennies = 256
 # print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
 
+# test_print_careers()
 
 window.mainloop()

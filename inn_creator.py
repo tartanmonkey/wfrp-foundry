@@ -11,7 +11,7 @@ from family_member import FamilyMember
 proprietor_type = [
     {"chance": (0, 90), "race": "Human", "family_chance": 50},
     {"chance": (90, 94), "race": "Halfling", "family_chance": 25},
-    {"chance": (94, 98), "race": "Dwarf", "family_chance": 10},
+    {"chance": (94, 100), "race": "Dwarf", "family_chance": 10},
 ]
 
 food_type_cost = {
@@ -34,6 +34,20 @@ food_type_available = {
 known_for_sets = [
     [0], [1], [2], [1, 2], [1, 2], [1, 1, 2], [1, 2, 2]
 ]
+
+clientele_group = [
+    {"chance": (0, 10), "group": "pilgrims"},
+    {"chance": (10, 30), "group": "family"},
+    {"chance": (30, 60), "group": "travellers group"},
+    {"chance": (60, 90), "group": "merchant caravan"},
+    {"chance": (90, 100), "group": "road warden patrol"},
+]
+
+clientele_sets = {
+    "Quiet": {"coach": (0, 0), "clientele_group": (0, 1), "travellers": (1, 1)},
+    "Middling": {"coach": (1, 2), "clientele_group": (1, 1), "travellers": (1, 2)},
+    "Busy": {"coach": (2, 2), "clientele_group": (1, 2), "travellers": (2, 3)}
+}
 
 inn_data = {}  # Dictionary for holding all Inn data keyed to column headings in the csv
 

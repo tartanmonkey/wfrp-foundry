@@ -5,6 +5,9 @@ town_folk = ["Townsman", "Villager", "Artisan", "Stevedore", "Boatman", "Servant
 dock_gang = ["Stevedore", "Racketeer", "Protagonist", "Smuggler"]
 guardian_band = ["Servant", "Hunter", "Villager", "Pedlar", "Stevedore", "Bawd", "Outlaw", "Soldier"]
 bandit_gang = ["Hunter", "Soldier", "Outlaw", "Outlaw", "Villager", "Protagonist"]
+travellers_group = ["Engineer", "Lawyer", "Nun", "Priest", "Scholar", "Artisan", "Merchant", "Townsman", "Miner", "Villager", "Entertainer", "Soldier"]
+traveller = ["Apothecary", "Lawyer", "Physician", "Priest", "Scholar", "Wizard", "Agitator", "Artisan", "Investigator", "Merchant", "Rat Catcher", "Townsman", "Advisor", "Artist", "Duellist", "Envoy", "Noble", "Servant", "Spy", "Warden", "Bailiff", "Herbalist", "Hunter", "Miner", "Mystic", "Scout", "Villager", "Bounty Hunter", "Entertainer", "Messenger", "Pedlar", "Witch Hunter", "Smuggler", "Stevedore", "Bawd", "Charlatan", "Fence", "Grave Robber", "Outlaw", "Racketeer", "Thief", "Cavalryman", "Knight", "Pit Fighter", "Protagonist", "Soldier", "Warrior Priest"]
+noble_retinue = ["Physician", "Priest", "Scholar", "Advisor", "Artist", "Envoy", "Servant", "Spy", "Guard", "Knight", "Bailiff", "Warden", "Entertainer", "Guard", "Engineer", "Hunter"]
 
 # note members can also have a "magic" key
 # level will randomize if 2 vals not equal, using 2nd as 'highest'
@@ -44,5 +47,43 @@ groups = {
     "bandit gang": [
             {"number": (1, 1), "career": ["Outlaw"], "level": (2, 3), "details": ["Motivated", "Basic"]},
             {"number": (2, 6), "career": bandit_gang, "level": (1, 2), "details": ["Default", "None", "Quirky", "Basic"]}
-        ]
+        ],
+    "noble party": [
+        {"number": (1, 3), "career": ["Noble"], "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (1, 3), "career": noble_retinue, "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (2, 4), "career": ["Servant"], "level": (1, 3), "details": ["Motivated", "Basic"]}
+    ],
+    "coach": [
+        {"number": (2, 2), "career": ["Coachman"], "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (2, 4), "career": travellers_group, "level": (1, 2), "details": ["Motivated", "Basic"], "group_type": "collective"},
+        {"number": (1, 4), "career": traveller, "level": (1, 2), "details": ["Motivated", "Basic"]}
+    ],
+    "coach noble": [
+        {"number": (2, 2), "career": ["Coachman"], "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (1, 2), "career": ["Noble"], "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (1, 2), "career": noble_retinue, "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (2, 4), "career": ["Servant"], "level": (1, 3), "details": ["Motivated", "Basic"]}
+    ],
+    "merchant caravan": [
+        {"number": (1, 1), "career": ["Merchant"], "level": (2, 3), "details": ["Motivated", "Basic"]},
+        {"number": (3, 7), "career": ["Coachman", "Merchant", "Villager", "Townsman", "Smuggler"], "level": (1, 2), "details": ["Motivated", "Basic"]},
+        {"number": (2, 4), "career": ["Guard"], "level": (1, 2), "details": ["Motivated", "Basic"]},
+    ],
+    "travellers": [
+        {"number": (1, 5), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"]}
+    ],
+    "travellers group": [
+        {"number": (2, 6), "career": travellers_group, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "collective"}
+    ],
+    "pilgrims": [
+        {"number": (1, 1), "career": ["Priest", "Mystic", "Charlatan", "Nun", "Warrior Priest", "Flagellant"], "level": (1, 3), "details": ["Motivated", "Basic"]},
+        {"number": (2, 7), "career": ["Priest", "Nun", "Flagellant", "Flagellant", "Villager", "Beggar", "Townsman", "Villager", "Townsman", "Noble"], "level": (1, 2), "details": ["Motivated", "Basic"]},
+    ],
+    "family": [
+        {"number": (1, 1), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "collective"},
+    ],
+    "road warden patrol": [
+        {"number": (1, 1), "career": ["Road Warden"], "level": (2, 3), "details": ["Captain"]},
+        {"number": (3, 5), "career": ["Road Warden"], "level": (1, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
+    ],
 }

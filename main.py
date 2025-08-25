@@ -392,11 +392,16 @@ def create_group(group_type):
         magic = "None"
         if "magic" in members:
             magic = members["magic"]
+        collective_career = ""  # Added for handling Groups of travellers where they all share one random career
+        if len(collective_career) == 0 and "group_type" in members:
+            if members["group_type"] == "collective":
+                collective_career = choice(members["career"])
+                # print(f"Got collective career: {collective_career}")
         for member in range(num_members):
             details_set = "one_line_traits"
             if not checked_one_line_details_state.get():
                 details_set = get_details_data(race, choice(members["details"]))
-                print("!!Not One Line Details!!")
+                # print("!!Not One Line Details!!")
             details = create_character_details(get_gender(), race, details_set, checked_wiki_output_state.get())
             # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
             level = members["level"][1]
@@ -405,7 +410,10 @@ def create_group(group_type):
                     level = randint(members["level"][0], members["level"][1])
                 else:
                     level = get_random_level(level)
-            career_key = choice(members["career"])
+            career_key = collective_career
+            print(f"Collective career here: {collective_career}")
+            if len(career_key) == 0:
+                career_key = choice(members["career"])
             group_member = create_character(career_key, level, race, magic, details)
             # test for leader = should always be first
             if len(group) == 0:

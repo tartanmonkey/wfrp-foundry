@@ -92,7 +92,7 @@ def create_quality_from_cost_mods(cost_mods):
 
 class Inn:
 
-    def __init__(self, quality="None"):
+    def __init__(self, quality="from tags", occupied="random"):
         self.name = self.create_name()
         self.tags = []
         self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 1.0, "Rooms": 1.0}
@@ -104,11 +104,16 @@ class Inn:
         # TODO known_for probs needs own method to deal with tags
         self.known_for = self.get_known_for(quality)
         # TODO add process tags to set cost_mods etc
-        self.quality = self.set_quality(quality)
+        self.quality = self.set_quality(quality)  # qualities: "Average","Expensive","Cheap"
         self.drinks = []
         self.menu = []
         self.create_drinks()
         self.create_menu()
+        self.occupied = ""  # occupied: "Quiet", "Middling", "Busy"
+        if occupied == "random":
+            self.occupied = choice(["Quiet", "Middling", "Middling", "Busy"])
+        else:
+            self.occupied = occupied
 
     def create_name(self):
         name_1 = choice(inn_data["Name_1"])
@@ -116,7 +121,7 @@ class Inn:
         return f"The {name_1} {name_2}"
 
     def set_quality(self, quality):
-        if quality == "None":
+        if quality == "from tags":
             return self.process_tags()
         else:
             # TODO we should possibly create tags for user input Quality? and/or cost_mods?
@@ -124,7 +129,7 @@ class Inn:
 
     def get_known_for(self, quality):
         # TODO set known for according to quality - could be list subsets?
-        if quality != "None":
+        if quality != "from tags":
             return
         known_for = ""
         known_for_set = choice(known_for_sets)
@@ -263,11 +268,12 @@ class Inn:
         if self.proprietor.has_family():
             text += self.get_family_output()
         text += f"\n{self.get_rooms_output()}"
-        text += f"\nProduce:\n"
+        text += f"\n\nProduce:\n"
         for d in self.drinks:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
+        text += f"\n\nOccupied: {self.occupied} - Clientele:"
         return text
 
     def get_known_for_output(self):

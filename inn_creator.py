@@ -142,7 +142,12 @@ class Inn:
         print(text)
         if "[" in text:
             text = self.get_tags_from_string(text)
-        # TODO check for bracketed options now too
+        # now handle alternatives divided by /
+        elif "(" in text:
+            substring = get_key_from_string(text, "(", ")")
+            if "/" in substring:
+                random_selection = get_random_item(substring, "/")
+                text = replace_text(text, f"({substring})", random_selection)
         return text
 
     def get_tags_from_string(self, text):

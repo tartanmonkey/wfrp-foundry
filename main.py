@@ -211,34 +211,21 @@ def click_create_inn():
     innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
     inn.set_proprietor(innkeep)
     # TODO add get clientele numbers here, create and set
+    clientele_groups = inn.get_clientele_groups()
+    inn.set_clientele(create_inn_clientele(clientele_groups))
     label_output["text"] = inn.get_output()
     pyperclip.copy(label_output["text"])
 
-def create_innkeep(innkeep_data):
-    # print(f"Inkeep race: {innkeep_data['race']} family chance: {innkeep_data['family_chance']}")
-    gender = choice(["male", "female"])
-    details = create_character_details(gender, innkeep_data['race'], "one_line_traits", checked_wiki_output_state.get())
-    level = 2  # TODO probs add a range, or maybe even user input here
-    innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
-    return innkeep
 
-def create_character_family(person, family_chance):
-    family = []
-    roll = randint(1, 100)
-    # TODO implement using some kind of data here rather than hard coded number of adults and children
-    if roll <= family_chance:
-        is_other_adult = choice([True, False])
-        if is_other_adult:
-            other_adult = FamilyMember(True, person.details["Gender"], person.race)
-            family.append(other_adult)
-            if other_adult.is_sibling():
-                return family  # if its a sibling we stop here and don't roll any children
-        num_children = choice([0, 0, 0, 0, 1, 2, 3, 5])
-        for x in range(0, num_children):
-            child = FamilyMember(False, person.details["Gender"], person.race)
-            family.append(child)
+def create_inn_clientele(clientele_types):
+    clientele = []
+    for c in clientele_types:
+        new_group = {"group_name": c, "members": []}
+        # TODO create actual group then...
+        clientele.append(new_group)
+    return clientele
 
-    return family
+
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
     for k, v in attribs.items():
@@ -362,6 +349,34 @@ def init_ui_career_dropdown(race='Human'):  # Note hack (maybe?) of passing race
 # -------------------------- FUNCTIONALITY --------------------------------------
 
 
+def create_innkeep(innkeep_data):
+    # print(f"Inkeep race: {innkeep_data['race']} family chance: {innkeep_data['family_chance']}")
+    gender = choice(["male", "female"])
+    details = create_character_details(gender, innkeep_data['race'], "one_line_traits", checked_wiki_output_state.get())
+    level = 2  # TODO probs add a range, or maybe even user input here
+    innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
+    return innkeep
+
+
+def create_character_family(person, family_chance):
+    family = []
+    roll = randint(1, 100)
+    # TODO implement using some kind of data here rather than hard coded number of adults and children
+    if roll <= family_chance:
+        is_other_adult = choice([True, False])
+        if is_other_adult:
+            other_adult = FamilyMember(True, person.details["Gender"], person.race)
+            family.append(other_adult)
+            if other_adult.is_sibling():
+                return family  # if its a sibling we stop here and don't roll any children
+        num_children = choice([0, 0, 0, 0, 1, 2, 3, 5])
+        for x in range(0, num_children):
+            child = FamilyMember(False, person.details["Gender"], person.race)
+            family.append(child)
+
+    return family
+
+
 def create_dreams(num_dreams):
     dream_text = ""
     for n in range(num_dreams):
@@ -380,6 +395,7 @@ def create_dreams(num_dreams):
     print(dream_text)
     label_output["text"] = dream_text
     pyperclip.copy(dream_text)
+
 
 def create_group(group_type):
     print(f"Clicked create group: {group_type}")

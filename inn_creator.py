@@ -40,12 +40,12 @@ clientele_group = [
     {"chance": (10, 30), "group": "family"},
     {"chance": (30, 60), "group": "travellers group"},
     {"chance": (60, 90), "group": "merchant caravan"},
-    {"chance": (90, 100), "group": "road warden patrol"},
+    {"chance": (90, 100), "group": "road warden patrol", "no_duplicates": True},
 ]
 
 clientele_sets = {
     "Quiet": {"coach": (0, 0), "clientele_group": (0, 1), "travellers": (1, 1)},
-    "Middling": {"coach": (1, 2), "clientele_group": (1, 1), "travellers": (1, 2)},
+    "Middling": {"coach": (1, 1), "clientele_group": (1, 1), "travellers": (1, 2)},
     "Busy": {"coach": (2, 2), "clientele_group": (1, 2), "travellers": (2, 3)}
 }
 
@@ -87,6 +87,11 @@ def create_quality_from_cost_mods(cost_mods):
     return quality
 
 
+def get_coach_type(quality):
+    if quality == "Cheap":
+        return "coach"
+    coach_type = choice(["coach", "coach", "coach noble"])
+    return coach_type
 # ---------------------------- INN CLASS ----------------------------------------
 
 
@@ -114,6 +119,7 @@ class Inn:
             self.occupied = choice(["Quiet", "Middling", "Middling", "Busy"])
         else:
             self.occupied = occupied
+        self.clientele = []
 
     def create_name(self):
         name_1 = choice(inn_data["Name_1"])
@@ -257,6 +263,30 @@ class Inn:
     def set_proprietor(self, innkeep):
         self.proprietor = innkeep
 
+    def get_clientele_groups(self):
+        groups = []
+        clientele_pool = clientele_sets[self.occupied]
+        for group_type in clientele_pool:
+            num_type = utilities.get_random_int_from_tuple(clientele_pool[group_type])
+            # print(f"Group {group_type} num_type = {num_type}")
+            for n in range(num_type):
+                if group_type == "coach":
+                    groups.append(get_coach_type(self.quality))
+                elif group_type == "clientele_group":
+                    # TODO now pick partic group and check for duplicates where needed
+                    group_data = utilities.get_random_chance_entry(clientele_group, "chance")
+                    if "no_duplicates" in group_data:
+                        if group_data["group"] not in groups:
+                            groups.append(group_data["group"])
+                    else:
+                        groups.append(group_data["group"])
+                else:
+                    groups.append(group_type)
+        return groups
+
+    def set_clientele(self, clientele):
+        self.clientele = clientele
+
 # ----------------------------------------- GET OUTPUT ----------------------------
 
     def get_output(self):
@@ -273,7 +303,7 @@ class Inn:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
-        text += f"\n\nOccupied: {self.occupied} - Clientele:"
+        text += self.get_clientele_output()
         return text
 
     def get_known_for_output(self):
@@ -301,4 +331,13 @@ class Inn:
         text = "Rooms:"
         for rooms in room_cost:
             text += f" {rooms} ({self.get_cost('Rooms', room_cost[rooms])}),"
+        return text
+
+    def get_clientele_output(self):
+        text = f"\n\nOccupied: {self.occupied} - Clientele:"
+        for group in self.clientele:
+            text += f"\n{group['group_name']}"
+            for member in group["members"]:
+                # TODO get character output
+                pass
         return text

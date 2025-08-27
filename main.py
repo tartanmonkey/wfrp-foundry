@@ -211,20 +211,12 @@ def click_create_inn():
     innkeep = create_innkeep(innkeep_data)
     innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
     inn.set_proprietor(innkeep)
-    # TODO add get clientele numbers here, create and set
     clientele_groups = inn.get_clientele_groups()
     inn.set_clientele(create_inn_clientele(clientele_groups))
-    label_output["text"] = inn.get_output()
+    include_traits = checked_one_line_traits_state.get() == 1
+    one_line_stats = checked_one_line_stats_state.get() == 1
+    label_output["text"] = inn.get_output(include_traits, one_line_stats)
     pyperclip.copy(label_output["text"])
-
-
-def create_inn_clientele(clientele_types):
-    clientele = []
-    for c in clientele_types:
-        new_group = {"group_name": c, "members": create_group(c, details="one_line")}
-        # TODO create actual group then...
-        clientele.append(new_group)
-    return clientele
 
 
 def attribute_test():
@@ -378,6 +370,14 @@ def create_character_family(person, family_chance):
     return family
 
 
+def create_inn_clientele(clientele_types):
+    clientele = []
+    for c in clientele_types:
+        new_group = {"group_name": c, "members": create_group(c, details="one_line")}
+        clientele.append(new_group)
+    return clientele
+
+
 def create_dreams(num_dreams):
     dream_text = ""
     for n in range(num_dreams):
@@ -405,6 +405,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
     add_relationship = checked_add_relationships_state.get() == 1
     # override user input options if passed - added for inn clientele 27/8/25
     if "details" in options:
+        print(f"Got details in options: {options['details']}")
         one_line_details = options["details"] == "one_line"
     if "relationship" in options:
         add_relationship = options["relationship"] == "random"
@@ -425,7 +426,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             details_set = "one_line_traits"
             if not one_line_details:
                 details_set = get_details_data(race, choice(members["details"]))
-                # print("!!Not One Line Details!!")
+                print("!!Not One Line Details!!")
             details = create_character_details(get_gender(), race, details_set, checked_wiki_output_state.get())
             # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
             level = members["level"][1]

@@ -55,7 +55,7 @@ groups = {
     ],
     "coach": [
         {"number": (2, 2), "career": ["Coachman"], "level": (1, 3), "details": ["Motivated", "Basic"]},
-        {"number": (2, 4), "career": travellers_group, "level": (1, 2), "details": ["Motivated", "Basic"], "group_type": "collective"},
+        {"number": (2, 3), "career": travellers_group, "level": (1, 2), "details": ["Motivated", "Basic"], "group_type": "collective"},
         {"number": (1, 4), "career": traveller, "level": (1, 2), "details": ["Motivated", "Basic"]}
     ],
     "coach noble": [
@@ -70,14 +70,14 @@ groups = {
         {"number": (2, 4), "career": ["Guard"], "level": (1, 2), "details": ["Motivated", "Basic"]},
     ],
     "travellers": [
-        {"number": (1, 5), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"]}
+        {"number": (1, 4), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"]}
     ],
     "travellers group": [
-        {"number": (2, 6), "career": travellers_group, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "collective"}
+        {"number": (2, 5), "career": travellers_group, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "collective"}
     ],
     "pilgrims": [
         {"number": (1, 1), "career": ["Priest", "Mystic", "Charlatan", "Nun", "Warrior Priest", "Flagellant"], "level": (1, 3), "details": ["Motivated", "Basic"]},
-        {"number": (2, 7), "career": ["Priest", "Nun", "Flagellant", "Flagellant", "Villager", "Beggar", "Townsman", "Villager", "Townsman", "Noble"], "level": (1, 2), "details": ["Motivated", "Basic"]},
+        {"number": (2, 6), "career": ["Priest", "Nun", "Flagellant", "Flagellant", "Villager", "Beggar", "Townsman", "Villager", "Townsman", "Noble"], "level": (1, 2), "details": ["Motivated", "Basic"]},
     ],
     "family": [
         {"number": (1, 1), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "collective"},

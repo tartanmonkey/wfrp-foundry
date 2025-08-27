@@ -45,8 +45,8 @@ clientele_group = [
 
 clientele_sets = {
     "Quiet": {"coach": (0, 0), "clientele_group": (0, 1), "travellers": (1, 1)},
-    "Middling": {"coach": (1, 1), "clientele_group": (1, 1), "travellers": (1, 2)},
-    "Busy": {"coach": (2, 2), "clientele_group": (1, 2), "travellers": (2, 3)}
+    "Middling": {"coach": (1, 1), "clientele_group": (0, 1), "travellers": (1, 2)},
+    "Busy": {"coach": (1, 2), "clientele_group": (1, 1), "travellers": (1, 2)}
 }
 
 inn_data = {}  # Dictionary for holding all Inn data keyed to column headings in the csv
@@ -289,7 +289,7 @@ class Inn:
 
 # ----------------------------------------- GET OUTPUT ----------------------------
 
-    def get_output(self):
+    def get_output(self, clientele_traits, clientele_stats):
         # TODO Add kwargs - see same method in character_creator
         text = self.name
         text += f"\n{self.description}, {self.condition} with {self.details}"
@@ -303,7 +303,7 @@ class Inn:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
-        text += self.get_clientele_output()
+        text += self.get_clientele_output(clientele_traits, clientele_stats)
         return text
 
     def get_known_for_output(self):
@@ -333,11 +333,12 @@ class Inn:
             text += f" {rooms} ({self.get_cost('Rooms', room_cost[rooms])}),"
         return text
 
-    def get_clientele_output(self):
+    def get_clientele_output(self, clientele_traits, clientele_stats):
         text = f"\n\nOccupied: {self.occupied} - Clientele:"
         for group in self.clientele:
-            text += f"\n{group['group_name']}"
+            text += f"\n\n-- {group['group_name'].capitalize()} --"
             for member in group["members"]:
-                # TODO get character output
-                pass
+                text += f"\n{member.get_one_line_details(clientele_traits)}"
+                if clientele_stats:
+                    text += f"\n{member.get_one_line_stats()}\n"
         return text

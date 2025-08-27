@@ -191,7 +191,8 @@ def click_add_levels():
 def click_create_group():
     group_type = groups_dropdown.get()
     if group_type in groups:
-        create_group(group_type)
+        group = create_group(group_type)
+        output_group(group)
     else:
         valid_groups = ""
         for k, v in groups.items():
@@ -220,7 +221,7 @@ def click_create_inn():
 def create_inn_clientele(clientele_types):
     clientele = []
     for c in clientele_types:
-        new_group = {"group_name": c, "members": []}
+        new_group = {"group_name": c, "members": create_group(c, details="one_line")}
         # TODO create actual group then...
         clientele.append(new_group)
     return clientele
@@ -397,9 +398,16 @@ def create_dreams(num_dreams):
     pyperclip.copy(dream_text)
 
 
-def create_group(group_type):
+def create_group(group_type, **options):  # details="one_line", relationship="random"
     print(f"Clicked create group: {group_type}")
     group = []
+    one_line_details = checked_one_line_details_state.get() == 1
+    add_relationship = checked_add_relationships_state.get() == 1
+    # override user input options if passed - added for inn clientele 27/8/25
+    if "details" in options:
+        one_line_details = options["details"] == "one_line"
+    if "relationship" in options:
+        add_relationship = options["relationship"] == "random"
     for members in groups[group_type]:
         num_members = randint(members["number"][0], members["number"][1])
         print(f"would create {num_members} group members")
@@ -415,7 +423,7 @@ def create_group(group_type):
                 # print(f"Got collective career: {collective_career}")
         for member in range(num_members):
             details_set = "one_line_traits"
-            if not checked_one_line_details_state.get():
+            if not one_line_details:
                 details_set = get_details_data(race, choice(members["details"]))
                 # print("!!Not One Line Details!!")
             details = create_character_details(get_gender(), race, details_set, checked_wiki_output_state.get())
@@ -436,7 +444,7 @@ def create_group(group_type):
                 print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
             group.append(group_member)
     # if Add Relationship ticked add one for each member of group
-    if checked_add_relationships_state.get() == 1:
+    if add_relationship:
         print("would create relationships now")
         for person in group:
             # get random person in group who is not me
@@ -444,17 +452,17 @@ def create_group(group_type):
             subject_name = subject.details['Name'].replace('*', '')
             # add_detail("Relationship", name-of-other-person)
             person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
+    return group
+
+
+def output_group(group):
     group_text = ""
     save_text = ""
     if checked_one_line_details_state.get():
         for person in group:
-            # traits = ""
-            # if checked_one_line_traits_state.get():
-            #     traits = get_one_line_traits()
-            # group_text += f"{person.details['Name']} {person.get_one_line_title()} {person.details['Description']} {traits} \n"
             group_text += f"{person.get_one_line_details(checked_one_line_traits_state.get())} \n"
-            # todo now check for one line stats and handle here - would mean for a group must also have one line deets
-            if checked_one_line_stats_state.get():  # <<<< Now implement Checkbox
+            # check for one line stats and handle here - would mean for a group must also have one line deets
+            if checked_one_line_stats_state.get():
                 group_text += f"{person.get_one_line_stats()}\n"
             if "Relationship" in person.details:
                 group_text += f"{person.details['Relationship']}\n\n"
@@ -462,7 +470,6 @@ def create_group(group_type):
                 group_text += "\n"
             save_text = group_text
     else:
-
         if checked_minimal_stats_state.get() == 1:  # output minimal description
             for person in group:
                 group_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
@@ -816,6 +823,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 #backgrounds.test("I have a [21]")
 #test_character_data()
 #kwarg_test(1, 10, name="Jojo", gender="male")
+#kwarg_test(1, 10)
 #test_random_race_data()
 
 #output_trappings_data(career_data)

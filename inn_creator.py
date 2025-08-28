@@ -92,6 +92,18 @@ def get_coach_type(quality):
         return "coach"
     coach_type = choice(["coach", "coach", "coach noble"])
     return coach_type
+
+def get_coach_output(coach_group, clientele_traits, clientele_stats):
+    text = ""
+    subtitle = "- Passengers -"
+    for member in coach_group:
+        if member.career != "Coachman" and subtitle == "- Passengers -":
+            text += f"\n{subtitle}"
+            subtitle = ""
+        text += f"\n{member.get_one_line_details(clientele_traits)}"
+        if clientele_stats:
+                text += f"\n{member.get_one_line_stats()}\n"
+    return text
 # ---------------------------- INN CLASS ----------------------------------------
 
 
@@ -287,6 +299,7 @@ class Inn:
     def set_clientele(self, clientele):
         self.clientele = clientele
 
+
 # ----------------------------------------- GET OUTPUT ----------------------------
 
     def get_output(self, clientele_traits, clientele_stats):
@@ -337,8 +350,16 @@ class Inn:
         text = f"\n\nOccupied: {self.occupied} - Clientele:"
         for group in self.clientele:
             text += f"\n\n-- {group['group_name'].capitalize()} --"
-            for member in group["members"]:
-                text += f"\n{member.get_one_line_details(clientele_traits)}"
-                if clientele_stats:
-                    text += f"\n{member.get_one_line_stats()}\n"
+            # Handle coach separately so can split out passengers...
+            if "coach" in group['group_name']:
+                text += get_coach_output(group["members"], clientele_traits, clientele_stats)
+            else:
+                for member in group["members"]:
+                    text += f"\n{member.get_one_line_details(clientele_traits)}"
+                    if clientele_stats:
+                        text += f"\n{member.get_one_line_stats()}\n"
         return text
+
+
+
+

@@ -706,7 +706,7 @@ checked_one_line_career_state = IntVar()
 checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=checked_one_line_career_state)
 checked_one_line_stats_state = IntVar()
 checkbutton_one_line_stats = Checkbutton(text="One line stats?", variable=checked_one_line_stats_state)
-checked_one_line_stats_state.set(1)
+checked_one_line_stats_state.set(0)
 
 # Vessels
 label_vessel = Label(text="Vessel:")

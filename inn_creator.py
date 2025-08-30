@@ -104,6 +104,7 @@ def get_coach_output(coach_group, clientele_traits, clientele_stats):
         if clientele_stats:
                 text += f"\n{member.get_one_line_stats()}\n"
     return text
+
 # ---------------------------- INN CLASS ----------------------------------------
 
 
@@ -309,7 +310,7 @@ class Inn:
         text += self.get_known_for_output()
         text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
         if self.proprietor.has_family():
-            text += self.get_family_output()
+            text += self.proprietor.get_family_output()
         text += f"\n{self.get_rooms_output()}"
         text += f"\n\nProduce:\n"
         for d in self.drinks:
@@ -324,20 +325,6 @@ class Inn:
         # TODO probably update to handle known_for as a list rather than string so we can add 'and'
         if len(self.known_for) > 0:
             text = f"\nKnown for {self.known_for}"
-        return text
-
-    def get_family_output(self):
-        text = f"\nFamily: "
-        added_child = False
-        for n in range(0, len(self.proprietor.family)):
-            if self.proprietor.family[n].relationship == "Child":
-                if added_child:
-                    text += f", {self.proprietor.family[n].get_output()}"
-                else:
-                    text += f"\nChildren: {self.proprietor.family[n].get_output()}"
-                    added_child = True
-            else:
-                text += f"{self.proprietor.family[n].get_output()}"
         return text
 
     def get_rooms_output(self):
@@ -358,6 +345,8 @@ class Inn:
                     text += f"\n{member.get_one_line_details(clientele_traits)}"
                     if clientele_stats:
                         text += f"\n{member.get_one_line_stats()}\n"
+                    if member.has_family():
+                        text += member.get_family_output()
         return text
 
 

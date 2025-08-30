@@ -80,7 +80,7 @@ groups = {
         {"number": (2, 6), "career": ["Priest", "Nun", "Flagellant", "Flagellant", "Villager", "Beggar", "Townsman", "Villager", "Townsman", "Noble"], "level": (1, 2), "details": ["Motivated", "Basic"]},
     ],
     "family": [
-        {"number": (1, 1), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "collective"},
+        {"number": (1, 1), "career": traveller, "level": (1, 3), "details": ["Motivated", "Basic"], "group_type": "family"},
     ],
     "road warden patrol": [
         {"number": (1, 1), "career": ["Road Warden"], "level": (2, 3), "details": ["Captain"]},

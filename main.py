@@ -444,6 +444,11 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             if len(group) == 0:
                 print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
             group.append(group_member)
+    # add family if specified
+    if "group_type" in members:
+        if members["group_type"] == "family":
+            for person in group:
+                person.family = create_character_family(person, 100)
     # if Add Relationship ticked add one for each member of group
     if add_relationship:
         print("would create relationships now")

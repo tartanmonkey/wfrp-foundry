@@ -110,11 +110,12 @@ def get_coach_output(coach_group, clientele_traits, clientele_stats):
 
 class Inn:
 
-    def __init__(self, quality="random", occupied="random"):
+    def __init__(self, quality, occupied):
         self.name = self.create_name()
         self.tags = []
         self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 1.0, "Rooms": 1.0}
         # TODO if passed in quality it really ought to affect description & condition - could build list using tags?
+        self.quality = quality
         self.description = self.get_text(inn_data["Size"])
         self.condition = self.get_text(inn_data["State of repair"])
         self.details = self.get_text(inn_data["Details"])
@@ -122,7 +123,10 @@ class Inn:
         # TODO known_for probs needs own method to deal with tags
         self.known_for = self.get_known_for(quality)
         # TODO add process tags to set cost_mods etc
-        self.quality = self.set_quality(quality)  # qualities: "Average","Expensive","Cheap"
+        # self.quality = self.set_quality(quality)  # qualities: "Average","Expensive","Cheap"
+        self.process_tags()
+        if self.quality == "random":
+            self.quality = create_quality_from_cost_mods(self.cost_mods)
         self.drinks = []
         self.menu = []
         self.create_drinks()
@@ -138,13 +142,6 @@ class Inn:
         name_1 = choice(inn_data["Name_1"])
         name_2 = choice(inn_data["Name_2"])
         return f"The {name_1} {name_2}"
-
-    def set_quality(self, quality):
-        if quality == "random":
-            return self.process_tags()
-        else:
-            # TODO we should possibly create tags for user input Quality? and/or cost_mods?
-            return quality
 
     def get_known_for(self, quality):
         # TODO set known for according to quality - could be list subsets?
@@ -213,7 +210,6 @@ class Inn:
             elif "Cheap" in tag:
                 self.modify_cost_mods(tag, "Cheap")
             print(tag)
-        return create_quality_from_cost_mods(self.cost_mods)
 
     def modify_cost_mods(self, tag_line, cost_type):
         tag_subject = utilities.replace_text(tag_line, cost_type, '')

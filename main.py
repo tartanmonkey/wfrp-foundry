@@ -209,7 +209,7 @@ def click_create_dreams():
 
 def click_create_inn():
     global inn
-    inn = Inn("random", inn_occupied_dropdown.get())
+    inn = Inn(inn_quality_dropdown.get(), inn_occupied_dropdown.get())
     innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
     innkeep = create_innkeep(innkeep_data)
     innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])

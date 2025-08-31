@@ -114,16 +114,13 @@ class Inn:
         self.name = self.create_name()
         self.tags = []
         self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 1.0, "Rooms": 1.0}
-        # TODO if passed in quality it really ought to affect description & condition - could build list using tags?
         self.quality = quality
-        self.description = self.get_text(inn_data["Size"])
-        self.condition = self.get_text(inn_data["State of repair"])
-        self.details = self.get_text(inn_data["Details"])
+        self.description = self.get_text(inn_data["Size"], True)
+        self.condition = self.get_text(inn_data["State of repair"], True)
+        self.details = self.get_text(inn_data["Details"], True, False)
         self.proprietor = None
-        # TODO known_for probs needs own method to deal with tags
-        self.known_for = self.get_known_for(quality)
-        # TODO add process tags to set cost_mods etc
-        # self.quality = self.set_quality(quality)  # qualities: "Average","Expensive","Cheap"
+        # TODO potentially replace with list so its easier to output nice
+        self.known_for = self.get_known_for()
         self.process_tags()
         if self.quality == "random":
             self.quality = create_quality_from_cost_mods(self.cost_mods)
@@ -143,15 +140,12 @@ class Inn:
         name_2 = choice(inn_data["Name_2"])
         return f"The {name_1} {name_2}"
 
-    def get_known_for(self, quality):
-        # TODO set known for according to quality - could be list subsets?
-        if quality != "random":
-            return
+    def get_known_for(self):
         known_for = ""
         known_for_set = choice(known_for_sets)
         track_duplicates = []
         if len(known_for_set) > 0:
-            set_adj = "Known_for_1"
+            set_adj = "Known_for_1"  # TODO only this set needs to catch Tags
             set_noun = "Known_for_2"
             for s in known_for_set:
                 # TODO could add logic to catch if not 1 line and last line and add 'and'
@@ -162,18 +156,34 @@ class Inn:
                 noun = choice(inn_data[set_noun])
                 if noun not in track_duplicates:
                     track_duplicates.append(noun)
-                    adjective = choice(inn_data[set_adj])
+                    adj_list = inn_data[set_adj]
+                    if set_adj == "Known_for_1":
+                        if self.quality != "random":
+                            if self.quality == "Average":
+                                adj_list = [item for item in inn_data["Known_for_1"] if "Cheap" not in item and "Expensive" not in item]
+                            else:
+                                adj_list = [item for item in inn_data["Known_for_1"] if self.quality in item]
+                    adjective = choice(adj_list)
+
                     text = f"{adjective} {noun}"
-                    text = self.get_text(text, False)
+                    text = self.get_text(text, False, False)
                     known_for += f"{text}, "
                 else:
                     # For debug only...
                     print(f"!!!!!!!!!!! Binning duplicate Known For noun: {noun}")
         return known_for
 
-    def get_text(self, text, is_list=True):
+    def get_text(self, text, is_list=True, use_quality=True):
         if is_list:
-            text = choice(text)
+            text_list = text
+            # if user input has set quality prune list to only relevant
+            if use_quality:
+                if self.quality != "random":
+                    if self.quality != "Average":
+                        text_list = [item for item in text if self.quality in item]
+                    else:
+                        text_list = [item for item in text if "Cheap" not in item and "Expensive" not in item]
+            text = choice(text_list)
         print(text)
         if "[" in text:
             text = self.get_tags_from_string(text)

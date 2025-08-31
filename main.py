@@ -612,6 +612,11 @@ def test_print_careers(race="Human"):
             print(key)
 
 
+def test_list_pruning(text, exclude_1, exclude_2):
+    text_list = [item for item in text if exclude_1 not in item and exclude_2 not in item]
+    for item in text_list:
+        print(item)
+
 def kwarg_test(a, b, **my_data):
     print(f"a = {a}")
     print(f"a = {b}")
@@ -859,7 +864,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 
 # test_pennies = 256
 # print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
-
+test_list_pruning(["Cheap Fries", "Expensive Eggs", "Ham", "Cheap Peas", "Mushrooms"], "Cheap", "Expensive")
 # test_print_careers()
 
 window.mainloop()

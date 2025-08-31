@@ -377,6 +377,10 @@ def create_inn_clientele(clientele_types):
     clientele = []
     for c in clientele_types:
         new_group = {"group_name": c, "members": create_group(c, details="one_line")}
+        if c == "merchant caravan":
+            num_goods = int(len(new_group["members"])/3)
+            print(f"num goods: {num_goods}")
+            new_group["goods"] = f" {trade_creator.get_cargo_simple(num_goods)}"
         clientele.append(new_group)
     return clientele
 

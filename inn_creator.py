@@ -39,7 +39,7 @@ clientele_group = [
     {"chance": (0, 10), "group": "pilgrims"},
     {"chance": (10, 30), "group": "family"},
     {"chance": (30, 60), "group": "travellers group"},
-    {"chance": (60, 90), "group": "merchant caravan"},
+    {"chance": (60, 100), "group": "merchant caravan"},
     {"chance": (90, 100), "group": "road warden patrol", "no_duplicates": True},
 ]
 
@@ -336,7 +336,11 @@ class Inn:
     def get_clientele_output(self, clientele_traits, clientele_stats):
         text = f"\n\nOccupied: {self.occupied} - Clientele:"
         for group in self.clientele:
-            text += f"\n\n-- {group['group_name'].capitalize()} --"
+            goods = ""
+            # add goods to title if group contains it
+            if "goods" in group:
+                goods = group["goods"]
+            text += f"\n\n-- {group['group_name'].capitalize()}{goods} --"
             # Handle coach separately so can split out passengers...
             if "coach" in group['group_name']:
                 text += get_coach_output(group["members"], clientele_traits, clientele_stats)

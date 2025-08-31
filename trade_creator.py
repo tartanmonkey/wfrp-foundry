@@ -185,6 +185,11 @@ def get_cargo(vessel):
     return cargo
 
 
+def get_cargo_simple(num_types):
+    text = "Cargo: "
+    for n in range(num_types):
+        text += f"{get_random_chance_entry(goods_data, 'chance')['trade_good']}, "
+    return text
 def get_passenger_numbers(vessel):
     passenger_numbers = []
     if roll_under(vessel["passenger_chance"]):

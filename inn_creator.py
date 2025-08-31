@@ -110,7 +110,7 @@ def get_coach_output(coach_group, clientele_traits, clientele_stats):
 
 class Inn:
 
-    def __init__(self, quality="from tags", occupied="random"):
+    def __init__(self, quality="random", occupied="random"):
         self.name = self.create_name()
         self.tags = []
         self.cost_mods = {"All": 0.0, "Food": 1.0, "Drink": 1.0, "Rooms": 1.0}
@@ -140,7 +140,7 @@ class Inn:
         return f"The {name_1} {name_2}"
 
     def set_quality(self, quality):
-        if quality == "from tags":
+        if quality == "random":
             return self.process_tags()
         else:
             # TODO we should possibly create tags for user input Quality? and/or cost_mods?
@@ -148,7 +148,7 @@ class Inn:
 
     def get_known_for(self, quality):
         # TODO set known for according to quality - could be list subsets?
-        if quality != "from tags":
+        if quality != "random":
             return
         known_for = ""
         known_for_set = choice(known_for_sets)

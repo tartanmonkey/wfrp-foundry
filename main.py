@@ -64,6 +64,9 @@ magic_options = ["None", "Beasts", "Death", "Fire", "Heavens", "Metal", "Life", 
                   "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena", "Hedgecraft",
                   "Witchcraft", "Daemonology", "Necromancy", "Petty", "Arcane"]
 group_options = []
+
+inn_busy_states = ["random", "Quiet", "Middling", "Busy"]
+inn_quality_options = ["random", "Cheap", "Average", "Expensive"]
 inn = None
 
 # ------------------------ BUTTON FUNCTIONS ----------------------------
@@ -206,7 +209,7 @@ def click_create_dreams():
 
 def click_create_inn():
     global inn
-    inn = Inn()
+    inn = Inn("random", inn_occupied_dropdown.get())
     innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
     innkeep = create_innkeep(innkeep_data)
     innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
@@ -471,12 +474,13 @@ def output_group(group):
             if checked_one_line_stats_state.get():
                 group_text += f"{person.get_one_line_stats()}\n"
             if "Relationship" in person.details:
-                group_text += f"{person.details['Relationship']}\n\n"
-            else:
-                group_text += "\n"
+                group_text += f"{person.details['Relationship']}\n"
+            if person.has_family():
+                group_text += person.get_family_output(False)
+            group_text += "\n"
             save_text = group_text
     else:
-        if checked_minimal_stats_state.get() == 1:  # output minimal description
+        if checked_minimal_stats_state.get() == 1:  # output only description
             for person in group:
                 group_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
                 save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
@@ -735,6 +739,13 @@ button_dreams = Button(text="Create Dreams", command=click_create_dreams)
 # Inns
 
 label_inns = Label(text="Inns: ")
+label_inn_quality = Label(text="Quality:")
+inn_quality_dropdown = ttk.Combobox(values=inn_quality_options)
+inn_quality_dropdown.set("random")
+label_inn_clientele = Label(text="Clientele:")
+inn_occupied_dropdown = ttk.Combobox(values=inn_busy_states)
+inn_occupied_dropdown.set("random")
+
 button_inns = Button(text="Create Inn", command=click_create_inn)
 
 # Output
@@ -814,7 +825,11 @@ button_dreams.grid(column=2, row=6)
 
 # Inns
 label_inns.grid(column=0, row=7)
-button_inns.grid(column=1, row=7)
+label_inn_quality.grid(column=1, row=7)
+inn_quality_dropdown.grid(column=2, row=7)
+label_inn_clientele.grid(column=3, row=7)
+inn_occupied_dropdown.grid(column=4, row=7)
+button_inns.grid(column=5, row=7)
 
 
 # Output

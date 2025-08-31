@@ -906,8 +906,11 @@ class GameCharacter:
             return f"{self.career} {domain} ({self.level} {self.title}) {self.status} - {self.race}"
         return f"{self.career} ({self.level} {self.title}) {self.status} - {self.race}"
 
-    def get_family_output(self):
-        text = f"\nFamily: "
+    def get_family_output(self, start_on_new_line=True):
+        nl = "\n"
+        if not start_on_new_line:
+            nl = ""
+        text = f"{nl}Family: "
         added_child = False
         for n in range(0, len(self.family)):
             if self.family[n].relationship == "Child":

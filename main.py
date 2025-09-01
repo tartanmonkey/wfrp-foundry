@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 import json
+from tkinter.messagebox import showinfo
 
 import pandas
 
@@ -68,7 +69,8 @@ group_options = []
 inn_busy_states = ["random", "Quiet", "Middling", "Busy"]
 inn_quality_options = ["random", "Cheap", "Average", "Expensive"]
 inn = None
-
+character_group = []
+add_relationships = 0
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -192,15 +194,29 @@ def click_add_levels():
 
 
 def click_create_group():
+    global character_group
     group_type = groups_dropdown.get()
     if group_type in groups:
-        group = create_group(group_type)
-        output_group(group)
+        character_group = create_group(group_type)
+        output_group(character_group)
     else:
         valid_groups = ""
         for k, v in groups.items():
             valid_groups += k + ", "
         messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group, choose from: {valid_groups}")
+
+
+def click_update_group():
+    global add_relationships
+    print("Update Group!")
+    if add_relationships != checked_add_relationships_state.get():
+        if checked_add_relationships_state.get() == 1:
+            add_group_relationships(character_group)
+        add_relationships = checked_add_relationships_state.get()
+    if len(character_group) > 0:
+        output_group(character_group)
+    else:
+        messagebox.showinfo(title="Oops!", message=f"No group to update! Create one first")
 
 
 def click_create_dreams():
@@ -218,6 +234,24 @@ def click_create_inn():
     inn.set_clientele(create_inn_clientele(clientele_groups))
     output_inn()
 
+def inn_occupied_changed(event):
+    # print("Woot this worked!!!!")
+    # showinfo(
+    #     title='Result',
+    #     message=f'You selected {inn_occupied_dropdown.get()}!'
+    # )
+    on_inn_input_changed()
+
+
+def inn_show_clientele_changed():
+    # print("Woot this worked!!!!")
+    on_inn_input_changed()
+
+
+def on_inn_input_changed():
+    if inn is not None:
+        button_update_inn["state"] = "normal"
+
 
 def output_inn():
     if inn is not None:
@@ -232,7 +266,16 @@ def output_inn():
 
 def click_update_inn():
     # TODO add checking if clientele has changed
+    amount_clientele = inn_occupied_dropdown.get()
+    if amount_clientele != "random":
+        if amount_clientele != inn.occupied:
+            inn.set_occupied(amount_clientele)
+            clientele_groups = inn.get_clientele_groups()
+            inn.set_clientele(create_inn_clientele(clientele_groups))
+
     output_inn()
+    # commented out as we may want to re-output when group inputs are changed
+    # button_update_inn["state"] = "DISABLED"
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -421,13 +464,13 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
     print(f"Clicked create group: {group_type}")
     group = []
     one_line_details = checked_one_line_details_state.get() == 1
-    add_relationship = checked_add_relationships_state.get() == 1
+    create_relationships = checked_add_relationships_state.get() == 1
     # override user input options if passed - added for inn clientele 27/8/25
     if "details" in options:
         print(f"Got details in options: {options['details']}")
         one_line_details = options["details"] == "one_line"
     if "relationship" in options:
-        add_relationship = options["relationship"] == "random"
+        create_relationships = options["relationship"] == "random"
     for members in groups[group_type]:
         num_members = randint(members["number"][0], members["number"][1])
         print(f"would create {num_members} group members")
@@ -469,8 +512,14 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             for person in group:
                 person.family = create_character_family(person, 100)
     # if Add Relationship ticked add one for each member of group
-    if add_relationship:
-        print("would create relationships now")
+    add_relationships != checked_add_relationships_state.get()
+    if create_relationships:
+        group = add_group_relationships(group)
+    return group
+
+
+def add_group_relationships(group):
+    if len(group) > 1:
         for person in group:
             # get random person in group who is not me
             subject = utilities.get_random_list_item(group, person)
@@ -489,7 +538,7 @@ def output_group(group):
             # check for one line stats and handle here - would mean for a group must also have one line deets
             if checked_one_line_stats_state.get():
                 group_text += f"{person.get_one_line_stats()}\n"
-            if "Relationship" in person.details:
+            if checked_show_relationships_state.get() == 1 and "Relationship" in person.details:
                 group_text += f"{person.details['Relationship']}\n"
             if person.has_family():
                 group_text += person.get_family_output(False)
@@ -720,8 +769,10 @@ groups_dropdown.set(choice(group_options))
 checked_minimal_stats_state = IntVar()
 checkbutton_minimal_stats = Checkbutton(text="No Stats?", variable=checked_minimal_stats_state)
 checked_add_relationships_state = IntVar()
+add_relationships = checked_add_relationships_state.get()
 checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
 button_group = Button(text="Create Group", command=click_create_group)
+button_update_group = Button(text="Update Group", command=click_update_group)
 
 
 # Details Options
@@ -737,6 +788,9 @@ checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=check
 checked_one_line_stats_state = IntVar()
 checkbutton_one_line_stats = Checkbutton(text="One line stats?", variable=checked_one_line_stats_state)
 checked_one_line_stats_state.set(0)
+checked_show_relationships_state = IntVar()
+checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)
+checked_show_relationships_state.set(1)
 
 # Vessels
 label_vessel = Label(text="Vessel:")
@@ -766,11 +820,12 @@ inn_quality_dropdown.set("random")
 label_inn_clientele = Label(text="Clientele:")
 inn_occupied_dropdown = ttk.Combobox(values=inn_busy_states)
 inn_occupied_dropdown.set("random")
+inn_occupied_dropdown.bind('<<ComboboxSelected>>', inn_occupied_changed)
 checked_show_clientele_state = IntVar()
-checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state)
+checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state, command=inn_show_clientele_changed)
 checked_show_clientele_state.set(1)
 button_inns = Button(text="Create Inn", command=click_create_inn)
-button_update_inn = Button(text="Update Inn", command=click_update_inn)
+button_update_inn = Button(text="Update Inn", command=click_update_inn, state=DISABLED)
 
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
@@ -823,6 +878,7 @@ groups_dropdown.grid(column=1, row=3)
 checkbutton_minimal_stats.grid(column=2, row=3)
 checkbutton_add_relationships.grid(column=3, row=3)
 button_group.grid(column=4, row=3)
+button_update_group.grid(column=5, row=3)
 
 # Details Options
 
@@ -831,6 +887,7 @@ checkbutton_one_line.grid(column=1, row=4)
 checkbutton_one_line_traits.grid(column=2, row=4)
 checkbutton_one_line_career.grid(column=3, row=4)
 checkbutton_one_line_stats.grid(column=4, row=4)
+checkbutton_show_relationships.grid(column=5, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)

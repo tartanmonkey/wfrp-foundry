@@ -306,6 +306,8 @@ class Inn:
     def set_clientele(self, clientele):
         self.clientele = clientele
 
+    def set_occupied(self, new_quantity_clientele):
+        self.occupied = new_quantity_clientele
 
 # ----------------------------------------- GET OUTPUT ----------------------------
 

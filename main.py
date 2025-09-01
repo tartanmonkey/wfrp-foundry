@@ -216,11 +216,23 @@ def click_create_inn():
     inn.set_proprietor(innkeep)
     clientele_groups = inn.get_clientele_groups()
     inn.set_clientele(create_inn_clientele(clientele_groups))
-    include_traits = checked_one_line_traits_state.get() == 1
-    one_line_stats = checked_one_line_stats_state.get() == 1
-    label_output["text"] = inn.get_output(include_traits, one_line_stats)
-    pyperclip.copy(label_output["text"])
+    output_inn()
 
+
+def output_inn():
+    if inn is not None:
+        include_traits = checked_one_line_traits_state.get() == 1
+        one_line_stats = checked_one_line_stats_state.get() == 1
+        show_clientele = checked_show_clientele_state.get() == 1
+        label_output["text"] = inn.get_output(include_traits, one_line_stats, show_clientele)
+        pyperclip.copy(label_output["text"])
+    else:
+        messagebox.showinfo(title="Oops!", message=f"Create Inn first!")
+
+
+def click_update_inn():
+    # TODO add checking if clientele has changed
+    output_inn()
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -754,8 +766,11 @@ inn_quality_dropdown.set("random")
 label_inn_clientele = Label(text="Clientele:")
 inn_occupied_dropdown = ttk.Combobox(values=inn_busy_states)
 inn_occupied_dropdown.set("random")
-
+checked_show_clientele_state = IntVar()
+checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state)
+checked_show_clientele_state.set(1)
 button_inns = Button(text="Create Inn", command=click_create_inn)
+button_update_inn = Button(text="Update Inn", command=click_update_inn)
 
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
@@ -838,7 +853,9 @@ label_inn_quality.grid(column=1, row=7)
 inn_quality_dropdown.grid(column=2, row=7)
 label_inn_clientele.grid(column=3, row=7)
 inn_occupied_dropdown.grid(column=4, row=7)
-button_inns.grid(column=5, row=7)
+checkbutton_show_clientele.grid(column=5, row=7)
+button_inns.grid(column=6, row=7)
+button_update_inn.grid(column=7, row=7)
 
 
 # Output

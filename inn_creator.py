@@ -309,7 +309,7 @@ class Inn:
 
 # ----------------------------------------- GET OUTPUT ----------------------------
 
-    def get_output(self, clientele_traits, clientele_stats):
+    def get_output(self, clientele_traits, clientele_stats, show_clientele):
         # TODO Add kwargs - see same method in character_creator
         text = self.name
         text += f"\n{self.description}, {self.condition} with {self.details}"
@@ -323,7 +323,7 @@ class Inn:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
-        text += self.get_clientele_output(clientele_traits, clientele_stats)
+        text += self.get_clientele_output(clientele_traits, clientele_stats, show_clientele)
         return text
 
     def get_known_for_output(self):
@@ -339,24 +339,26 @@ class Inn:
             text += f" {rooms} ({self.get_cost('Rooms', room_cost[rooms])}),"
         return text
 
-    def get_clientele_output(self, clientele_traits, clientele_stats):
-        text = f"\n\nOccupied: {self.occupied} - Clientele:"
-        for group in self.clientele:
-            goods = ""
-            # add goods to title if group contains it
-            if "goods" in group:
-                goods = group["goods"]
-            text += f"\n\n-- {group['group_name'].capitalize()}{goods} --"
-            # Handle coach separately so can split out passengers...
-            if "coach" in group['group_name']:
-                text += get_coach_output(group["members"], clientele_traits, clientele_stats)
-            else:
-                for member in group["members"]:
-                    text += f"\n{member.get_one_line_details(clientele_traits)}"
-                    if clientele_stats:
-                        text += f"\n{member.get_one_line_stats()}\n"
-                    if member.has_family():
-                        text += member.get_family_output()
+    def get_clientele_output(self, clientele_traits, clientele_stats, show_clientele):
+        text = f"\n\nOccupied: {self.occupied}"
+        if show_clientele:
+            text += " - Clientele:"
+            for group in self.clientele:
+                goods = ""
+                # add goods to title if group contains it
+                if "goods" in group:
+                    goods = group["goods"]
+                text += f"\n\n-- {group['group_name'].capitalize()}{goods} --"
+                # Handle coach separately so can split out passengers...
+                if "coach" in group['group_name']:
+                    text += get_coach_output(group["members"], clientele_traits, clientele_stats)
+                else:
+                    for member in group["members"]:
+                        text += f"\n{member.get_one_line_details(clientele_traits)}"
+                        if clientele_stats:
+                            text += f"\n{member.get_one_line_stats()}\n"
+                        if member.has_family():
+                            text += member.get_family_output()
         return text
 
 

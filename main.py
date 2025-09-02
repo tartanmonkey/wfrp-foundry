@@ -13,7 +13,7 @@ import utilities
 import group_data
 import inn_creator
 import family_member
-from family_member import FamilyMember
+from family_member import FamilyMember, create_persons_family
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
     init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
     get_one_line_traits
@@ -228,7 +228,8 @@ def click_create_inn():
     inn = Inn(inn_quality_dropdown.get(), inn_occupied_dropdown.get())
     innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
     innkeep = create_innkeep(innkeep_data)
-    innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
+    # innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
+    innkeep.family = create_persons_family(innkeep, innkeep_data['family_chance'])
     inn.set_proprietor(innkeep)
     clientele_groups = inn.get_clientele_groups()
     inn.set_clientele(create_inn_clientele(clientele_groups))
@@ -410,25 +411,6 @@ def create_innkeep(innkeep_data):
     return innkeep
 
 
-def create_character_family(person, family_chance):
-    family = []
-    roll = randint(1, 100)
-    # TODO implement using some kind of data here rather than hard coded number of adults and children
-    if roll <= family_chance:
-        is_other_adult = choice([True, False])
-        if is_other_adult:
-            other_adult = FamilyMember(True, person.details["Gender"], person.race)
-            family.append(other_adult)
-            if other_adult.is_sibling():
-                return family  # if its a sibling we stop here and don't roll any children
-        num_children = choice([0, 0, 0, 0, 1, 2, 3, 5])
-        for x in range(0, num_children):
-            child = FamilyMember(False, person.details["Gender"], person.race)
-            family.append(child)
-
-    return family
-
-
 def create_inn_clientele(clientele_types):
     clientele = []
     for c in clientele_types:
@@ -511,7 +493,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
     if "group_type" in members:
         if members["group_type"] == "family":
             for person in group:
-                person.family = create_character_family(person, 100)
+                person.family = create_persons_family(person, 100)
     # if Add Relationship ticked add one for each member of group
     add_relationships != checked_add_relationships_state.get()
     if create_relationships:

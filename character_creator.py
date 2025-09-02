@@ -920,5 +920,5 @@ class GameCharacter:
                     text += f"\nChildren: {self.family[n].get_output()}"
                     added_child = True
             else:
-                text += f"{self.family[n].get_output()}"
+                text += f"{self.family[n].get_output()}, "
         return text

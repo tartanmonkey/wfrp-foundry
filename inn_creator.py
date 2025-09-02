@@ -189,10 +189,13 @@ class Inn:
             text = self.get_tags_from_string(text)
         # now handle alternatives divided by /
         elif "(" in text:
-            substring = get_key_from_string(text, "(", ")")
-            if "/" in substring:
-                random_selection = get_random_item(substring, "/")
-                text = replace_text(text, f"({substring})", random_selection)
+            while "(" in text:
+                substring = get_key_from_string(text, "(", ")")
+                if "/" in substring:
+                    random_selection = get_random_item(substring, "/")
+                    text = replace_text(text, f"({substring})", random_selection)
+                else:
+                    break
         return text
 
     def get_tags_from_string(self, text):

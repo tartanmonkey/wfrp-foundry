@@ -258,7 +258,8 @@ def output_inn():
         include_traits = checked_one_line_traits_state.get() == 1
         one_line_stats = checked_one_line_stats_state.get() == 1
         show_clientele = checked_show_clientele_state.get() == 1
-        label_output["text"] = inn.get_output(include_traits, one_line_stats, show_clientele)
+        is_wiki_output = checked_wiki_output_state.get() == 1
+        label_output["text"] = inn.get_output(include_traits, one_line_stats, show_clientele, is_wiki_output)
         pyperclip.copy(label_output["text"])
     else:
         messagebox.showinfo(title="Oops!", message=f"Create Inn first!")

@@ -233,7 +233,7 @@ class Inn:
 
     def create_drinks(self):
         # gets price from string and modifies if needed
-        for i in range(random.randint(1,3)):
+        for i in range(random.randint(2, 3)):
             drink_type = choice(inn_data['Drink_2'])
             cost = utilities.get_key_from_string(drink_type)
             to_remove = f"[{cost}]"
@@ -314,21 +314,27 @@ class Inn:
 
 # ----------------------------------------- GET OUTPUT ----------------------------
 
-    def get_output(self, clientele_traits, clientele_stats, show_clientele):
+    def get_output(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output):
         # TODO Add kwargs - see same method in character_creator
-        text = self.name
+        prefix = ""
+        if is_wiki_output:
+            prefix = "+++ "
+        text = f"{prefix}{self.name}"
         text += f"\n{self.description}, {self.condition} with {self.details}"
         text += self.get_known_for_output()
         text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
         if self.proprietor.has_family():
             text += self.proprietor.get_family_output()
         text += f"\n{self.get_rooms_output()}"
-        text += f"\n\nProduce:\n"
+        prefix = "\n"
+        if is_wiki_output:
+            prefix = "++++ "
+        text += f"\n{prefix}Produce:\n"
         for d in self.drinks:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
-        text += self.get_clientele_output(clientele_traits, clientele_stats, show_clientele)
+        text += self.get_clientele_output(clientele_traits, clientele_stats, show_clientele, is_wiki_output)
         return text
 
     def get_known_for_output(self):
@@ -344,8 +350,11 @@ class Inn:
             text += f" {rooms} ({self.get_cost('Rooms', room_cost[rooms])}),"
         return text
 
-    def get_clientele_output(self, clientele_traits, clientele_stats, show_clientele):
-        text = f"\n\nOccupied: {self.occupied}"
+    def get_clientele_output(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output):
+        prefix = "\n"
+        if is_wiki_output:
+            prefix = "++++ "
+        text = f"\n{prefix}Occupied: {self.occupied}"
         if show_clientele:
             text += " - Clientele:"
             for group in self.clientele:

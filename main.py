@@ -974,7 +974,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 #print(split_into_lines("Warning about some location visited (thieves, con-men, corrupt river wardens, corrupt officials, disease)", 10))
 #test_character_data()
 
-# test_pennies = 256
+# test_pennies = 512
 # print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
 # test_list_pruning(["Cheap Fries", "Expensive Eggs", "Ham", "Cheap Peas", "Mushrooms"], "Cheap", "Expensive")
 # test_print_careers()

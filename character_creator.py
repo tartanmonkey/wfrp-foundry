@@ -291,12 +291,14 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_one_line_details(gender, race, add_traits, career):
+def create_one_line_details(gender, race, add_traits, career, name):
     # function assumes we want wiki output and will handle detail set type itself
     traits = ""
+    if len(name) == 0:
+        name = get_random_name(gender, race)
     if add_traits:
         traits = get_one_line_traits()
-    details = f"*{get_random_name(gender, race)}* {career}{choice(details_data['Description'])}, {get_extra_detail(gender, choice(details_data['Detail']))} {traits}"
+    details = f"*{name}* {career}{choice(details_data['Description'])}, {get_extra_detail(gender, choice(details_data['Detail']))} {traits}"
     return details
 
 

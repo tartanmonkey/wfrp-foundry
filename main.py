@@ -13,7 +13,7 @@ import utilities
 import group_data
 import inn_creator
 import family_member
-from family_member import FamilyMember, create_persons_family
+from family_member import FamilyMember
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
     init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
     get_one_line_traits
@@ -120,9 +120,10 @@ def click_details():
         detail_set = choice(list(detail_data_sets.keys()))
     if checked_one_line_details_state.get():
         career = ""
+        name = ""
         if checked_one_line_career_state.get():
             career = f"({get_random_career_key()}) "
-        label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career)
+        label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career, name)
         character_details.clear()
         character_details["OneLine"] = label_output["text"]
     else:
@@ -410,6 +411,53 @@ def create_innkeep(innkeep_data):
     innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
     return innkeep
 
+
+def create_persons_family(person, family_chance):
+    family = []
+    roll = randint(1, 100)
+    # TODO implement using some kind of data here rather than hard coded number of adults and children
+    if roll <= family_chance:
+        num_other_adults = randint(0, 2)
+        num_children = choice([0, 0, 0, 0, 1, 2, 3, 5])
+        if num_other_adults == 0:
+            num_children = choice([1, 1, 1, 2, 3])
+        # create adults
+        family = []
+        for n in range(num_other_adults):
+            relationship = choice(["sibling", "parent", "partner", "partner"])
+            if relationship == "partner":
+                for relative in family:
+                    if relative.relationship == "Husband" or "Wife":
+                        relationship = "sibling"
+            if relationship == "parent":
+                # if parent random it, if find parent set specific
+                current_parents = []
+                for relative in family:
+                    if relative.is_parent():
+                        current_parents.append(relative.relationship)
+                if len(current_parents) == 0:
+                    relationship = choice(["Mother", "Father"])
+                elif len(current_parents) > 1:
+                    relationship = "sibling"
+                else:
+                    if current_parents[0] == "Mother":
+                        relationship = "Father"
+                    else:
+                        relationship = "Mother"
+            other_adult = FamilyMember(relationship, person.details["Gender"], person.race)
+            family.append(other_adult)
+        # add details to adults
+        for adult in family:
+            name = f"{adult.relationship} {adult.name}"
+            career = ""
+            add_traits = checked_one_line_traits_state.get()
+            adult.set_details(create_one_line_details(adult.gender, person.race, add_traits, career, name))
+        # create children
+        for x in range(0, num_children):
+            child = FamilyMember("child", person.details["Gender"], person.race)
+            family.append(child)
+
+    return family
 
 def create_inn_clientele(clientele_types):
     clientele = []

@@ -246,7 +246,7 @@ def inn_occupied_changed(event):
     on_inn_input_changed()
 
 
-def inn_show_clientele_changed():
+def inn_checkbox_changed():
     # print("Woot this worked!!!!")
     on_inn_input_changed()
 
@@ -262,7 +262,8 @@ def output_inn():
         one_line_stats = checked_one_line_stats_state.get() == 1
         show_clientele = checked_show_clientele_state.get() == 1
         is_wiki_output = checked_wiki_output_state.get() == 1
-        label_output["text"] = inn.get_output(include_traits, one_line_stats, show_clientele, is_wiki_output)
+        show_family = checked_innkeep_family_state.get() == 1
+        label_output["text"] = inn.get_output(include_traits, one_line_stats, show_clientele, is_wiki_output, show_family)
         pyperclip.copy(label_output["text"])
     else:
         messagebox.showinfo(title="Oops!", message=f"Create Inn first!")
@@ -855,8 +856,11 @@ inn_occupied_dropdown = ttk.Combobox(values=inn_busy_states)
 inn_occupied_dropdown.set("random")
 inn_occupied_dropdown.bind('<<ComboboxSelected>>', inn_occupied_changed)
 checked_show_clientele_state = IntVar()
-checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state, command=inn_show_clientele_changed)
+checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state, command=inn_checkbox_changed)
 checked_show_clientele_state.set(1)
+checked_innkeep_family_state = IntVar()
+checkbutton_innkeep_family = Checkbutton(text="Innkeep Family?", variable=checked_innkeep_family_state, command=inn_checkbox_changed)
+checked_innkeep_family_state.set(1)
 button_inns = Button(text="Create Inn", command=click_create_inn)
 button_update_inn = Button(text="Update Inn", command=click_update_inn, state=DISABLED)
 
@@ -944,8 +948,9 @@ inn_quality_dropdown.grid(column=2, row=7)
 label_inn_clientele.grid(column=3, row=7)
 inn_occupied_dropdown.grid(column=4, row=7)
 checkbutton_show_clientele.grid(column=5, row=7)
-button_inns.grid(column=6, row=7)
-button_update_inn.grid(column=7, row=7)
+checkbutton_innkeep_family.grid(column=6, row=7)
+button_inns.grid(column=7, row=7)
+button_update_inn.grid(column=8, row=7)
 
 
 # Output

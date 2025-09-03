@@ -314,7 +314,7 @@ class Inn:
 
 # ----------------------------------------- GET OUTPUT ----------------------------
 
-    def get_output(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output):
+    def get_output(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output, show_family):
         # TODO Add kwargs - see same method in character_creator
         prefix = ""
         if is_wiki_output:
@@ -322,10 +322,11 @@ class Inn:
         text = f"{prefix}{self.name}"
         text += f"\n{self.description}, {self.condition} with {self.details}"
         text += self.get_known_for_output()
-        text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
-        if self.proprietor.has_family():
-            text += self.proprietor.get_family_output(clientele_traits)
         text += f"\n{self.get_rooms_output()}"
+        text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
+        if show_family:
+            if self.proprietor.has_family():
+                text += self.proprietor.get_family_output(clientele_traits)
         prefix = "\n"
         if is_wiki_output:
             prefix = "++++ "

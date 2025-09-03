@@ -324,7 +324,7 @@ class Inn:
         text += self.get_known_for_output()
         text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
         if self.proprietor.has_family():
-            text += self.proprietor.get_family_output()
+            text += self.proprietor.get_family_output(clientele_traits)
         text += f"\n{self.get_rooms_output()}"
         prefix = "\n"
         if is_wiki_output:
@@ -372,7 +372,7 @@ class Inn:
                         if clientele_stats:
                             text += f"\n{member.get_one_line_stats()}\n"
                         if member.has_family():
-                            text += member.get_family_output()
+                            text += member.get_family_output(clientele_traits)
         return text
 
 

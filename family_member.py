@@ -21,10 +21,14 @@ class FamilyMember:
     def is_parent(self):
         return self.relationship == "Mother" or self.relationship == "Father"
 
-    def get_output(self):
+    def get_output(self, show_traits=True):
         if self.relationship == "Child":
             return f"{self.name} ({self.age})"
-        return f"\n{self.details}"
+        # must be adult...
+        if show_traits:
+            return f"\n{self.details}"
+        else:
+            return f"\n{utilities.get_string_up_to(self.details, '-')}"
 
     def set_gender_and_relationship(self, relationship, relative_gender):
         if relationship == "Mother":

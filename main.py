@@ -121,9 +121,10 @@ def click_details():
     if checked_one_line_details_state.get():
         career = ""
         name = ""
+        wiki_output = checked_wiki_output_state.get() == 1
         if checked_one_line_career_state.get():
             career = f"({get_random_career_key()}) "
-        label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career, name)
+        label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career, name, wiki_output)
         character_details.clear()
         character_details["OneLine"] = label_output["text"]
     else:
@@ -451,7 +452,8 @@ def create_persons_family(person, family_chance):
             name = f"{adult.relationship} {adult.name}"
             career = ""
             add_traits = checked_one_line_traits_state.get()
-            adult.set_details(create_one_line_details(adult.gender, person.race, add_traits, career, name))
+            wiki_output = checked_wiki_output_state.get() == 1
+            adult.set_details(create_one_line_details(adult.gender, person.race, add_traits, career, name, wiki_output))
         # create children
         for x in range(0, num_children):
             child = FamilyMember("child", person.details["Gender"], person.race)
@@ -572,7 +574,7 @@ def output_group(group):
             if checked_show_relationships_state.get() == 1 and "Relationship" in person.details:
                 group_text += f"{person.details['Relationship']}\n"
             if person.has_family():
-                group_text += person.get_family_output(False)
+                group_text += person.get_family_output(checked_one_line_traits_state.get(),False)
             group_text += "\n"
             save_text = group_text
     else:
@@ -969,7 +971,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 
 # test_pennies = 256
 # print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
-test_list_pruning(["Cheap Fries", "Expensive Eggs", "Ham", "Cheap Peas", "Mushrooms"], "Cheap", "Expensive")
+# test_list_pruning(["Cheap Fries", "Expensive Eggs", "Ham", "Cheap Peas", "Mushrooms"], "Cheap", "Expensive")
 # test_print_careers()
 
 window.mainloop()

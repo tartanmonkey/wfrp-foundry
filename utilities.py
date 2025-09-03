@@ -235,6 +235,12 @@ def get_cash_notation(pennies):
             remainder = '-'
         return f"{silver}/{remainder}"
 
+
+def get_string_up_to(text, limit_char):
+    end_at = text.index(limit_char)
+    print(f"end_at: {end_at}")
+    return text[0:end_at]
+
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
     """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and

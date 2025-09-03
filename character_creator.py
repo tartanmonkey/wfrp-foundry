@@ -291,14 +291,15 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_one_line_details(gender, race, add_traits, career, name):
-    # function assumes we want wiki output and will handle detail set type itself
+def create_one_line_details(gender, race, add_traits, career, name, is_wiki_output):
     traits = ""
     if len(name) == 0:
         name = get_random_name(gender, race)
+    if is_wiki_output:
+        name = f"*{name}*"
     if add_traits:
         traits = get_one_line_traits()
-    details = f"*{name}* {career}{choice(details_data['Description'])}, {get_extra_detail(gender, choice(details_data['Detail']))} {traits}"
+    details = f"{name} {career}{choice(details_data['Description'])}, {get_extra_detail(gender, choice(details_data['Detail']))} {traits}"
     return details
 
 
@@ -908,11 +909,11 @@ class GameCharacter:
             return f"{self.career} {domain} ({self.level} {self.title}) {self.status} - {self.race}"
         return f"{self.career} ({self.level} {self.title}) {self.status} - {self.race}"
 
-    def get_family_output(self, start_on_new_line=True):
+    def get_family_output(self, show_traits, start_on_new_line=True):
         nl = "\n"
         if not start_on_new_line:
             nl = ""
-        text = f"{nl}Family: "
+        text = f"{nl}Innkeep Family: "
         added_child = False
         for n in range(0, len(self.family)):
             if self.family[n].relationship == "Child":
@@ -922,5 +923,5 @@ class GameCharacter:
                     text += f"\nChildren: {self.family[n].get_output()}"
                     added_child = True
             else:
-                text += f"{self.family[n].get_output()}, "
+                text += f"{self.family[n].get_output(show_traits)}, "
         return text

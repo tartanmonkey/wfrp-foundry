@@ -13,6 +13,8 @@ import utilities
 import group_data
 import inn_creator
 import family_member
+import mutant_creator
+from mutant_creator import Mutation
 from family_member import FamilyMember
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
     init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
@@ -368,6 +370,7 @@ def init_data():
                 level_data.insert(entry['Level'] - 1, entry)
                 career_data[entry['Career']] = {'chance': career_chances, 'level_data': level_data}
     init_dream_data()
+    mutant_creator.init_mutation_data()
 
 
 def init_dream_data():
@@ -978,5 +981,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 # print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
 # test_list_pruning(["Cheap Fries", "Expensive Eggs", "Ham", "Cheap Peas", "Mushrooms"], "Cheap", "Expensive")
 # test_print_careers()
+mutant_test = Mutation()
+print(mutant_test.get_output())
 
 window.mainloop()

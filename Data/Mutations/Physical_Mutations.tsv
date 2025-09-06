@@ -1,0 +1,63 @@
+Name	Chance	Effect	BS	S	T	I	Agi	Dex	Fel
+Animalistic Legs	3	Movement +1	0	0	0	0	0	0	0
+Acid Blood	1	Corrosive Blood	0	0	0	0	0	0	0
+Beaked Face	2	Bite +2	0	0	0	0	0	0	0
+Beast Head	4	[Beast Head]	0	0	0	0	0	0	0
+Dagger Hands	1		0	0	0	0	0	0	0
+Big Ears	2	Acute Sense (Hearing)	0	0	0	0	0	0	0
+Bird Feet	2	Arboreal	0	0	0	0	0	0	0
+Blank Face	1	Fear 2	0	0	0	0	0	0	0
+Breathe Fire	1	Breath 5 (Fire)	0	0	0	0	0	0	0
+Bulging Eyes	2		0	0	0	10	0	0	0
+Burning Skin	1	On Contact pass Athletics or gain Ablaze Condition	0	0	0	0	0	0	0
+Carapace	2	1 AP to [Hit  Location] and [Hit Location]	0	0	0	0	0	0	0
+Claws	2	Hands as weapons	0	0	0	0	0	0	0
+Cloud of Flies	1	Distracting	0	0	0	0	0	0	0
+Corpulent	1	Movement -1	0	5	5	0	0	0	0
+Crested Head	2	Attractive (Beastmen & Mutants)	0	0	0	0	0	0	0
+Deafening Cry	2	Distracting	0	0	0	0	0	0	0
+Distended Digits	1		0	0	0	0	0	10	0
+Elastic Arms	2	Melee weapons +2 Reach	0	0	0	0	0	0	0
+Emaciated	1		0	-10	0	0	5	0	0
+Evil Eye	1	Auto Success Evil Eye (p256)	0	0	0	0	0	0	0
+Extra Leg Joints	1		0	0	0	0	5	0	0
+Extra Mouth	1	[Hit Location]	0	0	0	0	0	0	0
+Eyestalks	2		0	0	0	0	0	0	0
+Fleshy Tentacle	1	Tentacles	0	0	0	0	0	0	0
+Foul Odour	3	Distracting	0	0	0	0	0	0	0
+Furred Skin	1		0	0	0	0	0	0	0
+Gills	3	Breathe underwater	0	0	0	0	0	0	0
+Glowing Skin	1	Bright as a candle	0	0	0	0	0	0	0
+Headless	1	Fear 2	0	0	0	0	0	0	0
+Hopper	2	Bounce, Move 2	0	0	0	0	0	0	0
+Inhuman Beauty	1		0	0	0	0	0	0	10
+Iron Skin	2		0	0	0	0	-10	0	0
+Lolling Tongue	1	-10 Languages	0	0	0	0	0	0	0
+Long Arms	2	Reach +1	0	0	0	0	0	0	0
+Long Legs	2	Movement +2	0	0	0	0	0	0	0
+Long Neck	2	Half Body hits are Head	0	0	0	10	0	0	0
+Multiple Arms	1	one Free Attack	0	0	0	0	0	0	0
+Multiple Legs	2	Movement +1	0	0	0	0	0	0	0
+One Eye	2		-20	0	0	0	0	0	0
+Patchy Feathers	1	[Hit Location] and [Hit Location]	0	0	0	0	0	0	0
+Pin Head	2	Stupid	0	0	0	0	0	0	0
+Pointed Head	2	Stupid	0	0	0	0	0	0	0
+Rearranged Face	1	Fear 1	0	0	0	0	0	0	0
+Rotting Flesh	1	Fear 2, Infected	0	0	0	0	0	0	0
+Shifting Colours	2	Distracting	0	0	0	0	0	0	0
+Short Legs	2	Movement -1	0	0	0	0	0	0	0
+Skull Face	2	Fear 2	0	0	0	0	0	0	0
+Spiked Skin	1	1 AP, No Armour, Free (Weapon +1) Attack when Charging	0	0	0	0	0	0	0
+Suckered Hands & Feet	2	Wallcrawler	0	0	0	0	0	0	0
+Tail	2	Tail Attack (+1)	0	0	0	0	0	0	0
+Thorny Scales	1	1 AP	0	0	0	0	0	0	0
+Three Eyes	2	Acute Sense (Sight)	0	0	0	0	0	0	0
+Transparent Skin	1	Fear 2	0	0	0	0	0	0	0
+Two Heads	2	Ambidextrous	0	0	0	0	0	0	0
+Uneven Horns	1	1 AP Head, Horns (+1)	0	0	0	0	0	0	0
+Unusual Skin	3	striped, spotted, boils etc	0	0	0	0	0	0	0
+Warp Frenzy	1	Frenzy, while Frenzied gain [Physical Mutation]	0	0	0	0	0	0	0
+Webbed Feet	2	Trait: Amphibious	0	0	0	0	0	0	0
+Weeping Pus	1	Hit Location, Trait: Infected	0	0	0	0	0	0	0
+Whiskered Snout	1	+10 Track	0	0	0	0	0	0	0
+Wings	1	Trait: Flight 60	0	0	0	0	0	0	0

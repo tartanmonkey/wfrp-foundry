@@ -48,10 +48,22 @@ def init_mutation_data():
 
 
 def get_detail_string(text=""):
-    detail_string = text
-    if len(text) == 0:
+    if isinstance(text, str):
+        if len(text) == 0:
+            return ""
+    else:
         return ""
-    # TODO add all the string parsing stuff here
+    if "[" in text:
+        while "[" in text:
+            key = get_key_from_string(text)
+            substitute_text = ""
+            if key in mutation_data:
+                # get random entry, Name & Effect if exists
+                substitute_text = choice(list(mutation_data[key].keys()))
+                if "Effect" in mutation_data[key][substitute_text]:
+                    substitute_text = f"{substitute_text} ({mutation_data[key][substitute_text]['Effect']})"
+            text = replace_text(text, f"[{key}]", substitute_text)
+
     return text
 
 # -------------------------------------- MUTATION CLASS ----------------------------------------------
@@ -63,4 +75,7 @@ class Mutation:
         self.details = get_detail_string(mutation_data["Physical Mutation"][self.name]["Effect"])
 
     def get_output(self):
-        return f"{self.name} : {self.details}"
+        details = ""
+        if len(self.details) > 0:
+            details = f" : {self.details}"
+        return f"{self.name}{details}"

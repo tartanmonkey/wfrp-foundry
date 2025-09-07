@@ -6,7 +6,7 @@ def get_key_from_string(text, sep_start='[', sep_end=']'):
     """returns the text in a string found between the separators"""
     start = text.index(sep_start) + 1
     end = text.index(sep_end)
-    print(f"start: {start} end: {end}")
+    # print(f"start: {start} end: {end}")
     key = ""
     for n in range(start, end):
         key += text[n]

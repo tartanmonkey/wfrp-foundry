@@ -10,7 +10,7 @@ Blank Face	1	Fear 2	0	0	0	0	0	0	0
 Breathe Fire	1	Breath 5 (Fire)	0	0	0	0	0	0	0
 Bulging Eyes	2		0	0	0	10	0	0	0
 Burning Skin	1	On Contact pass Athletics or gain Ablaze Condition	0	0	0	0	0	0	0
-Carapace	2	1 AP to [Hit  Location] and [Hit Location]	0	0	0	0	0	0	0
+Carapace	2	1 AP to [Hit Location] and [Hit Location]	0	0	0	0	0	0	0
 Claws	2	Hands as weapons	0	0	0	0	0	0	0
 Cloud of Flies	1	Distracting	0	0	0	0	0	0	0
 Corpulent	1	Movement -1	0	5	5	0	0	0	0
@@ -31,7 +31,7 @@ Glowing Skin	1	Bright as a candle	0	0	0	0	0	0	0
 Headless	1	Fear 2	0	0	0	0	0	0	0
 Hopper	2	Bounce, Move 2	0	0	0	0	0	0	0
 Inhuman Beauty	1		0	0	0	0	0	0	10
-Iron Skin	2		0	0	0	0	-10	0	0
+Iron Skin	2	2 AP all Hit Locations	0	0	0	0	-10	0	0
 Lolling Tongue	1	-10 Languages	0	0	0	0	0	0	0
 Long Arms	2	Reach +1	0	0	0	0	0	0	0
 Long Legs	2	Movement +2	0	0	0	0	0	0	0

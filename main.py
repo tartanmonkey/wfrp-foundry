@@ -95,10 +95,13 @@ def click_csv_to_wiki():
 
 
 def click_clear():
+    # TODO remove mutant_test!
     global character_details
     character_details = {}
     print("clear")
     label_output["text"] = ""
+    # mutant_test_new = Mutation()
+    # print(mutant_test_new.get_output())
 
 
 def click_create_vessel():

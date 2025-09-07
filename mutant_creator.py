@@ -2,6 +2,7 @@ import pandas
 
 import utilities
 from utilities import *
+
 from random import randint, choice
 
 # structured as a dictionary simply so can look up random elements in each mutation
@@ -65,6 +66,12 @@ def get_detail_string(text=""):
             text = replace_text(text, f"[{key}]", substitute_text)
 
     return text
+
+
+def add_mutations(game_character, max_num=3):
+    print(f"Mutation access test: {game_character.get_one_line_title()}")
+    return game_character
+
 
 # -------------------------------------- MUTATION CLASS ----------------------------------------------
 

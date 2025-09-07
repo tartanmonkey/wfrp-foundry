@@ -144,8 +144,9 @@ def click_create():
     career_name = careers_dropdown.get() #input_career.get()
     level = int(input_level.get())
     race = race_dropdown.get()
+    is_mutant = checked_mutations_state.get() == 1
     if is_valid_character_input(career_name, level, race):
-        character = create_character(career_name, level, race, magic_dropdown.get(), character_details)
+        character = create_character(career_name, level, race, magic_dropdown.get(), character_details, is_mutant)
         if character is not None:
             display_character_stats(character)
 
@@ -524,6 +525,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             if members["group_type"] == "collective":
                 collective_career = choice(members["career"])
                 # print(f"Got collective career: {collective_career}")
+            # TODO could catch Mutants here as an elif
         for member in range(num_members):
             details_set = "one_line_traits"
             if not one_line_details:
@@ -665,11 +667,14 @@ def get_random_career_key(race="Human"):
     messagebox.showinfo(title="Oops!", message=f"Failed to find random character key of race {race}! rolled: {roll}")
 
 
-def create_character(career, level, race, magic_domain, details):
+def create_character(career, level, race, magic_domain, details, is_mutant=False):
     global career_data, character
     # this check for valid magic should now be redundant now that dropdowns are implemented 6/7/25
     if is_valid_magic(magic_domain):
-        return GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, details)
+        new_character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, details)
+        if is_mutant:
+            new_character= mutant_creator.add_mutations(new_character)
+        return new_character
     else:
         messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
         return
@@ -799,6 +804,9 @@ checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
 button_add_level = Button(text="Add Career", command=click_add_levels)
+# TODO potentially eventually replace with a dropdown for None, Physical, Mental or both
+checked_mutations_state = IntVar()
+checkbutton_mutations = Checkbutton(text="Mutations?", variable=checked_mutations_state)
 
 
 # Groups
@@ -873,6 +881,7 @@ button_update_inn = Button(text="Update Inn", command=click_update_inn, state=DI
 # Output
 label_output = Label(text="Character output goes here", width=100, height=40, justify="left", anchor="n", pady=20)
 
+# ----------------------------------------------------------- UI LAYOUT -----------------------------------------
 # Save & Output ----------------------------------------
 button_clear.grid(column=0, row=0)
 button_save.grid(column=2, row=0, columnspan=2)
@@ -906,11 +915,12 @@ input_level.grid(column=3, row=2)
 input_level.insert(0, "1")
 label_race.grid(column=4, row=2)
 race_dropdown.grid(column=5, row=2)
-label_magic.grid(column=6, row=2)
-magic_dropdown.grid(column=7, row=2)
-button_create.grid(column=8, row=2)
+checkbutton_random_race.grid(column=6, row=2)
+label_magic.grid(column=7, row=2)
+magic_dropdown.grid(column=8, row=2)
+checkbutton_mutations.grid(column=9, row=2)
+button_create.grid(column=10, row=2)
 #button_random.grid(column=9, row=2)
-checkbutton_random_race.grid(column=10, row=2)
 button_add_level.grid(column=11, row=2)
 
 

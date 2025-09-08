@@ -61,7 +61,7 @@ def init_data():
     else:
         for col in data.columns:
             inn_data[col] = [item for item in data[col].tolist() if type(item) == str]
-        print(f"Inn Data initialised - num entries: {len(inn_data)}")
+        # print(f"Inn Data initialised - num entries: {len(inn_data)}")
 
 
 def get_cost_mod(cost):

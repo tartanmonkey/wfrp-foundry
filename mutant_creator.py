@@ -70,6 +70,9 @@ def get_detail_string(text=""):
 
 def add_mutations(game_character, max_num=3):
     print(f"Mutation access test: {game_character.get_one_line_title()}")
+    num_mutations = randint(1, max_num)
+    for n in range(num_mutations):
+        game_character.apply_mutation(Mutation())
     return game_character
 
 
@@ -82,6 +85,7 @@ class Mutation:
         self.details = get_detail_string(mutation_data["Physical Mutation"][self.name]["Effect"])
 
     def get_output(self):
+        # TODO support just showing details if Beast Head
         details = ""
         if len(self.details) > 0:
             details = f" : {self.details}"

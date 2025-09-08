@@ -439,6 +439,7 @@ class GameCharacter:
         self.set_trappings(levels_data[index]["Trappings"])
         self.details = details
         self.family = []  # added 17/8/25 for Innkeeps
+        self.mutations = []  # added 8/9/2025
         # for attribute, value in self.attributes.items():
         #     print(f"{attribute} advances: {value['advances']}")
 
@@ -491,9 +492,16 @@ class GameCharacter:
                 value = level_multiplier * 5 + randint(0, 5)
                 if value < self.attributes[attribute]["advances"]:
                     value = self.attributes[attribute]["advances"]
-                    print(f"Not increasing {self.attributes[attribute]} as current value higher than new one")
+                    # print(f"Not increasing {self.attributes[attribute]} as current value higher than new one")
                 self.attributes[attribute]["advances"] = value
             self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
+
+    def refresh_attribute_values(self):  # added 8/9/25 to cope with Mutations
+        # debug_text = ""
+        for attribute, value in self.attributes.items():
+            self.attributes[attribute]["total"] = self.attributes[attribute]["base"] + self.attributes[attribute]["advances"]
+            # debug_text += f"{attribute}: {self.attributes[attribute]['total']} "
+        # print(debug_text)
 
     def get_skill_total(self, skill_name):
         skill_key = extract_key(skill_name)
@@ -514,7 +522,7 @@ class GameCharacter:
         # note in the rules it should actually be 3 at 5 and 3 at 3, instead I'm adding just 4 at 4
         for skill in race_skills:
             self.advance_skill(skill, 4)
-        print(f"--- {self.career} - Race Skills: {self.skills} ------------")
+        # print(f"--- {self.career} - Race Skills: {self.skills} ------------")
         self.add_career_skills(level_data, self.level)
 
 
@@ -538,12 +546,12 @@ class GameCharacter:
         global skill_groups
         if skill in self.skills:
             self.skills[skill] += value
-            print(f"Increasing Previous skill: {skill} by {value} to {self.skills[skill]}")
+            # print(f"Increasing Previous skill: {skill} by {value} to {self.skills[skill]}")
         else:
             # check if 'Any'
             if "Any" in skill:
                 skill_group = get_first_word(skill)
-                print(f"Got skill group: {skill_group}")
+                # print(f"Got skill group: {skill_group}")
                  # check if already have this key and only get a new one if advances high enough
                 skill_groups_known = []
                 for key, entry in self.skills.items():
@@ -551,10 +559,10 @@ class GameCharacter:
                     if skill_group in key:
                         skill_groups_known.append(key) # note this is the whole name
                 # iterate through know skills to decide whether to add a new group or increase existing
-                print(f"Skills Groups Known: {skill_groups_known}")
+                # print(f"Skills Groups Known: {skill_groups_known}")
                 for known in skill_groups_known:
                     if self.skills[known] < SKILL_ANY_THRESHOLD:
-                        print(f"increase {known} as its only {self.skills[known]}")
+                        # print(f"increase {known} as its only {self.skills[known]}")
                         self.skills[known] += value
                         return
                 # get new skill group
@@ -563,7 +571,7 @@ class GameCharacter:
                     exclude = [get_key_from_string(item, "(", ")") for item in skill_groups_known]
                     self.skills[get_skill_from_group(skill_group, exclude)] = value
                 else:
-                    print(f"Did not find {skill_group} in skill_groups, so adding {skill}")
+                    # print(f"Did not find {skill_group} in skill_groups, so adding {skill}")
                      # simply add the whole skill name (with Any included)
                     # TODO i think it would be here we replace Any for trades
                     self.skills[skill] = value
@@ -743,6 +751,23 @@ class GameCharacter:
 
     def has_family(self):
         return len(self.family) > 0
+
+    def apply_mutation(self, mutation):
+        # print(f"Apply Mutation: {mutation.name}")
+        # first modify attributes
+        for attribute, value in mutation.attributes.items():
+            self.attributes[attribute]["base"] += value
+            # purely for test purposes
+            # if mutation.attributes[attribute] > 0:
+            #     print(f"mutation {mutation.name} changing {attribute} by {value} to {self.attributes[attribute]['base']}")
+        # then refresh attribute totals and store
+        self.refresh_attribute_values()
+        self.mutations.append(mutation)
+        print(f"in apply_mutation - Description = {self.details}")
+        if 'Description' in self.details:
+            print("Got description!")
+            self.details['Description'] += f", {mutation.name}"
+
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
     def get_output(self, **options):
@@ -761,13 +786,18 @@ class GameCharacter:
         output = ""
         if output_type == "minimal":
             # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
-            return f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
+            # TODO Add Mutations
+            output = f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
+            output += self.get_mutations_output("condensed")
+            return output
         # Details: If character_details is just one line, print rather than iterate through dictionary printing keys
         if utilities.get_first_key(self.details) == "OneLine":
             output = f"{self.details['OneLine']}\n"
             # add career in as it didn't exist when details created
             career_text = f" {self.get_one_line_title()}"
             output = utilities.insert_after_char(output, "*", career_text)
+            # TODO Add Mutations
+            output += self.get_mutations_output("one_line")
             # if One Line Stats call function here THEN Return
             if one_line_stats:
                 output += f"{self.get_one_line_stats()}\n"
@@ -800,12 +830,31 @@ class GameCharacter:
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
 
+        output += self.get_mutations_output("verbose")
         output += self.get_skills_output()
         output += self.get_talents_output()
         output += get_list_output("trappings", self.trappings)
         output += self.get_spells_output()
 
         return output
+
+    def get_mutations_output(self, output_type):
+        text = ""
+        if len(self.mutations) == 0:
+            return text
+        if output_type == "verbose":
+            text = "\n-----MUTATIONS-------------"
+            for mutation in self.mutations:
+                text += f"\n{mutation.get_output()}"
+            return text
+        new_line = "\n"
+        if output_type == "one_line":
+            new_line = ""
+        text = "Mutations: "
+        for mutation in self.mutations:
+            text += f"{new_line}{mutation.get_output()}, "
+        text += "\n"
+        return text
 
     def get_one_line_title(self):
         race = ""

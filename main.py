@@ -502,6 +502,7 @@ def create_dreams(num_dreams):
 
 
 def create_group(group_type, **options):  # details="one_line", relationship="random"
+    is_mutant = checked_mutations_state.get()
     print(f"Clicked create group: {group_type}")
     group = []
     one_line_details = checked_one_line_details_state.get() == 1
@@ -526,6 +527,8 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
                 collective_career = choice(members["career"])
                 # print(f"Got collective career: {collective_career}")
             # TODO could catch Mutants here as an elif
+            elif members["group_type"] == "mutants":
+                is_mutant = True
         for member in range(num_members):
             details_set = "one_line_traits"
             if not one_line_details:
@@ -543,7 +546,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             print(f"Collective career here: {collective_career}")
             if len(career_key) == 0:
                 career_key = choice(members["career"])
-            group_member = create_character(career_key, level, race, magic, details)
+            group_member = create_character(career_key, level, race, magic, details, is_mutant)
             # test for leader = should always be first
             if len(group) == 0:
                 print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
@@ -571,7 +574,7 @@ def add_group_relationships(group):
     return group
 
 
-def output_group(group):
+def output_group(group):  # TODO Handle Mutations!
     group_text = ""
     save_text = ""
     if checked_one_line_details_state.get():
@@ -994,7 +997,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 # print(f"{test_pennies} in proper notation: {utilities.get_cash_notation(test_pennies)}")
 # test_list_pruning(["Cheap Fries", "Expensive Eggs", "Ham", "Cheap Peas", "Mushrooms"], "Cheap", "Expensive")
 # test_print_careers()
-mutant_test = Mutation()
-print(mutant_test.get_output())
+# mutant_test = Mutation()
+# print(mutant_test.get_output())
 
 window.mainloop()

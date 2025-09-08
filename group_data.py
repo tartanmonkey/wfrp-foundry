@@ -86,4 +86,8 @@ groups = {
         {"number": (1, 1), "career": ["Road Warden"], "level": (2, 3), "details": ["Captain"]},
         {"number": (3, 5), "career": ["Road Warden"], "level": (1, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"]}
     ],
+    "mutant gang": [
+        {"number": (1, 1), "career": ["Outlaw"], "level": (2, 3), "details": ["Captain"], "group_type": "mutants"},
+        {"number": (2, 5), "career": ["Hunter", "Thief", "Outlaw", "Outlaw", "Villager", "Beggar"], "level": (1, 2), "details": ["Default", "None", "Motivated", "Quirky", "Conflict", "Basic"], "group_type": "mutants"}
+    ]
 }

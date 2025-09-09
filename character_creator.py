@@ -213,6 +213,17 @@ def init_talents_data():
             talent_bonus[entry["Talent"]] = entry["Attribute"]
 
 
+def get_single_name(text, get_family_name):
+    name = text.replace('*', '')
+    names_list = name.split()
+    if len(names_list) > 0:
+        if get_family_name:
+            if len(names_list) > 1:
+                return names_list[1]
+        return names_list[0]
+    print(f"get_single_name has problem with: {text}")
+    return text
+
 def get_random_name(gender, race="Human", first_name_only=False):
     region = race_data[race]["name_table"]
     if gender in names[region]:
@@ -977,9 +988,11 @@ class GameCharacter:
 
     def get_family_output(self, show_traits, start_on_new_line=True):
         nl = "\n"
+        family_name = get_single_name(self.details['Name'], True)
+
         if not start_on_new_line:
             nl = ""
-        text = f"{nl}Innkeep Family: "
+        text = f"{nl}{family_name} Family: "
         added_child = False
         for n in range(0, len(self.family)):
             if self.family[n].relationship == "Child":

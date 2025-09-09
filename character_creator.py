@@ -763,10 +763,7 @@ class GameCharacter:
         # then refresh attribute totals and store
         self.refresh_attribute_values()
         self.mutations.append(mutation)
-        print(f"in apply_mutation - Description = {self.details}")
-        if 'Description' in self.details:
-            print("Got description!")
-            self.details['Description'] += f", {mutation.name}"
+
 
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
@@ -787,26 +784,31 @@ class GameCharacter:
         if output_type == "minimal":
             # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
             # TODO Add Mutations
-            output = f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}"
+            output = f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}"
             output += self.get_mutations_output("condensed")
             return output
         # Details: If character_details is just one line, print rather than iterate through dictionary printing keys
         if utilities.get_first_key(self.details) == "OneLine":
+            print("Getting One Line details")
             output = f"{self.details['OneLine']}\n"
             # add career in as it didn't exist when details created
             career_text = f" {self.get_one_line_title()}"
             output = utilities.insert_after_char(output, "*", career_text)
-            # TODO Add Mutations
-            output += self.get_mutations_output("one_line")
+            # Add Mutations
+            if len(self.mutations) > 0:
+                mutation_text = " "
+                for m in self.mutations:
+                    mutation_text += f"{m.name}, "
+                output = utilities.insert_after_char(output, ")", mutation_text)
             # if One Line Stats call function here THEN Return
             if one_line_stats:
                 output += f"{self.get_one_line_stats()}\n"
                 return output
         else:
-            output = f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
+            output = f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
         # group_stages used for splitting details from stats, likely to use left after One Line Stats added 7/8/25
         if group_stage == 1:
-            return f"{self.career}: {get_dictionary_as_string(self.details, 50, ['Name'], ['Background'])}\n"
+            return f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n"
         if group_stage == 2:
             output = f"++++ {self.career}: {self.details['Name']}\n{self.get_title_output()}\n"
         if len(self.path) > 1:
@@ -872,14 +874,29 @@ class GameCharacter:
         return f"({race}{self.career} {self.level})"
 
     def get_one_line_stats(self):
+        mutations = self.get_mutations_output("one_line")
         ol_attributes = self.get_one_line_attributes()
-        return f"{ol_attributes} {self.get_one_line_talents()} {self.get_one_line_trappings()}"
+        return f"{mutations}{ol_attributes} {self.get_one_line_talents()} {self.get_one_line_trappings()}"
 
     def get_one_line_details(self, include_traits):
         traits = ""
         if include_traits and "one_line_traits" in self.details:
             traits = self.details["one_line_traits"]
-        return f"{self.details['Name']} {self.get_one_line_title()} {self.details['Description']} {traits}"
+        description = self.get_description(self.details['Description'])
+        return f"{self.details['Name']} {self.get_one_line_title()} {description} {traits}"
+
+    def get_description(self, description):  # could be used for more than just get_one_line_details
+        if len(self.mutations) == 0:
+            return description
+        if type(description) is list:
+            # TODO handle whole list here, in the meantime just...
+            return description
+        # otherwise it must be a string
+        mutation_text = ""
+        for mutation in self.mutations:
+            mutation_text += f"{mutation.name}, "
+        description = f"{mutation_text}{description}"
+        return description
 
     def get_one_line_attributes(self):
         # text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"

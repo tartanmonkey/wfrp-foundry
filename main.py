@@ -201,6 +201,15 @@ def click_add_levels():
         print("No character to add level to")
 
 
+def click_add_mutation():
+    global character
+    if character is not None:
+        mutant_creator.add_mutations(character, 1)
+        display_character_stats(character)
+    else:
+        messagebox.showinfo(title="Oops!", message="You need to create a character first!")
+
+
 def click_create_group():
     global character_group
     group_type = groups_dropdown.get()
@@ -574,7 +583,7 @@ def add_group_relationships(group):
     return group
 
 
-def output_group(group):  # TODO Handle Mutations!
+def output_group(group):
     group_text = ""
     save_text = ""
     if checked_one_line_details_state.get():
@@ -810,7 +819,7 @@ button_add_level = Button(text="Add Career", command=click_add_levels)
 # TODO potentially eventually replace with a dropdown for None, Physical, Mental or both
 checked_mutations_state = IntVar()
 checkbutton_mutations = Checkbutton(text="Mutations?", variable=checked_mutations_state)
-
+button_add_mutation = Button(text="Add Mutation", command=click_add_mutation)
 
 # Groups
 label_group = Label(text="Group:")
@@ -925,6 +934,7 @@ checkbutton_mutations.grid(column=9, row=2)
 button_create.grid(column=10, row=2)
 #button_random.grid(column=9, row=2)
 button_add_level.grid(column=11, row=2)
+button_add_mutation.grid(column=12, row=2)
 
 
 # Groups

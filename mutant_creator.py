@@ -85,8 +85,11 @@ class Mutation:
         self.details = get_detail_string(mutation_data["Physical Mutation"][self.name]["Effect"])
 
     def get_output(self):
-        # TODO support just showing details if Beast Head
         details = ""
+        name = self.name
         if len(self.details) > 0:
             details = f" : {self.details}"
-        return f"{self.name}{details}"
+        if name == "Beast Head":
+            name = self.details
+            details = ""
+        return f"{name}{details}"

@@ -44,6 +44,7 @@ extra_details = {
 
 detail_data_sets = {
     "Default": ["Trait", "Ambition", "Opinion"],
+    "Simple": ["Personality", "Motivation"],
     "Captain": ["Origin", "Trait", "Quirk", "Opinion", "Chat"],
     "All": ["Origin", "Trait", "Motivation", "Ambition", "Quirk", "Opinion", "Chat"], #  this is no longer actually All! 21-02-23
     "Motivated": ["Trait", "Motivation"],
@@ -73,6 +74,7 @@ inn_quality_options = ["random", "Cheap", "Average", "Expensive"]
 inn = None
 character_group = []
 add_relationships = 0
+show_details_options = ["One line", "Full", "None"]
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -824,7 +826,9 @@ button_update_group = Button(text="Update Group", command=click_update_group)
 
 
 # Details Options
-label_details_options = Label(text="Details Options", bg="lightblue")
+label_details_options = Label(text="Show Details", bg="lightblue")
+show_details_dropdown = ttk.Combobox(values=show_details_options)
+show_details_dropdown.set("One line")
 checked_one_line_details_state = IntVar()
 checkbutton_one_line = Checkbutton(text="One line only?", variable=checked_one_line_details_state)
 checked_one_line_details_state.set(1)
@@ -936,11 +940,12 @@ button_update_group.grid(column=4, row=3)
 # Details Options
 
 label_details_options.grid(column=0, row=4)
-checkbutton_one_line.grid(column=1, row=4)
-checkbutton_one_line_traits.grid(column=2, row=4)
-checkbutton_one_line_career.grid(column=3, row=4)
-checkbutton_one_line_stats.grid(column=4, row=4)
-checkbutton_show_relationships.grid(column=5, row=4)
+show_details_dropdown.grid(column=1, row=4)
+checkbutton_one_line.grid(column=2, row=4)
+checkbutton_one_line_traits.grid(column=3, row=4)
+checkbutton_one_line_career.grid(column=4, row=4)
+checkbutton_one_line_stats.grid(column=5, row=4)
+checkbutton_show_relationships.grid(column=6, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)

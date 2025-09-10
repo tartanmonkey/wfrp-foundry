@@ -785,20 +785,11 @@ class GameCharacter:
         output_type = "ui"
         if "output_type" in options:
             output_type = options['output_type']
-        group_stage = 0
-        if "group_stage" in options:
-            group_stage = options['group_stage']
         one_line_stats = False
         if "one_line_stats" in options:
             one_line_stats = options['one_line_stats']
-        output = ""
-        if output_type == "minimal":
-            # TODO potentially also add Trappings here before returning, or create potential 'levels of detail'
-            # TODO Add Mutations
-            output = f"{self.get_title_output()}\n{get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}"
-            output += self.get_mutations_output("condensed")
-            return output
-        # Details: If character_details is just one line, print rather than iterate through dictionary printing keys
+        if "one_line_traits" in self.details:
+            print(f"got one line traits: {self.details['one_line_traits']}")
         if utilities.get_first_key(self.details) == "OneLine":
             print("Getting One Line details")
             output = f"{self.details['OneLine']}\n"
@@ -817,11 +808,6 @@ class GameCharacter:
                 return output
         else:
             output = f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
-        # group_stages used for splitting details from stats, likely to use left after One Line Stats added 7/8/25
-        if group_stage == 1:
-            return f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n"
-        if group_stage == 2:
-            output = f"++++ {self.career}: {self.details['Name']}\n{self.get_title_output()}\n"
         if len(self.path) > 1:
             path_output = "Path: "
             for key, value in self.path.items():

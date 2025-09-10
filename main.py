@@ -599,19 +599,9 @@ def output_group(group):
             group_text += "\n"
             save_text = group_text
     else:
-        if checked_minimal_stats_state.get() == 1:  # output only description
-            for person in group:
-                group_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
-                save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="minimal") + "\n"
-        else:
-            for person in group:
-                # get all descriptions
-                group_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="ignore", group_stage=1)
-                save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="save", group_stage=1)
-            for person in group:
-                # get all stats
-                group_text += person.get_output(wiki_output=False, group_stage=2) + "\n"
-                save_text += person.get_output(wiki_output=checked_wiki_output_state.get(), output_type="save", group_stage=2) + "\n"
+        for person in group:
+            group_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
+            save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
     label_output["text"] = group_text
     pyperclip.copy(save_text)
 
@@ -826,8 +816,6 @@ label_group = Label(text="Group:")
 #input_group = Entry(width=15)
 groups_dropdown = ttk.Combobox(values=group_options)
 groups_dropdown.set(choice(group_options))
-checked_minimal_stats_state = IntVar()
-checkbutton_minimal_stats = Checkbutton(text="No Stats?", variable=checked_minimal_stats_state)
 checked_add_relationships_state = IntVar()
 add_relationships = checked_add_relationships_state.get()
 checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
@@ -941,10 +929,9 @@ button_add_mutation.grid(column=12, row=2)
 label_group.grid(column=0, row=3)
 groups_dropdown.grid(column=1, row=3)
 #input_group.insert(0, "None")
-checkbutton_minimal_stats.grid(column=2, row=3)
-checkbutton_add_relationships.grid(column=3, row=3)
-button_group.grid(column=4, row=3)
-button_update_group.grid(column=5, row=3)
+checkbutton_add_relationships.grid(column=2, row=3)
+button_group.grid(column=3, row=3)
+button_update_group.grid(column=4, row=3)
 
 # Details Options
 

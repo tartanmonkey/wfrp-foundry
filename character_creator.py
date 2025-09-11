@@ -325,26 +325,23 @@ def create_character_details(gender, race, detail_set, wiki_output):
     details = {}
     if wiki_output:
         details["Name"] = f"*{get_random_name(gender, race)}*"
-        # TODO potentially catch Cairn here and return it once generated?
-        # TODO Actually not the way to do it - see main 149
     else:
         details["Name"] = get_random_name(gender, race)
     details["Gender"] = gender
     details["Description"] = f"{choice(details_data['Description'])}, "
     details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
-    if detail_set == "one_line_traits":  # one_line_traits treated differently as the format is different and its not in details_data
-        details["one_line_traits"] = get_one_line_traits()
-    else:
-        for key, value in detail_set.items():
-            if key == "Opinion":
-                details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
-            elif value == "":
-                details[key] = choice(details_data[key])
-            elif key == "Cairn":
-                print("Got Cairn Details!")
-            else:
-                # TODO double  check if need to format the key text
-                details[key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
+
+    for key, value in detail_set.items():
+        details_key = key
+        if "Cairn" in key:
+            details_key = key.replace("Cairn", '')
+        if key == "Opinion":
+            details[choice(["Likes", "Dislikes"])] = choice(details_data["Opinions"])
+        elif value == "":
+            details[details_key] = choice(details_data[key])
+        else:  # see extra_details which maps function calls onto Origin, Chat and Background!
+            # TODO double  check if need to format the key text
+            details[details_key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
 
     return details
 
@@ -778,7 +775,66 @@ class GameCharacter:
 
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
-    def get_output(self, **options):
+    def get_output(self, details_type, stats_type, **options):
+        wiki_output = False
+        if "wiki_output" in options:
+            wiki_output = options['wiki_output']
+        output_type = "ui"
+        if "output_type" in options:
+            output_type = options['output_type']
+        one_line_stats = False
+        if "one_line_stats" in options:
+            one_line_stats = options['one_line_stats']
+        if "one_line_traits" in self.details:
+            print(f"got one line traits: {self.details['one_line_traits']}")
+        if utilities.get_first_key(self.details) == "OneLine":
+            print("Getting One Line details")
+            output = f"{self.details['OneLine']}\n"
+            # add career in as it didn't exist when details created
+            career_text = f" {self.get_one_line_title()}"
+            output = utilities.insert_after_char(output, "*", career_text)
+            # Add Mutations
+            if len(self.mutations) > 0:
+                mutation_text = " "
+                for m in self.mutations:
+                    mutation_text += f"{m.name}, "
+                output = utilities.insert_after_char(output, ")", mutation_text)
+            # if One Line Stats call function here THEN Return
+            if one_line_stats:
+                output += f"{self.get_one_line_stats()}\n"
+                return output
+        else:
+            output = f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
+        if len(self.path) > 1:
+            path_output = "Path: "
+            for key, value in self.path.items():
+                path_output += f"{key}: {value}, "
+            output += f"{path_output}\n"
+        if output_type == "ui":
+            output += "WS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
+            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
+        elif wiki_output:
+            output += "<<|\nWS| BS| S| T| I| Agi| Dex| Int| WP| Fel| W\n"
+            output += f"{self.attributes['WS']['total']}| {self.attributes['BS']['total']}| {self.attributes['S']['total']}| {self.attributes['T']['total']}| "
+            output += f"{self.attributes['I']['total']}| {self.attributes['Agi']['total']}| {self.attributes['Dex']['total']}| {self.attributes['Int']['total']}| "
+            output += f"{self.attributes['WP']['total']}| {self.attributes['Fel']['total']}| {self.wounds}|\n>>"
+        else:
+            output += "WS  BS  S   T   I   Agi Dex Int  WP Fel  W"
+            output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
+            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
+
+        output += self.get_mutations_output("verbose")
+        output += self.get_skills_output()
+        output += self.get_talents_output()
+        output += get_list_output("trappings", self.trappings)
+        output += self.get_spells_output()
+
+        return output
+
+    def get_output_LEGACY(self, **options):  # TODO remove
         wiki_output = False
         if "wiki_output" in options:
             wiki_output = options['wiki_output']

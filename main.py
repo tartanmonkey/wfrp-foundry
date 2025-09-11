@@ -74,7 +74,8 @@ inn_quality_options = ["random", "Cheap", "Average", "Expensive"]
 inn = None
 character_group = []
 add_relationships = 0
-show_details_options = ["One line", "Full", "None"]
+show_details_options = ["Minimal", "One line", "Full", "None"]
+show_stats_options = ["Minimal", "One line", "Full", "None"]
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -696,11 +697,13 @@ def create_character(career, level, race, magic_domain, details, is_mutant=False
         return
 
 
-def output_character(character):
+def output_character(character_obj):
     # TODO replace logic with call to simply use character output
     one_line_only = checked_one_line_stats_state.get() == 1
-    label_output["text"] = character.get_output(wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only)
-    pyperclip.copy(character.get_output(wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only))
+    details_type = show_details_dropdown.get()
+    stats_type = show_stats_dropdown.get()
+    label_output["text"] = character_obj.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only)
+    pyperclip.copy(label_output["text"])  # TODO double check this works, used to make teh call again to get_output
 
 
 def output_trappings_data(data):  # Just a Test function
@@ -851,6 +854,9 @@ checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=check
 checked_one_line_stats_state = IntVar()
 checkbutton_one_line_stats = Checkbutton(text="One line stats?", variable=checked_one_line_stats_state)
 checked_one_line_stats_state.set(0)
+label_stats_options = Label(text="Show Stats")
+show_stats_dropdown = ttk.Combobox(values=show_stats_options)
+show_stats_dropdown.set("One line")
 checked_show_relationships_state = IntVar()
 checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)
 checked_show_relationships_state.set(1)
@@ -955,7 +961,9 @@ checkbutton_one_line.grid(column=2, row=4)
 checkbutton_one_line_traits.grid(column=3, row=4)
 checkbutton_one_line_career.grid(column=4, row=4)
 checkbutton_one_line_stats.grid(column=5, row=4)
-checkbutton_show_relationships.grid(column=6, row=4)
+label_stats_options.grid(column=6, row=4)
+show_stats_dropdown.grid(column=7, row=4)
+checkbutton_show_relationships.grid(column=8, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)

@@ -116,7 +116,7 @@ def click_random_vessel():
     create_vessel()
 
 
-def click_details():
+def click_details():  # TODO LEGACY REMOVE once not in use
     global character_details
     race = race_dropdown.get()
     if not is_valid_race_input(race):
@@ -141,7 +141,7 @@ def click_details():
     pyperclip.copy(label_output["text"])
 
 
-def click_create():
+def click_create():  # TODO LEGACY REMOVE once not in use
     global career_data, character, valid_races
     career_name = careers_dropdown.get() #input_career.get()
     level = int(input_level.get())
@@ -150,8 +150,30 @@ def click_create():
     if is_valid_character_input(career_name, level, race):
         character = create_character(career_name, level, race, magic_dropdown.get(), character_details, is_mutant)
         if character is not None:
-            display_character_stats(character)
+            output_character(character)
 
+
+def click_create_character():
+    global character
+    # TODO handle random career here? - if so remove current starting on random
+    career_name = careers_dropdown.get()
+    level = int(input_level.get())
+    race = race_dropdown.get()
+    is_mutant = checked_mutations_state.get() == 1
+    if is_valid_character_input(level):
+        details = get_character_details(race)
+        character = create_character(career_name, level, race, magic_dropdown.get(), details, is_mutant)
+        if character is not None:
+            output_character(character)
+
+
+def get_character_details(race):
+    detail_set = detail_set_dropdown.get()  # input_details.get()
+    # TODO replace this with checking if detail_set == random then build list without that
+    if checked_random_details_state.get() == 1:
+        detail_set = choice(list(detail_data_sets.keys()))
+    details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
+    return details
 
 # def click_random():
 #     global character_details, character
@@ -196,7 +218,7 @@ def click_add_levels():
             magic_domain = magic_dropdown.get()
             if is_valid_magic(magic_domain):
                 character.add_levels(career_name, level, career_data[career_name]['level_data'], magic_domain)
-                display_character_stats(character)
+                output_character(character)
             else:
                 messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
     else:
@@ -207,7 +229,7 @@ def click_add_mutation():
     global character
     if character is not None:
         mutant_creator.add_mutations(character, 1)
-        display_character_stats(character)
+        output_character(character)
     else:
         messagebox.showinfo(title="Oops!", message="You need to create a character first!")
 
@@ -324,21 +346,11 @@ def is_valid_race_input(race):
     return True
 
 
-def is_valid_character_input(career_input, level_input, race):
+def is_valid_character_input(level_input):
     if level_input < 1 or level_input > 4:
         messagebox.showinfo(title="Oops!", message=f"Level must be between 1 and 4")
         return False
-    if is_valid_race_input(race):
-        if career_input in career_data:
-            if race not in career_data[career_input]["chance"]:
-                show_valid_careers(race)
-                return False
-            else:
-                return True
-        else:
-            show_valid_careers(race)
-            return False
-    return False
+    return True
 
 
 def show_valid_careers(race):
@@ -684,7 +696,7 @@ def create_character(career, level, race, magic_domain, details, is_mutant=False
         return
 
 
-def display_character_stats(character):
+def output_character(character):
     # TODO replace logic with call to simply use character output
     one_line_only = checked_one_line_stats_state.get() == 1
     label_output["text"] = character.get_output(wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only)
@@ -783,7 +795,6 @@ radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
 checked_random_details_state = IntVar()
 checkbutton_random_details = Checkbutton(text="Random Details Set?", variable=checked_random_details_state)
 checked_random_details_state.get()
-button_details = Button(text="Create Details", width=15, command=click_details)
 
 # Career
 label_career = Label(text="Career: ")
@@ -802,7 +813,7 @@ label_magic = Label(text="Magic:")
 #input_magic = Entry(width=10)
 magic_dropdown = ttk.Combobox(values=magic_options)
 magic_dropdown.set(magic_options[0])
-button_create = Button(text="Create Character", command=click_create)
+button_create = Button(text="Create Character", command=click_create_character)
 #button_random = Button(text="Random", command=click_random)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
@@ -908,7 +919,6 @@ radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
 radio_random.grid(column=5, row=1)
 checkbutton_random_details.grid(column=6, row=1)
-button_details.grid(column=7, row=1, columnspan=1)
 
 # Career
 label_career.grid(column=0, row=2)

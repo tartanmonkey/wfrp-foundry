@@ -241,6 +241,19 @@ def get_string_up_to(text, limit_char):
     print(f"end_at: {end_at}")
     return text[0:end_at]
 
+
+def remove_from_dictionary(dictionary, key_list):
+    """removes specified keys from dictionary - takes either list of keys or single key string as arg"""
+    new_dictionary = dictionary.copy()
+    if type(key_list) is not list:
+        if type(key_list) is str and key_list in new_dictionary:
+            new_dictionary.pop(key_list)
+    else:
+        for key in key_list:
+            if key in new_dictionary:
+                new_dictionary.pop(key)
+    return new_dictionary
+
 #  TODO: I wrote this then didn't use it, possibly remove or delete this comment 4-11-22
 def get_chance_list(data, data_chance_key, chance_key, data_keys, keys):
     """For creating a list of dictionaries each of which has a chance tuple  (above_this, below_or_equal_this) and

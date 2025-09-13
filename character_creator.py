@@ -78,6 +78,10 @@ details_data = {}  # a dictionary of lists keyed to detail type, using Column ti
 
 relationship_types = []
 
+name_format = ['FIRST', 'SECOND', 'WHOLE']
+
+details_no_key = ["Trait", "Vice", "Virtue", "Personality"]
+details_with_key = ["Motivation", "Likes", "Dislikes", "Goal", "Ideal", "Driven by", "Origin"]
 
 def init_details():
     global details_data
@@ -213,7 +217,19 @@ def init_talents_data():
             talent_bonus[entry["Talent"]] = entry["Attribute"]
 
 
-def get_single_name(text, get_family_name):
+def get_name_output(text, wiki_output, name_type='WHOLE'):  # added in refactor 12/9/25
+    """Given text and wiki_output bool for adding * name_type can be FIRST, SECOND or WHOLE"""
+    name = text
+    if name_type != 'WHOLE' and name_type in name_format:
+        name_list = text.split()
+        name_index = name_format.index(name_type)
+        if len(name_list) < name_index:
+            name = name_list[name_index]
+    if wiki_output:
+        name = f"*{name}*"
+    return name
+
+def get_single_name(text, get_family_name):  # TODO potential Legacy
     name = text.replace('*', '')
     names_list = name.split()
     if len(names_list) > 0:
@@ -314,19 +330,35 @@ def create_one_line_details(gender, race, add_traits, career, name, is_wiki_outp
     return details
 
 
-def get_one_line_traits():
+def get_one_line_traits_LEGACY():  # TODO: for deleting
     motivation = choice(details_data['Motivation'])
     if motivation == "God":
         motivation = choice(gods)
     traits = f"- {choice(details_data['Personality'])} - Motivation: {motivation}"
     return traits
 
-def create_character_details(gender, race, detail_set, wiki_output):
+
+def get_one_line_traits(character_details):
+    text = ""
+    # TODO iterate through keys, if one in details_no_key add
+    num_traits = 0
+    for key in character_details:
+        if key in details_no_key:
+            text = f" - {character_details[key]}"
+            num_traits = 1
+            break
+    # TODO store if added
+    for key in character_details:
+        if key in details_with_key and key not in text:
+            text = f"{text} - {key}: {character_details[key]}"
+            num_traits += 1
+            if num_traits >= 2:
+                break
+    return text
+
+def create_character_details(gender, race, detail_set):
     details = {}
-    if wiki_output:
-        details["Name"] = f"*{get_random_name(gender, race)}*"
-    else:
-        details["Name"] = get_random_name(gender, race)
+    details["Name"] = get_random_name(gender, race)
     details["Gender"] = gender
     details["Description"] = f"{choice(details_data['Description'])}, "
     details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
@@ -775,66 +807,70 @@ class GameCharacter:
 
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
+    def get_bracket_details(self, stats_type):
+        if stats_type == "None" or stats_type == "Full":
+            print(f"!!!! stats_type: {stats_type}")
+            return ""
+        race = ""
+        if self.race != "Human":
+            race = f"{self.race} "
+        trade = self.get_trade_or_craft()
+        if len(trade) > 0:
+            trade = f" {trade}"
+        return f"({race}{self.career} {self.level}{trade})"
+
     def get_output(self, details_type, stats_type, **options):
         wiki_output = False
         if "wiki_output" in options:
             wiki_output = options['wiki_output']
-        output_type = "ui"
-        if "output_type" in options:
-            output_type = options['output_type']
-        one_line_stats = False
-        if "one_line_stats" in options:
-            one_line_stats = options['one_line_stats']
-        if "one_line_traits" in self.details:
-            print(f"got one line traits: {self.details['one_line_traits']}")
-        if utilities.get_first_key(self.details) == "OneLine":
-            print("Getting One Line details")
-            output = f"{self.details['OneLine']}\n"
-            # add career in as it didn't exist when details created
-            career_text = f" {self.get_one_line_title()}"
-            output = utilities.insert_after_char(output, "*", career_text)
-            # Add Mutations
-            if len(self.mutations) > 0:
-                mutation_text = " "
-                for m in self.mutations:
-                    mutation_text += f"{m.name}, "
-                output = utilities.insert_after_char(output, ")", mutation_text)
-            # if One Line Stats call function here THEN Return
-            if one_line_stats:
-                output += f"{self.get_one_line_stats()}\n"
-                return output
-        else:
-            output = f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
-        if len(self.path) > 1:
-            path_output = "Path: "
-            for key, value in self.path.items():
-                path_output += f"{key}: {value}, "
-            output += f"{path_output}\n"
-        if output_type == "ui":
-            output += "WS  BS   S    T     I   Agi Dex Int WP Fel W"
-            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
-            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
-            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
-        elif wiki_output:
+        output = get_name_output(self.details['Name'], wiki_output)
+        # first handle Details...
+        if details_type == "None":
+            output = ""
+        elif details_type == "Full":
+            details_dictionary = remove_from_dictionary(self.details, ["Name", "Gender"])
+            output = f"{output}\n{get_dictionary_as_string(details_dictionary, 60)}"
+        else:  # must be Minimal or One Line and One Line is just an addition to minimal
+            output = f"{output} {self.get_bracket_details(stats_type)} {self.get_description(self.details['Description'])}"
+            if details_type == "One line":
+                output = f"{output}{get_one_line_traits(self.details)}"
+        # TODO might want to add \n here - no new lines so far
+        # then handle stats...
+        if stats_type == "One line":
+            output += f"\n{self.get_one_line_stats()}\n"
+        elif stats_type == "Full":
+            output = f"{output}\n{self.get_title_output()}\n"  #TODO note double use of \n
+            # Handle multiple careers
+            if len(self.path) > 1:
+                path_output = "Path: "
+                for key, value in self.path.items():
+                    path_output += f"{key}: {value}, "
+                output += f"{path_output}\n"
+            output += self.get_attributes_output(wiki_output)
+            output += self.get_mutations_output("verbose")
+            output += self.get_skills_output()
+            output += self.get_talents_output()
+            output += get_list_output("trappings", self.trappings)
+            output += self.get_spells_output()
+
+        return output
+
+    def get_attributes_output(self, is_wiki_output):
+        # TODO update main.py so only cache uses is_wiki_output
+        output = ""
+        if is_wiki_output:
             output += "<<|\nWS| BS| S| T| I| Agi| Dex| Int| WP| Fel| W\n"
             output += f"{self.attributes['WS']['total']}| {self.attributes['BS']['total']}| {self.attributes['S']['total']}| {self.attributes['T']['total']}| "
             output += f"{self.attributes['I']['total']}| {self.attributes['Agi']['total']}| {self.attributes['Dex']['total']}| {self.attributes['Int']['total']}| "
             output += f"{self.attributes['WP']['total']}| {self.attributes['Fel']['total']}| {self.wounds}|\n>>"
         else:
-            output += "WS  BS  S   T   I   Agi Dex Int  WP Fel  W"
-            output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
-            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
+            output += "WS  BS   S    T     I   Agi Dex Int WP Fel W"
+            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
-
-        output += self.get_mutations_output("verbose")
-        output += self.get_skills_output()
-        output += self.get_talents_output()
-        output += get_list_output("trappings", self.trappings)
-        output += self.get_spells_output()
-
         return output
 
-    def get_output_LEGACY(self, **options):  # TODO remove
+    def get_output_LEGACY(self, **options):  # TODO remove ONLY AFTER finalizing get_attributes_output
         wiki_output = False
         if "wiki_output" in options:
             wiki_output = options['wiki_output']
@@ -911,7 +947,18 @@ class GameCharacter:
         text += "\n"
         return text
 
-    def get_one_line_title(self):
+    def get_trade_or_craft(self):
+        text = ""
+        for skill, value in self.skills.items():
+            if "Trade" in skill:
+                return utilities.get_key_from_string(skill, "(", ")")
+        for talent in self.talents:
+            if "Craftsman" in talent:
+                if "(" in talent and ")" in talent:
+                    return utilities.get_key_from_string(talent, "(", ")")
+        return text
+
+    def get_one_line_title(self):  # TODO should be Legacy
         race = ""
         if self.race != "Human":
             race = f"{self.race} "

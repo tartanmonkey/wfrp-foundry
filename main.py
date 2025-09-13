@@ -168,12 +168,17 @@ def click_create_character():
             output_character(character)
 
 
+def click_update_character():
+    if character is not None:
+        output_character(character)
+
+
 def get_character_details(race):
     detail_set = detail_set_dropdown.get()  # input_details.get()
     # TODO replace this with checking if detail_set == random then build list without that
     if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
-    details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
+    details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
     return details
 
 # def click_random():
@@ -439,7 +444,7 @@ def init_ui_career_dropdown(race='Human'):  # Note hack (maybe?) of passing race
 def create_innkeep(innkeep_data):
     # print(f"Inkeep race: {innkeep_data['race']} family chance: {innkeep_data['family_chance']}")
     gender = choice(["male", "female"])
-    details = create_character_details(gender, innkeep_data['race'], "one_line_traits", checked_wiki_output_state.get())
+    details = create_character_details(gender, innkeep_data['race'], "one_line_traits")
     level = 2  # TODO probs add a range, or maybe even user input here
     innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
     return innkeep
@@ -558,7 +563,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             if not one_line_details:
                 details_set = get_details_data(race, choice(members["details"]))
                 print("!!Not One Line Details!!")
-            details = create_character_details(get_gender(), race, details_set, checked_wiki_output_state.get())
+            details = create_character_details(get_gender(), race, details_set)
             # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
             level = members["level"][1]
             if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
@@ -633,7 +638,7 @@ def create_vessel(vessel_type=""):
     if checked_captain_state.get() == 1:
         captain_race = get_race()
         character_details = create_character_details(get_gender(), captain_race,
-                                                     get_details_data(captain_race, "Captain"), checked_wiki_output_state.get())
+                                                     get_details_data(captain_race, "Captain"))
         captain_level = get_random_level(vessel_data["captain_level"])
         captain_career = choice(vessel_data["captain_career"])
         character = create_character(captain_career, captain_level, captain_race, "None", character_details)
@@ -821,6 +826,7 @@ button_create = Button(text="Create Character", command=click_create_character)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
+button_update_character = Button(text="Update", command=click_update_character)
 button_add_level = Button(text="Add Career", command=click_add_levels)
 # TODO potentially eventually replace with a dropdown for None, Physical, Mental or both
 checked_mutations_state = IntVar()
@@ -940,9 +946,10 @@ label_magic.grid(column=7, row=2)
 magic_dropdown.grid(column=8, row=2)
 checkbutton_mutations.grid(column=9, row=2)
 button_create.grid(column=10, row=2)
+button_update_character.grid(column=11, row=2)
 #button_random.grid(column=9, row=2)
-button_add_level.grid(column=11, row=2)
-button_add_mutation.grid(column=12, row=2)
+button_add_level.grid(column=12, row=2)
+button_add_mutation.grid(column=13, row=2)
 
 
 # Groups
@@ -1019,5 +1026,7 @@ label_output.grid(column=0, row=9, columnspan=10)
 # test_print_careers()
 # mutant_test = Mutation()
 # print(mutant_test.get_output())
+
+
 
 window.mainloop()

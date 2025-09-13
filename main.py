@@ -142,17 +142,6 @@ def click_details():  # TODO LEGACY REMOVE once not in use
     pyperclip.copy(label_output["text"])
 
 
-def click_create():  # TODO LEGACY REMOVE once not in use
-    global career_data, character, valid_races
-    career_name = careers_dropdown.get() #input_career.get()
-    level = int(input_level.get())
-    race = race_dropdown.get()
-    is_mutant = checked_mutations_state.get() == 1
-    if is_valid_character_input(career_name, level, race):
-        character = create_character(career_name, level, race, magic_dropdown.get(), character_details, is_mutant)
-        if character is not None:
-            output_character(character)
-
 
 def click_create_character():
     global character
@@ -534,6 +523,65 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
     is_mutant = checked_mutations_state.get()
     print(f"Clicked create group: {group_type}")
     group = []
+    create_relationships = checked_add_relationships_state.get() == 1
+    # override user input options if passed - added for inn clientele 27/8/25
+    details_type = ""
+    if "details" in options:
+        print(f"Got details_type in options: {options['details']}")
+        details_type = options["details"]
+    if "relationship" in options:
+        create_relationships = options["relationship"] == "random"
+    for members in groups[group_type]:
+        num_members = randint(members["number"][0], members["number"][1])
+        print(f"would create {num_members} group members")
+        # TODO at some point drive race from data rather than hard coded, complicated just due to career chances
+        race = "Human"
+        magic = "None"
+        if "magic" in members:
+            magic = members["magic"]
+        collective_career = ""  # Added for handling Groups of travellers where they all share one random career
+        if len(collective_career) == 0 and "group_type" in members:
+            if members["group_type"] == "collective":
+                collective_career = choice(members["career"])
+                # print(f"Got collective career: {collective_career}")
+            elif members["group_type"] == "mutants":
+                is_mutant = True
+        for member in range(num_members):
+            if details_type == "":
+                details_type = choice(members["details"])
+            details_set = get_details_data(race, details_type)
+            details = create_character_details(get_gender(), race, details_set)
+            # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
+            level = members["level"][1]
+            if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
+                if members["level"][0] > 1:
+                    level = randint(members["level"][0], members["level"][1])
+                else:
+                    level = get_random_level(level)
+            career_key = collective_career
+            print(f"Collective career here: {collective_career}")
+            if len(career_key) == 0:
+                career_key = choice(members["career"])
+            group_member = create_character(career_key, level, race, magic, details, is_mutant)
+            # test for leader = should always be first
+            if len(group) == 0:
+                print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
+            group.append(group_member)
+    # add family if specified
+    if "group_type" in members:
+        if members["group_type"] == "family":
+            for person in group:
+                person.family = create_persons_family(person, 100)
+    # if Add Relationship ticked add one for each member of group
+    add_relationships != checked_add_relationships_state.get()
+    if create_relationships:
+        group = add_group_relationships(group)
+    return group
+
+def create_group_LEGACY(group_type, **options):  # details="one_line", relationship="random" TODO: Remove
+    is_mutant = checked_mutations_state.get()
+    print(f"Clicked create group: {group_type}")
+    group = []
     one_line_details = checked_one_line_details_state.get() == 1
     create_relationships = checked_add_relationships_state.get() == 1
     # override user input options if passed - added for inn clientele 27/8/25
@@ -606,6 +654,20 @@ def add_group_relationships(group):
 def output_group(group):
     group_text = ""
     save_text = ""
+    details_type = show_details_dropdown.get()
+    stats_type = show_stats_dropdown.get()
+    for person in group:
+        group_text += f"{person.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())}\n\n"
+        # TODO remove following if decide to have save different from wiki output 13/9/25
+        # save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
+        save_text = group_text
+    label_output["text"] = group_text
+    pyperclip.copy(save_text)
+
+
+def output_group_LEGACY(group):  # TODO REMOVE
+    group_text = ""
+    save_text = ""
     if checked_one_line_details_state.get():
         for person in group:
             group_text += f"{person.get_one_line_details(checked_one_line_traits_state.get())} \n"
@@ -624,7 +686,6 @@ def output_group(group):
             save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
     label_output["text"] = group_text
     pyperclip.copy(save_text)
-
 
 def create_vessel(vessel_type=""):
     global character_details, character
@@ -704,10 +765,9 @@ def create_character(career, level, race, magic_domain, details, is_mutant=False
 
 def output_character(character_obj):
     # TODO replace logic with call to simply use character output
-    one_line_only = checked_one_line_stats_state.get() == 1
     details_type = show_details_dropdown.get()
     stats_type = show_stats_dropdown.get()
-    label_output["text"] = character_obj.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get(), one_line_stats=one_line_only)
+    label_output["text"] = character_obj.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())
     pyperclip.copy(label_output["text"])  # TODO double check this works, used to make teh call again to get_output
 
 

@@ -821,10 +821,15 @@ class GameCharacter:
 
     def get_output(self, details_type, stats_type, **options):
         wiki_output = False
+        show_relationship = False
+        # setup options
         if "wiki_output" in options:
             wiki_output = options['wiki_output']
+        if "show_relationship" in options:
+            show_relationship = options["show_relationship"]
+        # start with character Name
         output = get_name_output(self.details['Name'], wiki_output)
-        # first handle Details...
+        # then handle Details...
         if details_type == "None":
             output = ""
         elif details_type == "Full":
@@ -834,6 +839,8 @@ class GameCharacter:
             output = f"{output} {self.get_bracket_details(stats_type)} {self.get_description(self.details['Description'])}"
             if details_type == "One line":
                 output = f"{output}{get_one_line_traits(self.details)}"
+            if "Relationship" in self.details and show_relationship:
+                output += f"\n{self.details['Relationship']}"
         # TODO might want to add \n here - no new lines so far
         # then handle stats...
         if stats_type == "One line":

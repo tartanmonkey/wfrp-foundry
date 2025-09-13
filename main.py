@@ -656,8 +656,9 @@ def output_group(group):
     save_text = ""
     details_type = show_details_dropdown.get()
     stats_type = show_stats_dropdown.get()
+    relationship_vis = checked_show_relationships_state.get() == 1
     for person in group:
-        group_text += f"{person.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())}\n\n"
+        group_text += f"{person.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get(), show_relationship=relationship_vis)}\n\n"
         # TODO remove following if decide to have save different from wiki output 13/9/25
         # save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
         save_text = group_text

@@ -9,7 +9,7 @@ class FamilyMember:
         self.relationship = relationship
         self.age = 0  # note if i made teh default high could use it to sort whole family by age
         self.gender = self.set_gender_and_relationship(relationship, relative_gender)
-        self.name = character_creator.get_random_name(self.gender, relative_race, True)
+        self.name = character_creator.create_random_name(self.gender, relative_race, True)
         if self.relationship == "Child":
             # TODO should consider Halfling or Dwarf here
             self.age = randint(1, 18)
@@ -21,14 +21,15 @@ class FamilyMember:
     def is_parent(self):
         return self.relationship == "Mother" or self.relationship == "Father"
 
-    def get_output(self, show_traits=True):
+    def get_output(self, is_wiki_output, show_traits=True):
         if self.relationship == "Child":
             return f"{self.name} ({self.age})"
         # must be adult...
+        name_output = character_creator.get_name_output(self.details['Name'], is_wiki_output)
+        output = f"{name_output} {self.details['Description']}"
         if show_traits:
-            return f"\n{self.details}"
-        else:
-            return f"\n{utilities.get_string_up_to(self.details, '-')}"
+            output += character_creator.get_one_line_traits(self.details)
+        return output
 
     def set_gender_and_relationship(self, relationship, relative_gender):
         if relationship == "Mother":

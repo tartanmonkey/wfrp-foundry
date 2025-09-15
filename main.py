@@ -33,6 +33,8 @@ from inn_creator import Inn
 career_data = {}  # career_name : {chance: tuple, level_data: list}
 character_details = {}
 character = None
+vessel = None
+inn = None
 valid_races = []  # set in init_data for checking valid user input
 
 extra_details = {
@@ -59,11 +61,12 @@ detail_data_sets = {
     "None": []
 }
 
-
+# Added for creating Adult Family members, also used by Innkeeps
+detail_sets_short = ["Default", "Simple", "Motivated", "Basic", "CairnShort"]
 
 dreams_data = [] # a list of lists
-detail_set_options = []
-career_options = []
+detail_set_options = []  # stores names of detail sets loaded
+career_options = []  # stores names of careers loaded
 magic_options = ["None", "Beasts", "Death", "Fire", "Heavens", "Metal", "Life", "Light", "Shadow", "Manann", "Morr",
                   "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena", "Hedgecraft",
                   "Witchcraft", "Daemonology", "Necromancy", "Petty", "Arcane"]
@@ -71,7 +74,6 @@ group_options = []
 
 inn_busy_states = ["random", "Quiet", "Middling", "Busy"]
 inn_quality_options = ["random", "Cheap", "Average", "Expensive"]
-inn = None
 character_group = []
 add_relationships = 0
 show_details_options = ["Minimal", "One line", "Full", "None"]
@@ -108,9 +110,20 @@ def click_clear():
 
 
 def click_create_vessel():
-    vessel = vessel_dropdown.get()
-    if trade_creator.is_valid_vessel_type(vessel):
-        create_vessel(vessel)
+    global character, vessel
+    captain = None
+    if trade_creator.is_valid_vessel_type(vessel_dropdown.get()):
+        vessel_obj = create_vessel(vessel_dropdown.get())
+        vessel_data = vessel.get_vessel_data()  # vessel.get_output()
+        vessel = vessel_obj
+        if checked_captain_state.get() == 1:
+            captain_race = get_race()
+            captain_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
+            captain_level = get_random_level(vessel_data["captain_level"])
+            captain_career = choice(vessel_data["captain_career"])
+            captain = create_character(captain_career, captain_level, captain_race, "None", captain_details)
+            character = captain
+        output_vessel(vessel_obj, captain)
 
 
 def click_random_vessel():
@@ -271,17 +284,12 @@ def click_create_inn():
     inn.set_clientele(create_inn_clientele(clientele_groups))
     output_inn()
 
+# Left this and following two in only as example of doing stuff on checkbox change
 def inn_occupied_changed(event):
-    # print("Woot this worked!!!!")
-    # showinfo(
-    #     title='Result',
-    #     message=f'You selected {inn_occupied_dropdown.get()}!'
-    # )
     on_inn_input_changed()
 
 
 def inn_checkbox_changed():
-    # print("Woot this worked!!!!")
     on_inn_input_changed()
 
 
@@ -292,13 +300,16 @@ def on_inn_input_changed():
 
 def output_inn():
     if inn is not None:
-        include_traits = checked_one_line_traits_state.get() == 1
-        one_line_stats = checked_one_line_stats_state.get() == 1
+        # include_traits = checked_one_line_traits_state.get() == 1
+        # one_line_stats = checked_one_line_stats_state.get() == 1
+        details_type = show_details_dropdown.get()
+        stats_type = show_stats_dropdown.get()
         show_clientele = checked_show_clientele_state.get() == 1
         is_wiki_output = checked_wiki_output_state.get() == 1
-        show_family = checked_innkeep_family_state.get() == 1
-        label_output["text"] = inn.get_output(include_traits, one_line_stats, show_clientele, is_wiki_output, show_family)
+        # show_family = checked_innkeep_family_state.get() == 1
+        label_output["text"] = inn.get_output(details_type, stats_type, show_clientele, is_wiki_output)
         pyperclip.copy(label_output["text"])
+        button_update_inn["state"] = "normal"
     else:
         messagebox.showinfo(title="Oops!", message=f"Create Inn first!")
 
@@ -433,7 +444,8 @@ def init_ui_career_dropdown(race='Human'):  # Note hack (maybe?) of passing race
 def create_innkeep(innkeep_data):
     # print(f"Inkeep race: {innkeep_data['race']} family chance: {innkeep_data['family_chance']}")
     gender = choice(["male", "female"])
-    details = create_character_details(gender, innkeep_data['race'], "one_line_traits")
+    detail_set = get_details_data(innkeep_data['race'], choice(detail_sets_short))
+    details = create_character_details(gender, innkeep_data['race'], detail_set)
     level = 2  # TODO probs add a range, or maybe even user input here
     innkeep = create_character("Townsman", level, innkeep_data['race'], "None", details)
     return innkeep
@@ -475,11 +487,17 @@ def create_persons_family(person, family_chance):
             family.append(other_adult)
         # add details to adults
         for adult in family:
-            name = f"{adult.relationship} {adult.name}"
-            career = ""
-            add_traits = checked_one_line_traits_state.get()
-            wiki_output = checked_wiki_output_state.get() == 1
-            adult.set_details(create_one_line_details(adult.gender, person.race, add_traits, career, name, wiki_output))
+            adult_name = f"{adult.relationship} {adult.name}"
+            detail_set = get_details_data(person.race, choice(detail_sets_short))
+            adult_details = create_character_details(adult.gender, person.race, detail_set, name=adult_name)
+            # wiki_output = checked_wiki_output_state.get() == 1
+            adult.set_details(adult_details)
+            # TODO Delete Legacy
+            # name = f"{adult.relationship} {adult.name}"
+            # career = ""
+            # add_traits = checked_one_line_traits_state.get()
+            # wiki_output = checked_wiki_output_state.get() == 1
+            # adult.set_details(create_one_line_details(adult.gender, person.race, add_traits, career, name, wiki_output))
         # create children
         for x in range(0, num_children):
             child = FamilyMember("child", person.details["Gender"], person.race)
@@ -688,27 +706,25 @@ def output_group_LEGACY(group):  # TODO REMOVE
     label_output["text"] = group_text
     pyperclip.copy(save_text)
 
+
 def create_vessel(vessel_type=""):
-    global character_details, character
     vessel = Vessel(vessel_type)
     vessel_data = vessel.get_vessel_data()
     passengers = get_passenger_numbers(vessel_data)
     for i in range(len(passengers)):
         passengers[i] = f"{passengers[i]} {get_random_career_key()}"
     vessel.set_passengers(passengers)
-    vessel_details = vessel.get_output()
-    if checked_captain_state.get() == 1:
-        captain_race = get_race()
-        character_details = create_character_details(get_gender(), captain_race,
-                                                     get_details_data(captain_race, "Captain"))
-        captain_level = get_random_level(vessel_data["captain_level"])
-        captain_career = choice(vessel_data["captain_career"])
-        character = create_character(captain_career, captain_level, captain_race, "None", character_details)
-        label_output["text"] = vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(wiki_output=checked_wiki_output_state.get())
-        pyperclip.copy(vessel_details + "\n\n--------CAPTAIN----------\n\n" + character.get_output(wiki_output=checked_wiki_output_state.get(), output_type="save"))
-    else:
-        label_output["text"] = vessel_details
-        pyperclip.copy(label_output["text"])
+    return vessel
+
+
+def output_vessel(vessel_obj, captain):
+    output = vessel_obj.get_output()
+    if captain is not None:
+        details_type = show_details_dropdown.get()
+        stats_type = show_stats_dropdown.get()
+        output += "\n\n--------CAPTAIN----------\n\n" + captain.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())
+    label_output["text"] = output
+    pyperclip.copy(label_output["text"])  # TODO consider orig also had output_type="save" on Captain output
 
 
 

@@ -93,16 +93,15 @@ def get_coach_type(quality):
     coach_type = choice(["coach", "coach", "coach noble"])
     return coach_type
 
-def get_coach_output(coach_group, clientele_traits, clientele_stats):
+def get_coach_output(coach_group, details_type, stats_type, is_wiki_output):
     text = ""
     subtitle = "- Passengers -"
     for member in coach_group:
         if member.career != "Coachman" and subtitle == "- Passengers -":
             text += f"\n{subtitle}"
             subtitle = ""
-        text += f"\n{member.get_one_line_details(clientele_traits)}"
-        if clientele_stats:
-                text += f"\n{member.get_one_line_stats()}\n"
+        text += f"\n{member.get_output(details_type, stats_type, wiki_output=is_wiki_output)}"
+
     return text
 
 # ---------------------------- INN CLASS ----------------------------------------
@@ -314,7 +313,7 @@ class Inn:
 
 # ----------------------------------------- GET OUTPUT ----------------------------
 
-    def get_output(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output, show_family):
+    def get_output(self, details_type, stats_type, show_clientele, is_wiki_output):
         # TODO Add kwargs - see same method in character_creator
         prefix = ""
         if is_wiki_output:
@@ -323,10 +322,10 @@ class Inn:
         text += f"\n{self.description}, {self.condition} with {self.details}"
         text += self.get_known_for_output()
         text += f"\n{self.get_rooms_output()}"
-        text += f"\nInnkeep: {self.proprietor.get_one_line_details(True)}"
-        if show_family:
-            if self.proprietor.has_family():
-                text += self.proprietor.get_family_output(clientele_traits)
+        text += f"\nInnkeep: {self.proprietor.get_output(details_type, stats_type, wiki_output=is_wiki_output)}"
+        # if show_family:
+        #     if self.proprietor.has_family():
+        #         text += self.proprietor.get_family_output(clientele_traits)
         prefix = "\n"
         if is_wiki_output:
             prefix = "++++ "
@@ -335,7 +334,7 @@ class Inn:
             text += f"{d}, "
         for m in self.menu:
             text += f"\n{m}"
-        text += self.get_clientele_output(clientele_traits, clientele_stats, show_clientele, is_wiki_output)
+        text += self.get_clientele_output(details_type, stats_type, show_clientele, is_wiki_output)
         return text
 
     def get_known_for_output(self):
@@ -351,7 +350,29 @@ class Inn:
             text += f" {rooms} ({self.get_cost('Rooms', room_cost[rooms])}),"
         return text
 
-    def get_clientele_output(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output):
+    def get_clientele_output(self, details_type, stats_type, show_clientele, is_wiki_output):
+        prefix = "\n"
+        if is_wiki_output:
+            prefix = "++++ "
+        text = f"\n{prefix}Occupied: {self.occupied}"
+        if show_clientele:
+            text += " - Clientele:"
+            for group in self.clientele:
+                goods = ""
+                # add goods to title if group contains it
+                if "goods" in group:
+                    goods = group["goods"]
+                text += f"\n\n-- {group['group_name'].capitalize()}{goods} --"
+                # Handle coach separately so can split out passengers...
+                if "coach" in group['group_name']:
+                    text += get_coach_output(group["members"], details_type, stats_type, is_wiki_output)
+                else:
+                    for member in group["members"]:
+                        text += f"\n{member.get_output(details_type, stats_type, wiki_output=is_wiki_output)}"
+        return text
+
+    # TODO REMOVE -------------------------
+    def get_clientele_output_LEGACY(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output):
         prefix = "\n"
         if is_wiki_output:
             prefix = "++++ "

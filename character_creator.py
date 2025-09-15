@@ -240,7 +240,7 @@ def get_single_name(text, get_family_name):  # TODO potential Legacy
     print(f"get_single_name has problem with: {text}")
     return text
 
-def get_random_name(gender, race="Human", first_name_only=False):
+def create_random_name(gender, race="Human", first_name_only=False):
     region = race_data[race]["name_table"]
     if gender in names[region]:
         if first_name_only:
@@ -318,10 +318,10 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_one_line_details(gender, race, add_traits, career, name, is_wiki_output):
+def create_one_line_details(gender, race, add_traits, career, name, is_wiki_output):  # TODO Legacy Remove
     traits = ""
     if len(name) == 0:
-        name = get_random_name(gender, race)
+        name = create_random_name(gender, race)
     if is_wiki_output:
         name = f"*{name}*"
     if add_traits:
@@ -356,9 +356,12 @@ def get_one_line_traits(character_details):
                 break
     return text
 
-def create_character_details(gender, race, detail_set):
+def create_character_details(gender, race, detail_set, **options):
     details = {}
-    details["Name"] = get_random_name(gender, race)
+    if 'name' in options:
+        details["Name"] = options['name']
+    else:
+        details["Name"] = create_random_name(gender, race)
     details["Gender"] = gender
     details["Description"] = f"{choice(details_data['Description'])}, "
     details["Description"] += f"{get_extra_detail(gender, choice(details_data['Detail']))}."
@@ -807,17 +810,6 @@ class GameCharacter:
 
 # -------------- CHARACTER OUTPUT ----------------------------------------------------------
 
-    def get_bracket_details(self, stats_type):
-        if stats_type == "None" or stats_type == "Full":
-            print(f"!!!! stats_type: {stats_type}")
-            return ""
-        race = ""
-        if self.race != "Human":
-            race = f"{self.race} "
-        trade = self.get_trade_or_craft()
-        if len(trade) > 0:
-            trade = f" {trade}"
-        return f"({race}{self.career} {self.level}{trade})"
 
     def get_output(self, details_type, stats_type, **options):
         wiki_output = False
@@ -841,6 +833,9 @@ class GameCharacter:
                 output = f"{output}{get_one_line_traits(self.details)}"
             if "Relationship" in self.details and show_relationship:
                 output += f"\n{self.details['Relationship']}"
+        # Now do Family...
+        if self.has_family():
+            output += self.get_family_output(details_type, wiki_output)
         # TODO might want to add \n here - no new lines so far
         # then handle stats...
         if stats_type == "One line":
@@ -861,6 +856,18 @@ class GameCharacter:
             output += self.get_spells_output()
 
         return output
+
+    def get_bracket_details(self, stats_type):
+        if stats_type == "None" or stats_type == "Full":
+            print(f"!!!! stats_type: {stats_type}")
+            return ""
+        race = ""
+        if self.race != "Human":
+            race = f"{self.race} "
+        trade = self.get_trade_or_craft()
+        if len(trade) > 0:
+            trade = f" {trade}"
+        return f"({race}{self.career} {self.level}{trade})"
 
     def get_attributes_output(self, is_wiki_output):
         # TODO update main.py so only cache uses is_wiki_output
@@ -1082,21 +1089,24 @@ class GameCharacter:
             return f"{self.career} {domain} ({self.level} {self.title}) {self.status} - {self.race}"
         return f"{self.career} ({self.level} {self.title}) {self.status} - {self.race}"
 
-    def get_family_output(self, show_traits, start_on_new_line=True):
+    # TODO pass on wiki output and show_traits
+    def get_family_output(self, show_details, is_wiki_output, start_on_new_line=True):
         nl = "\n"
-        family_name = get_single_name(self.details['Name'], True)
-
+        family_name = get_name_output(self.details['Name'], False, 'SECOND')
         if not start_on_new_line:
             nl = ""
         text = f"{nl}{family_name} Family: "
         added_child = False
+        show_traits = False
+        if show_details == "One line" or "Full":
+            show_traits = True
         for n in range(0, len(self.family)):
             if self.family[n].relationship == "Child":
                 if added_child:
-                    text += f", {self.family[n].get_output()}"
+                    text += f", {self.family[n].get_output(is_wiki_output)}"
                 else:
-                    text += f"\nChildren: {self.family[n].get_output()}"
+                    text += f"\nChildren: {self.family[n].get_output(is_wiki_output)}"
                     added_child = True
             else:
-                text += f"{self.family[n].get_output(show_traits)}, "
+                text += f"\n{self.family[n].get_output(is_wiki_output, show_traits)}, "
         return text

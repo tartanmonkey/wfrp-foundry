@@ -125,6 +125,7 @@ def click_create_vessel():
             vessel_obj.set_captain(captain)
             character = captain  # left this in after adding captain as vessel variable in hopes can utilize add Mutation etc
         output_vessel(vessel_obj)
+        manage_enabled_update_buttons("Vessel")
 
 
 def click_update_vessel():
@@ -254,6 +255,7 @@ def click_create_group():
     if group_type in groups:
         character_group = create_group(group_type)
         output_group(character_group)
+        manage_enabled_update_buttons("Group")
     else:
         valid_groups = ""
         for k, v in groups.items():
@@ -289,39 +291,30 @@ def click_create_inn():
     clientele_groups = inn.get_clientele_groups()
     inn.set_clientele(create_inn_clientele(clientele_groups))
     output_inn()
+    manage_enabled_update_buttons("Inn")
 
-# Left this and following two in only as example of doing stuff on checkbox change
+
+# Left this in only as example of doing stuff on checkbox change
 def inn_occupied_changed(event):
-    on_inn_input_changed()
-
-
-def inn_checkbox_changed():
-    on_inn_input_changed()
-
-
-def on_inn_input_changed():
-    if inn is not None:
-        button_update_inn["state"] = "normal"
+    print(f"dropdown state changed {event.widget.get()}")
 
 
 def manage_enabled_update_buttons(button_name):
-    value = ""
     buttons = {
-        "Character": {"function": set_update_button_state_character, "args": "normal"},
-        "Inn": {"function": set_update_button_state_inn, "args": "DISABLED"},
-        "Group": {"function": set_update_button_state_group, "args": 'DISABLED'}
+        "Character": {"function": set_update_button_state_character},
+        "Inn": {"function": set_update_button_state_inn},
+        "Group": {"function": set_update_button_state_group},
+        "Vessel": {"function": set_update_button_state_vessel}
     }
     for k, v in buttons.items():
-        print(k)
         if k == button_name:
-            value = 'normal'
+            state = 'normal'
         else:
-            value = 'disabled'
-        buttons[k]["function"](value) #["function"](value)
+            state = 'disabled'
+        buttons[k]["function"](state)
 
 
 def set_update_button_state_inn(state):
-    print(f"calling: et_update_button_state_inn, state {state}")
     button_update_inn['state'] = state
 
 def set_update_button_state_group(state):
@@ -331,7 +324,7 @@ def set_update_button_state_character(state):
     button_update_character['state'] = state
 
 def set_update_button_state_vessel(state):
-    pass
+    button_update_vessel['state'] = state
 
 
 
@@ -361,8 +354,6 @@ def click_update_inn():
             inn.set_clientele(create_inn_clientele(clientele_groups))
 
     output_inn()
-    # commented out as we may want to re-output when group inputs are changed
-    # button_update_inn["state"] = "DISABLED"
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -940,7 +931,7 @@ button_create = Button(text="Create Character", command=click_create_character)
 checked_random_race_state = IntVar()
 checkbutton_random_race = Checkbutton(text="Randomize Race?", variable=checked_random_race_state)
 checked_random_race_state.get()
-button_update_character = Button(text="Update", command=click_update_character)
+button_update_character = Button(text="Update", command=click_update_character, state=DISABLED)
 button_add_level = Button(text="Add Career", command=click_add_levels)
 # TODO potentially eventually replace with a dropdown for None, Physical, Mental or both
 checked_mutations_state = IntVar()
@@ -956,7 +947,7 @@ checked_add_relationships_state = IntVar()
 add_relationships = checked_add_relationships_state.get()
 checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
 button_group = Button(text="Create Group", command=click_create_group)
-button_update_group = Button(text="Update Group", command=click_update_group)
+button_update_group = Button(text="Update Group", command=click_update_group, state=DISABLED)
 
 
 # Details Options
@@ -992,7 +983,7 @@ checkbutton_create_captain = Checkbutton(text="Create Captain?", variable=checke
 checked_captain_state.set(1)
 
 button_create_vessel = Button(text="Create Vessel", command=click_create_vessel)
-button_update_vessel = Button(text="Update", command=click_update_vessel)
+button_update_vessel = Button(text="Update", command=click_update_vessel, state=DISABLED)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
 # Dreams
@@ -1012,10 +1003,10 @@ inn_occupied_dropdown = ttk.Combobox(values=inn_busy_states)
 inn_occupied_dropdown.set("random")
 inn_occupied_dropdown.bind('<<ComboboxSelected>>', inn_occupied_changed)
 checked_show_clientele_state = IntVar()
-checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state, command=inn_checkbox_changed)
+checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state)
 checked_show_clientele_state.set(1)
 checked_innkeep_family_state = IntVar()
-checkbutton_innkeep_family = Checkbutton(text="Innkeep Family?", variable=checked_innkeep_family_state, command=inn_checkbox_changed)
+checkbutton_innkeep_family = Checkbutton(text="Innkeep Family?", variable=checked_innkeep_family_state)
 checked_innkeep_family_state.set(1)
 button_inns = Button(text="Create Inn", command=click_create_inn)
 button_update_inn = Button(text="Update Inn", command=click_update_inn, state=DISABLED)

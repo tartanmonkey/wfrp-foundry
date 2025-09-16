@@ -141,36 +141,12 @@ def click_update_vessel():
         output_vessel(vessel)
 
 
-def click_details():  # TODO LEGACY REMOVE once not in use
-    global character_details
-    race = get_race()
-    if not is_valid_race_input(race):
-        return
-    detail_set = detail_set_dropdown.get() # input_details.get()
-    # if no detail set chosen do random
-    if checked_random_details_state.get() == 1:
-        detail_set = choice(list(detail_data_sets.keys()))
-    if checked_one_line_details_state.get():
-        career = ""
-        name = ""
-        wiki_output = checked_wiki_output_state.get() == 1
-        if checked_one_line_career_state.get():
-            career = f"({get_random_career_key()}) "
-        label_output["text"] = create_one_line_details(get_gender(), race, checked_one_line_traits_state.get(), career, name, wiki_output)
-        character_details.clear()
-        character_details["OneLine"] = label_output["text"]
-    else:
-        character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
-        #label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name"], ['Background'])
-        label_output["text"] = get_dictionary_as_string(character_details, 50, ["Name", "CairnBackground", "CairnQuirk", "CairnGoal", "CairnVirtue", "CairnVice"], ['Background'], ['CairnBackground', 'CairnQuirk', 'CairnGoal', 'CairnVirtue'])
-    pyperclip.copy(label_output["text"])
-
-
 def get_career_dropdown():
     career_name = careers_dropdown.get()
     if career_name == "Random":
         return get_random_career_key(get_race())
     return career_name
+
 
 def click_create_character():
     global character
@@ -201,9 +177,6 @@ def get_details_dropdown():
 
 def get_character_details(race):
     detail_set = get_details_dropdown() # input_details.get()
-    # TODO replace this with checking if detail_set == random then build list without that
-    if checked_random_details_state.get() == 1:
-        detail_set = choice(list(detail_data_sets.keys()))
     details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
     return details
 
@@ -648,67 +621,6 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
         group = add_group_relationships(group)
     return group
 
-def create_group_LEGACY(group_type, **options):  # details="one_line", relationship="random" TODO: Remove
-    is_mutant = checked_mutations_state.get()
-    print(f"Clicked create group: {group_type}")
-    group = []
-    one_line_details = checked_one_line_details_state.get() == 1
-    create_relationships = checked_add_relationships_state.get() == 1
-    # override user input options if passed - added for inn clientele 27/8/25
-    if "details" in options:
-        print(f"Got details in options: {options['details']}")
-        one_line_details = options["details"] == "one_line"
-    if "relationship" in options:
-        create_relationships = options["relationship"] == "random"
-    for members in groups[group_type]:
-        num_members = randint(members["number"][0], members["number"][1])
-        print(f"would create {num_members} group members")
-        # TODO at some point drive race from data rather than hard coded, complicated just due to career chances
-        race = "Human"
-        magic = "None"
-        if "magic" in members:
-            magic = members["magic"]
-        collective_career = ""  # Added for handling Groups of travellers where they all share one random career
-        if len(collective_career) == 0 and "group_type" in members:
-            if members["group_type"] == "collective":
-                collective_career = choice(members["career"])
-                # print(f"Got collective career: {collective_career}")
-            # TODO could catch Mutants here as an elif
-            elif members["group_type"] == "mutants":
-                is_mutant = True
-        for member in range(num_members):
-            details_set = "one_line_traits"
-            if not one_line_details:
-                details_set = get_details_data(race, choice(members["details"]))
-                print("!!Not One Line Details!!")
-            details = create_character_details(get_gender(), race, details_set)
-            # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
-            level = members["level"][1]
-            if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
-                if members["level"][0] > 1:
-                    level = randint(members["level"][0], members["level"][1])
-                else:
-                    level = get_random_level(level)
-            career_key = collective_career
-            print(f"Collective career here: {collective_career}")
-            if len(career_key) == 0:
-                career_key = choice(members["career"])
-            group_member = create_character(career_key, level, race, magic, details, is_mutant)
-            # test for leader = should always be first
-            if len(group) == 0:
-                print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
-            group.append(group_member)
-    # add family if specified
-    if "group_type" in members:
-        if members["group_type"] == "family":
-            for person in group:
-                person.family = create_persons_family(person, 100)
-    # if Add Relationship ticked add one for each member of group
-    add_relationships != checked_add_relationships_state.get()
-    if create_relationships:
-        group = add_group_relationships(group)
-    return group
-
 
 def add_group_relationships(group):
     if len(group) > 1:
@@ -732,29 +644,6 @@ def output_group(group):
         # TODO remove following if decide to have save different from wiki output 13/9/25
         # save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
         save_text = group_text
-    label_output["text"] = group_text
-    pyperclip.copy(save_text)
-
-
-def output_group_LEGACY(group):  # TODO REMOVE
-    group_text = ""
-    save_text = ""
-    if checked_one_line_details_state.get():
-        for person in group:
-            group_text += f"{person.get_one_line_details(checked_one_line_traits_state.get())} \n"
-            # check for one line stats and handle here - would mean for a group must also have one line deets
-            if checked_one_line_stats_state.get():
-                group_text += f"{person.get_one_line_stats()}\n"
-            if checked_show_relationships_state.get() == 1 and "Relationship" in person.details:
-                group_text += f"{person.details['Relationship']}\n"
-            if person.has_family():
-                group_text += person.get_family_output(checked_one_line_traits_state.get(),False)
-            group_text += "\n"
-            save_text = group_text
-    else:
-        for person in group:
-            group_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
-            save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
     label_output["text"] = group_text
     pyperclip.copy(save_text)
 
@@ -931,9 +820,6 @@ radio_gender.set(3)
 radio_male = Radiobutton(text="Male", value=1, variable=radio_gender)
 radio_female = Radiobutton(text="Female", value=2, variable=radio_gender)
 radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
-checked_random_details_state = IntVar()
-checkbutton_random_details = Checkbutton(text="Random Details Set?", variable=checked_random_details_state)
-checked_random_details_state.get()
 
 # Career
 label_career = Label(text="Career: ")
@@ -972,17 +858,6 @@ button_update_group = Button(text="Update Group", command=click_update_group, st
 label_details_options = Label(text="Show Details", bg="lightblue")
 show_details_dropdown = ttk.Combobox(values=show_details_options)
 show_details_dropdown.set("One line")
-checked_one_line_details_state = IntVar()
-checkbutton_one_line = Checkbutton(text="One line only?", variable=checked_one_line_details_state)
-checked_one_line_details_state.set(1)
-checked_one_line_traits_state = IntVar()
-checkbutton_one_line_traits = Checkbutton(text="Include Traits?", variable=checked_one_line_traits_state)
-checked_one_line_traits_state.set(1)
-checked_one_line_career_state = IntVar()
-checkbutton_one_line_career = Checkbutton(text="Include Career?", variable=checked_one_line_career_state)
-checked_one_line_stats_state = IntVar()
-checkbutton_one_line_stats = Checkbutton(text="One line stats?", variable=checked_one_line_stats_state)
-checked_one_line_stats_state.set(0)
 label_stats_options = Label(text="Show Stats")
 show_stats_dropdown = ttk.Combobox(values=show_stats_options)
 show_stats_dropdown.set("One line")
@@ -1022,9 +897,6 @@ inn_occupied_dropdown.bind('<<ComboboxSelected>>', inn_occupied_changed)
 checked_show_clientele_state = IntVar()
 checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state)
 checked_show_clientele_state.set(1)
-checked_innkeep_family_state = IntVar()
-checkbutton_innkeep_family = Checkbutton(text="Innkeep Family?", variable=checked_innkeep_family_state)
-checked_innkeep_family_state.set(1)
 button_inns = Button(text="Create Inn", command=click_create_inn)
 button_update_inn = Button(text="Update Inn", command=click_update_inn, state=DISABLED)
 
@@ -1053,7 +925,6 @@ label_gender.grid(column=2, row=1)
 radio_male.grid(column=3, row=1)
 radio_female.grid(column=4, row=1)
 radio_random.grid(column=5, row=1)
-checkbutton_random_details.grid(column=6, row=1)
 
 # Career
 label_career.grid(column=0, row=2)
@@ -1085,13 +956,9 @@ button_update_group.grid(column=4, row=3)
 
 label_details_options.grid(column=0, row=4)
 show_details_dropdown.grid(column=1, row=4)
-checkbutton_one_line.grid(column=2, row=4)
-checkbutton_one_line_traits.grid(column=3, row=4)
-checkbutton_one_line_career.grid(column=4, row=4)
-checkbutton_one_line_stats.grid(column=5, row=4)
-label_stats_options.grid(column=6, row=4)
-show_stats_dropdown.grid(column=7, row=4)
-checkbutton_show_relationships.grid(column=8, row=4)
+label_stats_options.grid(column=2, row=4)
+show_stats_dropdown.grid(column=3, row=4)
+checkbutton_show_relationships.grid(column=4, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)
@@ -1114,9 +981,8 @@ inn_quality_dropdown.grid(column=2, row=7)
 label_inn_clientele.grid(column=3, row=7)
 inn_occupied_dropdown.grid(column=4, row=7)
 checkbutton_show_clientele.grid(column=5, row=7)
-checkbutton_innkeep_family.grid(column=6, row=7)
-button_inns.grid(column=7, row=7)
-button_update_inn.grid(column=8, row=7)
+button_inns.grid(column=6, row=7)
+button_update_inn.grid(column=7, row=7)
 
 
 # Output

@@ -218,10 +218,11 @@ def get_vessel_types():
     return vessel_types
 
 
-def get_vessel_type(vessel_type):
-    for entry in vessel_data:
-        if entry["vessel_type"] == vessel_type:
-            return entry
+def get_vessel_type(vessel_type=None):
+    if vessel_type is not None:
+        for entry in vessel_data:
+            if entry["vessel_type"] == vessel_type:
+                return entry
 # ---------------------------- VESSEL CLASS------------------------------------------------------------- #
 
 

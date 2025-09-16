@@ -79,6 +79,7 @@ character_group = []
 add_relationships = 0
 show_details_options = ["Minimal", "One line", "Full", "None"]
 show_stats_options = ["Minimal", "One line", "Full", "None"]
+vessel_dropdown_items = []
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -110,31 +111,33 @@ def click_clear():
     # print(mutant_test_new.get_output())
 
 
+def get_vessel_dropdown():
+    vessel_type = vessel_dropdown.get()
+    if vessel_type == "Random":
+        return ""
+    return vessel_type
+
 def click_create_vessel():
     global character, vessel
     captain = None
-    if trade_creator.is_valid_vessel_type(vessel_dropdown.get()):
-        vessel_obj = create_vessel(vessel_dropdown.get())
-        vessel_data = vessel_obj.get_vessel_data()  # vessel.get_output()
-        vessel = vessel_obj
-        if checked_captain_state.get() == 1:
-            captain_race = get_race()
-            captain_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
-            captain_level = get_random_level(vessel_data["captain_level"])
-            captain_career = choice(vessel_data["captain_career"])
-            captain = create_character(captain_career, captain_level, captain_race, "None", captain_details)
-            vessel_obj.set_captain(captain)
-            character = captain  # left this in after adding captain as vessel variable in hopes can utilize add Mutation etc
-        output_vessel(vessel_obj)
-        manage_enabled_update_buttons("Vessel")
+    vessel_obj = create_vessel(get_vessel_dropdown())
+    vessel_data = vessel_obj.get_vessel_data()  # vessel.get_output()
+    vessel = vessel_obj
+    if checked_captain_state.get() == 1:
+        captain_race = get_race()
+        captain_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
+        captain_level = get_random_level(vessel_data["captain_level"])
+        captain_career = choice(vessel_data["captain_career"])
+        captain = create_character(captain_career, captain_level, captain_race, "None", captain_details)
+        vessel_obj.set_captain(captain)
+        character = captain  # left this in after adding captain as vessel variable in hopes can utilize add Mutation etc
+    output_vessel(vessel_obj)
+    manage_enabled_update_buttons("Vessel")
 
 
 def click_update_vessel():
     if vessel is not None:
         output_vessel(vessel)
-
-def click_random_vessel():
-    create_vessel()
 
 
 def click_details():  # TODO LEGACY REMOVE once not in use
@@ -162,11 +165,16 @@ def click_details():  # TODO LEGACY REMOVE once not in use
     pyperclip.copy(label_output["text"])
 
 
+def get_career_dropdown():
+    career_name = careers_dropdown.get()
+    if career_name == "Random":
+        return get_random_career_key(get_race())
+    return career_name
 
 def click_create_character():
     global character
     # TODO handle random career here? - if so remove current starting on random
-    career_name = careers_dropdown.get()
+    career_name = get_career_dropdown()
     level = int(input_level.get())
     race = get_race()
     is_mutant = checked_mutations_state.get() == 1
@@ -226,7 +234,7 @@ def click_save():
 def click_add_levels():
     global character, career_data
     if character is not None:
-        career_name = careers_dropdown.get()
+        career_name = get_career_dropdown()
         level = int(input_level.get())
         if is_valid_character_input(career_name, level, character.race):
             # TODO check here or elsewhere that we are not adding a new magic domain
@@ -469,6 +477,7 @@ def init_ui_career_dropdown(race='Human'):  # Note hack (maybe?) of passing race
         if race in value['chance']:
             career_options.append(key)
     career_options.sort()
+    career_options.insert(0, "Random")
 
 # -------------------------- FUNCTIONALITY --------------------------------------
 
@@ -740,13 +749,13 @@ def output_group_LEGACY(group):  # TODO REMOVE
 
 
 def create_vessel(vessel_type=""):
-    vessel = Vessel(vessel_type)
-    vessel_data = vessel.get_vessel_data()
+    vessel_obj = Vessel(vessel_type)
+    vessel_data = vessel_obj.get_vessel_data()
     passengers = get_passenger_numbers(vessel_data)
     for i in range(len(passengers)):
         passengers[i] = f"{passengers[i]} {get_random_career_key()}"
-    vessel.set_passengers(passengers)
-    return vessel
+    vessel_obj.set_passengers(passengers)
+    return vessel_obj
 
 
 def output_vessel(vessel_obj):
@@ -878,6 +887,8 @@ init_details()
 init_backgrounds_data()  # note this has now been moved to backgrounds.py 11-12-22
 inn_creator.init_data()
 init_ui_dropdowns()
+vessel_dropdown_items = trade_creator.get_vessel_types().copy()
+vessel_dropdown_items.append("Random")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -917,7 +928,7 @@ checked_random_details_state.get()
 label_career = Label(text="Career: ")
 #input_career = Entry(width=12)
 careers_dropdown = ttk.Combobox(values=career_options)
-careers_dropdown.set(get_random_career_key())
+careers_dropdown.set("Random")
 label_level = Label(text="Level: ")
 input_level = Entry(width=3)
 label_race = Label(text="Race:")
@@ -971,7 +982,7 @@ checked_show_relationships_state.set(1)
 # Vessels
 label_vessel = Label(text="Vessel:")
 #input_vessel = Entry(width=10)
-vessel_dropdown = ttk.Combobox(values=trade_creator.get_vessel_types())
+vessel_dropdown = ttk.Combobox(values=vessel_dropdown_items)
 vessel_dropdown.set("Barge")  # this is a bit hacky as it relies on Barge being in the data
 # checkbox for generate captain here
 checked_captain_state = IntVar()
@@ -980,7 +991,6 @@ checked_captain_state.set(1)
 
 button_create_vessel = Button(text="Create Vessel", command=click_create_vessel)
 button_update_vessel = Button(text="Update", command=click_update_vessel, state=DISABLED)
-button_random_vessel = Button(text="Random", command=click_random_vessel)
 
 # Dreams
 
@@ -1078,8 +1088,6 @@ vessel_dropdown.grid(column=1, row=5)
 checkbutton_create_captain.grid(column=2, row=5)
 button_create_vessel.grid(column=3, row=5)
 button_update_vessel.grid(column=4, row=5)
-button_random_vessel.grid(column=5, row=5)
-
 
 # Dreams
 label_dreams.grid(column=0, row=6)

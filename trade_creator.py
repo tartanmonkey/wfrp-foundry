@@ -240,7 +240,7 @@ class Vessel:
         self.passengers = []  # set from main by calling class set function
         self.cargo = get_cargo(vessel)
         self.destination = get_random_chance_entry(destination_data, "chance")["destination"]
-        # TODO implement Captain data < this is temp, maybe better way of doing? get_captain_data?
+        self.captain = None
 
     def get_vessel_data(self):
         for entry in vessel_data:
@@ -250,6 +250,9 @@ class Vessel:
 
     def set_passengers(self, passengers):
         self.passengers = passengers
+
+    def set_captain(self, character_obj):  # Added to track that Vessel has captain rather than for actually accessing it 16/9/25
+        self.captain = character_obj
 
     def get_output(self):
         output = f"{self.vessel_type}, {self.name}\nDestination: {self.destination}"

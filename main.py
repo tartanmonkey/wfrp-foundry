@@ -114,7 +114,7 @@ def click_create_vessel():
     captain = None
     if trade_creator.is_valid_vessel_type(vessel_dropdown.get()):
         vessel_obj = create_vessel(vessel_dropdown.get())
-        vessel_data = vessel.get_vessel_data()  # vessel.get_output()
+        vessel_data = vessel_obj.get_vessel_data()  # vessel.get_output()
         vessel = vessel_obj
         if checked_captain_state.get() == 1:
             captain_race = get_race()
@@ -122,9 +122,14 @@ def click_create_vessel():
             captain_level = get_random_level(vessel_data["captain_level"])
             captain_career = choice(vessel_data["captain_career"])
             captain = create_character(captain_career, captain_level, captain_race, "None", captain_details)
-            character = captain
-        output_vessel(vessel_obj, captain)
+            vessel_obj.set_captain(captain)
+            character = captain  # left this in after adding captain as vessel variable in hopes can utilize add Mutation etc
+        output_vessel(vessel_obj)
 
+
+def click_update_vessel():
+    if vessel is not None:
+        output_vessel(vessel)
 
 def click_random_vessel():
     create_vessel()
@@ -168,6 +173,7 @@ def click_create_character():
         character = create_character(career_name, level, race, magic_dropdown.get(), details, is_mutant)
         if character is not None:
             output_character(character)
+            manage_enabled_update_buttons("Character")
 
 
 def click_update_character():
@@ -296,6 +302,37 @@ def inn_checkbox_changed():
 def on_inn_input_changed():
     if inn is not None:
         button_update_inn["state"] = "normal"
+
+
+def manage_enabled_update_buttons(button_name):
+    value = ""
+    buttons = {
+        "Character": {"function": set_update_button_state_character, "args": "normal"},
+        "Inn": {"function": set_update_button_state_inn, "args": "DISABLED"},
+        "Group": {"function": set_update_button_state_group, "args": 'DISABLED'}
+    }
+    for k, v in buttons.items():
+        print(k)
+        if k == button_name:
+            value = 'normal'
+        else:
+            value = 'disabled'
+        buttons[k]["function"](value) #["function"](value)
+
+
+def set_update_button_state_inn(state):
+    print(f"calling: et_update_button_state_inn, state {state}")
+    button_update_inn['state'] = state
+
+def set_update_button_state_group(state):
+    button_update_group['state'] = state
+
+def set_update_button_state_character(state):
+    button_update_character['state'] = state
+
+def set_update_button_state_vessel(state):
+    pass
+
 
 
 def output_inn():
@@ -717,12 +754,12 @@ def create_vessel(vessel_type=""):
     return vessel
 
 
-def output_vessel(vessel_obj, captain):
+def output_vessel(vessel_obj):
     output = vessel_obj.get_output()
-    if captain is not None:
+    if vessel_obj.captain is not None:
         details_type = show_details_dropdown.get()
         stats_type = show_stats_dropdown.get()
-        output += "\n\n--------CAPTAIN----------\n\n" + captain.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())
+        output += "\n\n--------CAPTAIN----------\n\n" + vessel_obj.captain.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())
     label_output["text"] = output
     pyperclip.copy(label_output["text"])  # TODO consider orig also had output_type="save" on Captain output
 
@@ -955,6 +992,7 @@ checkbutton_create_captain = Checkbutton(text="Create Captain?", variable=checke
 checked_captain_state.set(1)
 
 button_create_vessel = Button(text="Create Vessel", command=click_create_vessel)
+button_update_vessel = Button(text="Update", command=click_update_vessel)
 button_random_vessel = Button(text="Random", command=click_random_vessel)
 
 # Dreams
@@ -1054,7 +1092,8 @@ label_vessel.grid(column=0, row=5)
 vessel_dropdown.grid(column=1, row=5)
 checkbutton_create_captain.grid(column=2, row=5)
 button_create_vessel.grid(column=3, row=5)
-button_random_vessel.grid(column=4, row=5)
+button_update_vessel.grid(column=4, row=5)
+button_random_vessel.grid(column=5, row=5)
 
 
 # Dreams

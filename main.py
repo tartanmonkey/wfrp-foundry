@@ -36,6 +36,7 @@ character = None
 vessel = None
 inn = None
 valid_races = []  # set in init_data for checking valid user input
+dropdown_races = []  # copy of valid + 'Random'
 
 extra_details = {
     "Origin": {"function": trade_creator.get_origin, "args": ""},
@@ -138,7 +139,7 @@ def click_random_vessel():
 
 def click_details():  # TODO LEGACY REMOVE once not in use
     global character_details
-    race = race_dropdown.get()
+    race = get_race()
     if not is_valid_race_input(race):
         return
     detail_set = detail_set_dropdown.get() # input_details.get()
@@ -167,7 +168,7 @@ def click_create_character():
     # TODO handle random career here? - if so remove current starting on random
     career_name = careers_dropdown.get()
     level = int(input_level.get())
-    race = race_dropdown.get()
+    race = get_race()
     is_mutant = checked_mutations_state.get() == 1
     if is_valid_character_input(level):
         details = get_character_details(race)
@@ -363,9 +364,9 @@ def attribute_test():
 
 def get_race():
     race = race_dropdown.get()
-    if checked_random_race_state.get() == 1:
+    if race == "Random":
         race = character_creator.get_random_race()
-        race_dropdown.set(race)
+        # race_dropdown.set(race) # Could uncomment this to have it show the random race
         #print(f"Got random race: {race}")
     else:
         if not is_valid_race_input(race):
@@ -401,7 +402,7 @@ def show_valid_careers(race):
 
 
 def init_data():
-    global career_data, valid_races
+    global career_data, valid_races, dropdown_races
     # career_name : {chance: tuple, level_data: list}
     try:
         with open("Data/RulesData-Careers.json", "r") as data_file:
@@ -427,9 +428,12 @@ def init_data():
                         chance_tuple = (chance, chance_high)
                         chance_low[race] = chance_high
                         career_chances[race] = chance_tuple
+                dropdown_races = valid_races.copy()
+                dropdown_races.append("Random")
                 level_data = []
                 level_data.insert(entry['Level'] - 1, entry)
                 career_data[entry['Career']] = {'chance': career_chances, 'level_data': level_data}
+
     init_dream_data()
     mutant_creator.init_mutation_data()
 
@@ -919,7 +923,7 @@ input_level = Entry(width=3)
 
 label_race = Label(text="Race:")
 #input_race = Entry(width=10)
-race_dropdown = ttk.Combobox(values=valid_races)
+race_dropdown = ttk.Combobox(values=dropdown_races)
 race_dropdown.set("Human")
 
 label_magic = Label(text="Magic:")

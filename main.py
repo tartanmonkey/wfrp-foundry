@@ -67,6 +67,7 @@ detail_sets_short = ["Default", "Simple", "Motivated", "Basic", "CairnShort"]
 
 dreams_data = [] # a list of lists
 detail_set_options = []  # stores names of detail sets loaded
+detail_set_dropdown_list = []  # copy of above but with 'Random' added
 career_options = []  # stores names of careers loaded
 magic_options = ["None", "Beasts", "Death", "Fire", "Heavens", "Metal", "Life", "Light", "Shadow", "Manann", "Morr",
                   "Myrmidia", "Ranald", "Rhya", "Shallya", "Sigmar", "Taal", "Ulric", "Verena", "Hedgecraft",
@@ -191,8 +192,15 @@ def click_update_character():
         output_character(character)
 
 
+def get_details_dropdown():
+    details_set = detail_set_dropdown.get()
+    if details_set == "Random":
+        return choice(detail_set_options)
+    return details_set
+
+
 def get_character_details(race):
-    detail_set = detail_set_dropdown.get()  # input_details.get()
+    detail_set = get_details_dropdown() # input_details.get()
     # TODO replace this with checking if detail_set == random then build list without that
     if checked_random_details_state.get() == 1:
         detail_set = choice(list(detail_data_sets.keys()))
@@ -464,8 +472,11 @@ def init_dream_data():
 
 
 def init_ui_dropdowns():
+    global detail_set_options, detail_set_dropdown_list
     for k, v in detail_data_sets.items():
         detail_set_options.append(k)
+    detail_set_dropdown_list = detail_set_options.copy()
+    detail_set_dropdown_list.append("Random")
     init_ui_career_dropdown()
     for k, v in groups.items():
         group_options.append(k)
@@ -912,8 +923,8 @@ button_csv_to_wiki = Button(text="csv to wiki", width=15, command=click_csv_to_w
 # Details & Sets
 label_details = Label(text="Detail Set:")
 #input_details = Entry(width=12)
-detail_set_dropdown = ttk.Combobox(values=detail_set_options)
-detail_set_dropdown.set(detail_set_options[0])  # note could also use choice(detail_set_options) to have random start
+detail_set_dropdown = ttk.Combobox(values=detail_set_dropdown_list)
+detail_set_dropdown.set(detail_set_dropdown_list[0])  # note could also use choice(detail_set_options) to have random start
 label_gender = Label(text="Gender: ")
 radio_gender = IntVar()
 radio_gender.set(3)

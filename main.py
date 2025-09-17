@@ -119,6 +119,7 @@ def get_vessel_dropdown():
         return ""
     return vessel_type
 
+
 def click_create_vessel():
     global character, vessel
     captain = None
@@ -244,12 +245,6 @@ def click_create_group():
 
 
 def click_update_group():
-    global add_relationships
-    print("Update Group!")
-    if add_relationships != checked_add_relationships_state.get():
-        if checked_add_relationships_state.get() == 1:
-            add_group_relationships(character_group)
-        add_relationships = checked_add_relationships_state.get()
     if len(character_group) > 0:
         output_group(character_group)
     else:
@@ -265,7 +260,6 @@ def click_create_inn():
     inn = Inn(inn_quality_dropdown.get(), inn_occupied_dropdown.get())
     innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
     innkeep = create_innkeep(innkeep_data)
-    # innkeep.family = create_character_family(innkeep, innkeep_data['family_chance'])
     innkeep.family = create_persons_family(innkeep, innkeep_data['family_chance'])
     inn.set_proprietor(innkeep)
     clientele_groups = inn.get_clientele_groups()
@@ -310,13 +304,10 @@ def set_update_button_state_vessel(state):
 
 def output_inn():
     if inn is not None:
-        # include_traits = checked_one_line_traits_state.get() == 1
-        # one_line_stats = checked_one_line_stats_state.get() == 1
         details_type = show_details_dropdown.get()
         stats_type = show_stats_dropdown.get()
         show_clientele = checked_show_clientele_state.get() == 1
         is_wiki_output = checked_wiki_output_state.get() == 1
-        # show_family = checked_innkeep_family_state.get() == 1
         label_output["text"] = inn.get_output(details_type, stats_type, show_clientele, is_wiki_output)
         pyperclip.copy(label_output["text"])
         button_update_inn["state"] = "normal"
@@ -334,6 +325,7 @@ def click_update_inn():
             inn.set_clientele(create_inn_clientele(clientele_groups))
 
     output_inn()
+
 
 def attribute_test():
     attribs = {"WS": {"val": 1}, "BS": 2}
@@ -389,7 +381,6 @@ def init_data():
     except FileNotFoundError:
         messagebox.showinfo(title="Oops!", message="Missing data!")
     else:
-        #print("Do stuff with found data here...")
         chance_low = {"Human": 0, "Dwarf": 0, "Halfling": 0, "High Elf": 0, "Wood Elf": 0}
         for entry in data:
             # print(f"entry - career: {entry['Career']}")
@@ -429,9 +420,6 @@ def init_dream_data():
             dreams = data[col].tolist()
             dreams.append(col)
             dreams_data.append(dreams)
-        # for dreams in dreams_data:
-        #     for dream in dreams:
-        #         print(dream)
 
 
 def init_ui_dropdowns():
@@ -514,6 +502,7 @@ def create_persons_family(person, family_chance):
 
     return family
 
+
 def create_inn_clientele(clientele_types):
     clientele = []
     for c in clientele_types:
@@ -550,14 +539,11 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
     is_mutant = checked_mutations_state.get()
     print(f"Clicked create group: {group_type}")
     group = []
-    create_relationships = checked_add_relationships_state.get() == 1
     # override user input options if passed - added for inn clientele 27/8/25
     details_type = ""
     if "details" in options:
         print(f"Got details_type in options: {options['details']}")
         details_type = options["details"]
-    if "relationship" in options:
-        create_relationships = options["relationship"] == "random"
     for members in groups[group_type]:
         num_members = randint(members["number"][0], members["number"][1])
         print(f"would create {num_members} group members")
@@ -599,21 +585,25 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
         if members["group_type"] == "family":
             for person in group:
                 person.family = create_persons_family(person, 100)
-    # if Add Relationship ticked add one for each member of group
-    add_relationships != checked_add_relationships_state.get()
-    if create_relationships:
-        group = add_group_relationships(group)
     return group
 
 
+def click_add_relationships():
+    global character_group
+    if len(character_group) > 1:
+        character_group = add_group_relationships(character_group)
+        click_update_group()
+    else:
+        messagebox.showinfo(title="Oops!", message=f"No group to add to! Create one first")
+
+
 def add_group_relationships(group):
-    if len(group) > 1:
-        for person in group:
-            # get random person in group who is not me
-            subject = utilities.get_random_list_item(group, person)
-            subject_name = subject.details['Name'].replace('*', '')
-            # add_detail("Relationship", name-of-other-person)
-            person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
+    for person in group:
+        # get random person in group who is not me
+        subject = utilities.get_random_list_item(group, person)
+        subject_name = subject.details['Name'].replace('*', '')
+        # add_detail("Relationship", name-of-other-person)
+        person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
     return group
 
 
@@ -805,9 +795,7 @@ show_details_dropdown.set("One line")
 label_stats_options = Label(text="Show Stats")
 show_stats_dropdown = ttk.Combobox(values=show_stats_options)
 show_stats_dropdown.set("One line")
-checked_show_relationships_state = IntVar()
-checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)
-checked_show_relationships_state.set(1)
+
 
 
 # Career
@@ -836,12 +824,12 @@ label_group = Label(text="Group:")
 #input_group = Entry(width=15)
 groups_dropdown = ttk.Combobox(values=group_options)
 groups_dropdown.set(choice(group_options))
-checked_add_relationships_state = IntVar()
-add_relationships = checked_add_relationships_state.get()
-checkbutton_add_relationships = Checkbutton(text="Add Relationships?", variable=checked_add_relationships_state)
 button_group = Button(text="Create Group", command=click_create_group)
+button_add_relationships = Button(text="Add Relationships", command=click_add_relationships)
 button_update_group = Button(text="Update Group", command=click_update_group, state=DISABLED)
-
+checked_show_relationships_state = IntVar()
+checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)
+checked_show_relationships_state.set(1)
 
 # Vessels
 label_vessel = Label(text="Vessel:")
@@ -902,7 +890,6 @@ label_details_options.grid(column=4, row=1)
 show_details_dropdown.grid(column=5, row=1)
 label_stats_options.grid(column=6, row=1)
 show_stats_dropdown.grid(column=7, row=1)
-checkbutton_show_relationships.grid(column=8, row=1)
 
 
 # Career
@@ -925,10 +912,10 @@ button_add_mutation.grid(column=12, row=2)
 # Groups
 label_group.grid(column=0, row=3)
 groups_dropdown.grid(column=1, row=3)
-checkbutton_add_relationships.grid(column=2, row=3)
-button_group.grid(column=3, row=3)
+button_group.grid(column=2, row=3)
+button_add_relationships.grid(column=3, row=3)
 button_update_group.grid(column=4, row=3)
-
+checkbutton_show_relationships.grid(column=5, row=3)
 
 
 # Vessels

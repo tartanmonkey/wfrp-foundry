@@ -81,6 +81,7 @@ add_relationships = 0
 show_details_options = ["Minimal", "One line", "Full", "None"]
 show_stats_options = ["Minimal", "One line", "Full", "None"]
 vessel_dropdown_items = []
+gender_options = ["Random", "Female", "Male"]
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
 
@@ -179,17 +180,6 @@ def get_character_details(race):
     detail_set = get_details_dropdown() # input_details.get()
     details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
     return details
-
-# def click_random():
-#     global character_details, character
-#     # get random race here if checkbox set
-#     race = get_race()
-#     detail_set = input_details.get()
-#     if checked_random_details_state.get() == 1:
-#         detail_set = choice(list(detail_data_sets.keys()))
-#     character_details = create_character_details(get_gender(), race, get_details_data(race, detail_set), checked_wiki_output_state.get())
-#     character = create_character(get_random_career_key(race), get_random_level(), race, "None", character_details)
-#     display_character_stats(character)
 
 
 def click_save():
@@ -517,12 +507,6 @@ def create_persons_family(person, family_chance):
             adult_details = create_character_details(adult.gender, person.race, detail_set, name=adult_name)
             # wiki_output = checked_wiki_output_state.get() == 1
             adult.set_details(adult_details)
-            # TODO Delete Legacy
-            # name = f"{adult.relationship} {adult.name}"
-            # career = ""
-            # add_traits = checked_one_line_traits_state.get()
-            # wiki_output = checked_wiki_output_state.get() == 1
-            # adult.set_details(create_one_line_details(adult.gender, person.race, add_traits, career, name, wiki_output))
         # create children
         for x in range(0, num_children):
             child = FamilyMember("child", person.details["Gender"], person.race)
@@ -687,13 +671,10 @@ def get_details_data(race, set_name):
 
 
 def get_gender():
-    gender = radio_gender.get()
-    if gender == 3:
+    gender = gender_dropdown.get()
+    if gender == "Random":
         return choice(["male", "female"])
-    elif gender == 1:
-        return "male"
-    else:
-        return "female"
+    return gender.lower()
 
 
 def get_random_career_key(race="Human"):
@@ -815,11 +796,19 @@ label_details = Label(text="Detail Set:")
 detail_set_dropdown = ttk.Combobox(values=detail_set_dropdown_list)
 detail_set_dropdown.set(detail_set_dropdown_list[0])  # note could also use choice(detail_set_options) to have random start
 label_gender = Label(text="Gender: ")
-radio_gender = IntVar()
-radio_gender.set(3)
-radio_male = Radiobutton(text="Male", value=1, variable=radio_gender)
-radio_female = Radiobutton(text="Female", value=2, variable=radio_gender)
-radio_random = Radiobutton(text="Random", value=3, variable=radio_gender)
+gender_dropdown = ttk.Combobox(values=gender_options)
+gender_dropdown.set("Random")
+# Details Options
+label_details_options = Label(text="Show Details", bg="lightblue")
+show_details_dropdown = ttk.Combobox(values=show_details_options)
+show_details_dropdown.set("One line")
+label_stats_options = Label(text="Show Stats")
+show_stats_dropdown = ttk.Combobox(values=show_stats_options)
+show_stats_dropdown.set("One line")
+checked_show_relationships_state = IntVar()
+checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)
+checked_show_relationships_state.set(1)
+
 
 # Career
 label_career = Label(text="Career: ")
@@ -854,17 +843,6 @@ button_group = Button(text="Create Group", command=click_create_group)
 button_update_group = Button(text="Update Group", command=click_update_group, state=DISABLED)
 
 
-# Details Options
-label_details_options = Label(text="Show Details", bg="lightblue")
-show_details_dropdown = ttk.Combobox(values=show_details_options)
-show_details_dropdown.set("One line")
-label_stats_options = Label(text="Show Stats")
-show_stats_dropdown = ttk.Combobox(values=show_stats_options)
-show_stats_dropdown.set("One line")
-checked_show_relationships_state = IntVar()
-checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)
-checked_show_relationships_state.set(1)
-
 # Vessels
 label_vessel = Label(text="Vessel:")
 #input_vessel = Entry(width=10)
@@ -886,8 +864,7 @@ button_dreams = Button(text="Create Dreams", command=click_create_dreams)
 
 # Inns
 
-label_inns = Label(text="Inns: ")
-label_inn_quality = Label(text="Quality:")
+label_inns = Label(text="Inn Quality: ")
 inn_quality_dropdown = ttk.Combobox(values=inn_quality_options)
 inn_quality_dropdown.set("random")
 label_inn_clientele = Label(text="Clientele:")
@@ -917,18 +894,19 @@ button_csv_to_wiki.grid(column=11, row=0)
 
 # Details & Sets
 label_details.grid(column=0, row=1)
-#input_details.grid(column=1, row=1)
-#input_details.insert(0, "Motivated")
-# input_details.insert(0, "Background")
 detail_set_dropdown.grid(column=1, row=1) # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 label_gender.grid(column=2, row=1)
-radio_male.grid(column=3, row=1)
-radio_female.grid(column=4, row=1)
-radio_random.grid(column=5, row=1)
+gender_dropdown.grid(column=3, row=1)
+# Details Options
+label_details_options.grid(column=4, row=1)
+show_details_dropdown.grid(column=5, row=1)
+label_stats_options.grid(column=6, row=1)
+show_stats_dropdown.grid(column=7, row=1)
+checkbutton_show_relationships.grid(column=8, row=1)
+
 
 # Career
 label_career.grid(column=0, row=2)
-#input_career.grid(column=1, row=2)
 careers_dropdown.grid(column=1, row=2)
 label_level.grid(column=2, row=2)
 input_level.grid(column=3, row=2)
@@ -947,18 +925,11 @@ button_add_mutation.grid(column=12, row=2)
 # Groups
 label_group.grid(column=0, row=3)
 groups_dropdown.grid(column=1, row=3)
-#input_group.insert(0, "None")
 checkbutton_add_relationships.grid(column=2, row=3)
 button_group.grid(column=3, row=3)
 button_update_group.grid(column=4, row=3)
 
-# Details Options
 
-label_details_options.grid(column=0, row=4)
-show_details_dropdown.grid(column=1, row=4)
-label_stats_options.grid(column=2, row=4)
-show_stats_dropdown.grid(column=3, row=4)
-checkbutton_show_relationships.grid(column=4, row=4)
 
 # Vessels
 label_vessel.grid(column=0, row=5)
@@ -968,21 +939,20 @@ button_create_vessel.grid(column=3, row=5)
 button_update_vessel.grid(column=4, row=5)
 
 # Dreams
-label_dreams.grid(column=0, row=6)
-input_number_dreams.grid(column=1, row=6)
+label_dreams.grid(column=0, row=7)
+input_number_dreams.grid(column=1, row=7)
 input_number_dreams.insert(0, "5")
-button_dreams.grid(column=2, row=6)
+button_dreams.grid(column=2, row=7)
 
 
 # Inns
-label_inns.grid(column=0, row=7)
-label_inn_quality.grid(column=1, row=7)
-inn_quality_dropdown.grid(column=2, row=7)
-label_inn_clientele.grid(column=3, row=7)
-inn_occupied_dropdown.grid(column=4, row=7)
-checkbutton_show_clientele.grid(column=5, row=7)
-button_inns.grid(column=6, row=7)
-button_update_inn.grid(column=7, row=7)
+label_inns.grid(column=0, row=6)
+inn_quality_dropdown.grid(column=1, row=6)
+label_inn_clientele.grid(column=2, row=6)
+inn_occupied_dropdown.grid(column=3, row=6)
+checkbutton_show_clientele.grid(column=4, row=6)
+button_inns.grid(column=5, row=6)
+button_update_inn.grid(column=6, row=6)
 
 
 # Output

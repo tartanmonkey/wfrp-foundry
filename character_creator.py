@@ -833,9 +833,7 @@ class GameCharacter:
                 output = f"{output}{get_one_line_traits(self.details)}"
             if "Relationship" in self.details and show_relationship:
                 output += f"\n{self.details['Relationship']}"
-        # Now do Family...
-        if self.has_family():
-            output += self.get_family_output(details_type, wiki_output)
+
         # TODO might want to add \n here - no new lines so far
         # then handle stats...
         if stats_type == "One line":
@@ -854,7 +852,9 @@ class GameCharacter:
             output += self.get_talents_output()
             output += get_list_output("trappings", self.trappings)
             output += self.get_spells_output()
-
+        # Now do Family...
+        if self.has_family():
+            output += self.get_family_output(details_type, stats_type, wiki_output)
         return output
 
     def get_bracket_details(self, stats_type):
@@ -882,66 +882,14 @@ class GameCharacter:
             output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
             output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
             output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
+        # TODO the following was from old version, keeping for ref in case wanted for saving tho suspect thats covered by 'else' ^
+        # if output_type == "ui":
+        #     output += "WS  BS   S    T     I   Agi Dex Int WP Fel W"
+        #     output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
+        #     output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
+        #     output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
         return output
 
-    def get_output_LEGACY(self, **options):  # TODO remove ONLY AFTER finalizing get_attributes_output
-        wiki_output = False
-        if "wiki_output" in options:
-            wiki_output = options['wiki_output']
-        output_type = "ui"
-        if "output_type" in options:
-            output_type = options['output_type']
-        one_line_stats = False
-        if "one_line_stats" in options:
-            one_line_stats = options['one_line_stats']
-        if "one_line_traits" in self.details:
-            print(f"got one line traits: {self.details['one_line_traits']}")
-        if utilities.get_first_key(self.details) == "OneLine":
-            print("Getting One Line details")
-            output = f"{self.details['OneLine']}\n"
-            # add career in as it didn't exist when details created
-            career_text = f" {self.get_one_line_title()}"
-            output = utilities.insert_after_char(output, "*", career_text)
-            # Add Mutations
-            if len(self.mutations) > 0:
-                mutation_text = " "
-                for m in self.mutations:
-                    mutation_text += f"{m.name}, "
-                output = utilities.insert_after_char(output, ")", mutation_text)
-            # if One Line Stats call function here THEN Return
-            if one_line_stats:
-                output += f"{self.get_one_line_stats()}\n"
-                return output
-        else:
-            output = f"{self.career}: {get_dictionary_as_string(self.details, 60, ['Name'], ['Background'])}\n{self.get_title_output()}\n"
-        if len(self.path) > 1:
-            path_output = "Path: "
-            for key, value in self.path.items():
-                path_output += f"{key}: {value}, "
-            output += f"{path_output}\n"
-        if output_type == "ui":
-            output += "WS  BS   S    T     I   Agi Dex Int WP Fel W"
-            output += f"\n{self.attributes['WS']['total']}   {self.attributes['BS']['total']}   {self.attributes['S']['total']}  {self.attributes['T']['total']}"
-            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}    {self.attributes['Dex']['total']}   {self.attributes['Int']['total']}"
-            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
-        elif wiki_output:
-            output += "<<|\nWS| BS| S| T| I| Agi| Dex| Int| WP| Fel| W\n"
-            output += f"{self.attributes['WS']['total']}| {self.attributes['BS']['total']}| {self.attributes['S']['total']}| {self.attributes['T']['total']}| "
-            output += f"{self.attributes['I']['total']}| {self.attributes['Agi']['total']}| {self.attributes['Dex']['total']}| {self.attributes['Int']['total']}| "
-            output += f"{self.attributes['WP']['total']}| {self.attributes['Fel']['total']}| {self.wounds}|\n>>"
-        else:
-            output += "WS  BS  S   T   I   Agi Dex Int  WP Fel  W"
-            output += f"\n{self.attributes['WS']['total']}  {self.attributes['BS']['total']}  {self.attributes['S']['total']}  {self.attributes['T']['total']}"
-            output += f"  {self.attributes['I']['total']}  {self.attributes['Agi']['total']}   {self.attributes['Dex']['total']}  {self.attributes['Int']['total']}"
-            output += f"  {self.attributes['WP']['total']}  {self.attributes['Fel']['total']}  {self.wounds}"
-
-        output += self.get_mutations_output("verbose")
-        output += self.get_skills_output()
-        output += self.get_talents_output()
-        output += get_list_output("trappings", self.trappings)
-        output += self.get_spells_output()
-
-        return output
 
     def get_mutations_output(self, output_type):
         text = ""
@@ -1090,12 +1038,13 @@ class GameCharacter:
         return f"{self.career} ({self.level} {self.title}) {self.status} - {self.race}"
 
     # TODO pass on wiki output and show_traits
-    def get_family_output(self, show_details, is_wiki_output, start_on_new_line=True):
+    def get_family_output(self, show_details, show_stats, is_wiki_output):
         nl = "\n"
         family_name = get_name_output(self.details['Name'], False, 'SECOND')
-        if not start_on_new_line:
-            nl = ""
-        text = f"{nl}{family_name} Family: "
+        if show_stats == "Full":
+            text = f"\n-----FAMILY---------------"
+        else:
+            text = f"{family_name} Family: "
         added_child = False
         show_traits = False
         if show_details == "One line" or "Full":

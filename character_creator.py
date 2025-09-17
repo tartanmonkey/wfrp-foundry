@@ -377,7 +377,9 @@ def create_character_details(gender, race, detail_set, **options):
         else:  # see extra_details which maps function calls onto Origin, Chat and Background!
             # TODO double  check if need to format the key text
             details[details_key] = detail_set[key]  # < may have to do tolower here, see previous version above, esp "origin"
-
+        if key == "Motivation":
+            if details["Motivation"] == "God":
+                details["Motivation"] = f"God ({choice(gods)})"
     return details
 
 

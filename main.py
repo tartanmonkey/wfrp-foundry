@@ -289,6 +289,21 @@ def manage_enabled_update_buttons(button_name):
         else:
             state = 'disabled'
         buttons[k]["function"](state)
+    manage_secondary_buttons(button_name)
+
+
+def manage_secondary_buttons(button_set):
+    # TODO change so we set state based on button_set then do anyway
+    new_state = 'normal'
+    if button_set != "Character":
+        new_state = 'disabled'
+    button_add_level['state'] = new_state
+    button_add_family['state'] = new_state
+    button_add_mutation['state'] = new_state
+    new_state = 'normal'
+    if button_set != "Group":
+        new_state = 'disabled'
+    button_add_relationships['state'] = new_state
 
 
 def set_update_button_state_inn(state):
@@ -815,19 +830,19 @@ magic_dropdown = ttk.Combobox(values=magic_options)
 magic_dropdown.set(magic_options[0])
 button_create = Button(text="Create Character", command=click_create_character)
 button_update_character = Button(text="Update", command=click_update_character, state=DISABLED)
-button_add_level = Button(text="Add Career", command=click_add_levels)
-button_add_family = Button(text="Add Family", command=click_add_family)
+button_add_level = Button(text="Add Career", command=click_add_levels, state=DISABLED)
+button_add_family = Button(text="Add Family", command=click_add_family, state=DISABLED)
 # TODO potentially eventually replace with a dropdown for None, Physical, Mental or both
 checked_mutations_state = IntVar()
 checkbutton_mutations = Checkbutton(text="Mutant?", variable=checked_mutations_state)
-button_add_mutation = Button(text="Add Mutation", command=click_add_mutation)
+button_add_mutation = Button(text="Add Mutation", command=click_add_mutation, state=DISABLED)
 
 # Groups
 label_group = Label(text="Group:")
 groups_dropdown = ttk.Combobox(values=group_options)
 groups_dropdown.set(choice(group_options))
 button_group = Button(text="Create Group", command=click_create_group)
-button_add_relationships = Button(text="Add Relationships", command=click_add_relationships)
+button_add_relationships = Button(text="Add Relationships", command=click_add_relationships, state=DISABLED)
 button_update_group = Button(text="Update Group", command=click_update_group, state=DISABLED)
 checked_show_relationships_state = IntVar()
 checkbutton_show_relationships = Checkbutton(text="Show relationships?", variable=checked_show_relationships_state)

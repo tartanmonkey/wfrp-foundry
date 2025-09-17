@@ -80,7 +80,6 @@ character_group = []
 add_relationships = 0
 show_details_options = ["Minimal", "One line", "Full", "None"]
 show_stats_options = ["Minimal", "One line", "Full", "None"]
-vessel_dropdown_items = []
 gender_options = ["Random", "Female", "Male"]
 # ------------------------ BUTTON FUNCTIONS ----------------------------
 
@@ -220,6 +219,10 @@ def click_add_levels():
     else:
         print("No character to add level to")
 
+def click_add_family():
+    if character is not None:
+        character.family = create_persons_family(character, 100)
+        output_character(character)
 
 def click_add_mutation():
     global character
@@ -782,7 +785,6 @@ button_csv_to_wiki = Button(text="csv to wiki", width=15, command=click_csv_to_w
 
 # Details & Sets
 label_details = Label(text="Detail Set:")
-#input_details = Entry(width=12)
 detail_set_dropdown = ttk.Combobox(values=detail_set_dropdown_list)
 detail_set_dropdown.set(detail_set_dropdown_list[0])  # note could also use choice(detail_set_options) to have random start
 label_gender = Label(text="Gender: ")
@@ -814,6 +816,7 @@ magic_dropdown.set(magic_options[0])
 button_create = Button(text="Create Character", command=click_create_character)
 button_update_character = Button(text="Update", command=click_update_character, state=DISABLED)
 button_add_level = Button(text="Add Career", command=click_add_levels)
+button_add_family = Button(text="Add Family", command=click_add_family)
 # TODO potentially eventually replace with a dropdown for None, Physical, Mental or both
 checked_mutations_state = IntVar()
 checkbutton_mutations = Checkbutton(text="Mutant?", variable=checked_mutations_state)
@@ -821,7 +824,6 @@ button_add_mutation = Button(text="Add Mutation", command=click_add_mutation)
 
 # Groups
 label_group = Label(text="Group:")
-#input_group = Entry(width=15)
 groups_dropdown = ttk.Combobox(values=group_options)
 groups_dropdown.set(choice(group_options))
 button_group = Button(text="Create Group", command=click_create_group)
@@ -833,7 +835,6 @@ checked_show_relationships_state.set(1)
 
 # Vessels
 label_vessel = Label(text="Vessel:")
-#input_vessel = Entry(width=10)
 vessel_dropdown = ttk.Combobox(values=vessel_dropdown_items)
 vessel_dropdown.set("Barge")  # this is a bit hacky as it relies on Barge being in the data
 # checkbox for generate captain here
@@ -906,7 +907,8 @@ checkbutton_mutations.grid(column=8, row=2)
 button_create.grid(column=9, row=2)
 button_update_character.grid(column=10, row=2)
 button_add_level.grid(column=11, row=2)
-button_add_mutation.grid(column=12, row=2)
+button_add_family.grid(column=12, row=2)
+button_add_mutation.grid(column=13, row=2)
 
 
 # Groups

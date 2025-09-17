@@ -223,7 +223,7 @@ def get_name_output(text, wiki_output, name_type='WHOLE'):  # added in refactor 
     if name_type != 'WHOLE' and name_type in name_format:
         name_list = text.split()
         name_index = name_format.index(name_type)
-        if len(name_list) < name_index:
+        if len(name_list) > name_index:
             name = name_list[name_index]
     if wiki_output:
         name = f"*{name}*"

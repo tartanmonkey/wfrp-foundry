@@ -465,7 +465,7 @@ class GameCharacter:
             if self.trappings[i] == "Hand Weapon":
                 # replace hand weapon if it exists
                 if "Brass" in self.status:
-                    print("I'm Brass - need cheapo weapon")
+                    # print("I'm Brass - need cheapo weapon")
                     self.trappings[i] = choice(hand_weapons_brass)
                 else:
                     self.trappings[i] = choice(hand_weapons)
@@ -676,7 +676,7 @@ class GameCharacter:
         return wounds
 
     def set_magic_talent(self, talent, user_input):
-        print(f"Got magic talent: {talent}")
+        # print(f"Got magic talent: {talent}")
         talent_key = extract_key(talent)
         # if petty magic don't add a domain
         if talent_key == "Petty Magic":
@@ -735,7 +735,7 @@ class GameCharacter:
         #     print(f"{magic} : {my_spells}")
 
     def add_levels(self, career_name, level, levels_data, magic_domain):
-        print(f"Adding... {career_name} level to {self.career}")
+        # print(f"Adding... {career_name} level to {self.career}")
         # TODO decide what to do about actual level value
         if career_name == self.career:
             # TODO handle actually adding a level to current career - a BIG task!
@@ -827,7 +827,7 @@ class GameCharacter:
 
     def get_bracket_details(self, stats_type):
         if stats_type == "None" or stats_type == "Full":
-            print(f"!!!! stats_type: {stats_type}")
+            # print(f"!!!! stats_type: {stats_type}")
             return ""
         race = ""
         if self.race != "Human":
@@ -932,17 +932,17 @@ class GameCharacter:
         # text = f"WS: {self.attributes['WS']['total']} BS: {self.attributes['BS']['total']} W: {self.wounds}"
         ws = 0
         bs = 0
-        print("get_one_line_attributes...")
+        # print("get_one_line_attributes...")
         for key, value in self.skills.items():
             if 'Melee' in key:
-                print(f"{key} = {self.skills[key]}")
+                # print(f"{key} = {self.skills[key]}")
                 if self.skills[key] > ws:
                     ws = self.skills[key]
-                    print(f"Melee Skill: {key} new WS: {ws}")
+                    # print(f"Melee Skill: {key} new WS: {ws}")
             elif 'Ranged' in key:
                 if self.skills[key] > bs:
                     bs = self.skills[key]
-                    print(f"Ranged Skill: {key} new BS: {bs}")
+                    # print(f"Ranged Skill: {key} new BS: {bs}")
         ws += self.attributes['WS']['total']
         bs += self.attributes['BS']['total']
         return f"WS: {ws} BS: {bs} W: {self.wounds}"

@@ -357,12 +357,22 @@ class Inn:
         text = f"\n{prefix}Occupied: {self.occupied}"
         if show_clientele:
             text += " - Clientele:"
+            # check if more than one traveller group
+            traveller_groups_counted = 0
             for group in self.clientele:
                 goods = ""
                 # add goods to title if group contains it
                 if "goods" in group:
                     goods = group["goods"]
-                text += f"\n\n-- {group['group_name'].capitalize()}{goods} --"
+                # add title
+                # TODO handle multiple travellers groups
+                title_text = f"\n\n-- {group['group_name'].capitalize()}{goods} --"
+                if group['group_name'] == 'travellers':
+                    if traveller_groups_counted > 0:
+                        title_text = ""
+                    else:
+                        traveller_groups_counted += 1
+                text += title_text
                 # Handle coach separately so can split out passengers...
                 if "coach" in group['group_name']:
                     text += get_coach_output(group["members"], details_type, stats_type, is_wiki_output)
@@ -371,8 +381,7 @@ class Inn:
                         text += f"\n{member.get_output(details_type, stats_type, wiki_output=is_wiki_output)}"
         return text
 
-    # TODO REMOVE -------------------------
-    def get_clientele_output_LEGACY(self, clientele_traits, clientele_stats, show_clientele, is_wiki_output):
+    def get_clientele_output_SAFETY(self, details_type, stats_type, show_clientele, is_wiki_output):
         prefix = "\n"
         if is_wiki_output:
             prefix = "++++ "
@@ -387,15 +396,13 @@ class Inn:
                 text += f"\n\n-- {group['group_name'].capitalize()}{goods} --"
                 # Handle coach separately so can split out passengers...
                 if "coach" in group['group_name']:
-                    text += get_coach_output(group["members"], clientele_traits, clientele_stats)
+                    text += get_coach_output(group["members"], details_type, stats_type, is_wiki_output)
                 else:
                     for member in group["members"]:
-                        text += f"\n{member.get_one_line_details(clientele_traits)}"
-                        if clientele_stats:
-                            text += f"\n{member.get_one_line_stats()}\n"
-                        if member.has_family():
-                            text += member.get_family_output(clientele_traits)
+                        text += f"\n{member.get_output(details_type, stats_type, wiki_output=is_wiki_output)}"
         return text
+
+
 
 
 

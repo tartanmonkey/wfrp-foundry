@@ -828,7 +828,7 @@ class GameCharacter:
             output = ""
         elif details_type == "Full":
             details_dictionary = remove_from_dictionary(self.details, ["Name", "Gender"])
-            output = f"{output}\n{get_dictionary_as_string(details_dictionary, 60)}"
+            output = f"{output}\n{convert_dictionary_to_string(details_dictionary)}"
         else:  # must be Minimal or One Line and One Line is just an addition to minimal
             output = f"{output} {self.get_bracket_details(stats_type)} {self.get_description(self.details['Description'])}"
             if details_type == "One line":

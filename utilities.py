@@ -103,10 +103,19 @@ def convert_list_to_string(data):
     return string
 
 
+def convert_dictionary_to_string(data):
+    """returns a string of format key: value, new line"""
+    string = ""
+    for k, v in data.items():
+        string += f"{k}: {v}\n"
+    return string
+
+
 def split_into_lines(string, line_length):
     """Given a string and a line length in characters returns a list of lines with less than line_length"""
     split_lines = string
     if len(string) > line_length:
+        # print(f"splitting line of length {line_length}: {string}")
         words = string.split(' ')
         lines = [""]
         current_line = 0
@@ -151,6 +160,7 @@ def get_random_item(string, divisor):
 def get_dictionary_as_string(data, line_length, exclude_keys=[], do_not_split=[], keep_same_line=[]):
     """creates a string with each key & value on a new line, will omit to print any keys in exclude_keys, and won't line split any values which are in do_not_split, and won't add new line if in keep_same_line"""
     text = ""
+    # print(f"get dictionary as string line length: {line_length}")
     for key, value in data.items():
         if key not in exclude_keys:
             if key in do_not_split:

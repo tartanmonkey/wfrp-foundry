@@ -229,16 +229,6 @@ def get_name_output(text, wiki_output, name_type='WHOLE'):  # added in refactor 
         name = f"*{name}*"
     return name
 
-def get_single_name(text, get_family_name):  # TODO potential Legacy
-    name = text.replace('*', '')
-    names_list = name.split()
-    if len(names_list) > 0:
-        if get_family_name:
-            if len(names_list) > 1:
-                return names_list[1]
-        return names_list[0]
-    print(f"get_single_name has problem with: {text}")
-    return text
 
 def create_random_name(gender, race="Human", first_name_only=False):
     region = race_data[race]["name_table"]
@@ -318,36 +308,15 @@ def get_random_level(max_level=4):
     return level_data["level"]
 
 
-def create_one_line_details(gender, race, add_traits, career, name, is_wiki_output):  # TODO Legacy Remove
-    traits = ""
-    if len(name) == 0:
-        name = create_random_name(gender, race)
-    if is_wiki_output:
-        name = f"*{name}*"
-    if add_traits:
-        traits = get_one_line_traits()
-    details = f"{name} {career}{choice(details_data['Description'])}, {get_extra_detail(gender, choice(details_data['Detail']))} {traits}"
-    return details
-
-
-def get_one_line_traits_LEGACY():  # TODO: for deleting
-    motivation = choice(details_data['Motivation'])
-    if motivation == "God":
-        motivation = choice(gods)
-    traits = f"- {choice(details_data['Personality'])} - Motivation: {motivation}"
-    return traits
-
-
 def get_one_line_traits(character_details):
     text = ""
-    # TODO iterate through keys, if one in details_no_key add
+    # iterate through keys, if one in details_no_key add
     num_traits = 0
     for key in character_details:
         if key in details_no_key:
             text = f" - {character_details[key]}"
             num_traits = 1
             break
-    # TODO store if added
     for key in character_details:
         if key in details_with_key and key not in text:
             text = f"{text} - {key}: {character_details[key]}"
@@ -355,6 +324,7 @@ def get_one_line_traits(character_details):
             if num_traits >= 2:
                 break
     return text
+
 
 def create_character_details(gender, race, detail_set, **options):
     details = {}
@@ -569,7 +539,6 @@ class GameCharacter:
             self.advance_skill(skill, 4)
         # print(f"--- {self.career} - Race Skills: {self.skills} ------------")
         self.add_career_skills(level_data, self.level)
-
 
     def add_career_skills(self, level_data, level_num):
         if level_num == 1:
@@ -802,9 +771,6 @@ class GameCharacter:
         # first modify attributes
         for attribute, value in mutation.attributes.items():
             self.attributes[attribute]["base"] += value
-            # purely for test purposes
-            # if mutation.attributes[attribute] > 0:
-            #     print(f"mutation {mutation.name} changing {attribute} by {value} to {self.attributes[attribute]['base']}")
         # then refresh attribute totals and store
         self.refresh_attribute_values()
         self.mutations.append(mutation)

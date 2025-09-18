@@ -17,8 +17,7 @@ import mutant_creator
 from mutant_creator import Mutation
 from family_member import FamilyMember
 from character_creator import GameCharacter, init_skills_data, create_character_details, get_random_level, \
-    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details, create_one_line_details, \
-    get_one_line_traits
+    init_name_data, init_talents_data, init_magic_data, is_valid_magic, init_details
 from random import randint, choice
 import pyperclip  # for using the clipboard
 from trade_creator import init_trade_data, Vessel, get_passenger_numbers
@@ -81,311 +80,6 @@ add_relationships = 0
 show_details_options = ["Minimal", "One line", "Full", "None"]
 show_stats_options = ["Minimal", "One line", "Full", "None"]
 gender_options = ["Random", "Female", "Male"]
-# ------------------------ BUTTON FUNCTIONS ----------------------------
-
-
-def click_csv_to_wiki():
-    print("csv_to_wiki")
-    # TODO read in csv data file
-    try:
-        with open("Data/csv_to_wiki_data.csv", mode="r") as data_file:
-            data = data_file.readlines()
-    except FileNotFoundError:
-        print("Missing CSV file!")
-        return
-    # TODO replace commas with "|"
-    wiki_string = "<<|\n"
-    for lines in data:
-        wiki_string += lines.replace(",", " |")
-    wiki_string += "\n>>"
-    # TODO copy to clipboard
-    pyperclip.copy(wiki_string)
-
-
-def click_clear():
-    # TODO remove mutant_test!
-    global character_details
-    character_details = {}
-    print("clear")
-    label_output["text"] = ""
-    # mutant_test_new = Mutation()
-    # print(mutant_test_new.get_output())
-
-
-def get_vessel_dropdown():
-    vessel_type = vessel_dropdown.get()
-    if vessel_type == "Random":
-        return ""
-    return vessel_type
-
-
-def click_create_vessel():
-    global character, vessel
-    captain = None
-    vessel_obj = create_vessel(get_vessel_dropdown())
-    vessel_data = vessel_obj.get_vessel_data()  # vessel.get_output()
-    vessel = vessel_obj
-    if checked_captain_state.get() == 1:
-        captain_race = get_race()
-        captain_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
-        captain_level = get_random_level(vessel_data["captain_level"])
-        captain_career = choice(vessel_data["captain_career"])
-        captain = create_character(captain_career, captain_level, captain_race, "None", captain_details)
-        vessel_obj.set_captain(captain)
-        character = captain  # left this in after adding captain as vessel variable in hopes can utilize add Mutation etc
-    output_vessel(vessel_obj)
-    manage_enabled_update_buttons("Vessel")
-
-
-def click_update_vessel():
-    if vessel is not None:
-        output_vessel(vessel)
-
-
-def get_career_dropdown():
-    career_name = careers_dropdown.get()
-    if career_name == "Random":
-        return get_random_career_key(get_race())
-    return career_name
-
-
-def click_create_character():
-    global character
-    # TODO handle random career here? - if so remove current starting on random
-    career_name = get_career_dropdown()
-    level = int(input_level.get())
-    race = get_race()
-    is_mutant = checked_mutations_state.get() == 1
-    if is_valid_character_input(level):
-        details = get_character_details(race)
-        character = create_character(career_name, level, race, magic_dropdown.get(), details, is_mutant)
-        if character is not None:
-            output_character(character)
-            manage_enabled_update_buttons("Character")
-
-
-def click_update_character():
-    if character is not None:
-        output_character(character)
-
-
-def get_details_dropdown():
-    details_set = detail_set_dropdown.get()
-    if details_set == "Random":
-        return choice(detail_set_options)
-    return details_set
-
-
-def get_character_details(race):
-    detail_set = get_details_dropdown() # input_details.get()
-    details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
-    return details
-
-
-def click_save():
-    save_to = f"Output/{input_filename.get()}.txt"
-    if radio_save.get() == 1:
-        try:
-            with open(save_to, "a") as save_data:
-                text = f"\n*****************************************\n\n{pyperclip.paste()}\n"
-                save_data.write(text)
-        except FileNotFoundError:
-            with open(save_to, "w") as save_data:
-                print("Creating new file")
-                # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
-                text = pyperclip.paste() + "\n\n"
-                save_data.write(text)
-    else:
-        with open(save_to, "w") as save_data:
-            # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
-            text = pyperclip.paste() + "\n\n"
-            save_data.write(text)
-
-
-def click_add_levels():
-    global character, career_data
-    if character is not None:
-        career_name = get_career_dropdown()
-        level = int(input_level.get())
-        if is_valid_character_input(career_name, level, character.race):
-            # TODO check here or elsewhere that we are not adding a new magic domain
-            # Its not actually possible to check here as problems are likely ony caused when Talents are added
-            magic_domain = magic_dropdown.get()
-            if is_valid_magic(magic_domain):
-                character.add_levels(career_name, level, career_data[career_name]['level_data'], magic_domain)
-                output_character(character)
-            else:
-                messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
-    else:
-        print("No character to add level to")
-
-def click_add_family():
-    if character is not None:
-        character.family = create_persons_family(character, 100)
-        output_character(character)
-
-def click_add_mutation():
-    global character
-    if character is not None:
-        mutant_creator.add_mutations(character, 1)
-        output_character(character)
-    else:
-        messagebox.showinfo(title="Oops!", message="You need to create a character first!")
-
-
-def click_create_group():
-    global character_group
-    group_type = groups_dropdown.get()
-    if group_type in groups:
-        character_group = create_group(group_type)
-        output_group(character_group)
-        manage_enabled_update_buttons("Group")
-    else:
-        valid_groups = ""
-        for k, v in groups.items():
-            valid_groups += k + ", "
-        messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group, choose from: {valid_groups}")
-
-
-def click_update_group():
-    if len(character_group) > 0:
-        output_group(character_group)
-    else:
-        messagebox.showinfo(title="Oops!", message=f"No group to update! Create one first")
-
-
-def click_create_dreams():
-    create_dreams(int(input_number_dreams.get()))
-
-
-def click_create_inn():
-    global inn
-    inn = Inn(inn_quality_dropdown.get(), inn_occupied_dropdown.get())
-    innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
-    innkeep = create_innkeep(innkeep_data)
-    innkeep.family = create_persons_family(innkeep, innkeep_data['family_chance'])
-    inn.set_proprietor(innkeep)
-    clientele_groups = inn.get_clientele_groups()
-    inn.set_clientele(create_inn_clientele(clientele_groups))
-    output_inn()
-    manage_enabled_update_buttons("Inn")
-
-
-# Left this in only as example of doing stuff on checkbox change
-def inn_occupied_changed(event):
-    print(f"dropdown state changed {event.widget.get()}")
-
-
-def manage_enabled_update_buttons(button_name):
-    buttons = {
-        "Character": {"function": set_update_button_state_character},
-        "Inn": {"function": set_update_button_state_inn},
-        "Group": {"function": set_update_button_state_group},
-        "Vessel": {"function": set_update_button_state_vessel}
-    }
-    for k, v in buttons.items():
-        if k == button_name:
-            state = 'normal'
-        else:
-            state = 'disabled'
-        buttons[k]["function"](state)
-    manage_secondary_buttons(button_name)
-
-
-def manage_secondary_buttons(button_set):
-    # TODO change so we set state based on button_set then do anyway
-    new_state = 'normal'
-    if button_set != "Character":
-        new_state = 'disabled'
-    button_add_level['state'] = new_state
-    button_add_family['state'] = new_state
-    button_add_mutation['state'] = new_state
-    new_state = 'normal'
-    if button_set != "Group":
-        new_state = 'disabled'
-    button_add_relationships['state'] = new_state
-
-
-def set_update_button_state_inn(state):
-    button_update_inn['state'] = state
-
-def set_update_button_state_group(state):
-    button_update_group['state'] = state
-
-def set_update_button_state_character(state):
-    button_update_character['state'] = state
-
-def set_update_button_state_vessel(state):
-    button_update_vessel['state'] = state
-
-
-
-def output_inn():
-    if inn is not None:
-        details_type = show_details_dropdown.get()
-        stats_type = show_stats_dropdown.get()
-        show_clientele = checked_show_clientele_state.get() == 1
-        is_wiki_output = checked_wiki_output_state.get() == 1
-        label_output["text"] = inn.get_output(details_type, stats_type, show_clientele, is_wiki_output)
-        pyperclip.copy(label_output["text"])
-        button_update_inn["state"] = "normal"
-    else:
-        messagebox.showinfo(title="Oops!", message=f"Create Inn first!")
-
-
-def click_update_inn():
-    # TODO add checking if clientele has changed
-    amount_clientele = inn_occupied_dropdown.get()
-    if amount_clientele != "random":
-        if amount_clientele != inn.occupied:
-            inn.set_occupied(amount_clientele)
-            clientele_groups = inn.get_clientele_groups()
-            inn.set_clientele(create_inn_clientele(clientele_groups))
-
-    output_inn()
-
-
-def attribute_test():
-    attribs = {"WS": {"val": 1}, "BS": 2}
-    for k, v in attribs.items():
-        print(k)
-
-
-def get_race():
-    race = race_dropdown.get()
-    if race == "Random":
-        race = character_creator.get_random_race()
-        # race_dropdown.set(race) # Could uncomment this to have it show the random race
-        #print(f"Got random race: {race}")
-    else:
-        if not is_valid_race_input(race):
-            return "Human"
-    return race
-
-
-def is_valid_race_input(race):
-    if race not in valid_races:
-        messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
-        return False
-    return True
-
-
-def is_valid_character_input(level_input):
-    if level_input < 1 or level_input > 4:
-        messagebox.showinfo(title="Oops!", message=f"Level must be between 1 and 4")
-        return False
-    return True
-
-
-def show_valid_careers(race):
-    # print(f"invalid career for {race}")
-    header = f"Valid careers for {race}:\n"
-    output = ""
-    for career, data in career_data.items():
-        if race in data["chance"]:
-            output += f"{career}, "
-    label_output["text"] = header + utilities.split_into_lines(output, 100)
-
 
 # ---------------------------- DATA SETUP ----------------------------- #
 
@@ -459,7 +153,343 @@ def init_ui_career_dropdown(race='Human'):  # Note hack (maybe?) of passing race
     career_options.sort()
     career_options.insert(0, "Random")
 
+# ------------------------ BUTTON FUNCTIONS ----------------------------
+
+
+def click_csv_to_wiki():
+    print("csv_to_wiki")
+    # TODO read in csv data file
+    try:
+        with open("Data/csv_to_wiki_data.csv", mode="r") as data_file:
+            data = data_file.readlines()
+    except FileNotFoundError:
+        print("Missing CSV file!")
+        return
+    # TODO replace commas with "|"
+    wiki_string = "<<|\n"
+    for lines in data:
+        wiki_string += lines.replace(",", " |")
+    wiki_string += "\n>>"
+    # TODO copy to clipboard
+    pyperclip.copy(wiki_string)
+
+
+def click_clear():
+    # TODO remove mutant_test!
+    global character_details
+    character_details = {}
+    print("clear")
+    label_output["text"] = ""
+    # mutant_test_new = Mutation()
+    # print(mutant_test_new.get_output())
+
+
+def click_save():
+    save_to = f"Output/{input_filename.get()}.txt"
+    if radio_save.get() == 1:
+        try:
+            with open(save_to, "a") as save_data:
+                text = f"\n*****************************************\n\n{pyperclip.paste()}\n"
+                save_data.write(text)
+        except FileNotFoundError:
+            with open(save_to, "w") as save_data:
+                print("Creating new file")
+                # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
+                text = pyperclip.paste() + "\n\n"
+                save_data.write(text)
+    else:
+        with open(save_to, "w") as save_data:
+            # currently just uses the text copied to the clipboard as we don't store the character yet 1-11-22
+            text = pyperclip.paste() + "\n\n"
+            save_data.write(text)
+
+
+def click_create_vessel():
+    global character, vessel
+    captain = None
+    vessel_obj = create_vessel(get_vessel_dropdown())
+    vessel_data = vessel_obj.get_vessel_data()  # vessel.get_output()
+    vessel = vessel_obj
+    if checked_captain_state.get() == 1:
+        captain_race = get_race()
+        captain_details = create_character_details(get_gender(), captain_race, get_details_data(captain_race, "Captain"))
+        captain_level = get_random_level(vessel_data["captain_level"])
+        captain_career = choice(vessel_data["captain_career"])
+        captain = create_character(captain_career, captain_level, captain_race, "None", captain_details)
+        vessel_obj.set_captain(captain)
+        character = captain  # left this in after adding captain as vessel variable in hopes can utilize add Mutation etc
+    output_vessel(vessel_obj)
+    manage_enabled_update_buttons("Vessel")
+
+
+def click_update_vessel():
+    if vessel is not None:
+        output_vessel(vessel)
+
+
+def click_create_character():
+    global character
+    # TODO handle random career here? - if so remove current starting on random
+    career_name = get_career_dropdown()
+    level = int(input_level.get())
+    race = get_race()
+    is_mutant = checked_mutations_state.get() == 1
+    if is_valid_character_input(level):
+        details = get_character_details(race)
+        character = create_character(career_name, level, race, magic_dropdown.get(), details, is_mutant)
+        if character is not None:
+            output_character(character)
+            manage_enabled_update_buttons("Character")
+
+
+def click_update_character():
+    if character is not None:
+        output_character(character)
+
+
+def click_add_levels():
+    global character, career_data
+    if character is not None:
+        career_name = get_career_dropdown()
+        level = int(input_level.get())
+        if is_valid_character_input(level):
+            # TODO check here or elsewhere that we are not adding a new magic domain
+            # Its not actually possible to check here as problems are likely ony caused when Talents are added
+            magic_domain = magic_dropdown.get()
+            if is_valid_magic(magic_domain):
+                character.add_levels(career_name, level, career_data[career_name]['level_data'], magic_domain)
+                output_character(character)
+            else:
+                messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
+    else:
+        print("No character to add level to")
+
+
+def click_add_family():
+    if character is not None:
+        character.family = create_persons_family(character, 100)
+        output_character(character)
+
+
+def click_add_mutation():
+    global character
+    if character is not None:
+        mutant_creator.add_mutations(character, 1)
+        output_character(character)
+    else:
+        messagebox.showinfo(title="Oops!", message="You need to create a character first!")
+
+
+def click_create_group():
+    global character_group
+    group_type = groups_dropdown.get()
+    if group_type in groups:
+        character_group = create_group(group_type)
+        output_group(character_group)
+        manage_enabled_update_buttons("Group")
+    else:
+        valid_groups = ""
+        for k, v in groups.items():
+            valid_groups += k + ", "
+        messagebox.showinfo(title="Oops!", message=f"{group_type} is not valid Character group, choose from: {valid_groups}")
+
+
+def click_add_relationships():
+    global character_group
+    if len(character_group) > 1:
+        character_group = add_group_relationships(character_group)
+        click_update_group()
+    else:
+        messagebox.showinfo(title="Oops!", message=f"No group to add to! Create one first")
+
+
+def click_update_group():
+    if len(character_group) > 0:
+        output_group(character_group)
+    else:
+        messagebox.showinfo(title="Oops!", message=f"No group to update! Create one first")
+
+
+def click_create_dreams():
+    create_dreams(int(input_number_dreams.get()))
+
+
+def click_create_inn():
+    global inn
+    inn = Inn(inn_quality_dropdown.get(), inn_occupied_dropdown.get())
+    innkeep_data = utilities.get_random_chance_entry(inn_creator.proprietor_type, "chance")
+    innkeep = create_innkeep(innkeep_data)
+    innkeep.family = create_persons_family(innkeep, innkeep_data['family_chance'])
+    inn.set_proprietor(innkeep)
+    clientele_groups = inn.get_clientele_groups()
+    inn.set_clientele(create_inn_clientele(clientele_groups))
+    output_inn()
+    manage_enabled_update_buttons("Inn")
+
+
+def click_update_inn():
+    # TODO add checking if clientele has changed
+    amount_clientele = inn_occupied_dropdown.get()
+    if amount_clientele != "random":
+        if amount_clientele != inn.occupied:
+            inn.set_occupied(amount_clientele)
+            clientele_groups = inn.get_clientele_groups()
+            inn.set_clientele(create_inn_clientele(clientele_groups))
+
+    output_inn()
+
+
+def manage_enabled_update_buttons(button_name):
+    buttons = {
+        "Character": {"function": set_update_button_state_character},
+        "Inn": {"function": set_update_button_state_inn},
+        "Group": {"function": set_update_button_state_group},
+        "Vessel": {"function": set_update_button_state_vessel}
+    }
+    for k, v in buttons.items():
+        if k == button_name:
+            state = 'normal'
+        else:
+            state = 'disabled'
+        buttons[k]["function"](state)
+    manage_secondary_buttons(button_name)
+
+
+def manage_secondary_buttons(button_set):
+    # TODO change so we set state based on button_set then do anyway
+    new_state = 'normal'
+    if button_set != "Character":
+        new_state = 'disabled'
+    button_add_level['state'] = new_state
+    button_add_family['state'] = new_state
+    button_add_mutation['state'] = new_state
+    new_state = 'normal'
+    if button_set != "Group":
+        new_state = 'disabled'
+    button_add_relationships['state'] = new_state
+
+
+def set_update_button_state_inn(state):
+    button_update_inn['state'] = state
+
+
+def set_update_button_state_group(state):
+    button_update_group['state'] = state
+
+
+def set_update_button_state_character(state):
+    button_update_character['state'] = state
+
+
+def set_update_button_state_vessel(state):
+    button_update_vessel['state'] = state
+
+# -------------------------- HELPERS --------------------------------------
+
+
+def get_vessel_dropdown():
+    vessel_type = vessel_dropdown.get()
+    if vessel_type == "Random":
+        return ""
+    return vessel_type
+
+
+def get_career_dropdown():
+    career_name = careers_dropdown.get()
+    if career_name == "Random":
+        return get_random_career_key(get_race())
+    return career_name
+
+
+def get_details_dropdown():
+    details_set = detail_set_dropdown.get()
+    if details_set == "Random":
+        return choice(detail_set_options)
+    return details_set
+
+
+def get_character_details(race):
+    detail_set = get_details_dropdown() # input_details.get()
+    details = create_character_details(get_gender(), race, get_details_data(race, detail_set))
+    return details
+
+
+def get_race():
+    race = race_dropdown.get()
+    if race == "Random":
+        race = character_creator.get_random_race()
+        # race_dropdown.set(race) # Could uncomment this to have it show the random race
+        #print(f"Got random race: {race}")
+    else:
+        if not is_valid_race_input(race):
+            return "Human"
+    return race
+
+
+def is_valid_race_input(race):
+    if race not in valid_races:
+        messagebox.showinfo(title="Oops!", message=f"Failed to find race {race}! valid races = {valid_races}")
+        return False
+    return True
+
+
+def is_valid_character_input(level_input):
+    if level_input < 1 or level_input > 4:
+        messagebox.showinfo(title="Oops!", message=f"Level must be between 1 and 4")
+        return False
+    return True
+
+
+def get_details_data(race, set_name):
+    details_data = {}
+    if set_name in detail_data_sets:
+        # print(f"detail set {set_name}: {detail_data_sets[set_name]}")
+        for key in detail_data_sets[set_name]:
+            # print(f"key: {key}")
+            if key in extra_details:  # extra details contains the instructions on how to create the initial data
+                if "[" in key: # brackets used for having different behaviours for the same key, added for Backgrounds random
+                    details_data[utilities.get_key_from_string(key)] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
+                else:
+                    details_data[key] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
+            else:
+                details_data[key] = ""
+    # print(details_data)
+    return details_data
+
+
+def get_gender():
+    gender = gender_dropdown.get()
+    if gender == "Random":
+        return choice(["male", "female"])
+    return gender.lower()
+
+
+def get_random_career_key(race="Human"):
+    roll = randint(1, 100)
+    # print(f"random: {roll}")
+    for key, value in career_data.items():
+        if race in value['chance']:
+            chance = value['chance'][race]
+            # print(f"{chance}")
+            if roll > chance[0] and roll <= chance[1]:
+                return key
+    messagebox.showinfo(title="Oops!", message=f"Failed to find random character key of race {race}! rolled: {roll}")
+
+
 # -------------------------- FUNCTIONALITY --------------------------------------
+
+
+def create_character(career, level, race, magic_domain, details, is_mutant=False):
+    global career_data, character
+    # this check for valid magic should now be redundant now that dropdowns are implemented 6/7/25
+    if is_valid_magic(magic_domain):
+        new_character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, details)
+        if is_mutant:
+            new_character= mutant_creator.add_mutations(new_character)
+        return new_character
+    else:
+        messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
+        return
 
 
 def create_innkeep(innkeep_data):
@@ -606,15 +636,6 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
     return group
 
 
-def click_add_relationships():
-    global character_group
-    if len(character_group) > 1:
-        character_group = add_group_relationships(character_group)
-        click_update_group()
-    else:
-        messagebox.showinfo(title="Oops!", message=f"No group to add to! Create one first")
-
-
 def add_group_relationships(group):
     for person in group:
         # get random person in group who is not me
@@ -623,21 +644,6 @@ def add_group_relationships(group):
         # add_detail("Relationship", name-of-other-person)
         person.add_detail("Relationship", f" {choice(character_creator.relationship_types)} {subject_name}")
     return group
-
-
-def output_group(group):
-    group_text = ""
-    save_text = ""
-    details_type = show_details_dropdown.get()
-    stats_type = show_stats_dropdown.get()
-    relationship_vis = checked_show_relationships_state.get() == 1
-    for person in group:
-        group_text += f"{person.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get(), show_relationship=relationship_vis)}\n\n"
-        # TODO remove following if decide to have save different from wiki output 13/9/25
-        # save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
-        save_text = group_text
-    label_output["text"] = group_text
-    pyperclip.copy(save_text)
 
 
 def create_vessel(vessel_type=""):
@@ -650,65 +656,7 @@ def create_vessel(vessel_type=""):
     return vessel_obj
 
 
-def output_vessel(vessel_obj):
-    output = vessel_obj.get_output()
-    if vessel_obj.captain is not None:
-        details_type = show_details_dropdown.get()
-        stats_type = show_stats_dropdown.get()
-        output += "\n\n--------CAPTAIN----------\n\n" + vessel_obj.captain.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())
-    label_output["text"] = output
-    pyperclip.copy(label_output["text"])  # TODO consider orig also had output_type="save" on Captain output
-
-
-
-def get_details_data(race, set_name):
-    details_data = {}
-    if set_name in detail_data_sets:
-        # print(f"detail set {set_name}: {detail_data_sets[set_name]}")
-        for key in detail_data_sets[set_name]:
-            # print(f"key: {key}")
-            if key in extra_details:  # extra details contains the instructions on how to create the initial data
-                if "[" in key: # brackets used for having different behaviours for the same key, added for Backgrounds random
-                    details_data[utilities.get_key_from_string(key)] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
-                else:
-                    details_data[key] = extra_details[key]["function"](race=race, args=extra_details[key]["args"])
-            else:
-                details_data[key] = ""
-    # print(details_data)
-    return details_data
-
-
-def get_gender():
-    gender = gender_dropdown.get()
-    if gender == "Random":
-        return choice(["male", "female"])
-    return gender.lower()
-
-
-def get_random_career_key(race="Human"):
-    roll = randint(1, 100)
-    # print(f"random: {roll}")
-    for key, value in career_data.items():
-        if race in value['chance']:
-            chance = value['chance'][race]
-            # print(f"{chance}")
-            if roll > chance[0] and roll <= chance[1]:
-                return key
-    messagebox.showinfo(title="Oops!", message=f"Failed to find random character key of race {race}! rolled: {roll}")
-
-
-def create_character(career, level, race, magic_domain, details, is_mutant=False):
-    global career_data, character
-    # this check for valid magic should now be redundant now that dropdowns are implemented 6/7/25
-    if is_valid_magic(magic_domain):
-        new_character = GameCharacter(career, level, career_data[career]['level_data'], magic_domain, race, details)
-        if is_mutant:
-            new_character= mutant_creator.add_mutations(new_character)
-        return new_character
-    else:
-        messagebox.showinfo(title="Oops!", message=f"{magic_domain} is not valid magic type!")
-        return
-
+# ------------------------------- OUTPUT FUNCTIONS ---------------------------------------------------------
 
 def output_character(character_obj):
     # TODO replace logic with call to simply use character output
@@ -726,6 +674,52 @@ def output_trappings_data(data):  # Just a Test function
             text += career['Trappings'] + "\n"
     with open("Output/trappings_data.txt", "w") as trappings_data:
         trappings_data.write(text)
+
+
+def output_group(group):
+    group_text = ""
+    save_text = ""
+    details_type = show_details_dropdown.get()
+    stats_type = show_stats_dropdown.get()
+    relationship_vis = checked_show_relationships_state.get() == 1
+    for person in group:
+        group_text += f"{person.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get(), show_relationship=relationship_vis)}\n\n"
+        # TODO remove following if decide to have save different from wiki output 13/9/25
+        # save_text += f"{person.get_output(wiki_output=checked_wiki_output_state.get())}\n\n"
+        save_text = group_text
+    label_output["text"] = group_text
+    pyperclip.copy(save_text)
+
+
+def output_vessel(vessel_obj):
+    output = vessel_obj.get_output()
+    if vessel_obj.captain is not None:
+        details_type = show_details_dropdown.get()
+        stats_type = show_stats_dropdown.get()
+        output += "\n\n--------CAPTAIN----------\n\n" + vessel_obj.captain.get_output(details_type, stats_type, wiki_output=checked_wiki_output_state.get())
+    label_output["text"] = output
+    pyperclip.copy(label_output["text"])  # TODO consider orig also had output_type="save" on Captain output
+
+
+def output_inn():
+    if inn is not None:
+        details_type = show_details_dropdown.get()
+        stats_type = show_stats_dropdown.get()
+        show_clientele = checked_show_clientele_state.get() == 1
+        is_wiki_output = checked_wiki_output_state.get() == 1
+        label_output["text"] = inn.get_output(details_type, stats_type, show_clientele, is_wiki_output)
+        pyperclip.copy(label_output["text"])
+        button_update_inn["state"] = "normal"
+    else:
+        messagebox.showinfo(title="Oops!", message=f"Create Inn first!")
+
+# ------------------------------- TEST FUNCTIONS ---------------------------------------------------------
+
+
+def attribute_test():
+    attribs = {"WS": {"val": 1}, "BS": 2}
+    for k, v in attribs.items():
+        print(k)
 
 
 def test_character_data():
@@ -753,6 +747,7 @@ def test_list_pruning(text, exclude_1, exclude_2):
     text_list = [item for item in text if exclude_1 not in item and exclude_2 not in item]
     for item in text_list:
         print(item)
+
 
 def kwarg_test(a, b, **my_data):
     print(f"a = {a}")
@@ -874,7 +869,6 @@ inn_quality_dropdown.set("random")
 label_inn_clientele = Label(text="Clientele:")
 inn_occupied_dropdown = ttk.Combobox(values=inn_busy_states)
 inn_occupied_dropdown.set("random")
-inn_occupied_dropdown.bind('<<ComboboxSelected>>', inn_occupied_changed)
 checked_show_clientele_state = IntVar()
 checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state)
 checked_show_clientele_state.set(1)

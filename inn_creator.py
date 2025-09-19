@@ -365,7 +365,7 @@ class Inn:
                 if "goods" in group:
                     goods = group["goods"]
                 # add title
-                # TODO handle multiple travellers groups
+                # handle multiple travellers groups
                 title_text = f"\n\n-- {group['group_name'].capitalize()}{goods} --"
                 if group['group_name'] == 'travellers':
                     if traveller_groups_counted > 0:

@@ -611,6 +611,7 @@ def create_group(group_type, **options):  # details="one_line", relationship="ra
             if details_type == "":
                 details_type = choice(members["details"])
             details_set = get_details_data(race, details_type)
+            print(f"details type: {details_type}")
             details = create_character_details(get_gender(), race, details_set)
             # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
             level = members["level"][1]
@@ -801,7 +802,7 @@ label_gender = Label(text="Gender: ")
 gender_dropdown = ttk.Combobox(values=gender_options)
 gender_dropdown.set("Random")
 # Details Options
-label_details_options = Label(text="Show Details", bg="lightblue")
+label_details_options = Label(text="Show Details")
 show_details_dropdown = ttk.Combobox(values=show_details_options)
 show_details_dropdown.set("One line")
 label_stats_options = Label(text="Show Stats")
@@ -823,7 +824,7 @@ race_dropdown.set("Human")
 label_magic = Label(text="Magic:")
 magic_dropdown = ttk.Combobox(values=magic_options)
 magic_dropdown.set(magic_options[0])
-button_create = Button(text="Create Character", command=click_create_character)
+button_create = Button(text="Create Character", command=click_create_character, bg="tomato")
 button_update_character = Button(text="Update", command=click_update_character, state=DISABLED)
 button_add_level = Button(text="Add Career", command=click_add_levels, state=DISABLED)
 button_add_family = Button(text="Add Family", command=click_add_family, state=DISABLED)
@@ -836,7 +837,7 @@ button_add_mutation = Button(text="Add Mutation", command=click_add_mutation, st
 label_group = Label(text="Group:")
 groups_dropdown = ttk.Combobox(values=group_options)
 groups_dropdown.set(choice(group_options))
-button_group = Button(text="Create Group", command=click_create_group)
+button_group = Button(text="Create Group", command=click_create_group, bg="palegreen")
 button_add_relationships = Button(text="Add Relationships", command=click_add_relationships, state=DISABLED)
 button_update_group = Button(text="Update Group", command=click_update_group, state=DISABLED)
 checked_show_relationships_state = IntVar()
@@ -852,7 +853,7 @@ checked_captain_state = IntVar()
 checkbutton_create_captain = Checkbutton(text="Create Captain?", variable=checked_captain_state)
 checked_captain_state.set(1)
 
-button_create_vessel = Button(text="Create Vessel", command=click_create_vessel)
+button_create_vessel = Button(text="Create Vessel", command=click_create_vessel, bg="turquoise")
 button_update_vessel = Button(text="Update", command=click_update_vessel, state=DISABLED)
 
 # Dreams
@@ -872,7 +873,7 @@ inn_occupied_dropdown.set("random")
 checked_show_clientele_state = IntVar()
 checkbutton_show_clientele = Checkbutton(text="Show Clientele?", variable=checked_show_clientele_state)
 checked_show_clientele_state.set(1)
-button_inns = Button(text="Create Inn", command=click_create_inn)
+button_inns = Button(text="Create Inn", command=click_create_inn, bg="sienna3")
 button_update_inn = Button(text="Update Inn", command=click_update_inn, state=DISABLED)
 
 # Output

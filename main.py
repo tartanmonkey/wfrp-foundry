@@ -178,7 +178,7 @@ def click_clear():
     # TODO remove mutant_test!
     global character_details
     character_details = {}
-    print("clear")
+    # print("clear")
     label_output["text"] = ""
     # mutant_test_new = Mutation()
     # print(mutant_test_new.get_output())
@@ -554,10 +554,10 @@ def create_persons_family(person, family_chance):
 def create_inn_clientele(clientele_types):
     clientele = []
     for c in clientele_types:
-        new_group = {"group_name": c, "members": create_group(c, details="one_line")}
+        new_group = {"group_name": c, "members": create_group(c)}
         if c == "merchant caravan":
             num_goods = int(len(new_group["members"])/3)
-            print(f"num goods: {num_goods}")
+            # print(f"num goods: {num_goods}")
             new_group["goods"] = f" {trade_creator.get_cargo_simple(num_goods)}"
         clientele.append(new_group)
     return clientele
@@ -583,58 +583,54 @@ def create_dreams(num_dreams):
     pyperclip.copy(dream_text)
 
 
-def create_group(group_type, **options):  # details="one_line", relationship="random"
+def create_group(group_type, **options):  # right now no options actually passed 19/9/25
     is_mutant = checked_mutations_state.get()
-    print(f"Clicked create group: {group_type}")
-    group = []
-    # override user input options if passed - added for inn clientele 27/8/25
-    details_type = ""
-    if "details" in options:
-        print(f"Got details_type in options: {options['details']}")
-        details_type = options["details"]
-    for members in groups[group_type]:
-        num_members = randint(members["number"][0], members["number"][1])
-        print(f"would create {num_members} group members")
+    # print(f"Clicked create group: {group_type}")
+    new_group = []
+    for group in groups[group_type]:
+        num_members = randint(group["number"][0], group["number"][1])
+        # print(f"would create {num_members} group members")
         # TODO at some point drive race from data rather than hard coded, complicated just due to career chances
         race = "Human"
         magic = "None"
-        if "magic" in members:
-            magic = members["magic"]
+        if "magic" in group:
+            magic = group["magic"]
         collective_career = ""  # Added for handling Groups of travellers where they all share one random career
-        if len(collective_career) == 0 and "group_type" in members:
-            if members["group_type"] == "collective":
-                collective_career = choice(members["career"])
+        if len(collective_career) == 0 and "group_type" in group:
+            if group["group_type"] == "collective":
+                collective_career = choice(group["career"])
                 # print(f"Got collective career: {collective_career}")
-            elif members["group_type"] == "mutants":
+            elif group["group_type"] == "mutants":
                 is_mutant = True
-        for member in range(num_members):
-            if details_type == "":
-                details_type = choice(members["details"])
+        # now create each group member
+        for number in range(num_members):
+            details_type = choice(group["details"])
             details_set = get_details_data(race, details_type)
-            print(f"details type: {details_type}")
+            # print(f"details type: {details_type}")
             details = create_character_details(get_gender(), race, details_set)
             # TODO if lower of levels is not 1 just use basic logic to determine 11/8/25
-            level = members["level"][1]
-            if members["level"][1] != members["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
-                if members["level"][0] > 1:
-                    level = randint(members["level"][0], members["level"][1])
+            level = group["level"][1]
+            if group["level"][1] != group["level"][0]: # if both tuple values are not the same get a random val using 2nd as highest
+                if group["level"][0] > 1:
+                    level = randint(group["level"][0], group["level"][1])
                 else:
                     level = get_random_level(level)
             career_key = collective_career
-            print(f"Collective career here: {collective_career}")
+            # print(f"Collective career here: {collective_career}")
             if len(career_key) == 0:
-                career_key = choice(members["career"])
+                career_key = choice(group["career"])
             group_member = create_character(career_key, level, race, magic, details, is_mutant)
             # test for leader = should always be first
-            if len(group) == 0:
-                print(f"Created Leader: {group_member.details['Name']} - Level range was: {members['level'][0]} to {members['level'][1]}")
-            group.append(group_member)
-    # add family if specified
-    if "group_type" in members:
-        if members["group_type"] == "family":
-            for person in group:
-                person.family = create_persons_family(person, 100)
-    return group
+            if len(new_group) == 0:
+                pass
+                # print(f"Created Leader: {group_member.details['Name']} - Level range was: {group['level'][0]} to {group['level'][1]}")
+            new_group.append(group_member)
+        # add family if specified
+        if "group_type" in group:
+            if group["group_type"] == "family":
+                for person in new_group:
+                    person.family = create_persons_family(person, 100)
+    return new_group
 
 
 def add_group_relationships(group):
